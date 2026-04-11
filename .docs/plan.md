@@ -126,8 +126,8 @@
 ---
 
 ## Task 24 — Routing
-- [ ] extract routes to `src/routes.tsx`
-- [ ] create page stub components in `src/pages/`
+- [x] extract routes to `src/routes.tsx`
+- [x] create page stub components in `src/pages/`
 
 ---
 
