@@ -1,6 +1,6 @@
 import { dexieAdapter } from './dexie.adapter'
 import type { IStorage } from './storage.interface'
-import { SOFT_DELETE_PURGE_DURATION_DAY } from '../constants/misc'
+import { SOFT_DELETE_PURGE_DURATION_DAY } from '../utils/constants'
 import { DateTime } from 'luxon'
 
 // Platform factory: swap adapter here for Electron (SQLite) in future
