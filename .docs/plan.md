@@ -61,8 +61,8 @@
 ---
 
 ## Task 10 — useCoreCollections + collections query
-- [ ] `useCoreCollections` — builds 3 virtual collections from store with `coreType`
-- [ ] `useCollectionsQuery` — DB collections + core collections appended
+- [x] `useCoreCollections` — builds 3 virtual collections from store with `coreType`
+- [x] `useCollectionsQuery` — DB collections + core collections appended
 
 ---
 
