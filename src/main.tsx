@@ -28,7 +28,7 @@ createRoot(document.getElementById("root")!).render(
     <StrictMode>
         <BrowserRouter>
             <QueryClientProvider client={queryClient}>
-                <MantineProvider theme={theme}>
+                <MantineProvider theme={theme} defaultColorScheme="auto">
                     <ModalsProvider>
                         <Notifications position="bottom-right" />
                         <App />
