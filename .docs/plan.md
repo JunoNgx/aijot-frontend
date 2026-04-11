@@ -33,8 +33,8 @@
 - [x] persist to localStorage
 
 ## Task 5 — Zustand: profileSettings
-- [ ] `src/store/profileSettings.ts`
-- [ ] persist to localStorage
+- [x] `src/store/profileSettings.ts`
+- [x] persist to localStorage
 
 ## Task 6 — Zustand: coreCollectionSettings
 - [ ] `src/store/coreCollectionSettings.ts`
