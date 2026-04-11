@@ -1,10 +1,10 @@
 import { dexieAdapter } from './dexie.adapter'
-import type { IStorage } from './storage.interface'
+import type { StorageAdapter } from './storage.interface'
 import { SOFT_DELETE_PURGE_DURATION_DAY } from '../utils/constants'
 import { DateTime } from 'luxon'
 
 // Platform factory: swap adapter here for Electron (SQLite) in future
-export const storage: IStorage = dexieAdapter
+export const storage: StorageAdapter = dexieAdapter
 
 export async function purgeExpiredItems(): Promise<void> {
     const cutoff = DateTime.now()
@@ -14,4 +14,4 @@ export async function purgeExpiredItems(): Promise<void> {
     await storage.purgeItemsBefore(cutoff)
 }
 
-export type { IStorage }
+export type { StorageAdapter }

@@ -1,6 +1,6 @@
 import Dexie, { type Table } from 'dexie'
 import type { Item, Collection } from '../types'
-import type { IStorage } from './storage.interface'
+import type { StorageAdapter } from './storage.interface'
 
 class AijotDb extends Dexie {
     items!: Table<Item>
@@ -17,7 +17,7 @@ class AijotDb extends Dexie {
 
 const db = new AijotDb()
 
-export const dexieAdapter: IStorage = {
+export const dexieAdapter: StorageAdapter = {
     async getItems() {
         return db.items.toArray()
     },

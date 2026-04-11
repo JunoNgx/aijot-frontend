@@ -1,6 +1,6 @@
 import type { Item, Collection } from '../types'
 
-export interface IStorage {
+export interface StorageAdapter {
     // Items
     getItems(): Promise<Item[]>
     getItemById(id: string): Promise<Item | undefined>
