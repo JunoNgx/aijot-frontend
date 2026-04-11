@@ -6,8 +6,8 @@ import { Notifications } from '@mantine/notifications'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { BrowserRouter } from 'react-router-dom'
 
-import App from './App'
-import { theme } from './theme'
+import App from '@/App'
+import { theme } from '@/theme'
 
 import '@mantine/core/styles.css'
 import '@mantine/dates/styles.css'

@@ -1,6 +1,6 @@
 import Dexie, { type Table } from 'dexie'
-import type { Item, Collection } from '../types'
-import type { StorageAdapter } from './storage.interface'
+import type { Item, Collection } from '@/types'
+import type { StorageAdapter } from '@/db/storage.interface'
 
 class AijotDb extends Dexie {
     items!: Table<Item>

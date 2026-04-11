@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import type { LocalSyncDataStore } from '../types'
+import type { LocalSyncDataStore } from '@/types'
 
 export const useLocalSyncData = create<LocalSyncDataStore>()(
     persist(

@@ -1,4 +1,4 @@
-import type { Item, Collection } from '../types'
+import type { Item, Collection } from '@/types'
 
 export interface StorageAdapter {
     // Items

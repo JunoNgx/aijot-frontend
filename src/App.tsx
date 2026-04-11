@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
-import AppRoutes from './routes'
-import { purgeExpiredItems } from './db'
+import AppRoutes from '@/routes'
+import { purgeExpiredItems } from '@/db'
 
 export default function App() {
     useEffect(() => {

@@ -1,4 +1,4 @@
-import type { CoreCollectionConfig } from '../types'
+import type { CoreCollectionConfig } from '@/types'
 
 // ============================================================
 // App

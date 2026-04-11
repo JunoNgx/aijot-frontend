@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import type { ProfileSettingsStore } from '../types'
+import type { ProfileSettingsStore } from '@/types'
 
 export const useProfileSettings = create<ProfileSettingsStore>()(
     persist(

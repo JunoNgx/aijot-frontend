@@ -1,11 +1,11 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import type { CoreCollectionSettingsStore } from '../types'
+import type { CoreCollectionSettingsStore } from '@/types'
 import {
     DEFAULT_ALL_COLLECTION,
     DEFAULT_UNTAGGED_COLLECTION,
     DEFAULT_TRASH_COLLECTION,
-} from '../utils/constants'
+} from '@/utils/constants'
 
 export const useCoreCollectionSettings = create<CoreCollectionSettingsStore>()(
     persist(
