@@ -47,9 +47,9 @@
 ---
 
 ## Task 8 — Utils
-- [ ] `src/utils/slugGenerator.ts` — string to kebab-case
-- [ ] `src/utils/dateFormatter.ts` — month+day; year if older than 1yr
-- [ ] `src/utils/hexColour.ts` — `isValidHexColourCode(str)` checks last 7 chars
+- [x] `src/utils/slugGenerator.ts` — string to kebab-case
+- [x] `src/utils/dateFormatter.ts` — month+day; year if older than 1yr
+- [x] `src/utils/hexColour.ts` — `isValidHexColourCode(str)` checks last 7 chars
 
 ---
 
