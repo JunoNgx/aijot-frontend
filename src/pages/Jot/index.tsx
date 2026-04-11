@@ -1,9 +1,9 @@
-import { useState } from 'react'
-import { useItems } from '@/hooks/useItems'
-import MainInput from '@/components/MainInput'
-import JotItem from '@/components/itemComponent/JotItem'
-import styles from './index.module.scss'
-import type { Item } from '@/types'
+import { useState } from "react"
+import { useItems } from "@/hooks/useItems"
+import MainInput from "@/components/MainInput"
+import JotItem from "@/components/itemComponent/JotItem"
+import styles from "./index.module.scss"
+import type { Item } from "@/types"
 
 function filterItems(items: Item[], query: string): Item[] {
     if (!query) return items
@@ -15,7 +15,7 @@ function filterItems(items: Item[], query: string): Item[] {
 }
 
 export default function Jot() {
-    const [inputValue, setInputValue] = useState('')
+    const [inputValue, setInputValue] = useState("")
     const { itemsQuery } = useItems()
 
     const visibleItems = filterItems(itemsQuery.data ?? [], inputValue)

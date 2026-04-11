@@ -1,5 +1,5 @@
-import type { Item } from '@/types'
-import styles from './JotItem.module.scss'
+import type { Item } from "@/types"
+import styles from "./JotItem.module.scss"
 
 interface Props {
     item: Item

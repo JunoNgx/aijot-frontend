@@ -1,16 +1,16 @@
-import Dexie, { type Table } from 'dexie'
-import type { Item, Collection } from '@/types'
-import type { StorageAdapter } from '@/db/storage.interface'
+import Dexie, { type Table } from "dexie"
+import type { Item, Collection } from "@/types"
+import type { StorageAdapter } from "@/db/storage.interface"
 
 class AijotDb extends Dexie {
     items!: Table<Item>
     collections!: Table<Collection>
 
     constructor() {
-        super('aijot')
+        super("aijot")
         this.version(1).stores({
-            items: 'id, type, jottedAt, deletedAt, *tags',
-            collections: 'id, sortOrder, slug',
+            items: "id, type, jottedAt, deletedAt, *tags",
+            collections: "id, sortOrder, slug",
         })
     }
 }
@@ -39,11 +39,11 @@ export const dexieAdapter: StorageAdapter = {
     },
 
     async getCollections() {
-        return db.collections.orderBy('sortOrder').toArray()
+        return db.collections.orderBy("sortOrder").toArray()
     },
 
     async getCollectionBySlug(slug) {
-        return db.collections.where('slug').equals(slug).first()
+        return db.collections.where("slug").equals(slug).first()
     },
 
     async putCollection(collection) {
@@ -60,7 +60,7 @@ export const dexieAdapter: StorageAdapter = {
 
     async purgeItemsBefore(cutoffIso) {
         const expiredIds = await db.items
-            .where('deletedAt')
+            .where("deletedAt")
             .below(cutoffIso)
             .primaryKeys()
         await db.items.bulkDelete(expiredIds as string[])

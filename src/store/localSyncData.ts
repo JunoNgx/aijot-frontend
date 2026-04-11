@@ -1,6 +1,6 @@
-import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
-import type { LocalSyncDataStore } from '@/types'
+import { create } from "zustand"
+import { persist } from "zustand/middleware"
+import type { LocalSyncDataStore } from "@/types"
 
 export const useLocalSyncData = create<LocalSyncDataStore>()(
     persist(
@@ -8,7 +8,7 @@ export const useLocalSyncData = create<LocalSyncDataStore>()(
             authToken: undefined,
             driveFolderId: undefined,
             lastSyncTime: undefined,
-            syncStatus: 'idle',
+            syncStatus: "idle",
             syncError: undefined,
             setAuthToken: (authToken) => set({ authToken }),
             setDriveFolderId: (driveFolderId) => set({ driveFolderId }),
@@ -16,6 +16,6 @@ export const useLocalSyncData = create<LocalSyncDataStore>()(
             setSyncStatus: (syncStatus) => set({ syncStatus }),
             setSyncError: (syncError) => set({ syncError }),
         }),
-        { name: 'localSyncData' },
+        { name: "localSyncData" },
     ),
 )

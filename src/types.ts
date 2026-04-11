@@ -2,7 +2,7 @@
 // Item
 // ============================================================
 
-export type ItemType = 'text' | 'todo' | 'link'
+export type ItemType = "text" | "todo" | "link"
 
 export interface Item {
     id: string
@@ -31,7 +31,7 @@ export interface PendingItem extends Item {
 // Collection
 // ============================================================
 
-export type CoreCollectionType = 'all' | 'untagged' | 'trash'
+export type CoreCollectionType = "all" | "untagged" | "trash"
 
 export interface Collection {
     id: string
@@ -52,7 +52,7 @@ export interface Collection {
 // Zustand store shapes
 // ============================================================
 
-export type ThemeMode = 'system' | 'light' | 'dark'
+export type ThemeMode = "system" | "light" | "dark"
 
 export interface LocalUserSettingsStore {
     themeMode: ThemeMode
@@ -64,10 +64,10 @@ export interface LocalAppDataStore {
     setShouldShowDemoDataBanner: (value: boolean) => void
 }
 
-export type SyncStatus = 'idle' | 'syncing' | 'error'
+export type SyncStatus = "idle" | "syncing" | "error"
 
 export interface AuthToken {
-    id: 'google'
+    id: "google"
     accessToken: string
     expiresAt: string
     email: string
@@ -113,7 +113,7 @@ export interface CoreCollectionSettingsStore {
 // Combobox parser output
 // ============================================================
 
-export type ComboboxMode = 'create' | 'search'
+export type ComboboxMode = "create" | "search"
 
 export interface ParsedComboboxInput {
     mode: ComboboxMode
@@ -122,7 +122,7 @@ export interface ParsedComboboxInput {
     title?: string
     tags: string[]
     colSlug?: string
-    filterType?: ItemType | 'itd'
+    filterType?: ItemType | "itd"
     searchText?: string
 }
 

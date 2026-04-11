@@ -1,11 +1,11 @@
-import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
-import type { CoreCollectionSettingsStore } from '@/types'
+import { create } from "zustand"
+import { persist } from "zustand/middleware"
+import type { CoreCollectionSettingsStore } from "@/types"
 import {
     DEFAULT_ALL_COLLECTION,
     DEFAULT_UNTAGGED_COLLECTION,
     DEFAULT_TRASH_COLLECTION,
-} from '@/utils/constants'
+} from "@/utils/constants"
 
 export const useCoreCollectionSettings = create<CoreCollectionSettingsStore>()(
     persist(
@@ -17,6 +17,6 @@ export const useCoreCollectionSettings = create<CoreCollectionSettingsStore>()(
             setUntagged: (config) => set((state) => ({ untagged: { ...state.untagged, ...config } })),
             setTrash: (config) => set((state) => ({ trash: { ...state.trash, ...config } })),
         }),
-        { name: 'coreCollectionSettings' },
+        { name: "coreCollectionSettings" },
     ),
 )

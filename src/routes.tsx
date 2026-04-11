@@ -1,11 +1,11 @@
-import { Routes, Route } from 'react-router-dom'
-import Landing from '@/pages/Landing'
-import Jot from '@/pages/Jot'
-import Collections from '@/pages/Collections'
-import Profile from '@/pages/Profile'
-import Help from '@/pages/Help'
-import Privacy from '@/pages/Privacy'
-import Terms from '@/pages/Terms'
+import { Routes, Route } from "react-router-dom"
+import Landing from "@/pages/Landing"
+import Jot from "@/pages/Jot"
+import Collections from "@/pages/Collections"
+import Profile from "@/pages/Profile"
+import Help from "@/pages/Help"
+import Privacy from "@/pages/Privacy"
+import Terms from "@/pages/Terms"
 
 export default function AppRoutes() {
     return (

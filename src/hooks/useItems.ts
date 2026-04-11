@@ -1,7 +1,7 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { storage } from '@/db'
-import { queryKeys } from '@/db/queryKeys'
-import type { Item } from '@/types'
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
+import { storage } from "@/db"
+import { queryKeys } from "@/db/queryKeys"
+import type { Item } from "@/types"
 
 function sortItems(items: Item[]): Item[] {
     const pinnedItems = items.filter((item) => item.isPinned)

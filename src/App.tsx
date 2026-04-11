@@ -1,20 +1,20 @@
-import { useEffect } from 'react'
-import AppRoutes from '@/routes'
-import { purgeExpiredItems } from '@/db'
+import { useEffect } from "react"
+import AppRoutes from "@/routes"
+import { purgeExpiredItems } from "@/db"
 
 export default function App() {
     useEffect(() => {
         purgeExpiredItems()
 
         const handleVisibilityChange = () => {
-            if (document.visibilityState === 'visible') {
+            if (document.visibilityState === "visible") {
                 purgeExpiredItems()
             }
         }
 
-        document.addEventListener('visibilitychange', handleVisibilityChange)
+        document.addEventListener("visibilitychange", handleVisibilityChange)
         return () => {
-            document.removeEventListener('visibilitychange', handleVisibilityChange)
+            document.removeEventListener("visibilitychange", handleVisibilityChange)
         }
     }, [])
 
