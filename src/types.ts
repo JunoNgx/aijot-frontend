@@ -130,7 +130,7 @@ export interface ParsedComboboxInput {
 // Link fetch
 // ============================================================
 
-export interface LinkMeta {
+export interface LinkFetchResult {
     title: string
     faviconUrl: string
 }
