@@ -1,21 +1,71 @@
 .JotItem {
     display: flex;
-    flex-direction: column;
-    padding: 0.5rem;
-    border-bottom: 1px solid #e0e0e0;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.625rem 0.5rem;
+    border-bottom: 1px solid var(--colBorder);
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--colSurface);
+    }
+
+    &__Icon {
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+        padding-top: 0.125rem;
+        color: var(--colTextMuted);
+    }
+
+    &__Body {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.125rem;
+    }
+
+    &__Header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 0.5rem;
+    }
 
     &__PrimaryText {
         font-size: 0.875rem;
         font-weight: 500;
+        color: var(--colText);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &__Datetime {
+        font-size: 0.75rem;
+        color: var(--colTextMuted);
+        flex-shrink: 0;
     }
 
     &__SecondaryText {
         font-size: 0.75rem;
-        color: #888;
+        color: var(--colTextMuted);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
-    &__Type {
-        font-size: 0.75rem;
-        color: #aaa;
+    &__Favicon {
+        width: 16px;
+        height: 16px;
+        object-fit: contain;
+    }
+
+    &__ColourSwatch {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        border-radius: 3px;
     }
 }
