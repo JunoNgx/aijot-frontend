@@ -21,8 +21,8 @@
 ---
 
 ## Task 2 — Zustand: localUserSettings
-- [ ] `src/store/localUserSettings.ts`
-- [ ] persist to localStorage
+- [x] `src/store/localUserSettings.ts`
+- [x] persist to localStorage
 
 ## Task 3 — Zustand: localAppData
 - [ ] `src/store/localAppData.ts`
