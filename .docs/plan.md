@@ -1,207 +1,212 @@
 # aijot-frontend — Implementation Plan
 
-## Task 1 — Project scaffold
+## Task 1 — Project scaffold ✅
 
-- Init Vite + React + TypeScript
-- Install: Mantine 8, `@mantine/hooks`, `@mantine/dates`, Zustand, TanStack Query, Dexie, React Router v6, CodeMirror 6 (`@codemirror/view`, `@codemirror/commands`), `vite-plugin-pwa`, SCSS
-- `global.scss` at root, BEM pascal-case convention established
-- `src/types.ts`: all shared types (`Item`, `Collection`, `ItemType`, `CoreCollectionType`, store shapes)
-- `src/constants/`: `terminology.ts` (SOFT_DELETE_PURGE_DURATION_DAY=60), `keyboard-shortcuts.ts`, `core-collections.ts`
-
----
-
-## Task 2 — Data layer
-
-### Storage abstraction (`src/db/`)
-
-```
-storage.interface.ts   <- IStorage contract
-dexie.adapter.ts       <- Dexie impl of IStorage
-index.ts               <- platform factory (returns correct adapter)
-```
-
-- `items` table: all fields per spec; indexes on `id, type, jottedAt, deletedAt, *tags`
-- `collections` table; indexes on `id, sortOrder, slug`
-
-### Zustand stores (`src/store/`)
-
-- `localUserSettings`: themeMode
-- `localAppData`: shouldShowDemoDataBanner
-- `localSyncData`: authToken, driveFolderId, lastSyncTime, syncStatus, syncError
-- `profileSettings`: userDisplayName, shouldApplyTagsOfCurrCollection
-- `coreCollectionSettings`: names/slugs/emojis/colours for Trash, All, Untagged
+- [x] Init Vite + React + TypeScript
+- [x] Set up yarn v4 with node-modules linker
+- [x] Install all dependencies
+- [x] `postcss.config.cjs` for Mantine
+- [x] `vite.config.ts` with PWA plugin
+- [x] `src/styles/global.scss`
+- [x] `src/theme.ts`
+- [x] `src/types.ts`
+- [x] `src/constants/misc.ts`
+- [x] `src/constants/coreCollections.ts`
+- [x] `src/constants/keyboardShortcuts.ts`
+- [x] `src/main.tsx` with all providers
+- [x] `src/App.tsx` stub with routes and purge trigger
 
 ---
 
-## Task 3 — Core business logic
+## Task 2 — Storage interface and Dexie adapter ✅
 
-### Hooks (`src/hooks/`)
-
-- `useCoreCollections`: builds 3 virtual collection objects from `coreCollectionSettings`, appends to DB results
-- `useComboboxParser`: parses raw input string into `{ type, content, title, tags, colSlug, filterType, filterTags, searchText }`
-
-### Utils (`src/utils/`)
-
-- `slugGenerator.ts`
-- `dateFormatter.ts`: month+day; show year if older than 1 year
-- `constants.ts`: BACKEND_URL, etc.
-
-### Soft delete / purge
-
-- `purgeExpiredItems()`: hard-delete where `deletedAt < now - 60d`
-- Trigger on `visibilitychange` event in App root; also triggered at sync
-
-### Previous version recording
-
-- On any `content`-changing update to text items: write `previousContent` + `previousContentRecordedAt`
+- [x] `src/db/storage.interface.ts` — `IStorage` contract
+- [x] `src/db/dexie.adapter.ts` — Dexie impl
+- [x] `src/db/index.ts` — platform factory + `purgeExpiredItems`
 
 ---
 
-## Task 4 — Services (`src/services/`)
+## Task 3 — Zustand stores
 
-- `auth.ts`: `postAuthCallback(code)`, `postAuthRefresh()`, `postAuthLogout()`
-- `linkFetch.ts`: `fetchLinkMeta(url)` returning `{ title, faviconUrl }`; validates via `new URL(url)`; toast on offline
-- `googleDriveSync.ts`:
-    - GIS script loader
-    - Folder discovery/cache
-    - Download, resolve (last-write-wins via `updatedAt`), upload
-    - `401` handler: nullify auth
-    - Debounced 15s auto-trigger on item/collection mutations
-    - Manual trigger support
+- [ ] `src/store/localUserSettings.ts`
+- [ ] `src/store/localAppData.ts`
+- [ ] `src/store/localSyncData.ts`
+- [ ] `src/store/profileSettings.ts`
+- [ ] `src/store/coreCollectionSettings.ts`
+- [ ] `src/store/index.ts` — re-export all stores
 
 ---
 
-## Task 5 — Routing (`src/routes.tsx`)
+## Task 4 — Utils
 
-```
-/               -> Landing
-/jot            -> Jot (all items)
-/jot/:slug      -> Jot (collection filtered)
-/collections    -> Collections management
-/profile        -> Profile/Settings
-/help           -> Help
-/privacy        -> Privacy
-/terms          -> Terms
-```
+- [ ] `src/utils/slugGenerator.ts`
+- [ ] `src/utils/dateFormatter.ts`
+- [ ] `src/utils/hexColour.ts` — `isValidHexColourCode`
 
 ---
 
-## Task 6 — Shared UI components (`src/components/`)
+## Task 5 — Hooks
 
-### Combobox
-
-- Parse input via `useComboboxParser`
-- Creation path: `:t:` opens TextDialog, `:td:` creates todo, URL detected creates link, default creates text
-- Tag flags: `::tg`, `::col`, both combined
-- Browse path: plain text searches content/title; `::t::` / `::link::` / `::td::` / `::itd::` filter by type; `##tag` filters by tag
-- Multiple `##tag` filters supported simultaneously
-- Up/Down arrow navigation; Shift+Up/Down skips 5 items
-- Pinned items honoured during search
-- Guard: creation disabled in trash
-
-### JotItem
-
-- Icon: hex colour block (if last 7 chars are valid hex, text only), checkbox, favicon with fallback, note icon
-- Primary text: title for text/link; content for todo
-- Secondary text: content for text/link
-- Datetime: formatted per spec (month+day; year if older than 1yr)
-- Context menu (right-click / long-press): Copy, Edit, Trash, Restore, Refetch, Pin, Unpin, Convert to Todo, Copy on click
-- Click triggers primary action; copy if `shouldCopyOnClick` is true
-- List not tabbable; controlled via combobox only
-
-### CollectionDropdown
-
-- Desktop: top bar; mobile: bottom-right
-- Sorted list with emoji, name, colour, numeric hotkey (1-9)
-- Always includes All, Untagged, Trash core collections
-
-### TextDialog / ItemDialog
-
-- Large CodeMirror 6 editor (text type only) using `standardKeymap` and `defaultKeymap`
-- Small 4-line editor for todo/link
-- Autosave debounced 5s; last saved timestamp always visible
-- Cmd/Ctrl+S: save and close
-- Tag editor: single string, whitespace-separated, collapses multiple spaces on each keystroke
-- Advanced accordion:
-    - Collection-based tag picker (collections highlighted when tag criteria met)
-    - `jottedAt` datetime picker
-    - View Last Version button (text only, when history available): opens read-only dialog with preview, `previousContentRecordedAt`, close and restore buttons
-
-### CollectionDialog
-
-- Name (alphanumeric only), slug (auto-derived from name in kebab-case), type checkboxes (all checked by default), tag list
-- Save / Delete buttons
-
-### Spotlight
-
-- Activated via Cmd/Ctrl+K anywhere in app
-- Actions: switch theme, navigate to collection, switch view (collections, profile, help), export data, manual sync
-
-### UserDropdown
-
-- Located top-right
-- Access: Settings, Manage Collections, About, Help, Privacy, Terms of Service
+- [ ] `src/hooks/useCoreCollections.ts`
+- [ ] `src/hooks/useComboboxParser.ts`
 
 ---
 
-## Task 7 — Pages (`src/pages/`)
+## Task 6 — TanStack Query: items
 
-### Landing
-
-- App name and tagline: `*sloth, not artificial intelligence`
-- Hook 1: `ai` as three-toed sloth
-- Hook 2: `jot` as quickly record something
-- Feature 1: keyboard-first workflow
-- Feature 2: multiple jot types
-- Feature 3: free forever, open source, data ownership, no tracking
-
-### Jot (`/jot` and `/jot/:slug`)
-
-- Combobox at top
-- Pinned items section above regular items list
-- Trash: notice that items older than 60 days are permanently deleted
-- Onboarding banner (shown if `shouldShowDemoDataBanner`)
-
-### Collections
-
-- List of user collections with drag-sort
-- CRUD: create, edit, delete
-- Trash not sortable, always listed separately at bottom
-
-### Profile
-
-- User display name
-- Sync config and manual sync trigger
-- Core collection settings (All, Untagged, Trash)
+- [ ] Query keys
+- [ ] `useItemsQuery` — fetch all items
+- [ ] `useCreateItemMutation`
+- [ ] `useUpdateItemMutation`
+- [ ] `useDeleteItemMutation` (soft delete)
 
 ---
 
-## Task 8 — PWA + offline
+## Task 7 — TanStack Query: collections
 
-- `vite-plugin-pwa`: manifest (name, icons, start_url `/jot`, display standalone)
-- Service worker: cache app shell
-- Offline: link fetch fails shows toast; sync unavailable reflected in sync status
-
----
-
-## Task 9 — Demo data (`src/utils/demoData.ts`)
-
-Seed function inserting items and collections per spec. Triggered from onboarding banner (opt-in only).
+- [ ] `useCollectionsQuery`
+- [ ] `useCreateCollectionMutation`
+- [ ] `useUpdateCollectionMutation`
+- [ ] `useDeleteCollectionMutation`
 
 ---
 
-## Task 10 — Export / import
+## Task 8 — Routing
 
-- Export: single JSON `{ items, collections, settings }`, pretty-printed
-- Import: parse same shape, merge into DB
-- Accessible via Spotlight
+- [ ] Extract routes to `src/routes.tsx`
+- [ ] Create page stub components in `src/pages/`
 
 ---
 
-## Recommended build order
+## Task 9 — JotItem component
 
-```
-1 -> 2 -> 3 -> 5 -> 6 (JotItem + Combobox) -> 7 (Jot page) -> 4 -> 6 (Dialogs) -> 8 -> 9 -> 10
-```
+- [ ] Layout: icon, primary text, secondary text, datetime
+- [ ] Icon variants: note, hex colour swatch, checkbox, favicon
+- [ ] Click triggers primary action
+- [ ] Context menu (Radix): Copy, Edit, Trash, Restore, Refetch, Pin, Unpin, Convert to Todo, Copy on click
 
-Get the core read/write loop working first (DB -> list -> combobox create -> display), then layer services and sync.
+---
+
+## Task 10 — Combobox
+
+- [ ] Input with ARIA combobox semantics
+- [ ] Wire `useComboboxParser`
+- [ ] Creation path (`:t:`, `:td:`, URL, default)
+- [ ] Tag flags (`::tg`, `::col`)
+- [ ] Browse/filter path
+- [ ] Keyboard navigation (Up/Down, Shift skip, Enter)
+- [ ] Extended menu (click-accessible syntax shortcuts)
+
+---
+
+## Task 11 — Collection dropdown
+
+- [ ] Sorted list with emoji, name, colour, hotkey (1-9)
+- [ ] Core collections always present
+- [ ] Desktop (top bar) / mobile (bottom-right) layout
+
+---
+
+## Task 12 — Item dialog
+
+- [ ] Large CodeMirror editor (text only)
+- [ ] Small 4-line editor (todo/link)
+- [ ] Autosave debounced 5s
+- [ ] Cmd/Ctrl+S save and close
+- [ ] Tag editor
+- [ ] Advanced accordion: collection tag picker, `jottedAt` picker, View Last Version
+
+---
+
+## Task 13 — Collection dialog
+
+- [ ] Name, slug (auto from name), type checkboxes, tag list
+- [ ] Save / Delete
+
+---
+
+## Task 14 — Spotlight
+
+- [ ] Setup `<Spotlight>` with `spotlight.open()`
+- [ ] Actions: theme switch, collection nav, view switching, export, manual sync
+
+---
+
+## Task 15 — User dropdown + header
+
+- [ ] User dropdown (top-right)
+- [ ] Settings, Manage Collections, About, Help, Privacy, ToS links
+
+---
+
+## Task 16 — Jot page
+
+- [ ] Combobox + item list
+- [ ] Pinned items section
+- [ ] Trash purge notice
+- [ ] Onboarding banner
+
+---
+
+## Task 17 — Collections page
+
+- [ ] Drag-sort list
+- [ ] CRUD actions
+- [ ] Trash always at bottom
+
+---
+
+## Task 18 — Profile page
+
+- [ ] Display name
+- [ ] Core collection config
+- [ ] Sync section
+
+---
+
+## Task 19 — Services
+
+- [ ] `src/services/auth.ts`
+- [ ] `src/services/linkFetch.ts`
+- [ ] `src/services/googleDriveSync.ts`
+
+---
+
+## Task 20 — Sync flow
+
+- [ ] GIS script loader
+- [ ] Auth callback + token refresh
+- [ ] Folder discovery/cache
+- [ ] Download, resolve, upload
+- [ ] Debounced 15s auto-trigger
+- [ ] Manual trigger
+
+---
+
+## Task 21 — Landing page
+
+- [ ] App name, tagline
+- [ ] Three feature sections
+
+---
+
+## Task 22 — Demo data
+
+- [ ] `src/utils/demoData.ts` — seed items + collections per spec
+- [ ] Wire to onboarding banner
+
+---
+
+## Task 23 — Export / import
+
+- [ ] Export: `{ items, collections, settings }` JSON
+- [ ] Import: parse + merge
+- [ ] Wire to Spotlight
+
+---
+
+## Task 24 — PWA + offline
+
+- [ ] PWA manifest icons
+- [ ] Offline toast for link fetch
+- [ ] Sync unavailable handling
