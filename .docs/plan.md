@@ -37,9 +37,9 @@
 - [x] persist to localStorage
 
 ## Task 6 — Zustand: coreCollectionSettings
-- [ ] `src/store/coreCollectionSettings.ts`
-- [ ] seed defaults from `src/constants/coreCollections.ts`
-- [ ] persist to localStorage
+- [x] `src/store/coreCollectionSettings.ts`
+- [x] seed defaults from `src/constants/coreCollections.ts`
+- [x] persist to localStorage
 
 ## Task 7 — Zustand: store index
 - [ ] `src/store/index.ts` — re-export all stores
