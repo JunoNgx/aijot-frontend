@@ -3,13 +3,23 @@ import { useItems } from '@/hooks/useItems'
 import styles from './MainInput.module.scss'
 import type { Item, ItemType } from '@/types'
 
-function detectItemType(input: string): ItemType {
+function isUrl(input: string): boolean {
     try {
         const url = new URL(input)
-        if (url.protocol === 'http:' || url.protocol === 'https:') return 'link'
+        return url.protocol === 'http:' || url.protocol === 'https:'
     } catch {
-        // not a URL
+        // no protocol — try as bare domain
     }
+    try {
+        const url = new URL(`https://${input}`)
+        return url.hostname.includes('.') && !input.includes(' ')
+    } catch {
+        return false
+    }
+}
+
+function detectItemType(input: string): ItemType {
+    if (isUrl(input)) return 'link'
     if (input.startsWith(':td:')) return 'todo'
     return 'text'
 }
@@ -21,7 +31,12 @@ function parseInput(raw: string): Pick<Item, 'content' | 'type' | 'title'> {
     if (raw.startsWith(':t:')) {
         return { type: 'text', content: '', title: raw.slice(3).trim() }
     }
-    return { type: detectItemType(raw), content: raw.trim(), title: undefined }
+    const trimmed = raw.trim()
+    const itemType = detectItemType(trimmed)
+    const normalizedContent = itemType === 'link' && !trimmed.startsWith('http')
+        ? `https://${trimmed}`
+        : trimmed
+    return { type: itemType, content: normalizedContent, title: undefined }
 }
 
 function buildItem(raw: string): Item {
