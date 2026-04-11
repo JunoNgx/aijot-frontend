@@ -115,6 +115,13 @@ TanStack Query wraps all data access including local DB reads.
 - Reads: `useQuery` / `useInfiniteQuery` backed by IStorage methods
 - Writes: `useMutation` + manual `queryClient.invalidateQueries`
 
+## Technical decisions
+
+### Color scheme
+We own the color scheme logic. `themeMode` in `localUserSettings` Zustand store (`"system" | "light" | "dark"`) is the single source of truth. On change, `App.tsx` resolves `system` via `prefers-color-scheme`, sets `data-color-scheme` on `<html>`, and syncs Mantine via `setColorScheme()`. Mantine follows — it does not own the logic. When `themeMode === "system"`, a `matchMedia` change listener keeps the attribute in sync with OS changes.
+
+CSS variables are defined under `[data-color-scheme="dark|light"]` selectors in `src/styles/_theme.scss`.
+
 ## Auth / cookies
 
 Backend sets the refresh token via HTTP-only cookie. Frontend sends `credentials: 'include'` on all requests to the backend. No CORS configuration needed on the frontend.
