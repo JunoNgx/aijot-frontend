@@ -77,10 +77,10 @@
 ---
 
 ## Task 12 — Jot page MVP
-- [ ] Combobox input with inline parsing
-- [ ] creation: Enter submits, routes by parsed type, tag resolution, guard in trash
-- [ ] item list via `useItemsQuery`
-- [ ] plain text search + type/tag filters applied to list
+- [x] Combobox input with inline parsing
+- [x] creation: Enter submits, routes by parsed type, tag resolution, guard in trash
+- [x] item list via `useItemsQuery`
+- [x] plain text search + type/tag filters applied to list
 
 ---
 
