@@ -29,8 +29,8 @@
 - [x] persist to localStorage
 
 ## Task 4 — Zustand: localSyncData
-- [ ] `src/store/localSyncData.ts`
-- [ ] persist to localStorage
+- [x] `src/store/localSyncData.ts`
+- [x] persist to localStorage
 
 ## Task 5 — Zustand: profileSettings
 - [ ] `src/store/profileSettings.ts`
