@@ -1,0 +1,19 @@
+// Global styles
+// BEM convention: PascalCase namespace (e.g. JotItem__PrimaryText--Selected)
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+#root {
+    height: 100%;
+}

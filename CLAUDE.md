@@ -14,7 +14,8 @@ ai*jot is a remake of JustJot. Most of JustJot specifications are applicable to 
 - Prioritise using guard clause and early termination. Avoid `else` and deeply nested codes.
 - Use leading operators style for multi-line logical/binary expressions: place the operator at the start of the continuation line, not the end of the preceding one. (Not yet supported by Biome - it will reformat to trailing operators.)
 - Use only `yarn` to manage packages
-- Use `camelCase` for hooks and `PascalCase` for components
+- Use `camelCase` for hooks, `PascalCase` for components, and `camelCase` for all other filenames (no kebab-case)
+- Constants use `SCREAMING_SNAKE_CASE` for values
 - Exercise "Camel Case Acronyms"; treat acronyms and initialisms as one single word. E.g. `extractFromDb` instead of `extractFromDB`; `convertToUtc` instead of `convertToUTC`
 - Use the term `Dialog` instead of `Modal`
 - Complicated handler function, taking up more than one line, should be implemented separately outside of the template.

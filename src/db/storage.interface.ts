@@ -1,0 +1,20 @@
+import type { Item, Collection } from '../types'
+
+export interface IStorage {
+    // Items
+    getItems(): Promise<Item[]>
+    getItemById(id: string): Promise<Item | undefined>
+    putItem(item: Item): Promise<void>
+    deleteItem(id: string): Promise<void>
+    bulkPutItems(items: Item[]): Promise<void>
+
+    // Collections
+    getCollections(): Promise<Collection[]>
+    getCollectionBySlug(slug: string): Promise<Collection | undefined>
+    putCollection(collection: Collection): Promise<void>
+    deleteCollection(id: string): Promise<void>
+    bulkPutCollections(collections: Collection[]): Promise<void>
+
+    // Maintenance
+    purgeItemsBefore(cutoffIso: string): Promise<void>
+}
