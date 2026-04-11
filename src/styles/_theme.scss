@@ -1,0 +1,20 @@
+// Theme CSS variables
+// Toggle via data-color-scheme="dark|light" on <html>
+
+[data-color-scheme="dark"] {
+    --colBg: #000000;
+    --colSurface: #111111;
+    --colBorder: #222222;
+    --colText: #ffffff;
+    --colTextMuted: #888888;
+    --colAccent: #ffffff;
+}
+
+[data-color-scheme="light"] {
+    --colBg: #ffffff;
+    --colSurface: #f5f5f5;
+    --colBorder: #e0e0e0;
+    --colText: #000000;
+    --colTextMuted: #666666;
+    --colAccent: #000000;
+}
