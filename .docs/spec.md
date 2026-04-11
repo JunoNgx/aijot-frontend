@@ -497,15 +497,17 @@ First time user (see `shouldShowDemoDataBanner`) will receive a banner inviting 
         - auth
         - link fetch
         - Google Drive sync
+    - styles
+        - global.scss: global styles, loaded once in main.tsx
     - types.ts
+    - theme.ts: Mantine theme config
     - utils: pure helpers
-        - constants.ts
         - slug generator
         - date formatter
     - constants: app-wide constants
-        - terminology
-        - core collection config
-        - keyboard shortcuts
+        - misc.ts
+        - coreCollections.ts
+        - keyboardShortcuts.ts
     - routes.tsx: React Router config
     - App.tsx
     - main.tsx
