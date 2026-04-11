@@ -54,9 +54,9 @@
 ---
 
 ## Task 9 — Items query layer
-- [ ] `src/db/queryKeys.ts` — centralised query key constants
-- [ ] `useItemsQuery` — non-deleted items, jottedAt desc, pinned first
-- [ ] `useCreateItemMutation` — optimistic insert with `isPending: true`
+- [x] `src/db/queryKeys.ts` — centralised query key constants
+- [x] `useItemsQuery` — non-deleted items, jottedAt desc, pinned first
+- [x] `useCreateItemMutation` — optimistic insert with `isPending: true`
 
 ---
 
