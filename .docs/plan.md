@@ -42,7 +42,7 @@
 - [x] persist to localStorage
 
 ## Task 7 — Zustand: store index
-- [ ] `src/store/index.ts` — re-export all stores
+- [won't do] `src/store/index.ts` — re-export all stores
 
 ---
 
