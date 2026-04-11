@@ -22,6 +22,8 @@ ai*jot is a remake of JustJot. Most of JustJot specifications are applicable to 
 - Do not use the deprecated `FormEvent` and `React.FormEventHandler`
 - Do not use em dash
 - Avoid nesting by breaking down component templates to variables
+- Implement reusable utility CSS classes in `global.scss` as needed rather than repeating inline styles
+- Use Mantine components where the benefit outweighs the cost of library coupling. Prefer plain HTML + SCSS for simple layout and typography where Mantine's overhead isn't worth it
 
 ## Patterns from JustJot
 
