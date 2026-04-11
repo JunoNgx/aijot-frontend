@@ -1,0 +1,10 @@
+.Jot {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    &__List {
+        display: flex;
+        flex-direction: column;
+    }
+}

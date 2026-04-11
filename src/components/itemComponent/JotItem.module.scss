@@ -1,0 +1,21 @@
+.JotItem {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    border-bottom: 1px solid #e0e0e0;
+
+    &__PrimaryText {
+        font-size: 0.875rem;
+        font-weight: 500;
+    }
+
+    &__SecondaryText {
+        font-size: 0.75rem;
+        color: #888;
+    }
+
+    &__Type {
+        font-size: 0.75rem;
+        color: #aaa;
+    }
+}
