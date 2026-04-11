@@ -67,12 +67,12 @@
 ---
 
 ## Task 11 — JotItem component
-- [ ] layout: icon, primary text, secondary text, datetime
-- [ ] icon variants: note, hex swatch, checkbox, favicon with fallback
-- [ ] primary text: title for text/link; content for todo
-- [ ] secondary text: content for text/link
-- [ ] datetime via `dateFormatter`
-- [ ] click: primary action or copy if `shouldCopyOnClick`
+- [x] layout: icon, primary text, secondary text, datetime
+- [x] icon variants: note, hex swatch, checkbox, favicon with fallback
+- [x] primary text: title for text/link; content for todo
+- [x] secondary text: content for text/link
+- [x] datetime via `dateFormatter`
+- [x] click: primary action or copy if `shouldCopyOnClick`
 
 ---
 
