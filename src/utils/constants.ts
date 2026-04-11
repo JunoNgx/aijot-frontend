@@ -40,7 +40,7 @@ export const DEFAULT_TRASH_COLLECTION: CoreCollectionConfig = {
 // Format follows Mantine's getHotkeyHandler convention: "mod+key"
 // mod = Ctrl on Windows/Linux, Cmd on Mac
 
-export const SHORTCUT_SPOTLIGHT = ['mod+k", "mod+p"]
+export const SHORTCUT_SPOTLIGHT = ["mod+k", "mod+p"]
 
 export const SHORTCUT_ITEM_EDIT = "mod+e"
 export const SHORTCUT_ITEM_TRASH = "mod+shift+backspace"
@@ -62,4 +62,10 @@ export const SHORTCUT_NAV_SUBMIT = "Enter"
 export const SHORTCUT_NAV_ACTION = "mod+Enter"
 
 export const COLLECTION_HOTKEY_COUNT = 9
-"
+
+// ============================================================
+// Input syntax prefixes
+// ============================================================
+
+export const SYNTAX_PREFIX_TODO = ":td:"
+export const SYNTAX_PREFIX_LONG_TEXT = ":t:"

@@ -1,5 +1,6 @@
 import { DateTime } from "luxon"
 import { useItems } from "@/hooks/useItems"
+import { SYNTAX_PREFIX_TODO, SYNTAX_PREFIX_LONG_TEXT } from "@/utils/constants"
 import styles from "./MainInput.module.scss"
 import type { Item, ItemType } from "@/types"
 
@@ -20,16 +21,16 @@ function isUrl(input: string): boolean {
 
 function detectItemType(input: string): ItemType {
     if (isUrl(input)) return "link"
-    if (input.startsWith(":td:")) return "todo"
+    if (input.startsWith(SYNTAX_PREFIX_TODO)) return "todo"
     return "text"
 }
 
 function parseInput(raw: string): Pick<Item, "content" | "type" | "title"> {
-    if (raw.startsWith(":td:")) {
-        return { type: "todo", content: raw.slice(4).trim(), title: undefined }
+    if (raw.startsWith(SYNTAX_PREFIX_TODO)) {
+        return { type: "todo", content: raw.slice(SYNTAX_PREFIX_TODO.length).trim(), title: undefined }
     }
-    if (raw.startsWith(":t:")) {
-        return { type: "text", content: "", title: raw.slice(3).trim() }
+    if (raw.startsWith(SYNTAX_PREFIX_LONG_TEXT)) {
+        return { type: "text", content: "", title: raw.slice(SYNTAX_PREFIX_LONG_TEXT.length).trim() }
     }
     const trimmed = raw.trim()
     const itemType = detectItemType(trimmed)
