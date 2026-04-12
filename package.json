@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
+    "format": "prettier --write .",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -51,6 +52,7 @@
     "postcss": "^8.5.9",
     "postcss-preset-mantine": "^1.18.0",
     "postcss-simple-vars": "^7.0.1",
+    "prettier": "^3.8.2",
     "sass": "^1.99.0",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.58.0",
