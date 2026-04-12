@@ -47,4 +47,16 @@
         display: flex;
         gap: 0.5rem;
     }
+
+    &__LastVersion {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    &__LastVersionDate {
+        font-size: 0.75rem;
+        color: var(--colText);
+        opacity: 0.6;
+    }
 }
