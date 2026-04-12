@@ -24,6 +24,21 @@ export function useItems() {
         },
     })
 
+    const trashedItemsQuery = useQuery({
+        queryKey: queryKeys.trashedItems,
+        queryFn: async () => {
+            const allItems = await storage.getItems()
+            return allItems
+                .filter((item) => !!item.trashedAt && !item.deletedAt)
+                .sort((a, b) => b.trashedAt!.localeCompare(a.trashedAt!))
+        },
+    })
+
+    const invalidateItemQueries = () => {
+        queryClient.invalidateQueries({ queryKey: queryKeys.items })
+        queryClient.invalidateQueries({ queryKey: queryKeys.trashedItems })
+    }
+
     const createItemMutation = useMutation({
         mutationFn: async (item: Item) => {
             await storage.putItem(item)
@@ -39,7 +54,7 @@ export function useItems() {
             queryClient.setQueryData(queryKeys.items, context?.previousItems)
         },
         onSettled: () => {
-            queryClient.invalidateQueries({ queryKey: queryKeys.items })
+            invalidateItemQueries()
         },
     })
 
@@ -73,7 +88,7 @@ export function useItems() {
             queryClient.setQueryData(queryKeys.items, context?.previousItems)
         },
         onSettled: () => {
-            queryClient.invalidateQueries({ queryKey: queryKeys.items })
+            invalidateItemQueries()
         },
     })
 
@@ -94,7 +109,7 @@ export function useItems() {
             queryClient.setQueryData(queryKeys.items, context?.previousItems)
         },
         onSettled: () => {
-            queryClient.invalidateQueries({ queryKey: queryKeys.items })
+            invalidateItemQueries()
         },
     })
 
@@ -120,7 +135,7 @@ export function useItems() {
             queryClient.setQueryData(queryKeys.items, context?.previousItems)
         },
         onSettled: () => {
-            queryClient.invalidateQueries({ queryKey: queryKeys.items })
+            invalidateItemQueries()
         },
     })
 
@@ -141,12 +156,13 @@ export function useItems() {
             queryClient.setQueryData(queryKeys.items, context?.previousItems)
         },
         onSettled: () => {
-            queryClient.invalidateQueries({ queryKey: queryKeys.items })
+            invalidateItemQueries()
         },
     })
 
     return {
         itemsQuery,
+        trashedItemsQuery,
         createItemMutation,
         updateItemMutation,
         softDeleteItemMutation,
