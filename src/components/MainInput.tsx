@@ -57,16 +57,8 @@ export default function MainInput({
     }
 
     const handlePrimaryAction = () => {
-        if (!selectedItem) return
-        if (selectedItem.type === "link") {
-            window.open(selectedItem.content, "_blank")
-            return
-        }
-        if (selectedItem.type === "text") {
-            openItemDialog(selectedItem)
-            return
-        }
-        // todo: toggle done — task 15b
+        if (selectedIndex < 0) return
+        document.querySelector<HTMLElement>(`[data-item-index="${selectedIndex}"]`)?.click()
     }
 
     const handleCopySelected = () => {

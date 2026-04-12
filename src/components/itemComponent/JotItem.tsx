@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { IconNote, IconLink, IconSquare, IconSquareCheck } from "@tabler/icons-react"
 import { isValidHexColourCode, formatJottedAt } from "@/utils/helpers"
+import { openItemDialog } from "@/components/ItemDialog"
 import type { Item } from "@/types"
 import styles from "./JotItem.module.scss"
 
@@ -34,18 +35,26 @@ function ItemIcon({ item }: { item: Item }) {
     return <IconNote size={ICON_SIZE} />
 }
 
+export function triggerItemPrimaryAction(item: Item) {
+    if (item.shouldCopyOnClick) {
+        navigator.clipboard.writeText(item.content)
+        return
+    }
+    if (item.type === "link") {
+        window.open(item.content, "_blank")
+        return
+    }
+    if (item.type === "text") {
+        openItemDialog(item)
+        return
+    }
+    // todo: toggle done — task 15b
+}
+
 export default function JotItem({ item, isSelected, itemIndex }: Props) {
     const primaryText = item.type === "todo" ? item.content : (item.title ?? item.content)
     const secondaryText = item.type !== "todo" && item.title ? item.content : null
     const datetime = formatJottedAt(item.jottedAt)
-
-    const handleClick = () => {
-        if (item.shouldCopyOnClick) {
-            navigator.clipboard.writeText(item.content)
-            return
-        }
-        // Opens ItemDialog — task 18
-    }
 
     const secondaryTextEl = secondaryText && (
         <span className={styles.JotItem__SecondaryText}>{secondaryText}</span>
@@ -54,7 +63,7 @@ export default function JotItem({ item, isSelected, itemIndex }: Props) {
     const rootClassName = [styles.JotItem, isSelected ? styles["JotItem--Selected"] : ""].join(" ")
 
     return (
-        <div className={rootClassName} data-item-index={itemIndex} onClick={handleClick}>
+        <div className={rootClassName} data-item-index={itemIndex} onClick={() => triggerItemPrimaryAction(item)}>
             <span className={styles.JotItem__Icon}>
                 <ItemIcon item={item} />
             </span>
