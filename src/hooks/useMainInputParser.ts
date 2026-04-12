@@ -42,9 +42,9 @@ function detectFilterType(input: string): FilterType | undefined {
 function extractTagSearches(input: string): string[] {
     return input
         .split(" ")
-        .filter(token => token.startsWith(SYNTAX_SEARCH_TAG_PREFIX))
-        .map(token => token.slice(SYNTAX_SEARCH_TAG_PREFIX.length))
-        .filter(tag => tag.length > 0)
+        .filter((token) => token.startsWith(SYNTAX_SEARCH_TAG_PREFIX))
+        .map((token) => token.slice(SYNTAX_SEARCH_TAG_PREFIX.length))
+        .filter((tag) => tag.length > 0)
 }
 
 function parseCreationFlags(input: string): {
@@ -84,7 +84,7 @@ function extractFlagArgs(allFlagsStr: string, targetFlagSyntax: string) {
     const afterTargetFlagStr = allFlagsStr.slice(targetFlagStartsIndex + targetFlagSyntax.length)
 
     const argStr = afterTargetFlagStr.split(SYNTAX_FLAG_COMMON_PREFIX)[0].trim()
-    const argArr = argStr.split(" ").filter(word => word.length > 0)
+    const argArr = argStr.split(" ").filter((word) => word.length > 0)
     return argArr
 }
 
@@ -98,7 +98,7 @@ function extractSearchText(trimmedInputText: string): string | undefined {
         .trim()
 
     const tokens = textWithoutFilterSyntax.split(" ")
-    const nonTagTokens = tokens.filter(token => !token.startsWith(SYNTAX_SEARCH_TAG_PREFIX))
+    const nonTagTokens = tokens.filter((token) => !token.startsWith(SYNTAX_SEARCH_TAG_PREFIX))
     const text = nonTagTokens.join(" ").trim()
 
     return text || undefined
@@ -138,9 +138,8 @@ function parseCreationData(raw: string): MainInputCreationData {
     }
 
     const isUrlInput = isUrl(parsedContent)
-    const normalizedUrl = isUrlInput && !parsedContent.startsWith("http")
-        ? `https://${parsedContent}`
-        : parsedContent
+    const normalizedUrl =
+        isUrlInput && !parsedContent.startsWith("http") ? `https://${parsedContent}` : parsedContent
 
     return {
         itemType: isUrlInput ? "link" : "text",

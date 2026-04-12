@@ -38,7 +38,13 @@ function CodeMirrorEditor({ initialValue, onChange, onSaveAndClose }: CodeMirror
                         ".cm-cursor, .cm-dropCursor": { borderLeftColor: "var(--colText)" },
                     }),
                     keymap.of([
-                        { key: "Mod-s", run: () => { onSaveAndCloseRef.current(); return true } },
+                        {
+                            key: "Mod-s",
+                            run: () => {
+                                onSaveAndCloseRef.current()
+                                return true
+                            },
+                        },
                         ...defaultKeymap,
                         ...historyKeymap,
                     ]),
@@ -76,7 +82,7 @@ export default function ItemDialog({ item }: Props) {
     const [contentVal, setContentVal] = useState(item.content)
     const [tagStr, setTagStr] = useState(item.tags.join(" "))
     const [saveStatusText, setSaveStatusText] = useState(
-        `Saved ${DateTime.fromISO(item.updatedAt).toLocaleString(DateTime.TIME_WITH_SECONDS)}`
+        `Saved ${DateTime.fromISO(item.updatedAt).toLocaleString(DateTime.TIME_WITH_SECONDS)}`,
     )
 
     const titleRef = useRef(titleVal)
@@ -86,15 +92,24 @@ export default function ItemDialog({ item }: Props) {
     const mutateRef = useRef(updateItemMutation.mutate)
     mutateRef.current = updateItemMutation.mutate
 
-    useEffect(() => { titleRef.current = titleVal }, [titleVal])
-    useEffect(() => { contentRef.current = contentVal }, [contentVal])
-    useEffect(() => { tagStrRef.current = tagStr }, [tagStr])
+    useEffect(() => {
+        titleRef.current = titleVal
+    }, [titleVal])
+    useEffect(() => {
+        contentRef.current = contentVal
+    }, [contentVal])
+    useEffect(() => {
+        tagStrRef.current = tagStr
+    }, [tagStr])
 
     const buildUpdatedItem = (): Item => ({
         ...item,
         title: titleRef.current.trim() || undefined,
         content: contentRef.current,
-        tags: tagStrRef.current.trim().split(" ").filter((t) => t.length > 0),
+        tags: tagStrRef.current
+            .trim()
+            .split(" ")
+            .filter((t) => t.length > 0),
         updatedAt: DateTime.now().toISO(),
     })
 
@@ -153,25 +168,23 @@ export default function ItemDialog({ item }: Props) {
 
     const isTextItem = item.type === "text"
 
-    const contentEditor = isTextItem
-        ? (
-            <CodeMirrorEditor
-                initialValue={contentVal}
-                onChange={handleCodeMirrorChange}
-                onSaveAndClose={handleSaveAndClose}
-            />
-        )
-        : (
-            <Textarea
-                data-autofocus
-                label="Content"
-                value={contentVal}
-                onChange={handleContentTextareaChange}
-                onKeyDown={getHotkeyHandler([[SHORTCUT_SAVE_AND_CLOSE, handleSaveAndClose]])}
-                rows={4}
-                resize="none"
-            />
-        )
+    const contentEditor = isTextItem ? (
+        <CodeMirrorEditor
+            initialValue={contentVal}
+            onChange={handleCodeMirrorChange}
+            onSaveAndClose={handleSaveAndClose}
+        />
+    ) : (
+        <Textarea
+            data-autofocus
+            label="Content"
+            value={contentVal}
+            onChange={handleContentTextareaChange}
+            onKeyDown={getHotkeyHandler([[SHORTCUT_SAVE_AND_CLOSE, handleSaveAndClose]])}
+            rows={4}
+            resize="none"
+        />
+    )
 
     return (
         <div className={styles.ItemDialog}>
@@ -193,15 +206,12 @@ export default function ItemDialog({ item }: Props) {
             <div className={styles.ItemDialog__Footer}>
                 <span className={styles.ItemDialog__SaveStatus}>{saveStatusText}</span>
                 <div className={styles.ItemDialog__Actions}>
-                    <Button
-                        variant="subtle"
-                        color="red"
-                        size="sm"
-                        onClick={handleDeleteClick}
-                    >
+                    <Button variant="subtle" color="red" size="sm" onClick={handleDeleteClick}>
                         Delete
                     </Button>
-                    <Button size="sm" onClick={handleSaveAndClose}>Save</Button>
+                    <Button size="sm" onClick={handleSaveAndClose}>
+                        Save
+                    </Button>
                 </div>
             </div>
         </div>

@@ -39,56 +39,68 @@ export default function JotItemContextMenu({ item }: Props) {
     const handleRestore = () => restoreItemMutation.mutate(item)
     const handleHardDelete = () => hardDeleteItemMutation.mutate(item)
 
-    const handlePin = () => updateItemMutation.mutate({
-        ...item,
-        isPinned: true,
-        updatedAt: DateTime.now().toISO(),
-    })
-    const handleUnpin = () => updateItemMutation.mutate({
-        ...item,
-        isPinned: undefined,
-        updatedAt: DateTime.now().toISO(),
-    })
-    const handleConvertToTodo = () => updateItemMutation.mutate({
-        ...item,
-        type: "todo",
-        title: undefined,
-        updatedAt: DateTime.now().toISO(),
-    })
-    const handleToggleCopyOnClick = () => updateItemMutation.mutate({
-        ...item,
-        shouldCopyOnClick: item.shouldCopyOnClick ? undefined : true,
-        updatedAt: DateTime.now().toISO(),
-    })
+    const handlePin = () =>
+        updateItemMutation.mutate({
+            ...item,
+            isPinned: true,
+            updatedAt: DateTime.now().toISO(),
+        })
+    const handleUnpin = () =>
+        updateItemMutation.mutate({
+            ...item,
+            isPinned: undefined,
+            updatedAt: DateTime.now().toISO(),
+        })
+    const handleConvertToTodo = () =>
+        updateItemMutation.mutate({
+            ...item,
+            type: "todo",
+            title: undefined,
+            updatedAt: DateTime.now().toISO(),
+        })
+    const handleToggleCopyOnClick = () =>
+        updateItemMutation.mutate({
+            ...item,
+            shouldCopyOnClick: item.shouldCopyOnClick ? undefined : true,
+            updatedAt: DateTime.now().toISO(),
+        })
 
     const secondaryItems = (
         <>
-            {item.isPinned
-                ? (
-                    <ContextMenu.Item className={styles.JotItemContextMenu__Item} onClick={handleUnpin}>
-                        <IconPinnedOff size={ICON_SIZE} />
-                        Unpin
-                    </ContextMenu.Item>
-                )
-                : (
-                    <ContextMenu.Item className={styles.JotItemContextMenu__Item} onClick={handlePin}>
-                        <IconPin size={ICON_SIZE} />
-                        Pin
-                    </ContextMenu.Item>
-                )
-            }
+            {item.isPinned ? (
+                <ContextMenu.Item className={styles.JotItemContextMenu__Item} onClick={handleUnpin}>
+                    <IconPinnedOff size={ICON_SIZE} />
+                    Unpin
+                </ContextMenu.Item>
+            ) : (
+                <ContextMenu.Item className={styles.JotItemContextMenu__Item} onClick={handlePin}>
+                    <IconPin size={ICON_SIZE} />
+                    Pin
+                </ContextMenu.Item>
+            )}
             {item.type === "text" && (
-                <ContextMenu.Item className={styles.JotItemContextMenu__Item} onClick={handleConvertToTodo}>
+                <ContextMenu.Item
+                    className={styles.JotItemContextMenu__Item}
+                    onClick={handleConvertToTodo}
+                >
                     <IconSquareCheck size={ICON_SIZE} />
                     Convert to Todo
                 </ContextMenu.Item>
             )}
-            <ContextMenu.Item className={styles.JotItemContextMenu__Item} onClick={handleToggleCopyOnClick}>
+            <ContextMenu.Item
+                className={styles.JotItemContextMenu__Item}
+                onClick={handleToggleCopyOnClick}
+            >
                 <IconCursorText size={ICON_SIZE} />
                 {item.shouldCopyOnClick ? "Disable copy on click" : "Copy on click"}
             </ContextMenu.Item>
             {item.type === "link" && (
-                <ContextMenu.Item className={styles.JotItemContextMenu__Item} onClick={() => { /* task 26 */ }}>
+                <ContextMenu.Item
+                    className={styles.JotItemContextMenu__Item}
+                    onClick={() => {
+                        /* task 26 */
+                    }}
+                >
                     <IconRefresh size={ICON_SIZE} />
                     Refetch
                 </ContextMenu.Item>
@@ -96,25 +108,29 @@ export default function JotItemContextMenu({ item }: Props) {
         </>
     )
 
-    const destructiveItems = isInTrash
-        ? (
-            <>
-                <ContextMenu.Item className={styles.JotItemContextMenu__Item} onClick={handleRestore}>
-                    <IconArrowBackUp size={ICON_SIZE} />
-                    Restore
-                </ContextMenu.Item>
-                <ContextMenu.Item className={`${styles.JotItemContextMenu__Item} ${styles["JotItemContextMenu__Item--Destructive"]}`} onClick={handleHardDelete}>
-                    <IconTrashX size={ICON_SIZE} />
-                    Permanently delete
-                </ContextMenu.Item>
-            </>
-        )
-        : (
-            <ContextMenu.Item className={`${styles.JotItemContextMenu__Item} ${styles["JotItemContextMenu__Item--Destructive"]}`} onClick={handleTrash}>
-                <IconTrash size={ICON_SIZE} />
-                Trash
+    const destructiveItems = isInTrash ? (
+        <>
+            <ContextMenu.Item className={styles.JotItemContextMenu__Item} onClick={handleRestore}>
+                <IconArrowBackUp size={ICON_SIZE} />
+                Restore
             </ContextMenu.Item>
-        )
+            <ContextMenu.Item
+                className={`${styles.JotItemContextMenu__Item} ${styles["JotItemContextMenu__Item--Destructive"]}`}
+                onClick={handleHardDelete}
+            >
+                <IconTrashX size={ICON_SIZE} />
+                Permanently delete
+            </ContextMenu.Item>
+        </>
+    ) : (
+        <ContextMenu.Item
+            className={`${styles.JotItemContextMenu__Item} ${styles["JotItemContextMenu__Item--Destructive"]}`}
+            onClick={handleTrash}
+        >
+            <IconTrash size={ICON_SIZE} />
+            Trash
+        </ContextMenu.Item>
+    )
 
     return (
         <ContextMenu.Portal>

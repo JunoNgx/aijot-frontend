@@ -32,9 +32,7 @@ export function useItems() {
         onMutate: async (item) => {
             await queryClient.cancelQueries({ queryKey: queryKeys.items })
             const previousItems = queryClient.getQueryData<Item[]>(queryKeys.items)
-            queryClient.setQueryData<Item[]>(queryKeys.items, (prev) =>
-                [item, ...(prev ?? [])],
-            )
+            queryClient.setQueryData<Item[]>(queryKeys.items, (prev) => [item, ...(prev ?? [])])
             return { previousItems }
         },
         onError: (_err, _item, context) => {
@@ -48,16 +46,17 @@ export function useItems() {
     const updateItemMutation = useMutation({
         mutationFn: async (updatedItem: Item) => {
             const existingItem = await storage.getItemById(updatedItem.id)
-            const shouldSavePreviousContent = !!existingItem
-                && updatedItem.type === "text"
-                && existingItem.content !== updatedItem.content
+            const shouldSavePreviousContent =
+                !!existingItem &&
+                updatedItem.type === "text" &&
+                existingItem.content !== updatedItem.content
 
             const itemToStore = shouldSavePreviousContent
                 ? {
-                    ...updatedItem,
-                    previousContent: existingItem!.content,
-                    previousContentRecordedAt: DateTime.now().toISO(),
-                }
+                      ...updatedItem,
+                      previousContent: existingItem!.content,
+                      previousContentRecordedAt: DateTime.now().toISO(),
+                  }
                 : updatedItem
 
             await storage.putItem(itemToStore)
@@ -66,7 +65,7 @@ export function useItems() {
             await queryClient.cancelQueries({ queryKey: queryKeys.items })
             const previousItems = queryClient.getQueryData<Item[]>(queryKeys.items)
             queryClient.setQueryData<Item[]>(queryKeys.items, (prev) =>
-                (prev ?? []).map((i) => i.id === updatedItem.id ? updatedItem : i),
+                (prev ?? []).map((i) => (i.id === updatedItem.id ? updatedItem : i)),
             )
             return { previousItems }
         },
@@ -110,8 +109,9 @@ export function useItems() {
             const { trashedAt: _trashedAt, ...restoredItem } = item
             queryClient.setQueryData<Item[]>(queryKeys.items, (prev) =>
                 sortItems(
-                    [...(prev ?? []), restoredItem]
-                        .sort((a, b) => b.jottedAt.localeCompare(a.jottedAt))
+                    [...(prev ?? []), restoredItem].sort((a, b) =>
+                        b.jottedAt.localeCompare(a.jottedAt),
+                    ),
                 ),
             )
             return { previousItems }

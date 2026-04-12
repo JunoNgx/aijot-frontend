@@ -70,10 +70,7 @@ export const dexieAdapter: StorageAdapter = {
     },
 
     async purgeSoftDeletedItems(cutoffIso) {
-        const expiredIds = await db.items
-            .where("deletedAt")
-            .below(cutoffIso)
-            .primaryKeys()
+        const expiredIds = await db.items.where("deletedAt").below(cutoffIso).primaryKeys()
         await db.items.bulkDelete(expiredIds as string[])
     },
 }

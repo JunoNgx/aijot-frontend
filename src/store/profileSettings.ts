@@ -8,7 +8,8 @@ export const useProfileSettings = create<ProfileSettingsStore>()(
             userDisplayName: "",
             shouldApplyTagsOfCurrCollection: true,
             setUserDisplayName: (userDisplayName) => set({ userDisplayName }),
-            setShouldApplyTagsOfCurrCollection: (value) => set({ shouldApplyTagsOfCurrCollection: value }),
+            setShouldApplyTagsOfCurrCollection: (value) =>
+                set({ shouldApplyTagsOfCurrCollection: value }),
         }),
         { name: "profileSettings" },
     ),

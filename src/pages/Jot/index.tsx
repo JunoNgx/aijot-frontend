@@ -15,24 +15,23 @@ function filterItems(items: Item[], searchData: MainInputSearchData): Item[] {
     let result = items
 
     if (searchData.filterType === "incompleteTodo") {
-        result = result.filter(item => item.type === "todo" && !item.isDone)
+        result = result.filter((item) => item.type === "todo" && !item.isDone)
     } else if (searchData.filterType === "completedTodo") {
-        result = result.filter(item => item.type === "todo" && item.isDone)
+        result = result.filter((item) => item.type === "todo" && item.isDone)
     } else if (searchData.filterType) {
-        result = result.filter(item => item.type === searchData.filterType)
+        result = result.filter((item) => item.type === searchData.filterType)
     }
 
     if (searchData.tags.length > 0) {
-        result = result.filter(item =>
-            searchData.tags.every(tag => item.tags.includes(tag))
-        )
+        result = result.filter((item) => searchData.tags.every((tag) => item.tags.includes(tag)))
     }
 
     if (searchData.searchText) {
         const lowerSearch = searchData.searchText.toLowerCase()
-        result = result.filter(item =>
-            item.content.toLowerCase().includes(lowerSearch)
-            || item.title?.toLowerCase().includes(lowerSearch)
+        result = result.filter(
+            (item) =>
+                item.content.toLowerCase().includes(lowerSearch) ||
+                item.title?.toLowerCase().includes(lowerSearch),
         )
     }
 
@@ -61,12 +60,7 @@ export default function Jot() {
     useHotkeys([[SHORTCUT_FOCUS_MAIN_INPUT, () => mainInputRef.current?.focus()]], [])
 
     const itemList = visibleItems.map((item, index) => (
-        <JotItem
-            key={item.id}
-            item={item}
-            isSelected={index === selectedIndex}
-            itemIndex={index}
-        />
+        <JotItem key={item.id} item={item} isSelected={index === selectedIndex} itemIndex={index} />
     ))
 
     return (
@@ -79,9 +73,7 @@ export default function Jot() {
                 visibleItemCount={visibleItems.length}
                 onSelectedIndexChange={setSelectedIndex}
             />
-            <div className={styles.Jot__List}>
-                {itemList}
-            </div>
+            <div className={styles.Jot__List}>{itemList}</div>
         </div>
     )
 }

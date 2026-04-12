@@ -18,21 +18,31 @@ interface Props {
 function FaviconIcon({ url }: { url: string }) {
     const [hasFailed, setHasFailed] = useState(false)
     if (hasFailed) return <IconLink size={ICON_SIZE} />
-    return <img src={url} onError={() => setHasFailed(true)} className={styles.JotItem__Favicon} alt="" />
+    return (
+        <img
+            src={url}
+            onError={() => setHasFailed(true)}
+            className={styles.JotItem__Favicon}
+            alt=""
+        />
+    )
 }
 
 function ItemIcon({ item }: { item: Item }) {
     if (item.type === "todo") {
-        return item.isDone
-            ? <IconSquareCheck size={ICON_SIZE} />
-            : <IconSquare size={ICON_SIZE} />
+        return item.isDone ? <IconSquareCheck size={ICON_SIZE} /> : <IconSquare size={ICON_SIZE} />
     }
     if (item.type === "link") {
         if (item.faviconUrl) return <FaviconIcon url={item.faviconUrl} />
         return <IconLink size={ICON_SIZE} />
     }
     if (isValidHexColourCode(item.content)) {
-        return <span className={styles.JotItem__ColourSwatch} style={{ backgroundColor: item.content }} />
+        return (
+            <span
+                className={styles.JotItem__ColourSwatch}
+                style={{ backgroundColor: item.content }}
+            />
+        )
     }
     return <IconNote size={ICON_SIZE} />
 }
@@ -67,7 +77,11 @@ export default function JotItem({ item, isSelected, itemIndex }: Props) {
     return (
         <ContextMenu.Root>
             <ContextMenu.Trigger asChild>
-                <div className={rootClassName} data-item-index={itemIndex} onClick={() => triggerItemPrimaryAction(item)}>
+                <div
+                    className={rootClassName}
+                    data-item-index={itemIndex}
+                    onClick={() => triggerItemPrimaryAction(item)}
+                >
                     <span className={styles.JotItem__Icon}>
                         <ItemIcon item={item} />
                     </span>
