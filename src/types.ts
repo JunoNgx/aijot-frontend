@@ -15,10 +15,10 @@ export interface Item {
     title?: string
     content: string
     type: ItemType
-    isDone: boolean
+    isDone?: boolean
     faviconUrl?: string
-    shouldCopyOnClick: boolean
-    isPinned: boolean
+    shouldCopyOnClick?: boolean
+    isPinned?: boolean
     tags: string[]
     previousContent?: string
     previousContentRecordedAt?: string
