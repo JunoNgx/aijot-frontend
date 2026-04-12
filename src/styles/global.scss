@@ -22,3 +22,10 @@ body {
 #root {
     height: 100%;
 }
+
+input {
+    border: var(--lineThickness) solid var(--colText);
+    background-color: var(--colBg);
+    color: var(--colText);
+    box-shadow: none;
+}
