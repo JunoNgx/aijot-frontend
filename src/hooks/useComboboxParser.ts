@@ -97,7 +97,6 @@ function parseComboboxInput(raw: string): ParsedComboboxInput {
             .replace(SYNTAX_FILTER_TYPE_TODO, "")
             .replace(SYNTAX_FILTER_TYPE_TEXT, "")
             .replace(SYNTAX_FILTER_TYPE_LINK, "")
-            .replace(new RegExp(`${SYNTAX_SEARCH_TAG_PREFIX}\\S+`, "g"), "")
             .trim()
 
         return {
