@@ -29,7 +29,8 @@ export function buildDemoItems(): Item[] {
         {
             id: uuidv4(),
             type: "link",
-            content: "https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_code_values",
+            content:
+                "https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_code_values",
             title: "Keyboard code reference",
             tags: ["work", "programming", "web"],
             createdAt: at(10),
