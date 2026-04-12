@@ -1,6 +1,6 @@
 # aijot-frontend — Implementation Plan
 
-## Task 1 — Project scaffold ✅
+## Task 1 — Project scaffold
 - [x] Init Vite + React + TypeScript
 - [x] Set up yarn v4 with node-modules linker
 - [x] Install all dependencies
@@ -144,11 +144,11 @@
 ---
 
 ## Task 18 — ItemDialog
-- [ ] shell via `modals.open`
-- [ ] CodeMirror 6 editor (text) + small 4-line editor (todo/link)
-- [ ] autosave debounced 5s + last saved timestamp
-- [ ] Cmd/Ctrl+S save and close
-- [ ] tag editor: single string, collapse spaces on keystroke
+- [x] shell via `modals.open`
+- [x] CodeMirror 6 editor (text) + small 4-line editor (todo/link)
+- [x] autosave debounced 5s + last saved timestamp
+- [x] Cmd/Ctrl+S save and close
+- [x] tag editor: single string, collapse spaces on keystroke
 
 ---
 
@@ -187,7 +187,7 @@
 
 ---
 
-## Task 24 — Routing ✅
+## Task 24 — Routing
 - [x] extract routes to `src/routes.tsx`
 - [x] create page stub components in `src/pages/`
 
