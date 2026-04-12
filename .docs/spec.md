@@ -1,10 +1,11 @@
-# Specification for ai*jot frontend
+# Specification for ai\*jot frontend
 
 ## Overview
 
 A minimal keyboard-first note-taking application with a focus on quick keyboard-driven input workflow, offline functionality, and data ownership.
 
 ## Tech stack
+
 - React on Vite
 - IndexedDB via Dexie for data persistence
 - Zustand and TanStack Query for state management
@@ -19,6 +20,7 @@ A minimal keyboard-first note-taking application with a focus on quick keyboard-
 - Backend is implemented elsewhere
 
 ## Platform
+
 - Web application
 - Progressive Web App
 - Electron app (under consideration)
@@ -43,6 +45,7 @@ TRASH_PURGE_DURATION_DAY = 7
 SOFT_DELETE_PURGE_DURATION_DAY = 60
 
 ### Item
+
 - The primary data storage item, can be either
     - Plain text: can have optional title
     - Todo item: uniquely have isTodoDone state
@@ -51,6 +54,7 @@ SOFT_DELETE_PURGE_DURATION_DAY = 60
 - Items exist in one flat pool and do not belong to any collection
 
 ### Collection
+
 - A set of filter configuration to display items that meet the criteria. Can be used as a folder, but is not a folder.
 - Filter configuration include
     - Item tag
@@ -58,20 +62,25 @@ SOFT_DELETE_PURGE_DURATION_DAY = 60
 - An item would be required to have ALL the tags and is one of the selected types, set in the collection to meet the criteria to be displayed
 
 ### Tag
+
 - Can be attached to each Jot to allow them to be collated in a `Collection`.
 
 ## Functional requirement
 
 ### Authentication/User profile
+
 - User can immediately use the app without any logging in
 
 ### Data processing
+
 - CRUD operations for the three data models
 - Url upon input, will immediately fetch page title and favicon
 - Plain text without title can be converted into a Todo item
 
 ### Combobox input
+
 The central UI component of the app, capable of:
+
 - Creating new Jots by type
 - Filter Jots in the Page by type
 - Filter Jots in the Page by tag
@@ -79,6 +88,7 @@ The central UI component of the app, capable of:
 ## Data schema
 
 ### Table `items`
+
 - `id`: uuid
 - `createdAt`: iso timestamp, metadata
 - `jottedAt`: iso timestamp, user-editable for display purpose
@@ -98,9 +108,10 @@ The central UI component of the app, capable of:
 
 - ItemType: `text` | `todo` | `link`
 
-Fields to index: id, type, jottedAt, trashedAt, deletedAt, *tags
+Fields to index: id, type, jottedAt, trashedAt, deletedAt, \*tags
 
 ### Table `collections`
+
 - `id`: uuid
 - `createdAt`
 - `updatedAt`
@@ -135,12 +146,15 @@ Fields to index: id, sortOrder, slug
 Stores that are prefixed with `local*` are for local use only and never synced.
 
 #### `localUserSettings`
+
 - themeMode: "system" | "light" | "dark"
 
 #### `localAppData`
+
 - shouldShowDemoDataBanner: related to Demo Data section, would be `false` after dismissed by user.
 
 #### `localSyncData`
+
 - authToken: store the access token after access to Google Drive was granted by user
     - id: "google"
     - accessToken
@@ -151,12 +165,13 @@ Stores that are prefixed with `local*` are for local use only and never synced.
 - syncStatus: "idle" | "syncing" | "error"
 - syncError: store error from sync upon issue encountered
 
-
 ### `profileSettings`
+
 - userDisplayName: to display user name on the navbar, top right corner
 - shouldApplyTagsOfCurrCollection: boolean, true by default. When checked, when viewing a collection, creating new items will automatically apply the tags associated with this collection.
 
 ### `coreCollectionSettings`
+
 - Trash bin settings:
     - Name: `Trash` by default
     - Slug: `trash` by default
@@ -177,6 +192,7 @@ Stores that are prefixed with `local*` are for local use only and never synced.
 ## User interface
 
 ### Art direction
+
 - Core mood keywords: minimal; precise; focused
 - High contrast black/white with sparing use of grey unless absolutely necessary (for default themes)
 - Thick and bold lines and borders
@@ -184,6 +200,7 @@ Stores that are prefixed with `local*` are for local use only and never synced.
 - Font family: Space Grostek and Space Mono
 
 ### Landing page
+
 - Showing app name
 - Tagline: `*sloth, not artificial intelligence`
 - Hook 1: `ai` as `three-toed sloth`
@@ -203,9 +220,11 @@ Stores that are prefixed with `local*` are for local use only and never synced.
 ### Main view
 
 #### Combobox
+
 The central UI component of the app, behaviours depend on the content and context
 
 ##### Creation
+
 - Creating is always performed by entering the input with the Enter key.
 - Uses a cmd flag-like system to differentiate types
     - `:t:` for text with title, will trigger `TextDialog`
@@ -218,6 +237,7 @@ The central UI component of the app, behaviours depend on the content and contex
 ##### Tagging creation
 
 ###### By tags
+
 - Tags are flagged with `::tg`, and should be kept as the last part of the syntax. Tag should be separated with space.
 - Examples:
     - `#A84B34 ::tg red` will create a short note with content `#A84B34` with tag `red`
@@ -225,6 +245,7 @@ The central UI component of the app, behaviours depend on the content and contex
     - `:t: Screenplay draft ::tg thriller scifi` will open the create text dialog with `Screenplay draft` filled for title, and tags filled with `thriller` and `scifi`
 
 ###### By collection
+
 - Tags can also be tagged by collection basis with the flag `::col`, followed by the slugs of the collection that the user wants it to be associated with. This should also be kept behind the content.
 - Consider the scenario:
     - Collection `Screenplays` with the slug `screenplays`, which has the tags `creative`, `writing`, and `screen`
@@ -234,9 +255,11 @@ The central UI component of the app, behaviours depend on the content and contex
         - `scifi` as the result of the second indicated collection `Scifi`
 
 ###### By both tags and collection
+
 - Both of these flags can be used together, and it doesn't matter which one come first. The specified tags and the tags used by the collection will all be applied together to the item
 
 ###### While viewing a collection
+
 - This will take effect even if currently viewing a collection, in addition to `shouldApplyTagsOfCurrCollection`.
 - Example
     - `shouldApplyTagsOfCurrCollection` is true
@@ -246,6 +269,7 @@ The central UI component of the app, behaviours depend on the content and contex
     - Item will be created with tag1 and tag2 (under `shouldApplyTagsOfCurrCollection` effect); tag3 and tag4 (specified by flag `::col col2`); and tag5 (specified by flag `::tg tag5`)
 
 ##### Browsing items
+
 - By default, combobox with `$inputContent` will search for content or title contains `$inputContent`, case-insensitive within the current collection
 - Pinned status is still honoured while searching
 - Filter Jots in the page by type:
@@ -261,6 +285,7 @@ The central UI component of the app, behaviours depend on the content and contex
     - Multiple tags can be filtered at once
 
 ##### Control
+
 - While combobox is focused, up and down arrow can be used to browse through the items
     - Shift + Up/Down: move by 5 items
     - Ctrl + Shift + Up/Down: move to top/bottom of the displayed list
@@ -276,6 +301,7 @@ The central UI component of the app, behaviours depend on the content and contex
     - Ctrl + Alt + 6: convert a title-less text to todo
 
 #### Jot item
+
 - Displayed Jot items, if passed filtered, are displayed in a list
     - Pinned items are always displayed on top of the list, whether globally or in a collection
 - Jot item list is not tabbable, and is only controlled via the main combobox
@@ -286,28 +312,34 @@ The central UI component of the app, behaviours depend on the content and contex
     - Primary action can be `Copy content` if `shouldCopyOnClick` is true, copying the content of the item
 
 ##### Icon
+
 - Pre-set note icon for text
 - A block of hex colour if the last 7 characters are a valid hex colour code preceded with the hash sign (text note only)
 - Checkbox icon for todo items
 - Favicon for links, or default icon if not available or not valid
 
 ##### Primary text
+
 - Highlighted, using primary text colour
 - Shows `title` content for text and link
 - Show `content` for todo item
 
 ##### Secondary text
+
 - Dimmed, using grey
 - Shows `content` for text or link (which is typically link content)
 
 ##### Jotted datetime
+
 - Shows absolute date in month and day only
 - Shows year if older than a year
 
 ##### Context menu options
+
 Long-press on mobile; right mouse click on desktop.
 
 Might require a solution to workaround iOS
+
 - Copy
 - Edit
 - Move collection: under consideration, probably comes with too much complexity?
@@ -323,10 +355,12 @@ Might require a solution to workaround iOS
 #### Collection Dropdown
 
 ##### Location
+
 - Top bar when in desktop layout
 - Bottom lower right corner in mobile layout
 
 ##### Functionalities: switching collection
+
 - Display collections in the sequence sorted in settings
 - Each collection item is displayed with:
     - Emoji icon
@@ -343,7 +377,9 @@ Might require a solution to workaround iOS
 Displayed on the top right corner, clicking will trigger a dropdown to access other configuration menu
 
 #### Settings
+
 Configuration for:
+
 - User display name
 - Sync config/manual sync
 - All items collection
@@ -351,12 +387,14 @@ Configuration for:
 - Trash bin
 
 Extra information for
+
 - About
 - Help/Manual
 - Privacy policy
 - Terms of Service
 
 #### Manage Collections
+
 - Collections can be custom sorted here
 - Trash bin is not sortable, and is always listed at the bottom, separatedly
 - CRUD operations for collections:
@@ -367,6 +405,7 @@ Extra information for
 ### Spotlight/Command palette
 
 Spotlight control, activated with Cmd/Ctrl + K, is accessible anywhere in the app. Can be used for:
+
 - Switch user theme mode (system, light, dark)
 - Collection navigation
 - Switch view to:
@@ -377,7 +416,9 @@ Spotlight control, activated with Cmd/Ctrl + K, is accessible anywhere in the ap
 - Manual sync
 
 #### Item create/edit dialog
+
 Fields to edit:
+
 - Title
 - Large text editor:
     - Only applicable to text type
@@ -398,6 +439,7 @@ Fields to edit:
     - Delete
 
 ##### Advanced settings: accessed by toggling an accordion
+
 - Setting tag by collection, below the tag input
     - Display list of collection
     - Selecting/deselecting tag will add/remove associated tag from the input
@@ -412,6 +454,7 @@ Fields to edit:
         - This is a one-way operation with no undo
 
 #### Collection create/edit dialog
+
 - Name: alphanumeric only
 - Slug: auto calculated and transformed name into kebab case upon name change
 - Checkboxes for three types of items; always checked all by default upon creation
@@ -424,7 +467,9 @@ Fields to edit:
 ## Other business logic
 
 ### Core collections
+
 All users have three mandatory system collections that are not deletable:
+
 - Everything
 - Untagged
 - Trash bin
@@ -448,6 +493,7 @@ Tombstone (invisible): has `deletedAt`.
 - Tombstone records (with `deletedAt`) are eventually removed from the DB entirely after sync confirms propagation
 
 ### Previous version recording
+
 - Applicable to text items only
 - Recording is triggered upon any update that also changes the item's `content`.
 
@@ -458,6 +504,7 @@ Sync is triggered debounced to 15s, after the user has made a change to `items` 
 ### Sync flow
 
 #### Connecting to Google/Authorization code flow
+
 - User clicks on Connect to Google button in settings
 - Check environment variable for `GOOGLE_CLIENT_ID`
 - Load GIS at `https://accounts.google.com/gsi/client`
@@ -465,6 +512,7 @@ Sync is triggered debounced to 15s, after the user has made a change to `items` 
 - Upon successful response, make a request to backend at `POST auth/callback` use the provided auth code `res.code` to exchange for refresh token (in the body) and refresh token (set via cookie)
 
 #### Sync flow
+
 - Sync flow is triggered either by changes, staleness, or user's explicit action
 - Perform necessary guard check (internet connection, already sync)
 - Try using cached access token, else refresh via backend endpoint `POST auth/refresh`
@@ -477,12 +525,14 @@ Sync is triggered debounced to 15s, after the user has made a change to `items` 
 - Invalidate TanStack query caches to triggers full refetch and re-render
 
 #### Disconnect/logout
+
 - User no longer wants to connect, clicks on `Disconnect` button in settings
 - POST request is made to `/auth/logout`
 - Server destroys the cookie
 - Client nullifies auth status
 
 ### Storage structure:
+
 - All JSON files are pretty printed for human readability purpose.
 
 - /ai-jot
@@ -491,6 +541,7 @@ Sync is triggered debounced to 15s, after the user has made a change to `items` 
     - `settings.json` (only data in `profileSettings`; `localSettings` is not synced)
 
 ### Resolution logic
+
 - Cloud data is downloaded to local device first, then resolved on a last-write-win basis (via `updatedAt`), before being uploaded
 
 ## Offline behaviour
@@ -500,9 +551,11 @@ Sync is triggered debounced to 15s, after the user has made a change to `items` 
 - Sync is unavailable
 
 ## Data export/import
+
 User can export all data to one single json file. The same data can be re-imported back. All data are pretty printed.
 
 ## Onboarding
+
 First time user (see `shouldShowDemoDataBanner`) will receive a banner inviting them to load Demo data for a taste of the application. Demo data is opt-in only (to avoid friction for existing users starting on a new device).
 
 ## File structure
@@ -549,19 +602,23 @@ First time user (see `shouldShowDemoDataBanner`) will receive a banner inviting 
 ## Demo data
 
 ### Items
+
 - Link: Mozilla; https://www.mozilla.org/en-US/; tag: organisation web pretty
 - Link: xkcd; https://xkcd.com/; tag: fun
 - Link: Keyboard code reference; https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_code_values; tag: work programming web
 - Link: Small (web) is beautiful; https://fredrocha.net/2025/05/21/small-web-is-beautiful/; tag: small-web essay goodread web
 - Text: Hexcode validator func; tag: work web programming
+
 ```
 export const isValidHexColourCode = (str: string): boolean => {
     const hexColourCodeRegEx = /(^#[A-Fa-f0-9]{6}$)/;
     return hexColourCodeRegEx.test(str);
 }
 ```
+
 - Todo: Submit PR to fix keyboard shortcut (unchecked); tag: `work programming`
 - Text: Carian Knight build; tag: er
+
 ```
 Lvl: 150
 Astrologer
@@ -575,6 +632,7 @@ INT 80
 FAI 7
 ARC 9
 ```
+
 - Todo: Try Quadrilateral Cowboy; untagged
 - Todo: Buy bacon; checked; tag: chore
 - Todo: Refill toilet supplies; checked; tag: chore
@@ -582,6 +640,7 @@ ARC 9
 - Todo: Get Sword Dance; tag: er
 
 ### Collections
+
 - Elden Ring: tag: er
 - Chore: tag: chore
 - Work: tag: programming web
