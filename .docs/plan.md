@@ -159,7 +159,6 @@
 ## Task 17 — Jot page: pinned section, trash notice, onboarding banner
 
 - [ ] pinned items rendered above regular list
-- [ ] trash: notice items older than 7 days are soft deleted
 - [x] onboarding banner: shown if `shouldShowDemoDataBanner`, dismiss + load demo data
 
 ---
@@ -195,6 +194,7 @@
 - [ ] core collections always present
 - [ ] desktop: top bar; mobile: bottom-right
 - [ ] click + numeric hotkeys navigate to collection
+- [ ] trash notice: notice items older than 7 days are soft deleted
 
 ---
 
