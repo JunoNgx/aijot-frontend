@@ -118,8 +118,8 @@
 ---
 
 ## Task 15 — Remaining item mutations
-- [ ] `useUpdateItemMutation` — saves `previousContent` if content changed (text only)
-- [ ] `useSoftDeleteItemMutation`, `useRestoreItemMutation`, `useHardDeleteItemMutation`
+- [x] `useUpdateItemMutation` — saves `previousContent` if content changed (text only)
+- [x] `useSoftDeleteItemMutation`, `useRestoreItemMutation`, `useHardDeleteItemMutation`
 
 ## Task 15b — Mutation hotkeys (blocked by task 15)
 - [ ] `mod+shift+backspace` — trash selected item
