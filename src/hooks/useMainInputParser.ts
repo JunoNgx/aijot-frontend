@@ -64,7 +64,7 @@ function parseCreationFlags(input: string): {
     )
 
     const content = input.slice(0, flagStart).trim()
-    const flagsStr = input.slice(flagStart)
+    const flagsStr = input.slice(flagStart) // `::tg tag1 tag2 ::col slug1 slug2`
     const flagSegments = flagsStr.split("::").filter(segment => segment.length > 0)
 
     const tags: string[] = []
