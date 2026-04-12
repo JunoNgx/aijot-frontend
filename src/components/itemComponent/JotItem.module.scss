@@ -1,3 +1,5 @@
+@use "styles/mixins" as *;
+
 .JotItem {
     display: flex;
     align-items: flex-start;
@@ -11,8 +13,9 @@
 
     &--Selected {
         background-color: var(--colSurface);
-        outline: var(--lineThickness) solid var(--colBorder);
         outline-offset: -1px;
+
+        @include StandardOutline;
     }
 
     &__Icon {

@@ -1,3 +1,5 @@
+@use "styles/mixins" as *;
+
 .MainInput {
     padding: 1rem;
 
@@ -9,7 +11,8 @@
         &:focus,
         &:focus-visible {
             outline-offset: 5px;
-            outline: var(--lineThickness) solid var(--colText);
+
+            @include StandardOutline;
         }
     }
 }

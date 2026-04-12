@@ -1,3 +1,5 @@
+@use "styles/mixins" as *;
+
 .ItemDialog {
     display: flex;
     flex-direction: column;
@@ -5,7 +7,8 @@
     padding-bottom: 0.5rem;
 
     &__CodeMirror {
-        border: var(--lineThickness) solid var(--colText);
+        // border: var(--lineThickness) solid var(--colText);
+        @include StandardBorder;
         overflow: hidden;
 
         :global(.cm-editor) {

@@ -1,10 +1,14 @@
+@use "styles/mixins" as *;
+
 .JotItemContextMenu {
     background-color: var(--colSurface);
-    border: var(--lineThickness) solid var(--colText);
+    // border: var(--lineThickness) solid var(--colText);
     padding: 0.25rem;
     min-width: 180px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
     z-index: 100;
+
+    @include StandardBorder;
 
     &__Item {
         display: flex;
