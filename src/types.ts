@@ -3,6 +3,7 @@
 // ============================================================
 
 export type ItemType = "text" | "todo" | "link"
+export type FilterType = ItemType | "incompleteTodo"
 
 export interface Item {
     id: string
@@ -122,7 +123,7 @@ export interface ParsedComboboxInput {
     title?: string
     tags: string[]
     colSlug?: string
-    filterType?: ItemType | "itd"
+    filterType?: FilterType
     searchText?: string
 }
 
