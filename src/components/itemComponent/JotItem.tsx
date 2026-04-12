@@ -1,6 +1,6 @@
 import { useState } from "react"
 import * as ContextMenu from "@radix-ui/react-context-menu"
-import { IconNote, IconLink, IconSquare, IconSquareCheck } from "@tabler/icons-react"
+import { IconNote, IconLink, IconSquare, IconSquareCheck, IconPin } from "@tabler/icons-react"
 import { isValidHexColourCode, formatJottedAt } from "@/utils/helpers"
 import { openItemDialog } from "@/components/ItemDialog"
 import JotItemContextMenu from "./JotItemContextMenu"
@@ -74,6 +74,7 @@ export default function JotItem({ item, isSelected, itemIndex }: Props) {
 
     const rootClassName = [styles.JotItem, isSelected ? styles["JotItem--Selected"] : ""].join(" ")
 
+    // TODO: fix this layout manually
     return (
         <ContextMenu.Root>
             <ContextMenu.Trigger asChild>
@@ -88,6 +89,11 @@ export default function JotItem({ item, isSelected, itemIndex }: Props) {
                     <div className={styles.JotItem__Body}>
                         <div className={styles.JotItem__Header}>
                             <span className={styles.JotItem__PrimaryText}>{primaryText}</span>
+                            {item.isPinned && (
+                                <span className={styles.JotItem__PinIcon}>
+                                    <IconPin size={16} />
+                                </span>
+                            )}
                             <span className={styles.JotItem__Datetime}>{datetime}</span>
                         </div>
                         {secondaryTextEl}

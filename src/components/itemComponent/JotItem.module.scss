@@ -49,6 +49,14 @@
         white-space: nowrap;
     }
 
+    &__PinIcon {
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+        color: var(--colText);
+        opacity: 0.5;
+    }
+
     &__Datetime {
         font-size: 1rem;
         color: var(--colText);
