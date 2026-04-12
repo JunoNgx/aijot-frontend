@@ -331,7 +331,9 @@ The central UI component of the app, behaviours depend on the content and contex
 
 ##### Jotted datetime
 
-- Shows absolute date in month and day only
+- Always shows absolute time
+- Shows time only if newer than 24 hours
+- Shows month and day only if newer than a year
 - Shows year if older than a year
 
 ##### Context menu options
