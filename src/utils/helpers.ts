@@ -11,9 +11,10 @@ export function generateSlug(str: string): string {
 
 export function formatJottedAt(isoString: string): string {
     const date = DateTime.fromISO(isoString)
-    const isOlderThanOneYear = DateTime.now().diff(date, "years").years >= 1
-    const format = isOlderThanOneYear ? "MMM d, yyyy" : "MMM d"
-    return date.toFormat(format)
+    const now = DateTime.now()
+    if (now.diff(date, "hours").hours < 24) return date.toFormat("HH:mm")
+    if (now.diff(date, "years").years < 1) return date.toFormat("MMM d")
+    return date.toFormat("MMM d, yyyy")
 }
 
 const HEX_COLOUR_REGEX = /#[A-Fa-f0-9]{6}$/
