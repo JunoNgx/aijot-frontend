@@ -42,7 +42,7 @@ export default function MainInput({
         onParse(searchData)
     }, [searchData])
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.target.value)
         onSelectedIndexChange(-1)
     }
@@ -92,7 +92,7 @@ export default function MainInput({
                 ref={inputRef}
                 className={styles.MainInput__Input}
                 value={inputValue}
-                onChange={handleChange}
+                onChange={handleInputChange}
                 onKeyDown={getHotkeyHandler([
                     ["Enter", handleSubmit],
                     [SHORTCUT_NAV_ACTION, handlePrimaryAction],
