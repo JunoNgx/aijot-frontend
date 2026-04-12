@@ -3,7 +3,6 @@
     align-items: flex-start;
     gap: 0.5rem;
     padding: 0.625rem 0.5rem;
-    border-bottom: 1px solid var(--colBorder);
     cursor: pointer;
 
     &:hover {
@@ -21,7 +20,7 @@
         align-items: center;
         flex-shrink: 0;
         padding-top: 0.125rem;
-        color: var(--colTextMuted);
+        color: var(--colText);
     }
 
     &__Body {
@@ -50,13 +49,13 @@
 
     &__Datetime {
         font-size: 0.75rem;
-        color: var(--colTextMuted);
+        color: var(--colText);
         flex-shrink: 0;
     }
 
     &__SecondaryText {
         font-size: 0.75rem;
-        color: var(--colTextMuted);
+        color: var(--colText);
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
