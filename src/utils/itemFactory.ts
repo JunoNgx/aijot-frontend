@@ -1,11 +1,11 @@
 import { DateTime } from "luxon"
-import { generateId } from "@/utils/uuid"
+import { v4 as uuidv4 } from "uuid"
 import type { Item, MainInputCreationData } from "@/types"
 
 export function buildItem(creationData: MainInputCreationData): Item {
     const now = DateTime.now().toISO()
     return {
-        id: generateId(),
+        id: uuidv4(),
         createdAt: now,
         jottedAt: now,
         updatedAt: now,
