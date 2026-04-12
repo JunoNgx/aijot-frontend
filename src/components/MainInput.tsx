@@ -1,48 +1,12 @@
+import { useState, useEffect } from "react"
 import { DateTime } from "luxon"
 import { useItems } from "@/hooks/useItems"
-import { SYNTAX_PREFIX_TODO, SYNTAX_PREFIX_LONG_TEXT } from "@/utils/constants"
+import useComboboxParser from "@/hooks/useComboboxParser"
 import styles from "./MainInput.module.scss"
-import type { Item, ItemType } from "@/types"
+import type { Item, ParsedComboboxInput } from "@/types"
 
-function isUrl(input: string): boolean {
-    try {
-        const url = new URL(input)
-        return url.protocol === "http:" || url.protocol === "https:"
-    } catch {
-        // no protocol — try as bare domain
-    }
-    try {
-        const url = new URL(`https://${input}`)
-        return url.hostname.includes(".") && !input.includes(" ")
-    } catch {
-        return false
-    }
-}
-
-function detectItemType(input: string): ItemType {
-    if (isUrl(input)) return "link"
-    if (input.startsWith(SYNTAX_PREFIX_TODO)) return "todo"
-    return "text"
-}
-
-function parseInput(raw: string): Pick<Item, "content" | "type" | "title"> {
-    if (raw.startsWith(SYNTAX_PREFIX_TODO)) {
-        return { type: "todo", content: raw.slice(SYNTAX_PREFIX_TODO.length).trim(), title: undefined }
-    }
-    if (raw.startsWith(SYNTAX_PREFIX_LONG_TEXT)) {
-        return { type: "text", content: "", title: raw.slice(SYNTAX_PREFIX_LONG_TEXT.length).trim() }
-    }
-    const trimmed = raw.trim()
-    const itemType = detectItemType(trimmed)
-    const normalizedContent = itemType === "link" && !trimmed.startsWith("http")
-        ? `https://${trimmed}`
-        : trimmed
-    return { type: itemType, content: normalizedContent, title: undefined }
-}
-
-function buildItem(raw: string): Item {
+function buildItem(parsedInputData: ParsedComboboxInput): Item {
     const now = DateTime.now().toISO()
-    const parsed = parseInput(raw)
     return {
         id: crypto.randomUUID(),
         createdAt: now,
@@ -51,34 +15,41 @@ function buildItem(raw: string): Item {
         isDone: false,
         shouldCopyOnClick: false,
         isPinned: false,
-        tags: [],
-        ...parsed,
+        tags: parsedInputData.tags,
+        type: parsedInputData.itemType,
+        content: parsedInputData.content,
+        title: parsedInputData.title,
     }
 }
 
 interface Props {
-    value: string
-    onChange: (value: string) => void
+    onParse: (parsedInputData: ParsedComboboxInput) => void
 }
 
-export default function MainInput({ value, onChange }: Props) {
+export default function MainInput({ onParse }: Props) {
+    const [inputValue, setInputValue] = useState("")
     const { createItem } = useItems()
+    const parsedInputData = useComboboxParser(inputValue)
+
+    useEffect(() => {
+        onParse(parsedInputData)
+    }, [parsedInputData])
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key !== "Enter") return
-        const trimmedValue = value.trim()
-        if (!trimmedValue) return
+        if (!inputValue.trim()) return
+        if (parsedInputData.mode !== "create") return
 
-        createItem.mutate(buildItem(trimmedValue))
-        onChange("")
+        createItem.mutate(buildItem(parsedInputData))
+        setInputValue("")
     }
 
     return (
         <div className={styles.MainInput}>
             <input
                 className={styles.MainInput__Input}
-                value={value}
-                onChange={(e) => onChange(e.target.value)}
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Jot something..."
                 autoFocus
