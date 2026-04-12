@@ -158,7 +158,7 @@
 
 ## Task 17 — Jot page: pinned section, trash notice, onboarding banner
 
-- [ ] pinned items rendered above regular list
+- [x] pinned items rendered above regular list
 - [x] onboarding banner: shown if `shouldShowDemoDataBanner`, dismiss + load demo data
 
 ---
