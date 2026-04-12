@@ -78,7 +78,7 @@ Two-layer split for all data operations:
 - Mantine's `ScrollArea` viewport ref must be used for programmatic scrolling — `window.scrollTo()` won't work if content is inside a `ScrollArea`.
 - `Menu.Item` has no `data-hovered` attribute in v8. Style hover/focus with `:hover` and `:focus` CSS selectors.
 - `useForm`: use `mode: 'uncontrolled'` (recommended default). `form.values` does not update reactively in this mode — read current values via `form.getValues()` inside handlers.
-- `DatePicker` values are strings (`"YYYY-MM-DD"`), not `Date` objects.
+- `DatePicker` and `DateTimePicker` values are strings, not `Date` objects. `DatePicker` uses `"YYYY-MM-DD"`, `DateTimePicker` uses ISO string.
 
 ### Mantine v8: Spotlight API change
 
