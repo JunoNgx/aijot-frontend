@@ -132,13 +132,13 @@ function parseCreationData(raw: string): MainInputCreationData {
     }
 
     const isUrlInput = isUrl(parsedContent)
-    const normalizedContent = isUrlInput && !parsedContent.startsWith("http")
+    const normalizedUrl = isUrlInput && !parsedContent.startsWith("http")
         ? `https://${parsedContent}`
         : parsedContent
 
     return {
         itemType: isUrlInput ? "link" : "text",
-        content: normalizedContent,
+        content: normalizedUrl,
         tags,
         colSlug,
     }
