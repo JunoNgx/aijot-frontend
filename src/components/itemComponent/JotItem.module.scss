@@ -10,6 +10,12 @@
         background-color: var(--colSurface);
     }
 
+    &--Selected {
+        background-color: var(--colSurface);
+        outline: 1px solid var(--colBorder);
+        outline-offset: -1px;
+    }
+
     &__Icon {
         display: flex;
         align-items: center;

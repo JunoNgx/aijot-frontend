@@ -1,7 +1,9 @@
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
+import { useHotkeys } from "@mantine/hooks"
 import { useItems } from "@/hooks/useItems"
 import MainInput from "@/components/MainInput"
 import JotItem from "@/components/itemComponent/JotItem"
+import { SHORTCUT_FOCUS_MAIN_INPUT } from "@/utils/constants"
 import styles from "./index.module.scss"
 import type { MainInputSearchData, Item } from "@/types"
 
@@ -39,17 +41,41 @@ function filterItems(items: Item[], searchData: MainInputSearchData): Item[] {
 
 export default function Jot() {
     const [searchData, setSearchData] = useState<MainInputSearchData>(DEFAULT_SEARCH_DATA)
+    const [selectedIndex, setSelectedIndex] = useState(-1)
     const { itemsQuery } = useItems()
+    const mainInputRef = useRef<HTMLInputElement>(null)
 
     const visibleItems = filterItems(itemsQuery.data ?? [], searchData)
+    const selectedItem = selectedIndex >= 0 ? visibleItems[selectedIndex] : undefined
 
-    const itemList = visibleItems.map((item) => (
-        <JotItem key={item.id} item={item} />
+    useEffect(() => {
+        if (selectedIndex < 0) return
+        document
+            .querySelector(`[data-item-index="${selectedIndex}"]`)
+            ?.scrollIntoView({ block: "nearest" })
+    }, [selectedIndex])
+
+    useHotkeys([[SHORTCUT_FOCUS_MAIN_INPUT, () => mainInputRef.current?.focus()]], [])
+
+    const itemList = visibleItems.map((item, index) => (
+        <JotItem
+            key={item.id}
+            item={item}
+            isSelected={index === selectedIndex}
+            itemIndex={index}
+        />
     ))
 
     return (
         <div className={styles.Jot}>
-            <MainInput onParse={setSearchData} />
+            <MainInput
+                inputRef={mainInputRef}
+                onParse={setSearchData}
+                selectedIndex={selectedIndex}
+                selectedItem={selectedItem}
+                visibleItemCount={visibleItems.length}
+                onSelectedIndexChange={setSelectedIndex}
+            />
             <div className={styles.Jot__List}>
                 {itemList}
             </div>

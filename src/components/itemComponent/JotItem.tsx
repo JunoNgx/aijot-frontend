@@ -8,6 +8,8 @@ const ICON_SIZE = 16
 
 interface Props {
     item: Item
+    isSelected: boolean
+    itemIndex: number
 }
 
 function FaviconIcon({ url }: { url: string }) {
@@ -32,7 +34,7 @@ function ItemIcon({ item }: { item: Item }) {
     return <IconNote size={ICON_SIZE} />
 }
 
-export default function JotItem({ item }: Props) {
+export default function JotItem({ item, isSelected, itemIndex }: Props) {
     const primaryText = item.type === "todo" ? item.content : (item.title ?? item.content)
     const secondaryText = item.type !== "todo" && item.title ? item.content : null
     const datetime = formatJottedAt(item.jottedAt)
@@ -49,8 +51,10 @@ export default function JotItem({ item }: Props) {
         <span className={styles.JotItem__SecondaryText}>{secondaryText}</span>
     )
 
+    const rootClassName = [styles.JotItem, isSelected ? styles["JotItem--Selected"] : ""].join(" ")
+
     return (
-        <div className={styles.JotItem} onClick={handleClick}>
+        <div className={rootClassName} data-item-index={itemIndex} onClick={handleClick}>
             <span className={styles.JotItem__Icon}>
                 <ItemIcon item={item} />
             </span>
