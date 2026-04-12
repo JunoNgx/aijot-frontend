@@ -54,7 +54,7 @@ function parseCreationFlags(input: string): {
     const tagIndex = input.indexOf(SYNTAX_FLAG_TAG)
     const collectionIndex = input.indexOf(SYNTAX_FLAG_COLLECTION)
 
-    const hasFlagSyntax = tagIndex > -1 || collectionIndex > -1;
+    const hasFlagSyntax = tagIndex > -1 || collectionIndex > -1
     if (!hasFlagSyntax) {
         return { content: input, tags: [], colSlug: undefined }
     }
