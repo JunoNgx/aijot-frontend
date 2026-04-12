@@ -9,6 +9,8 @@ import { BrowserRouter } from "react-router-dom"
 import App from "@/App"
 import { theme } from "@/theme"
 
+import "@fontsource/space-grotesk"
+import "@fontsource/space-mono"
 import "@mantine/core/styles.css"
 import "@mantine/dates/styles.css"
 import "@mantine/notifications/styles.css"
