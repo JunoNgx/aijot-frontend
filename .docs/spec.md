@@ -245,6 +245,7 @@ The central UI component of the app, behaviours depend on the content and contex
     - `::link::` for link types
     - `::td::` for all checkbox types
     - `::itd::` for incomplete checkbox types
+    - `::ctd::` for completed checkbox types
 
 - Filter Jots in the Page by tag:
     - `##${tagName}`
