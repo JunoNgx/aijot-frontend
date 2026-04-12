@@ -3,7 +3,7 @@ import { modals } from "@mantine/modals"
 import { useDebouncedCallback, getHotkeyHandler } from "@mantine/hooks"
 import { TextInput, Textarea, Button, Text, Group } from "@mantine/core"
 import { DateTime } from "luxon"
-import { EditorView, keymap } from "@codemirror/view"
+import { EditorView, keymap, drawSelection } from "@codemirror/view"
 import { EditorState } from "@codemirror/state"
 import { defaultKeymap, history, historyKeymap } from "@codemirror/commands"
 import { useItems } from "@/hooks/useItems"
@@ -33,6 +33,10 @@ function CodeMirrorEditor({ initialValue, onChange, onSaveAndClose }: CodeMirror
                 doc: initialValue,
                 extensions: [
                     history(),
+                    drawSelection(),
+                    EditorView.theme({
+                        ".cm-cursor, .cm-dropCursor": { borderLeftColor: "var(--colText)" },
+                    }),
                     keymap.of([
                         { key: "Mod-s", run: () => { onSaveAndCloseRef.current(); return true } },
                         ...defaultKeymap,
