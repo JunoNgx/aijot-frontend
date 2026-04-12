@@ -94,9 +94,20 @@
 
 ---
 
-## Task 14 — Combobox: keyboard nav + extended menu
+## Task 14 — Combobox: keyboard nav + hotkeys
 - [ ] Up/Down navigation, Shift skips 5, mod+shift jumps top/bottom
-- [ ] hotkeys: edit, trash, copy, restore, pin, convert to todo
+- [ ] `mod+f` focuses main input
+- [ ] Escape clears selection
+- [ ] `mod+Enter` triggers primary action on selected item
+- [ ] `mod+shift+c` copy content
+- [ ] `mod+e` edit (open ItemDialog)
+- [ ] `mod+shift+backspace` trash
+- [ ] `mod+alt+r` restore
+- [ ] `mod+alt+4` toggle copy on click
+- [ ] `mod+alt+5` refetch (links only)
+- [ ] `mod+alt+6` convert to todo
+
+## Task 14b — Extended menu
 - [ ] extended menu: click-accessible syntax shortcuts
 
 ---
