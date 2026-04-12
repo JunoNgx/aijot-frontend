@@ -14,6 +14,8 @@ function filterItems(items: Item[], searchData: MainInputSearchData): Item[] {
 
     if (searchData.filterType === "incompleteTodo") {
         result = result.filter(item => item.type === "todo" && !item.isDone)
+    } else if (searchData.filterType === "completedTodo") {
+        result = result.filter(item => item.type === "todo" && item.isDone)
     } else if (searchData.filterType) {
         result = result.filter(item => item.type === searchData.filterType)
     }

@@ -9,6 +9,7 @@ import {
     SYNTAX_FILTER_TYPE_LINK,
     SYNTAX_FILTER_TYPE_TODO,
     SYNTAX_FILTER_TYPE_INCOMPLETE_TODO,
+    SYNTAX_FILTER_TYPE_COMPLETED_TODO,
     SYNTAX_SEARCH_TAG_PREFIX,
 } from "@/utils/constants"
 import type { MainInputCreationData, MainInputSearchData, FilterType } from "@/types"
@@ -30,8 +31,8 @@ function isUrl(input: string): boolean {
 
 function detectFilterType(input: string): FilterType | undefined {
     const lower = input.toLowerCase()
-    // Check ::itd:: before ::td:: to avoid substring false-match
     if (lower.includes(SYNTAX_FILTER_TYPE_INCOMPLETE_TODO)) return "incompleteTodo"
+    if (lower.includes(SYNTAX_FILTER_TYPE_COMPLETED_TODO)) return "completedTodo"
     if (lower.includes(SYNTAX_FILTER_TYPE_TODO)) return "todo"
     if (lower.includes(SYNTAX_FILTER_TYPE_TEXT)) return "text"
     if (lower.includes(SYNTAX_FILTER_TYPE_LINK)) return "link"
@@ -90,6 +91,7 @@ function extractFlagArgs(allFlagsStr: string, targetFlagSyntax: string) {
 function extractSearchText(trimmedInputText: string): string | undefined {
     const textWithoutFilterSyntax = trimmedInputText
         .replace(SYNTAX_FILTER_TYPE_INCOMPLETE_TODO, "")
+        .replace(SYNTAX_FILTER_TYPE_COMPLETED_TODO, "")
         .replace(SYNTAX_FILTER_TYPE_TODO, "")
         .replace(SYNTAX_FILTER_TYPE_TEXT, "")
         .replace(SYNTAX_FILTER_TYPE_LINK, "")

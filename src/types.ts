@@ -3,7 +3,7 @@
 // ============================================================
 
 export type ItemType = "text" | "todo" | "link"
-export type FilterType = ItemType | "incompleteTodo"
+export type FilterType = ItemType | "incompleteTodo" | "completedTodo"
 
 export interface Item {
     id: string
