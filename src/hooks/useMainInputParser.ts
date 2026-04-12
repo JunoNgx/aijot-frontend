@@ -84,21 +84,16 @@ function parseCreationFlags(input: string): {
 }
 
 function extractSearchText(trimmedInputText: string): string | undefined {
-    let text = trimmedInputText
+    const textWithoutFilterSyntax = trimmedInputText
         .replace(SYNTAX_FILTER_TYPE_INCOMPLETE_TODO, "")
         .replace(SYNTAX_FILTER_TYPE_TODO, "")
         .replace(SYNTAX_FILTER_TYPE_TEXT, "")
         .replace(SYNTAX_FILTER_TYPE_LINK, "")
         .trim()
 
-    const { content } = parseCreationFlags(text)
-    text = content
-
-    if (text.startsWith(SYNTAX_PREFIX_TODO)) {
-        text = text.slice(SYNTAX_PREFIX_TODO.length).trim()
-    } else if (text.startsWith(SYNTAX_PREFIX_LONG_TEXT)) {
-        text = text.slice(SYNTAX_PREFIX_LONG_TEXT.length).trim()
-    }
+    const tokens = textWithoutFilterSyntax.split(" ")
+    const nonTagTokens = tokens.filter(token => !token.startsWith(SYNTAX_SEARCH_TAG_PREFIX))
+    const text = nonTagTokens.join(" ").trim()
 
     return text || undefined
 }
