@@ -1,26 +1,9 @@
 import { useState, useEffect } from "react"
-import { DateTime } from "luxon"
 import { useItems } from "@/hooks/useItems"
 import { useMainInputParser, parseCreationData } from "@/hooks/useMainInputParser"
+import { buildItem } from "@/utils/itemFactory"
 import styles from "./MainInput.module.scss"
-import type { MainInputCreationData, MainInputSearchData, Item } from "@/types"
-
-function buildItem(creationData: MainInputCreationData): Item {
-    const now = DateTime.now().toISO()
-    return {
-        id: crypto.randomUUID(),
-        createdAt: now,
-        jottedAt: now,
-        updatedAt: now,
-        isDone: false,
-        shouldCopyOnClick: false,
-        isPinned: false,
-        tags: creationData.tags,
-        type: creationData.itemType,
-        content: creationData.content,
-        title: creationData.title,
-    }
-}
+import type { MainInputSearchData } from "@/types"
 
 interface Props {
     onParse: (searchData: MainInputSearchData) => void
