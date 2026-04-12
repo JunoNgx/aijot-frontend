@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { DateTime } from "luxon"
 import { useItems } from "@/hooks/useItems"
-import { useComboboxParser, parseCreationData } from "@/hooks/useComboboxParser"
+import { useMainInputParser, parseCreationData } from "@/hooks/useMainInputParser"
 import styles from "./MainInput.module.scss"
 import type { ComboboxCreationData, ComboboxSearchData, Item } from "@/types"
 
@@ -29,7 +29,7 @@ interface Props {
 export default function MainInput({ onParse }: Props) {
     const [inputValue, setInputValue] = useState("")
     const { createItem } = useItems()
-    const searchData = useComboboxParser(inputValue)
+    const searchData = useMainInputParser(inputValue)
 
     useEffect(() => {
         onParse(searchData)

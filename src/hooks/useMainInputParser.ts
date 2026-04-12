@@ -150,8 +150,8 @@ function parseCreationData(raw: string): ComboboxCreationData {
 }
 
 // Run on every keystroke, so memoized
-function useComboboxParser(input: string): ComboboxSearchData {
+function useMainInputParser(input: string): ComboboxSearchData {
     return useMemo(() => parseSearchData(input), [input])
 }
 
-export { parseCreationData, useComboboxParser }
+export { parseCreationData, useMainInputParser }
