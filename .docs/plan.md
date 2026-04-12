@@ -175,8 +175,8 @@
 
 ## Task 19 — ItemDialog: advanced accordion
 
-- [ ] `jottedAt` datetime picker
-- [ ] View Last Version: read-only editor with restore button (text only)
+- [x] `jottedAt` datetime picker
+- [x] View Last Version: read-only editor with restore button (text only)
 
 ---
 
