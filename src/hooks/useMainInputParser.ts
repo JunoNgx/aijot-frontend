@@ -49,14 +49,14 @@ function extractTagSearches(input: string): string[] {
 function parseCreationFlags(input: string): {
     content: string
     tags: string[]
-    colSlug: string | undefined
+    colSlugs: string[]
 } {
     const tagIndex = input.indexOf(SYNTAX_FLAG_TAG)
     const collectionIndex = input.indexOf(SYNTAX_FLAG_COLLECTION)
 
     const hasFlagSyntax = tagIndex > -1 || collectionIndex > -1
     if (!hasFlagSyntax) {
-        return { content: input, tags: [], colSlug: undefined }
+        return { content: input, tags: [], colSlugs: [] }
     }
 
     const flagStart = Math.min(
@@ -69,9 +69,9 @@ function parseCreationFlags(input: string): {
     // `::tg tag1 tag2 ::col slug1 slug2`
     const flagsStr = input.slice(flagStart)
     const tags = extractFlagArgs(flagsStr, SYNTAX_FLAG_TAG)
-    const colSlug = extractFlagArgs(flagsStr, SYNTAX_FLAG_COLLECTION)[0]
+    const colSlugs = extractFlagArgs(flagsStr, SYNTAX_FLAG_COLLECTION)
 
-    return { content, tags, colSlug }
+    return { content, tags, colSlugs }
 }
 
 function extractFlagArgs(allFlagsStr: string, targetFlagSyntax: string) {
@@ -113,14 +113,14 @@ function parseSearchData(raw: string): MainInputSearchData {
 
 function parseCreationData(raw: string): MainInputCreationData {
     const trimmedInputText = raw.trim()
-    const { content: parsedContent, tags, colSlug } = parseCreationFlags(trimmedInputText)
+    const { content: parsedContent, tags, colSlugs } = parseCreationFlags(trimmedInputText)
 
     if (parsedContent.startsWith(SYNTAX_PREFIX_TODO)) {
         return {
             itemType: "todo",
             content: parsedContent.slice(SYNTAX_PREFIX_TODO.length).trim(),
             tags,
-            colSlug,
+            colSlugs,
         }
     }
 
@@ -131,7 +131,7 @@ function parseCreationData(raw: string): MainInputCreationData {
             content: "",
             title: title || undefined,
             tags,
-            colSlug,
+            colSlugs,
         }
     }
 
@@ -144,7 +144,7 @@ function parseCreationData(raw: string): MainInputCreationData {
         itemType: isUrlInput ? "link" : "text",
         content: normalizedUrl,
         tags,
-        colSlug,
+        colSlugs,
     }
 }
 

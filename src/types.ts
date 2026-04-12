@@ -125,7 +125,7 @@ export interface MainInputCreationData {
     content: string
     title?: string
     tags: string[]
-    colSlug?: string
+    colSlugs: string[]
 }
 
 // ============================================================
