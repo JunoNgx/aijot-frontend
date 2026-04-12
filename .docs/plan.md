@@ -97,20 +97,20 @@
 ## Task 14 — Combobox: keyboard nav + hotkeys
 
 ### State
-- [ ] `selectedIndex` lifted to `Jot/index.tsx`, passed to `MainInput` and `JotItem` (for selected styling)
-- [ ] `selectedIndex` resets to `-1` on input change
+- [x] `selectedIndex` lifted to `Jot/index.tsx`, passed to `MainInput` and `JotItem` (for selected styling)
+- [x] `selectedIndex` resets to `-1` on input change
 
 ### Navigation (handled in `MainInput` via `getHotkeyHandler`)
-- [ ] `ArrowUp` / `ArrowDown` — move selection by 1
-- [ ] `Shift+ArrowUp` / `Shift+ArrowDown` — move selection by 5
-- [ ] `mod+Shift+ArrowUp` / `mod+Shift+ArrowDown` — jump to top/bottom
-- [ ] `Escape` — clear selection (set to `-1`)
-- [ ] `mod+f` — focus main input from anywhere in the app (registered at `App.tsx` level)
+- [x] `ArrowUp` / `ArrowDown` — move selection by 1
+- [x] `Shift+ArrowUp` / `Shift+ArrowDown` — move selection by 5
+- [x] `mod+Shift+ArrowUp` / `mod+Shift+ArrowDown` — jump to top/bottom
+- [x] `Escape` — clear selection (set to `-1`)
+- [x] `mod+f` — focus main input from anywhere in the app (registered at `Jot` level)
 
 ### Item hotkeys (only fire when `selectedIndex > -1`)
-- [ ] `mod+Enter` — trigger primary action on selected item (link: open, todo: toggle done, text: open ItemDialog stub)
-- [ ] `mod+shift+c` — copy selected item content to clipboard
-- [ ] `mod+e` — open ItemDialog (stub until task 18)
+- [x] `mod+Enter` — trigger primary action on selected item (link: open, todo: toggle done, text: open ItemDialog stub)
+- [x] `mod+shift+c` — copy selected item content to clipboard
+- [x] `mod+e` — open ItemDialog (stub until task 18)
 
 ## Task 14b — Extended menu
 - [ ] extended menu: click-accessible syntax shortcuts
