@@ -50,12 +50,12 @@ function parseCreationFlags(input: string): {
     tags: string[]
     colSlug: string | undefined
 } {
-    const tgIndex = input.indexOf(SYNTAX_FLAG_TAG)
-    const colIndex = input.indexOf(SYNTAX_FLAG_COLLECTION)
+    const tagIndex = input.indexOf(SYNTAX_FLAG_TAG)
+    const collectionIndex = input.indexOf(SYNTAX_FLAG_COLLECTION)
 
     const flagStart = Math.min(
-        tgIndex === -1 ? Infinity : tgIndex,
-        colIndex === -1 ? Infinity : colIndex,
+        tagIndex === -1 ? Infinity : tagIndex,
+        collectionIndex === -1 ? Infinity : collectionIndex,
     )
 
     if (!isFinite(flagStart)) {
