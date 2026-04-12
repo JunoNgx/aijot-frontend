@@ -243,9 +243,9 @@ The central UI component of the app, behaviours depend on the content and contex
     - Syntax is intentionally verbose to avoid clashing with actual content of the Jots
     - `::t::` for text type
     - `::link::` for link types
-    - `::td::` for all checkbox types
-    - `::itd::` for incomplete checkbox types
-    - `::ctd::` for completed checkbox types
+    - `::td::` for all todo types
+    - `::itd::` for incomplete todo types
+    - `::ctd::` for completed todo types
 
 - Filter Jots in the Page by tag:
     - `##${tagName}`
