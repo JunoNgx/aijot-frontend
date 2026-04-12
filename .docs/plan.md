@@ -85,12 +85,12 @@
 ---
 
 ## Task 13 — useComboboxParser
-- [ ] extract inline parsing logic to `src/hooks/useComboboxParser.ts`
-- [ ] detect creation vs browse mode
-- [ ] parse `:t:`, `:td:` prefixes; detect URL
-- [ ] parse `::tg`, `::col` tag flags
-- [ ] parse `::t::`, `::link::`, `::td::`, `::itd::` type filters
-- [ ] parse `##tag` filters; plain text = search
+- [x] extract inline parsing logic to `src/hooks/useComboboxParser.ts`
+- [x] detect creation vs browse mode
+- [x] parse `:t:`, `:td:` prefixes; detect URL
+- [x] parse `::tg`, `::col` tag flags
+- [x] parse `::t::`, `::link::`, `::td::`, `::itd::` type filters
+- [x] parse `##tag` filters; plain text = search
 
 ---
 
