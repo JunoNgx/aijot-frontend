@@ -1,0 +1,20 @@
+.DemoDataBanner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.625rem 0.5rem;
+    border-bottom: var(--lineThickness) solid var(--colBorder);
+    font-size: 0.875rem;
+
+    &__Text {
+        flex: 1;
+        min-width: 0;
+    }
+
+    &__Actions {
+        display: flex;
+        gap: 0.5rem;
+        flex-shrink: 0;
+    }
+}

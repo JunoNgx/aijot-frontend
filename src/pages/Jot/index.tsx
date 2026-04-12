@@ -1,9 +1,11 @@
 import { useState, useEffect, useRef } from "react"
 import { useHotkeys } from "@mantine/hooks"
 import { useItems } from "@/hooks/useItems"
+import { useLocalAppData } from "@/store/localAppData"
+import { SHORTCUT_FOCUS_MAIN_INPUT } from "@/utils/constants"
 import MainInput from "@/components/MainInput"
 import JotItem from "@/components/itemComponent/JotItem"
-import { SHORTCUT_FOCUS_MAIN_INPUT } from "@/utils/constants"
+import DemoDataBanner from "./DemoDataBanner"
 import styles from "./index.module.scss"
 import type { MainInputSearchData, Item } from "@/types"
 
@@ -42,6 +44,7 @@ export default function Jot() {
     const [searchData, setSearchData] = useState<MainInputSearchData>(DEFAULT_SEARCH_DATA)
     const [selectedIndex, setSelectedIndex] = useState(-1)
     const { itemsQuery } = useItems()
+    const { shouldShowDemoDataBanner } = useLocalAppData()
     const mainInputRef = useRef<HTMLInputElement>(null)
 
     const visibleItems = filterItems(itemsQuery.data ?? [], searchData)
@@ -65,6 +68,9 @@ export default function Jot() {
 
     return (
         <div className={styles.Jot}>
+            <div className={styles.Jot__NoticeWrapper}>
+                {shouldShowDemoDataBanner && <DemoDataBanner />}
+            </div>
             <MainInput
                 inputRef={mainInputRef}
                 onParse={setSearchData}

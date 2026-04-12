@@ -5,6 +5,10 @@
     max-width: 720px;
     margin: auto;
 
+    &__NoticeWrapper {
+        padding: 40px 0;
+    }
+
     &__List {
         display: flex;
         flex-direction: column;
