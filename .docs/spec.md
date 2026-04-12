@@ -259,6 +259,7 @@ The central UI component of the app, behaviours depend on the content and contex
 - Highlighted items can have actions performed on using hotkey shortcuts
     - Ctrl + Enter: perform primary action
     - Ctrl + Shift + Backspace: trash item
+    - Ctrl + Shift + R: (in trash bin only) restore deleted item
     - Ctrl + Shift + C: copy content
     - Ctrl + E: open edit dialog
     - Ctrl + Alt + 4: toggle copying as primary action
