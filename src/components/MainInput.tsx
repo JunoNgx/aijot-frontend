@@ -86,6 +86,11 @@ export default function MainInput({
         onSelectedIndexChange(visibleItemCount - 1)
     }
 
+    const handleEscapePress = () => {
+        onSelectedIndexChange(-1)
+        inputRef.current?.blur()
+    }
+
     return (
         <div className={styles.MainInput}>
             <input
@@ -102,7 +107,7 @@ export default function MainInput({
                     [SHORTCUT_NAV_UP_SKIP, () => moveSelection(-5)],
                     [SHORTCUT_NAV_TOP, jumpToTop],
                     [SHORTCUT_NAV_BOTTOM, jumpToBottom],
-                    ["Escape", () => onSelectedIndexChange(-1)],
+                    ["Escape", handleEscapePress],
                     [SHORTCUT_ITEM_COPY, handleCopySelected],
                     [SHORTCUT_ITEM_EDIT, () => { /* open ItemDialog — task 18 */ }],
                 ])}
