@@ -10,7 +10,7 @@ import {
     SYNTAX_FILTER_TYPE_INCOMPLETE_TODO,
     SYNTAX_SEARCH_TAG_PREFIX,
 } from "@/utils/constants"
-import type { ComboboxCreationData, ComboboxSearchData, FilterType } from "@/types"
+import type { MainInputCreationData, MainInputSearchData, FilterType } from "@/types"
 
 function isUrl(input: string): boolean {
     try {
@@ -103,7 +103,7 @@ function extractSearchText(trimmedInputText: string): string | undefined {
     return text || undefined
 }
 
-function parseSearchData(raw: string): ComboboxSearchData {
+function parseSearchData(raw: string): MainInputSearchData {
     const trimmedInputText = raw.trim()
     return {
         filterType: detectFilterType(trimmedInputText),
@@ -112,7 +112,7 @@ function parseSearchData(raw: string): ComboboxSearchData {
     }
 }
 
-function parseCreationData(raw: string): ComboboxCreationData {
+function parseCreationData(raw: string): MainInputCreationData {
     const trimmedInputText = raw.trim()
     const { content: parsedContent, tags, colSlug } = parseCreationFlags(trimmedInputText)
 
@@ -150,7 +150,7 @@ function parseCreationData(raw: string): ComboboxCreationData {
 }
 
 // Run on every keystroke, so memoized
-function useMainInputParser(input: string): ComboboxSearchData {
+function useMainInputParser(input: string): MainInputSearchData {
     return useMemo(() => parseSearchData(input), [input])
 }
 

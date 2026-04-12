@@ -111,16 +111,16 @@ export interface CoreCollectionSettingsStore {
 }
 
 // ============================================================
-// Combobox parser output
+// Main input parser output
 // ============================================================
 
-export interface ComboboxSearchData {
+export interface MainInputSearchData {
     filterType?: FilterType
     tags: string[]
     searchText?: string
 }
 
-export interface ComboboxCreationData {
+export interface MainInputCreationData {
     itemType: ItemType
     content: string
     title?: string

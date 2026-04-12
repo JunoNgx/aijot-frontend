@@ -3,13 +3,13 @@ import { useItems } from "@/hooks/useItems"
 import MainInput from "@/components/MainInput"
 import JotItem from "@/components/itemComponent/JotItem"
 import styles from "./index.module.scss"
-import type { ComboboxSearchData, Item } from "@/types"
+import type { MainInputSearchData, Item } from "@/types"
 
-const DEFAULT_SEARCH_DATA: ComboboxSearchData = {
+const DEFAULT_SEARCH_DATA: MainInputSearchData = {
     tags: [],
 }
 
-function filterItems(items: Item[], searchData: ComboboxSearchData): Item[] {
+function filterItems(items: Item[], searchData: MainInputSearchData): Item[] {
     let result = items
 
     if (searchData.filterType === "incompleteTodo") {
@@ -36,7 +36,7 @@ function filterItems(items: Item[], searchData: ComboboxSearchData): Item[] {
 }
 
 export default function Jot() {
-    const [searchData, setSearchData] = useState<ComboboxSearchData>(DEFAULT_SEARCH_DATA)
+    const [searchData, setSearchData] = useState<MainInputSearchData>(DEFAULT_SEARCH_DATA)
     const { itemsQuery } = useItems()
 
     const visibleItems = filterItems(itemsQuery.data ?? [], searchData)

@@ -3,9 +3,9 @@ import { DateTime } from "luxon"
 import { useItems } from "@/hooks/useItems"
 import { useMainInputParser, parseCreationData } from "@/hooks/useMainInputParser"
 import styles from "./MainInput.module.scss"
-import type { ComboboxCreationData, ComboboxSearchData, Item } from "@/types"
+import type { MainInputCreationData, MainInputSearchData, Item } from "@/types"
 
-function buildItem(creationData: ComboboxCreationData): Item {
+function buildItem(creationData: MainInputCreationData): Item {
     const now = DateTime.now().toISO()
     return {
         id: crypto.randomUUID(),
@@ -23,7 +23,7 @@ function buildItem(creationData: ComboboxCreationData): Item {
 }
 
 interface Props {
-    onParse: (searchData: ComboboxSearchData) => void
+    onParse: (searchData: MainInputSearchData) => void
 }
 
 export default function MainInput({ onParse }: Props) {
