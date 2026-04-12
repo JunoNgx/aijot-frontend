@@ -39,6 +39,7 @@ Backend is deployed at `https://aijot-backend.vercel.app`, consisting of the fol
 
 ## Terminology
 
+TRASH_PURGE_DURATION_DAY = 7
 SOFT_DELETE_PURGE_DURATION_DAY = 60
 
 ### Item
@@ -82,7 +83,8 @@ The central UI component of the app, capable of:
 - `createdAt`: iso timestamp, metadata
 - `jottedAt`: iso timestamp, user-editable for display purpose
 - `updatedAt`
-- `deletedAt`: for soft-deletion
+- `trashedAt`: iso timestamp, item is moved to trashbin
+- `deletedAt`: iso timestamp, item permanently removed from user's view; kept in DB as sync tombstone
 - `title`
 - `content`: plain-text only
 - `type`: ItemType
@@ -96,7 +98,7 @@ The central UI component of the app, capable of:
 
 - ItemType: `text` | `todo` | `link`
 
-Fields to index: id, type, jottedAt, deletedAt, *tags
+Fields to index: id, type, jottedAt, trashedAt, deletedAt, *tags
 
 ### Table `collections`
 - `id`: uuid
@@ -304,6 +306,7 @@ Might require a solution to workaround iOS
 - Move collection: under consideration, probably comes with too much complexity?
 - Trash
 - Restore: from Trash bin only
+- Permanently Delete: from Trash bin only
 - Refetch
 - Pin item
 - Unpin item
@@ -421,12 +424,21 @@ All users have three mandatory system collections that are not deletable:
 
 These are not real collections and are derived from `coreCollectionSettings`, then built into collection-shaped objects (with `coreType`) and appended into db query results.
 
-### Soft deletion
-- Items can only be soft-deleted, set at `deletedAt`
-- Soft deleted items are viewed via TrashBin collection
-    - The collection should display a notice on top the logic that items older than SOFT_DELETE_PURGE_DURATION_DAY will be permanently deleted
-- Item is purged/hard-deleted if deletedAt is older than SOFT_DELETE_PURGE_DURATION_DAY
-- Purge occurs at `visibilitychange` when user access the app AND at sync
+### Deletion model
+
+Two-stage deletion:
+
+1. **Trash** (`trashedAt`): user moves item to trash. Item is visible in the trash bin and can be restored. Set by the "trash" action.
+2. **Soft delete** (`deletedAt`): item is permanently removed from the user's view but retained in the DB as a sync tombstone. Set when the user hard-deletes from the trash bin, or when auto-purge fires.
+
+Active items: no `trashedAt`, no `deletedAt`.
+Trash bin: has `trashedAt`, no `deletedAt`.
+Tombstone (invisible): has `deletedAt`.
+
+- Trash bin displays a notice that items older than `TRASH_PURGE_DURATION_DAY` will be permanently deleted
+- Auto-purge sets `deletedAt` on items where `trashedAt` is older than `SOFT_DELETE_PURGE_DURATION_DAY`
+- Purge occurs at `visibilitychange` when user accesses the app AND at sync
+- Tombstone records (with `deletedAt`) are eventually removed from the DB entirely after sync confirms propagation
 
 ### Previous version recording
 - Applicable to text items only
