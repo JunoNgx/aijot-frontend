@@ -131,8 +131,8 @@
 ---
 
 ## Task 16 — JotItem context menu
-- [ ] Radix ContextMenu: Copy, Edit, Trash, Restore, Refetch, Pin, Unpin, Convert to Todo, Copy on click
-- [ ] Restore only in trash; Trash hidden in trash
+- [x] Radix ContextMenu: Copy, Edit, Trash, Restore, Permanently Delete, Refetch, Pin, Unpin, Convert to Todo, Copy on click
+- [x] Restore + Permanently Delete only in trash; Trash hidden in trash
 
 ---
 
