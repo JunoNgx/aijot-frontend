@@ -3,6 +3,7 @@ import { getHotkeyHandler } from "@mantine/hooks"
 import { useItems } from "@/hooks/useItems"
 import { useMainInputParser, parseCreationData } from "@/hooks/useMainInputParser"
 import { buildItem } from "@/utils/itemFactory"
+import { openItemDialog } from "@/components/ItemDialog"
 import {
     SHORTCUT_NAV_UP,
     SHORTCUT_NAV_DOWN,
@@ -61,7 +62,11 @@ export default function MainInput({
             window.open(selectedItem.content, "_blank")
             return
         }
-        // todo: toggle done (task 15); text: open ItemDialog (task 18)
+        if (selectedItem.type === "text") {
+            openItemDialog(selectedItem)
+            return
+        }
+        // todo: toggle done — task 15b
     }
 
     const handleCopySelected = () => {
@@ -109,7 +114,7 @@ export default function MainInput({
                     [SHORTCUT_NAV_BOTTOM, jumpToBottom],
                     ["Escape", handleEscapePress],
                     [SHORTCUT_ITEM_COPY, handleCopySelected],
-                    [SHORTCUT_ITEM_EDIT, () => { /* open ItemDialog — task 18 */ }],
+                    [SHORTCUT_ITEM_EDIT, () => selectedItem && openItemDialog(selectedItem)],
                 ])}
                 placeholder="Jot something..."
             />
