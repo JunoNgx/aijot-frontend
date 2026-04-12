@@ -114,17 +114,18 @@ export interface CoreCollectionSettingsStore {
 // Combobox parser output
 // ============================================================
 
-export type ComboboxMode = "create" | "search"
+export interface ComboboxSearchData {
+    filterType?: FilterType
+    tags: string[]
+    searchText?: string
+}
 
-export interface ParsedComboboxInput {
-    mode: ComboboxMode
+export interface ComboboxCreationData {
     itemType: ItemType
     content: string
     title?: string
     tags: string[]
     colSlug?: string
-    filterType?: FilterType
-    searchText?: string
 }
 
 // ============================================================

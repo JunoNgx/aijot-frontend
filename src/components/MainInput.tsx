@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react"
 import { DateTime } from "luxon"
 import { useItems } from "@/hooks/useItems"
-import useComboboxParser from "@/hooks/useComboboxParser"
+import { useComboboxParser, parseCreationData } from "@/hooks/useComboboxParser"
 import styles from "./MainInput.module.scss"
-import type { Item, ParsedComboboxInput } from "@/types"
+import type { ComboboxCreationData, ComboboxSearchData, Item } from "@/types"
 
-function buildItem(parsedInputData: ParsedComboboxInput): Item {
+function buildItem(creationData: ComboboxCreationData): Item {
     const now = DateTime.now().toISO()
     return {
         id: crypto.randomUUID(),
@@ -15,32 +15,32 @@ function buildItem(parsedInputData: ParsedComboboxInput): Item {
         isDone: false,
         shouldCopyOnClick: false,
         isPinned: false,
-        tags: parsedInputData.tags,
-        type: parsedInputData.itemType,
-        content: parsedInputData.content,
-        title: parsedInputData.title,
+        tags: creationData.tags,
+        type: creationData.itemType,
+        content: creationData.content,
+        title: creationData.title,
     }
 }
 
 interface Props {
-    onParse: (parsedInputData: ParsedComboboxInput) => void
+    onParse: (searchData: ComboboxSearchData) => void
 }
 
 export default function MainInput({ onParse }: Props) {
     const [inputValue, setInputValue] = useState("")
     const { createItem } = useItems()
-    const parsedInputData = useComboboxParser(inputValue)
+    const searchData = useComboboxParser(inputValue)
 
     useEffect(() => {
-        onParse(parsedInputData)
-    }, [parsedInputData])
+        onParse(searchData)
+    }, [searchData])
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key !== "Enter") return
         if (!inputValue.trim()) return
-        if (parsedInputData.mode !== "create") return
+        if (searchData.filterType !== undefined || searchData.tags.length > 0) return
 
-        createItem.mutate(buildItem(parsedInputData))
+        createItem.mutate(buildItem(parseCreationData(inputValue)))
         setInputValue("")
     }
 

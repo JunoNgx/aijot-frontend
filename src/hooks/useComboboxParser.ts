@@ -10,7 +10,7 @@ import {
     SYNTAX_FILTER_TYPE_INCOMPLETE_TODO,
     SYNTAX_SEARCH_TAG_PREFIX,
 } from "@/utils/constants"
-import type { FilterType, ParsedComboboxInput } from "@/types"
+import type { ComboboxCreationData, ComboboxSearchData, FilterType } from "@/types"
 
 function isUrl(input: string): boolean {
     try {
@@ -64,13 +64,13 @@ function parseCreationFlags(input: string): {
 
     const content = input.slice(0, flagStart).trim()
     const flagsStr = input.slice(flagStart)
-    const flagSegments = flagsStr.split("::").filter(Boolean)
+    const flagSegments = flagsStr.split("::").filter(segment => segment.length > 0)
 
     const tags: string[] = []
     let colSlug: string | undefined
 
     for (const segment of flagSegments) {
-        const words = segment.trim().split(/\s+/).filter(Boolean)
+        const words = segment.trim().split(" ").filter(word => word.length > 0)
         if (words.length === 0) continue
         const [flag, ...args] = words
         if (flag === "tg") {
@@ -83,41 +83,43 @@ function parseCreationFlags(input: string): {
     return { content, tags, colSlug }
 }
 
-function parseComboboxInput(raw: string): ParsedComboboxInput {
-    const trimmedInputText = raw.trim()
+function extractSearchText(trimmedInputText: string): string | undefined {
+    let text = trimmedInputText
+        .replace(SYNTAX_FILTER_TYPE_INCOMPLETE_TODO, "")
+        .replace(SYNTAX_FILTER_TYPE_TODO, "")
+        .replace(SYNTAX_FILTER_TYPE_TEXT, "")
+        .replace(SYNTAX_FILTER_TYPE_LINK, "")
+        .trim()
 
-    const filterType = detectFilterType(trimmedInputText)
-    const tagSearches = extractTagSearches(trimmedInputText)
+    const { content } = parseCreationFlags(text)
+    text = content
 
-    const isSearchMode = filterType !== undefined || tagSearches.length > 0
-    if (isSearchMode) {
-        let searchText = trimmedInputText
-        searchText = searchText
-            .replace(SYNTAX_FILTER_TYPE_INCOMPLETE_TODO, "")
-            .replace(SYNTAX_FILTER_TYPE_TODO, "")
-            .replace(SYNTAX_FILTER_TYPE_TEXT, "")
-            .replace(SYNTAX_FILTER_TYPE_LINK, "")
-            .trim()
-
-        return {
-            mode: "search",
-            itemType: "text",
-            content: "",
-            tags: tagSearches,
-            filterType,
-            searchText: searchText || undefined,
-        }
+    if (text.startsWith(SYNTAX_PREFIX_TODO)) {
+        text = text.slice(SYNTAX_PREFIX_TODO.length).trim()
+    } else if (text.startsWith(SYNTAX_PREFIX_LONG_TEXT)) {
+        text = text.slice(SYNTAX_PREFIX_LONG_TEXT.length).trim()
     }
 
+    return text || undefined
+}
+
+function parseSearchData(raw: string): ComboboxSearchData {
+    const trimmedInputText = raw.trim()
+    return {
+        filterType: detectFilterType(trimmedInputText),
+        tags: extractTagSearches(trimmedInputText),
+        searchText: extractSearchText(trimmedInputText),
+    }
+}
+
+function parseCreationData(raw: string): ComboboxCreationData {
+    const trimmedInputText = raw.trim()
     const { content: parsedContent, tags, colSlug } = parseCreationFlags(trimmedInputText)
 
     if (parsedContent.startsWith(SYNTAX_PREFIX_TODO)) {
-        const textContent = parsedContent.slice(SYNTAX_PREFIX_TODO.length).trim()
         return {
-            mode: "create",
             itemType: "todo",
-            content: textContent,
-            searchText: textContent || undefined,
+            content: parsedContent.slice(SYNTAX_PREFIX_TODO.length).trim(),
             tags,
             colSlug,
         }
@@ -126,11 +128,9 @@ function parseComboboxInput(raw: string): ParsedComboboxInput {
     if (parsedContent.startsWith(SYNTAX_PREFIX_LONG_TEXT)) {
         const title = parsedContent.slice(SYNTAX_PREFIX_LONG_TEXT.length).trim()
         return {
-            mode: "create",
             itemType: "text",
             content: "",
             title: title || undefined,
-            searchText: title || undefined,
             tags,
             colSlug,
         }
@@ -142,15 +142,16 @@ function parseComboboxInput(raw: string): ParsedComboboxInput {
         : parsedContent
 
     return {
-        mode: "create",
         itemType: isUrlInput ? "link" : "text",
         content: normalizedContent,
-        searchText: parsedContent || undefined,
         tags,
         colSlug,
     }
 }
 
-export default function useComboboxParser(input: string): ParsedComboboxInput {
-    return useMemo(() => parseComboboxInput(input), [input])
+// Run on every keystroke, so memoized
+function useComboboxParser(input: string): ComboboxSearchData {
+    return useMemo(() => parseSearchData(input), [input])
 }
+
+export { parseCreationData, useComboboxParser }
