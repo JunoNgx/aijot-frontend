@@ -5,7 +5,7 @@
     padding-bottom: 0.5rem;
 
     &__CodeMirror {
-        border: 1px solid var(--colText);
+        border: var(--lineThickness) solid var(--colText);
         overflow: hidden;
 
         :global(.cm-editor) {

@@ -11,7 +11,7 @@
 
     &--Selected {
         background-color: var(--colSurface);
-        outline: 1px solid var(--colBorder);
+        outline: var(--lineThickness) solid var(--colBorder);
         outline-offset: -1px;
     }
 
@@ -39,7 +39,7 @@
     }
 
     &__PrimaryText {
-        font-size: 0.875rem;
+        font-size: 1rem;
         font-weight: 500;
         color: var(--colText);
         overflow: hidden;
@@ -48,7 +48,7 @@
     }
 
     &__Datetime {
-        font-size: 0.75rem;
+        font-size: 1rem;
         color: var(--colText);
         flex-shrink: 0;
     }

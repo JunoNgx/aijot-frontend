@@ -7,6 +7,7 @@
     --colBorder: #ffffff;
     --colText: #ffffff;
     --colAccent: #ffffff;
+    --colDanger: #fa5252;
 }
 
 [data-color-scheme="light"] {
@@ -15,4 +16,10 @@
     --colBorder: #e0e0e0;
     --colText: #000000;
     --colAccent: #000000;
+    --colDestructiveAction: #fa5252;
+}
+
+:root {
+    --containerWidth: 1000px;
+    --lineThickness: 1px;
 }

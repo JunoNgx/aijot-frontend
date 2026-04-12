@@ -1,6 +1,6 @@
 .JotItemContextMenu {
     background-color: var(--colSurface);
-    border: 1px solid var(--colBorder);
+    border: var(--lineThickness) solid var(--colText);
     padding: 0.25rem;
     min-width: 180px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
@@ -19,11 +19,12 @@
 
         &:hover,
         &:focus {
-            background-color: var(--colBorder);
+            color: var(--colBg);
+            background-color: var(--colText);
         }
 
         &--Destructive {
-            color: var(--mantine-color-red-6);
+            color: var(--colDanger);
         }
     }
 
