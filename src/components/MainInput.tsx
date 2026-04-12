@@ -40,7 +40,8 @@ export default function MainInput({ onParse }: Props) {
         if (!inputValue.trim()) return
         if (searchData.filterType !== undefined || searchData.tags.length > 0) return
 
-        createItem.mutate(buildItem(parseCreationData(inputValue)))
+        const creationData = parseCreationData(inputValue)
+        createItem.mutate(buildItem(creationData))
         setInputValue("")
     }
 
