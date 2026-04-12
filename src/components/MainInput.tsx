@@ -28,7 +28,7 @@ interface Props {
 
 export default function MainInput({ onParse }: Props) {
     const [inputValue, setInputValue] = useState("")
-    const { createItem } = useItems()
+    const { createItemMutation } = useItems()
     const searchData = useMainInputParser(inputValue)
 
     useEffect(() => {
@@ -41,7 +41,7 @@ export default function MainInput({ onParse }: Props) {
         if (searchData.filterType !== undefined || searchData.tags.length > 0) return
 
         const creationData = parseCreationData(inputValue)
-        createItem.mutate(buildItem(creationData))
+        createItemMutation.mutate(buildItem(creationData))
         setInputValue("")
     }
 

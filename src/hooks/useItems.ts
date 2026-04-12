@@ -23,7 +23,7 @@ export function useItems() {
         },
     })
 
-    const createItem = useMutation({
+    const createItemMutation = useMutation({
         mutationFn: async (item: Item) => {
             await storage.putItem(item)
             return item
@@ -44,5 +44,5 @@ export function useItems() {
         },
     })
 
-    return { itemsQuery, createItem }
+    return { itemsQuery, createItemMutation }
 }
