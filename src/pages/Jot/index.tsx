@@ -49,7 +49,10 @@ export default function Jot() {
     const selectedItem = selectedIndex >= 0 ? visibleItems[selectedIndex] : undefined
 
     useEffect(() => {
-        if (selectedIndex < 0) return
+        if (selectedIndex <= 0) {
+            window.scrollTo({ top: 0, behavior: "smooth" })
+            return
+        }
         document
             .querySelector(`[data-item-index="${selectedIndex}"]`)
             ?.scrollIntoView({ block: "nearest" })
