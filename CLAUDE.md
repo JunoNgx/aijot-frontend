@@ -28,6 +28,7 @@ ai\*jot is a remake of JustJot. Most of JustJot specifications are applicable to
 - Implement reusable utility CSS classes in `global.scss` as needed rather than repeating inline styles
 - CSS custom properties (variables) use `camelCase` (e.g. `--colBg`, `--colTextMuted`)
 - Use CSS variables when possible, especially for common patterns (e.g. `var(--lineThickness)` instead of `1px`). Variables are defined in `src/styles/_vars.scss`
+- Run `yarn format` after every set of changes before handing back
 - Use Mantine components where the benefit outweighs the cost of library coupling. Prefer plain HTML + SCSS for simple layout and typography where Mantine's overhead isn't worth it
 
 ## Patterns from JustJot
