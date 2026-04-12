@@ -176,6 +176,13 @@ Stores that are prefixed with `local*` are for local use only and never synced.
 
 ## User interface
 
+### Art direction
+- Core mood keywords: minimal; precise; focused
+- High contrast black/white with sparing use of grey unless absolutely necessary (for default themes)
+- Thick and bold lines and borders
+- No rounded corners
+- Font family: Space Grostek and Space Mono
+
 ### Landing page
 - Showing app name
 - Tagline: `*sloth, not artificial intelligence`
