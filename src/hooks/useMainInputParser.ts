@@ -4,6 +4,7 @@ import {
     SYNTAX_PREFIX_LONG_TEXT,
     SYNTAX_FLAG_TAG,
     SYNTAX_FLAG_COLLECTION,
+    SYNTAX_FLAG_COMMON_PREFIX,
     SYNTAX_FILTER_TYPE_TEXT,
     SYNTAX_FILTER_TYPE_LINK,
     SYNTAX_FILTER_TYPE_TODO,
@@ -64,24 +65,26 @@ function parseCreationFlags(input: string): {
     )
 
     const content = input.slice(0, flagStart).trim()
-    const flagsStr = input.slice(flagStart) // `::tg tag1 tag2 ::col slug1 slug2`
-    const flagSegments = flagsStr.split("::").filter(segment => segment.length > 0)
 
-    const tags: string[] = []
-    let colSlug: string | undefined
-
-    for (const segment of flagSegments) {
-        const words = segment.trim().split(" ").filter(word => word.length > 0)
-        if (words.length === 0) continue
-        const [flag, ...args] = words
-        if (flag === "tg") {
-            tags.push(...args)
-        } else if (flag === "col" && args.length > 0) {
-            colSlug = args[0]
-        }
-    }
+    // `::tg tag1 tag2 ::col slug1 slug2`
+    const flagsStr = input.slice(flagStart)
+    const tags = extractFlagArgs(flagsStr, SYNTAX_FLAG_TAG)
+    const colSlug = extractFlagArgs(flagsStr, SYNTAX_FLAG_COLLECTION)[0]
 
     return { content, tags, colSlug }
+}
+
+function extractFlagArgs(allFlagsStr: string, targetFlagSyntax: string) {
+    const targetFlagStartsIndex = allFlagsStr.indexOf(targetFlagSyntax)
+    if (targetFlagStartsIndex === -1) {
+        return []
+    }
+
+    const afterTargetFlagStr = allFlagsStr.slice(targetFlagStartsIndex + targetFlagSyntax.length)
+
+    const argStr = afterTargetFlagStr.split(SYNTAX_FLAG_COMMON_PREFIX)[0].trim()
+    const argArr = argStr.split(" ").filter(word => word.length > 0)
+    return argArr
 }
 
 function extractSearchText(trimmedInputText: string): string | undefined {
