@@ -18,7 +18,7 @@ export function useItems() {
         queryFn: async () => {
             const allItems = await storage.getItems()
             const activeItems = allItems
-                .filter((item) => !item.deletedAt)
+                .filter((item) => !item.trashedAt && !item.deletedAt)
                 .sort((a, b) => b.jottedAt.localeCompare(a.jottedAt))
             return sortItems(activeItems)
         },
@@ -81,7 +81,7 @@ export function useItems() {
     const softDeleteItemMutation = useMutation({
         mutationFn: async (item: Item) => {
             const now = DateTime.now().toISO()
-            await storage.putItem({ ...item, deletedAt: now, updatedAt: now })
+            await storage.putItem({ ...item, trashedAt: now, updatedAt: now })
         },
         onMutate: async (item) => {
             await queryClient.cancelQueries({ queryKey: queryKeys.items })
@@ -101,13 +101,13 @@ export function useItems() {
 
     const restoreItemMutation = useMutation({
         mutationFn: async (item: Item) => {
-            const { deletedAt: _deletedAt, ...restoredItem } = item
+            const { trashedAt: _trashedAt, ...restoredItem } = item
             await storage.putItem({ ...restoredItem, updatedAt: DateTime.now().toISO() })
         },
         onMutate: async (item) => {
             await queryClient.cancelQueries({ queryKey: queryKeys.items })
             const previousItems = queryClient.getQueryData<Item[]>(queryKeys.items)
-            const { deletedAt: _deletedAt, ...restoredItem } = item
+            const { trashedAt: _trashedAt, ...restoredItem } = item
             queryClient.setQueryData<Item[]>(queryKeys.items, (prev) =>
                 sortItems(
                     [...(prev ?? []), restoredItem]
@@ -125,18 +125,19 @@ export function useItems() {
     })
 
     const hardDeleteItemMutation = useMutation({
-        mutationFn: async (itemId: string) => {
-            await storage.deleteItem(itemId)
+        mutationFn: async (item: Item) => {
+            const now = DateTime.now().toISO()
+            await storage.putItem({ ...item, deletedAt: now, updatedAt: now })
         },
-        onMutate: async (itemId) => {
+        onMutate: async (item) => {
             await queryClient.cancelQueries({ queryKey: queryKeys.items })
             const previousItems = queryClient.getQueryData<Item[]>(queryKeys.items)
             queryClient.setQueryData<Item[]>(queryKeys.items, (prev) =>
-                (prev ?? []).filter((i) => i.id !== itemId),
+                (prev ?? []).filter((i) => i.id !== item.id),
             )
             return { previousItems }
         },
-        onError: (_err, _itemId, context) => {
+        onError: (_err, _item, context) => {
             queryClient.setQueryData(queryKeys.items, context?.previousItems)
         },
         onSettled: () => {

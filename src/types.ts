@@ -10,6 +10,7 @@ export interface Item {
     createdAt: string
     jottedAt: string
     updatedAt: string
+    trashedAt?: string
     deletedAt?: string
     title?: string
     content: string

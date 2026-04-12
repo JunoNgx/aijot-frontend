@@ -16,5 +16,6 @@ export interface StorageAdapter {
     bulkPutCollections(collections: Collection[]): Promise<void>
 
     // Maintenance
-    purgeItemsBefore(cutoffIso: string): Promise<void>
+    purgeTrashedItems(cutoffIso: string): Promise<void>
+    purgeSoftDeletedItems(cutoffIso: string): Promise<void>
 }
