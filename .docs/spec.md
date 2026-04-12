@@ -253,8 +253,17 @@ The central UI component of the app, behaviours depend on the content and contex
 
 ##### Control
 - While combobox is focused, up and down arrow can be used to browse through the items
-    - Use Shift + Up/Down to move by 5 items
+    - Shift + Up/Down: move by 5 items
+    - Ctrl + Shift + Up/Down: move to top/bottom of the displayed list
+    - Esc: unfocus/blur the main input
 - Highlighted items can have actions performed on using hotkey shortcuts
+    - Ctrl + Enter: perform primary action
+    - Ctrl + Shift + Backspace: trash item
+    - Ctrl + Shift + C: copy content
+    - Ctrl + E: open edit dialog
+    - Ctrl + Alt + 4: toggle copying as primary action
+    - Ctrl + Alt + 5: refetch link
+    - Ctrl + Alt + 6: convert a title-less text to todo
 
 #### Jot item
 - Displayed Jot items, if passed filtered, are displayed in a list
