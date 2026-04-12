@@ -36,7 +36,6 @@ export default function MainInput({ onParse }: Props) {
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Jot something..."
-                autoFocus
             />
         </div>
     )
