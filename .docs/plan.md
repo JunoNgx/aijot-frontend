@@ -175,9 +175,8 @@
 
 ## Task 19 — ItemDialog: advanced accordion
 
-- [ ] collection tag picker (highlights matching collections)
 - [ ] `jottedAt` datetime picker
-- [ ] View Last Version: read-only dialog with restore button (text only)
+- [ ] View Last Version: read-only editor with restore button (text only)
 
 ---
 
@@ -185,6 +184,7 @@
 
 - [ ] `useCreateCollectionMutation`, `useUpdateCollectionMutation`, `useDeleteCollectionMutation`
 - [ ] CollectionDialog: name, slug (auto), type checkboxes, tag list, Save/Delete
+- [ ] collection tag picker in ItemDialog (highlights matching collections)
 
 ---
 
