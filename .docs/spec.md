@@ -216,9 +216,13 @@ The central UI component of the app, behaviours depend on the content and contex
     - `:t: Screenplay draft ::tg thriller scifi` will open the create text dialog with `Screenplay draft` filled for title, and tags filled with `thriller` and `scifi`
 
 ###### By collection
-- Tags can also be tagged by collection basis with the flag `::col`, followed by the slug of the collection. This should also be kept behind the content.
-- With the Collection `Screenplays` with the slug `screenplays`, which has the tags `creative`,  `writing`, and `screen`:
-    - Entering `:t: Thriller draft ::col screenplays` will also apply the three tags used to display this collection
+- Tags can also be tagged by collection basis with the flag `::col`, followed by the slugs of the collection that the user wants it to be associated with. This should also be kept behind the content.
+- Consider the scenario:
+    - Collection `Screenplays` with the slug `screenplays`, which has the tags `creative`, `writing`, and `screen`
+    - Collection `Scifi` with the slug `scifi`, which has the tags `scifi`
+    - Entering `:t: Untitled scifi thriller draft ::col screenplays scifi` will also apply the following tags:
+        - `creative`, `writing`, `screen` as the result of the first indicated collection `Screenplays`
+        - `scifi` as the result of the second indicated collection `Scifi`
 
 ###### By both tags and collection
 - Both of these flags can be used together, and it doesn't matter which one come first. The specified tags and the tags used by the collection will all be applied together to the item
