@@ -160,7 +160,7 @@
 
 - [ ] pinned items rendered above regular list
 - [ ] trash: notice items older than 7 days are soft deleted
-- [ ] onboarding banner: shown if `shouldShowDemoDataBanner`, dismiss + load demo data
+- [x] onboarding banner: shown if `shouldShowDemoDataBanner`, dismiss + load demo data
 
 ---
 
@@ -258,8 +258,9 @@
 
 ## Task 30 — Demo data
 
-- [ ] `src/utils/demoData.ts` — seed items + collections per spec
-- [ ] wire to onboarding banner
+- [x] `buildDemoItems()` in `src/utils/itemFactory.ts` — seed items per spec
+- [x] wire to onboarding banner
+- [ ] seed collections per spec
 
 ---
 
