@@ -14,6 +14,9 @@ body {
     margin: 0;
     padding: 0;
     height: 100%;
+    font-family: "Space Grotesk", sans-serif;
+    background-color: var(--colBg);
+    color: var(--colText);
 }
 
 #root {
