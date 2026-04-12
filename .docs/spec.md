@@ -88,10 +88,10 @@ The central UI component of the app, capable of:
 - `title`
 - `content`: plain-text only
 - `type`: ItemType
-- `isDone`
-- `faviconUrl`: `link` only
-- `shouldCopyOnClick`: boolean
-- `isPinned`
+- `isDone`: optional boolean, `todo` only
+- `faviconUrl`: optional, `link` only
+- `shouldCopyOnClick`: optional boolean, omitted when false
+- `isPinned`: optional boolean, omitted when false
 - `tags`: string[]
 - `previousContent`, last saved content, for undo'ing purpose
 - `previousContentRecordedAt`: iso-timestamp for `previousContent`
