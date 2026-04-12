@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react"
 import { modals } from "@mantine/modals"
 import { useDebouncedCallback, getHotkeyHandler } from "@mantine/hooks"
-import { TextInput, Textarea, Button, Text, Group } from "@mantine/core"
+import { TextInput, Textarea, Button } from "@mantine/core"
 import { DateTime } from "luxon"
 import { EditorView, keymap, drawSelection } from "@codemirror/view"
 import { EditorState } from "@codemirror/state"
@@ -191,8 +191,8 @@ export default function ItemDialog({ item }: Props) {
                 description="Separated by spaces"
             />
             <div className={styles.ItemDialog__Footer}>
-                <Text size="xs" c="dimmed">{saveStatusText}</Text>
-                <Group gap="xs">
+                <span className={styles.ItemDialog__SaveStatus}>{saveStatusText}</span>
+                <div className={styles.ItemDialog__Actions}>
                     <Button
                         variant="subtle"
                         color="red"
@@ -202,7 +202,7 @@ export default function ItemDialog({ item }: Props) {
                         Delete
                     </Button>
                     <Button size="sm" onClick={handleSaveAndClose}>Save</Button>
-                </Group>
+                </div>
             </div>
         </div>
     )

@@ -34,4 +34,14 @@
         align-items: center;
         justify-content: space-between;
     }
+
+    &__SaveStatus {
+        font-size: 0.75rem;
+        color: var(--colTextMuted);
+    }
+
+    &__Actions {
+        display: flex;
+        gap: 0.5rem;
+    }
 }
