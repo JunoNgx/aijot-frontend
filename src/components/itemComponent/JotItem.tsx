@@ -1,7 +1,9 @@
 import { useState } from "react"
+import * as ContextMenu from "@radix-ui/react-context-menu"
 import { IconNote, IconLink, IconSquare, IconSquareCheck } from "@tabler/icons-react"
 import { isValidHexColourCode, formatJottedAt } from "@/utils/helpers"
 import { openItemDialog } from "@/components/ItemDialog"
+import JotItemContextMenu from "./JotItemContextMenu"
 import type { Item } from "@/types"
 import styles from "./JotItem.module.scss"
 
@@ -63,17 +65,22 @@ export default function JotItem({ item, isSelected, itemIndex }: Props) {
     const rootClassName = [styles.JotItem, isSelected ? styles["JotItem--Selected"] : ""].join(" ")
 
     return (
-        <div className={rootClassName} data-item-index={itemIndex} onClick={() => triggerItemPrimaryAction(item)}>
-            <span className={styles.JotItem__Icon}>
-                <ItemIcon item={item} />
-            </span>
-            <div className={styles.JotItem__Body}>
-                <div className={styles.JotItem__Header}>
-                    <span className={styles.JotItem__PrimaryText}>{primaryText}</span>
-                    <span className={styles.JotItem__Datetime}>{datetime}</span>
+        <ContextMenu.Root>
+            <ContextMenu.Trigger asChild>
+                <div className={rootClassName} data-item-index={itemIndex} onClick={() => triggerItemPrimaryAction(item)}>
+                    <span className={styles.JotItem__Icon}>
+                        <ItemIcon item={item} />
+                    </span>
+                    <div className={styles.JotItem__Body}>
+                        <div className={styles.JotItem__Header}>
+                            <span className={styles.JotItem__PrimaryText}>{primaryText}</span>
+                            <span className={styles.JotItem__Datetime}>{datetime}</span>
+                        </div>
+                        {secondaryTextEl}
+                    </div>
                 </div>
-                {secondaryTextEl}
-            </div>
-        </div>
+            </ContextMenu.Trigger>
+            <JotItemContextMenu item={item} />
+        </ContextMenu.Root>
     )
 }
