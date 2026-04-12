@@ -69,3 +69,14 @@ export const COLLECTION_HOTKEY_COUNT = 9
 
 export const SYNTAX_PREFIX_TODO = ":td:"
 export const SYNTAX_PREFIX_LONG_TEXT = ":t:"
+
+// Creation flags (suffixed after content)
+export const SYNTAX_FLAG_TAG = "::tg"
+export const SYNTAX_FLAG_COLLECTION = "::col"
+
+// Browse/filter syntax
+export const SYNTAX_FILTER_TYPE_TEXT = "::t::"
+export const SYNTAX_FILTER_TYPE_LINK = "::link::"
+export const SYNTAX_FILTER_TYPE_TODO = "::td::"
+export const SYNTAX_FILTER_TYPE_INCOMPLETE_TODO = "::itd::"
+export const SYNTAX_SEARCH_TAG_PREFIX = "##"
