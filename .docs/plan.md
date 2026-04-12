@@ -95,17 +95,22 @@
 ---
 
 ## Task 14 — Combobox: keyboard nav + hotkeys
-- [ ] Up/Down navigation, Shift skips 5, mod+shift jumps top/bottom
-- [ ] `mod+f` focuses main input
-- [ ] Escape clears selection
-- [ ] `mod+Enter` triggers primary action on selected item
-- [ ] `mod+shift+c` copy content
-- [ ] `mod+e` edit (open ItemDialog)
-- [ ] `mod+shift+backspace` trash
-- [ ] `mod+alt+r` restore
-- [ ] `mod+alt+4` toggle copy on click
-- [ ] `mod+alt+5` refetch (links only)
-- [ ] `mod+alt+6` convert to todo
+
+### State
+- [ ] `selectedIndex` lifted to `Jot/index.tsx`, passed to `MainInput` and `JotItem` (for selected styling)
+- [ ] `selectedIndex` resets to `-1` on input change
+
+### Navigation (handled in `MainInput` via `getHotkeyHandler`)
+- [ ] `ArrowUp` / `ArrowDown` — move selection by 1
+- [ ] `Shift+ArrowUp` / `Shift+ArrowDown` — move selection by 5
+- [ ] `mod+Shift+ArrowUp` / `mod+Shift+ArrowDown` — jump to top/bottom
+- [ ] `Escape` — clear selection (set to `-1`)
+- [ ] `mod+f` — focus main input from anywhere in the app (registered at `App.tsx` level)
+
+### Item hotkeys (only fire when `selectedIndex > -1`)
+- [ ] `mod+Enter` — trigger primary action on selected item (link: open, todo: toggle done, text: open ItemDialog stub)
+- [ ] `mod+shift+c` — copy selected item content to clipboard
+- [ ] `mod+e` — open ItemDialog (stub until task 18)
 
 ## Task 14b — Extended menu
 - [ ] extended menu: click-accessible syntax shortcuts
@@ -115,6 +120,13 @@
 ## Task 15 — Remaining item mutations
 - [ ] `useUpdateItemMutation` — saves `previousContent` if content changed (text only)
 - [ ] `useSoftDeleteItemMutation`, `useRestoreItemMutation`, `useHardDeleteItemMutation`
+
+## Task 15b — Mutation hotkeys (blocked by task 15)
+- [ ] `mod+shift+backspace` — trash selected item
+- [ ] `mod+alt+r` — restore selected item, trash only
+- [ ] `mod+alt+4` — toggle copy-on-click
+- [ ] `mod+alt+5` — refetch link meta, links only
+- [ ] `mod+alt+6` — convert to todo, text only
 
 ---
 
