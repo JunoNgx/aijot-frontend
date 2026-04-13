@@ -203,10 +203,10 @@ Remove all Mantine packages: `@mantine/core`, `@mantine/dates`, `@mantine/hooks`
 
 ## Task 19-2c — Mantine removal: ItemDialog surgery
 
-- [ ] Replace `Accordion` with `@radix-ui/react-accordion`
-- [ ] Replace `DateTimePicker` with `<input type="datetime-local">`
-- [ ] Replace `useDebouncedCallback` with `useDebounced`
-- [ ] Replace `Button`, `TextInput`, `Textarea` with plain HTML + SCSS
+- [x] Replace `Accordion` with `@radix-ui/react-accordion`
+- [x] Replace `DateTimePicker` with `<input type="datetime-local">`
+- [x] Replace `useDebouncedCallback` with `useDebounced`
+- [x] Replace `Button`, `TextInput`, `Textarea` with plain HTML + SCSS
 
 ---
 
