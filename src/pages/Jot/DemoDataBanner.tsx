@@ -1,4 +1,3 @@
-import { Button } from "@mantine/core"
 import { useQueryClient } from "@tanstack/react-query"
 import { useLocalAppData } from "@/store/localAppData"
 import { storage } from "@/db"
@@ -26,12 +25,12 @@ export default function DemoDataBanner() {
                 <strong>Welcome to ai*jot.</strong> Your jots are stored locally on this device.
             </div>
             <div className={styles.DemoDataBanner__Actions}>
-                <Button variant="subtle" size="xs" onClick={handleDismiss}>
+                <button className={styles.DemoDataBanner__BtnSubtle} onClick={handleDismiss}>
                     Dismiss
-                </Button>
-                <Button variant="outline" size="xs" onClick={handleLoadDemoData}>
+                </button>
+                <button className={styles.DemoDataBanner__BtnOutline} onClick={handleLoadDemoData}>
                     Load demo data
-                </Button>
+                </button>
             </div>
         </div>
     )

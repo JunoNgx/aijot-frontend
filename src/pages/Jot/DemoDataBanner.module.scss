@@ -17,4 +17,29 @@
         gap: 0.5rem;
         flex-shrink: 0;
     }
+
+    &__BtnSubtle {
+        all: unset;
+        cursor: pointer;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+        box-sizing: border-box;
+
+        &:hover {
+            opacity: 0.7;
+        }
+    }
+
+    &__BtnOutline {
+        all: unset;
+        cursor: pointer;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+        border: var(--lineThickness) solid var(--colText);
+        box-sizing: border-box;
+
+        &:hover {
+            background-color: var(--colSurface);
+        }
+    }
 }
