@@ -180,23 +180,42 @@
 
 ---
 
-## Task 19-2 — Full Mantine removal
+## Task 19-2a — Mantine removal: setup + teardown
 
 Remove all Mantine packages: `@mantine/core`, `@mantine/dates`, `@mantine/hooks`, `@mantine/modals`, `@mantine/notifications`, `@mantine/spotlight`, `@mantine/form`.
 
 - [ ] Install `@radix-ui/react-accordion`, `sonner`, `react-hotkeys-hook`
 - [ ] `src/hooks/useDebounced.ts` — custom debounce hook to replace `useDebouncedCallback`
-- [ ] Remove `MantineProvider`, `ModalsProvider`, `Notifications` from `main.tsx`; remove all `@mantine/*` CSS imports; remove `postcss-preset-mantine` from `postcss.config.cjs`
-- [ ] Build dialog system: `src/components/dialogManager.tsx` — Radix `Dialog` root + plain Zustand store (no `persist`) exposing `openDialog({ children })` / `closeAllDialogs()`
-- [ ] Replace `Accordion` in `ItemDialog.tsx` with Radix accordion
-- [ ] Replace `modals.*` calls in `ItemDialog.tsx` with `closeAllDialogs()`
-- [ ] Wire `openDialog` wherever `modals.open` is called
-- [ ] Replace `DateTimePicker` in `ItemDialog.tsx` with `<input type="datetime-local">`
-- [ ] Replace `getHotkeyHandler` + `useHotkeys` with `react-hotkeys-hook`
+- [ ] Remove `MantineProvider`, `ModalsProvider`, `Notifications` from `main.tsx`; remove all `@mantine/*` CSS imports
+- [ ] Remove `postcss-preset-mantine` from `postcss.config.cjs`
+
+---
+
+## Task 19-2b — Mantine removal: dialog system
+
+- [ ] `src/store/dialogStore.ts` — plain Zustand store (no `persist`) with `openDialog({ children })` / `closeAllDialogs()`
+- [ ] `src/components/DialogManager.tsx` — Radix `Dialog` root consuming the store
+- [ ] Mount `<DialogManager>` in `main.tsx`
+- [ ] Replace all `modals.open(...)` call sites with `openDialog(...)`
+- [ ] Replace all `modals.closeAll()` call sites with `closeAllDialogs()`
+
+---
+
+## Task 19-2c — Mantine removal: ItemDialog surgery
+
+- [ ] Replace `Accordion` with `@radix-ui/react-accordion`
+- [ ] Replace `DateTimePicker` with `<input type="datetime-local">`
 - [ ] Replace `useDebouncedCallback` with `useDebounced`
-- [ ] Replace `Button`, `TextInput`, `Textarea` in `ItemDialog.tsx` + `DemoDataBanner.tsx` with plain HTML + SCSS
+- [ ] Replace `Button`, `TextInput`, `Textarea` with plain HTML + SCSS
+
+---
+
+## Task 19-2d — Mantine removal: hotkeys + notifications + cleanup
+
+- [ ] Replace `getHotkeyHandler` + `useHotkeys` with `react-hotkeys-hook`
 - [ ] Wire sonner: add `<Toaster>` to `main.tsx`, replace all `notifications.show(...)` calls
-- [ ] Remove `theme.ts`; remove `useMantineColorScheme` from `App.tsx` (app already owns color scheme logic)
+- [ ] Remove `theme.ts`; remove `useMantineColorScheme` from `App.tsx`
+- [ ] Uninstall all `@mantine/*` packages
 
 ---
 
