@@ -252,10 +252,10 @@ Remove all Mantine packages: `@mantine/core`, `@mantine/dates`, `@mantine/hooks`
 
 ---
 
-## Task 23 — Header + UserDropdown + Spotlight
+## Task 23 — Header + UserDropdown
 
-- [ ] Header with user display name top-right
-- [ ] UserDropdown: Settings, Manage Collections, About, Help, Privacy, ToS
+- [x] Header with user display name top-right
+- [x] UserDropdown: Settings, Manage Collections, Help, Privacy, ToS
 
 ---
 
