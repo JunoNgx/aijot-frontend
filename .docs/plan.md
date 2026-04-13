@@ -180,6 +180,34 @@
 
 ---
 
+## Task 19-2 — Full Mantine removal
+
+Remove all Mantine packages: `@mantine/core`, `@mantine/dates`, `@mantine/hooks`, `@mantine/modals`, `@mantine/notifications`, `@mantine/spotlight`, `@mantine/form`.
+
+- [ ] Install `@radix-ui/react-accordion`, `sonner`, `react-hotkeys-hook`
+- [ ] `src/hooks/useDebounced.ts` — custom debounce hook to replace `useDebouncedCallback`
+- [ ] Remove `MantineProvider`, `ModalsProvider`, `Notifications` from `main.tsx`; remove all `@mantine/*` CSS imports; remove `postcss-preset-mantine` from `postcss.config.cjs`
+- [ ] Build dialog system: `src/components/dialogManager.tsx` — Radix `Dialog` root + plain Zustand store (no `persist`) exposing `openDialog({ children })` / `closeAllDialogs()`
+- [ ] Replace `Accordion` in `ItemDialog.tsx` with Radix accordion
+- [ ] Replace `modals.*` calls in `ItemDialog.tsx` with `closeAllDialogs()`
+- [ ] Wire `openDialog` wherever `modals.open` is called
+- [ ] Replace `DateTimePicker` in `ItemDialog.tsx` with `<input type="datetime-local">`
+- [ ] Replace `getHotkeyHandler` + `useHotkeys` with `react-hotkeys-hook`
+- [ ] Replace `useDebouncedCallback` with `useDebounced`
+- [ ] Replace `Button`, `TextInput`, `Textarea` in `ItemDialog.tsx` + `DemoDataBanner.tsx` with plain HTML + SCSS
+- [ ] Wire sonner: add `<Toaster>` to `main.tsx`, replace all `notifications.show(...)` calls
+- [ ] Remove `theme.ts`; remove `useMantineColorScheme` from `App.tsx` (app already owns color scheme logic)
+
+---
+
+## Task 19-3 — Firefox datetime picker fallback
+
+- [ ] Detect Firefox via user agent or feature detection
+- [ ] Render fallback UI (separate date + time `<input>` fields, or custom picker) when native `datetime-local` is inadequate
+- [ ] Reconcile fallback output back to ISO string for consistent value handling
+
+---
+
 ## Task 20 — Collection mutations + CollectionDialog
 
 - [ ] `useCreateCollectionMutation`, `useUpdateCollectionMutation`, `useDeleteCollectionMutation`
