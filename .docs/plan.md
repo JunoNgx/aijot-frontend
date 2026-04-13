@@ -256,7 +256,6 @@ Remove all Mantine packages: `@mantine/core`, `@mantine/dates`, `@mantine/hooks`
 
 - [ ] Header with user display name top-right
 - [ ] UserDropdown: Settings, Manage Collections, About, Help, Privacy, ToS
-- [ ] Spotlight: setup + actions (theme, nav, export, sync)
 
 ---
 
@@ -322,4 +321,5 @@ Remove all Mantine packages: `@mantine/core`, `@mantine/dates`, `@mantine/hooks`
 
 ## Task 32 — Post-release polish
 
+- [ ] Spotlight: setup + actions (theme, nav, export, sync)
 - [ ] Collection tag picker in ItemDialog: highlights collections whose tags match the item's tags
