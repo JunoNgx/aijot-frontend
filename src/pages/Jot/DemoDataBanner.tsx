@@ -2,7 +2,7 @@ import { useQueryClient } from "@tanstack/react-query"
 import { useLocalAppData } from "@/store/localAppData"
 import { storage } from "@/db"
 import { queryKeys } from "@/db/queryKeys"
-import { buildDemoItems } from "@/utils/itemFactory"
+import { buildDemoCollections, buildDemoItems } from "@/utils/itemFactory"
 import styles from "./DemoDataBanner.module.scss"
 
 export default function DemoDataBanner() {
@@ -14,8 +14,12 @@ export default function DemoDataBanner() {
     }
 
     const handleLoadDemoData = async () => {
-        await storage.bulkPutItems(buildDemoItems())
+        await Promise.all([
+            storage.bulkPutItems(buildDemoItems()),
+            storage.bulkPutCollections(buildDemoCollections()),
+        ])
         queryClient.invalidateQueries({ queryKey: queryKeys.items })
+        queryClient.invalidateQueries({ queryKey: queryKeys.collections })
         setShouldShowDemoDataBanner(false)
     }
 

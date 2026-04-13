@@ -1,6 +1,6 @@
 import { DateTime } from "luxon"
 import { v4 as uuidv4 } from "uuid"
-import type { Item, MainInputCreationData } from "@/types"
+import type { Collection, Item, ItemType, MainInputCreationData } from "@/types"
 
 export function buildDemoItems(): Item[] {
     const base = DateTime.now()
@@ -139,6 +139,50 @@ ARC 9`,
             createdAt: at(1),
             jottedAt: at(1),
             updatedAt: at(1),
+        },
+    ]
+}
+
+export function buildDemoCollections(): Collection[] {
+    const now = DateTime.now().toISO()
+    const allTypes: ItemType[] = ["text", "todo", "link"]
+
+    return [
+        {
+            id: uuidv4(),
+            createdAt: now,
+            updatedAt: now,
+            name: "Elden Ring",
+            icon: "⚔️",
+            colour: "#8B2020",
+            slug: "elden-ring",
+            sortOrder: 1000,
+            tags: ["er"],
+            types: allTypes,
+        },
+        {
+            id: uuidv4(),
+            createdAt: now,
+            updatedAt: now,
+            name: "Chore",
+            icon: "🧹",
+            colour: "#4A7C59",
+            slug: "chore",
+            sortOrder: 2000,
+            tags: ["chore"],
+            types: allTypes,
+        },
+        {
+            id: uuidv4(),
+            createdAt: now,
+            updatedAt: now,
+            name: "Work",
+            icon: "💼",
+            colour: "#2C5F8A",
+            slug: "work",
+            sortOrder: 3000,
+            tags: ["programming", "web"],
+            types: allTypes,
         },
     ]
 }
