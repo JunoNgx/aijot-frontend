@@ -27,7 +27,7 @@ export default function JotItemContextMenu({ item }: Props) {
     const {
         updateItemMutation,
         softDeleteItemMutation,
-        restoreItemMutation,
+        untrashItemMutation,
         hardDeleteItemMutation,
     } = useItems()
 
@@ -36,7 +36,7 @@ export default function JotItemContextMenu({ item }: Props) {
     const handleCopy = () => navigator.clipboard.writeText(item.content)
     const handleEdit = () => openItemDialog(item)
     const handleTrash = () => softDeleteItemMutation.mutate(item)
-    const handleRestore = () => restoreItemMutation.mutate(item)
+    const handleRestore = () => untrashItemMutation.mutate(item)
     const handleHardDelete = () => hardDeleteItemMutation.mutate(item)
 
     const handlePin = () =>

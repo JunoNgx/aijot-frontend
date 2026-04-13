@@ -113,7 +113,7 @@ export function useItems() {
         },
     })
 
-    const restoreItemMutation = useMutation({
+    const untrashItemMutation = useMutation({
         mutationFn: async (item: Item) => {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { trashedAt: _trashedAt, ...restoredItem } = item
@@ -168,7 +168,7 @@ export function useItems() {
         createItemMutation,
         updateItemMutation,
         softDeleteItemMutation,
-        restoreItemMutation,
+        untrashItemMutation,
         hardDeleteItemMutation,
     }
 }
