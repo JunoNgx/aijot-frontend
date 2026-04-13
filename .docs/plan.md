@@ -193,11 +193,11 @@ Remove all Mantine packages: `@mantine/core`, `@mantine/dates`, `@mantine/hooks`
 
 ## Task 19-2b — Mantine removal: dialog system
 
-- [ ] `src/store/dialogStore.ts` — plain Zustand store (no `persist`) with `openDialog({ children })` / `closeAllDialogs()`
-- [ ] `src/components/DialogManager.tsx` — Radix `Dialog` root consuming the store
-- [ ] Mount `<DialogManager>` in `main.tsx`
-- [ ] Replace all `modals.open(...)` call sites with `openDialog(...)`
-- [ ] Replace all `modals.closeAll()` call sites with `closeAllDialogs()`
+- [x] `src/store/dialogStore.ts` — plain Zustand store (no `persist`) with `openDialog({ children })` / `closeAllDialogs()`
+- [x] `src/components/DialogManager.tsx` — Radix `Dialog` root consuming the store
+- [x] Mount `<DialogManager>` in `main.tsx`
+- [x] Replace all `modals.open(...)` call sites with `openDialog(...)`
+- [x] Replace all `modals.closeAll()` call sites with `closeAllDialogs()`
 
 ---
 
