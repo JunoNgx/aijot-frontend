@@ -305,7 +305,7 @@ Remove all Mantine packages: `@mantine/core`, `@mantine/dates`, `@mantine/hooks`
 
 - [x] `buildDemoItems()` in `src/utils/itemFactory.ts` — seed items per spec
 - [x] wire to onboarding banner
-- [ ] seed collections per spec
+- [x] seed collections per spec
 
 ---
 
