@@ -1,3 +1,5 @@
+import type { ReactNode } from "react"
+
 // ============================================================
 // Item
 // ============================================================
@@ -100,6 +102,13 @@ export interface CoreCollectionConfig {
     slug: string
     icon: string
     colour: string
+}
+
+export interface DialogStore {
+    isOpen: boolean
+    children: ReactNode | null
+    openDialog: (options: { children: ReactNode }) => void
+    closeAllDialogs: () => void
 }
 
 export interface CoreCollectionSettingsStore {
