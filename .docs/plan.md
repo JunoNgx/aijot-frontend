@@ -266,9 +266,9 @@ Remove all Mantine packages: `@mantine/core`, `@mantine/dates`, `@mantine/hooks`
 
 ---
 
-## Task 25 — Profile page
+## Task 25 — Settings page
 
-- [ ] user display name, core collection config, sync section (connect/disconnect/status)
+- [ ] user display name, core collection config, sync section (connect/disconnect/status, dummy for now)
 
 ---
 
