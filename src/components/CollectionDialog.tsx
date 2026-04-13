@@ -17,10 +17,6 @@ interface Props {
     collection?: Collection
 }
 
-export function openCollectionDialog(collection?: Collection) {
-    useDialogStore.getState().openDialog({ children: <CollectionDialog collection={collection} /> })
-}
-
 export default function CollectionDialog({ collection }: Props) {
     const {
         collectionsQuery,
