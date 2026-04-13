@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { getHotkeyHandler } from "@mantine/hooks"
+import { getHotkeyHandler } from "@/utils/hotkeyHandler"
 import { useItems } from "@/hooks/useItems"
 import { useMainInputParser, parseCreationData } from "@/hooks/useMainInputParser"
 import { buildItem } from "@/utils/itemFactory"

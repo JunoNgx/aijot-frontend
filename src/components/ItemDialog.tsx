@@ -1,5 +1,5 @@
 import { useState, useEffect, useLayoutEffect, useCallback, useRef } from "react"
-import { getHotkeyHandler } from "@mantine/hooks"
+import { getHotkeyHandler } from "@/utils/hotkeyHandler"
 import * as Accordion from "@radix-ui/react-accordion"
 import { DateTime } from "luxon"
 import { EditorView, keymap, drawSelection } from "@codemirror/view"

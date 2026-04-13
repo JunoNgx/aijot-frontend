@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react"
-import { useHotkeys } from "@mantine/hooks"
+import { useHotkeys } from "react-hotkeys-hook"
 import { useItems } from "@/hooks/useItems"
 import { useLocalAppData } from "@/store/localAppData"
 import { SHORTCUT_FOCUS_MAIN_INPUT } from "@/utils/constants"
@@ -60,7 +60,9 @@ export default function Jot() {
             ?.scrollIntoView({ block: "nearest" })
     }, [selectedIndex])
 
-    useHotkeys([[SHORTCUT_FOCUS_MAIN_INPUT, () => mainInputRef.current?.focus()]], [])
+    useHotkeys(SHORTCUT_FOCUS_MAIN_INPUT, () => mainInputRef.current?.focus(), {
+        enableOnFormTags: true,
+    })
 
     const itemList = visibleItems.map((item, index) => (
         <JotItem key={item.id} item={item} isSelected={index === selectedIndex} itemIndex={index} />
