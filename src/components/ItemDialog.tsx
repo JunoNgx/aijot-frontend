@@ -1,10 +1,4 @@
-import {
-    useState,
-    useEffect,
-    useLayoutEffect,
-    useCallback,
-    useRef,
-} from "react"
+import { useState, useEffect, useLayoutEffect, useCallback, useRef } from "react"
 import { modals } from "@mantine/modals"
 import { useDebouncedCallback, getHotkeyHandler } from "@mantine/hooks"
 import { TextInput, Textarea, Button, Accordion } from "@mantine/core"
@@ -234,9 +228,9 @@ export default function ItemDialog({ item }: Props) {
                     {item.previousContentRecordedAt && (
                         <span className={styles.ItemDialog__LastVersionDate}>
                             Recorded{" "}
-                            {DateTime.fromISO(
-                                item.previousContentRecordedAt,
-                            ).toLocaleString(DateTime.DATETIME_MED)}
+                            {DateTime.fromISO(item.previousContentRecordedAt).toLocaleString(
+                                DateTime.DATETIME_MED,
+                            )}
                         </span>
                     )}
                     <CodeMirrorEditor
@@ -245,11 +239,7 @@ export default function ItemDialog({ item }: Props) {
                         onSaveAndClose={() => {}}
                         isReadOnly
                     />
-                    <Button
-                        variant="outline"
-                        size="xs"
-                        onClick={handleRestoreLastVersion}
-                    >
+                    <Button variant="outline" size="xs" onClick={handleRestoreLastVersion}>
                         Restore this version
                     </Button>
                 </div>
