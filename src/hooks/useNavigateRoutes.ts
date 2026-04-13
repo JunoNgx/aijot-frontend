@@ -7,5 +7,8 @@ export function useNavigateRoutes() {
         navigateToCollection: (slug: string) => navigate(`/jot/${slug}`),
         navigateToCollections: () => navigate("/collections"),
         navigateToProfile: () => navigate("/profile"),
+        navigateToHelp: () => navigate("/help"),
+        navigateToPrivacy: () => navigate("/privacy"),
+        navigateToTerms: () => navigate("/terms"),
     }
 }
