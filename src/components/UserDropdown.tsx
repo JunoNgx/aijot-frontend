@@ -7,7 +7,7 @@ import styles from "./UserDropdown.module.scss"
 export default function UserDropdown() {
     const userDisplayName = useProfileSettings((s) => s.userDisplayName)
     const {
-        navigateToProfile,
+        navigateToSettings,
         navigateToCollections,
         navigateToHelp,
         navigateToPrivacy,
@@ -29,7 +29,7 @@ export default function UserDropdown() {
                     >
                         <DropdownMenu.Item
                             className={styles.UserDropdown__Item}
-                            onSelect={navigateToProfile}
+                            onSelect={navigateToSettings}
                         >
                             Settings
                         </DropdownMenu.Item>
