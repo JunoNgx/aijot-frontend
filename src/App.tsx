@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import AppRoutes from "@/routes"
+import Header from "@/components/Header"
 import { purgeExpiredItems } from "@/db"
 import { useLocalUserSettings } from "@/store/localUserSettings"
 
@@ -40,5 +41,10 @@ export default function App() {
         }
     }, [])
 
-    return <AppRoutes />
+    return (
+        <>
+            <Header />
+            <AppRoutes />
+        </>
+    )
 }

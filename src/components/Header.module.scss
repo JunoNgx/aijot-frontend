@@ -1,0 +1,18 @@
+@use "styles/vars" as *;
+@use "styles/mixins" as *;
+
+.Header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    border-bottom: var(--lineThickness) solid var(--colBorder);
+
+    &__Logo {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--colText);
+        user-select: none;
+        cursor: pointer;
+    }
+}
