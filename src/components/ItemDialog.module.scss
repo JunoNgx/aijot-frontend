@@ -6,8 +6,30 @@
     gap: 1rem;
     padding-bottom: 0.5rem;
 
+    &__Field {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    &__Label {
+        font-size: 0.875rem;
+        font-weight: 500;
+    }
+
+    &__Description {
+        font-size: 0.75rem;
+        opacity: 0.6;
+    }
+
+    &__Textarea {
+        resize: none;
+        font-family: inherit;
+        font-size: 0.875rem;
+        padding: 0.375rem 0.5rem;
+    }
+
     &__CodeMirror {
-        // border: var(--lineThickness) solid var(--colText);
         @include StandardBorder;
         overflow: hidden;
 
@@ -17,7 +39,6 @@
         }
 
         :global(.cm-editor.cm-focused) {
-            // TODO
             outline: 2px solid var(--colAccent);
             outline-offset: -2px;
         }
@@ -30,6 +51,37 @@
         :global(.cm-scroller) {
             overflow: auto;
         }
+    }
+
+    &__Accordion {
+        @include StandardBorder;
+    }
+
+    &__AccordionItem {
+        & + & {
+            border-top: var(--lineThickness) solid var(--colBorder);
+        }
+    }
+
+    &__AccordionTrigger {
+        all: unset;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.875rem;
+        cursor: pointer;
+        box-sizing: border-box;
+
+        &:hover {
+            background-color: var(--colSurface);
+        }
+    }
+
+    &__AccordionContent {
+        padding: 0.75rem;
+        border-top: var(--lineThickness) solid var(--colBorder);
     }
 
     &__Footer {
@@ -46,6 +98,47 @@
     &__Actions {
         display: flex;
         gap: 0.5rem;
+    }
+
+    &__BtnPrimary {
+        all: unset;
+        cursor: pointer;
+        padding: 0.375rem 0.875rem;
+        font-size: 0.875rem;
+        background-color: var(--colAccent);
+        color: var(--colBg);
+        box-sizing: border-box;
+
+        &:hover {
+            opacity: 0.85;
+        }
+    }
+
+    &__BtnDanger {
+        all: unset;
+        cursor: pointer;
+        padding: 0.375rem 0.875rem;
+        font-size: 0.875rem;
+        color: var(--colDanger);
+        box-sizing: border-box;
+
+        &:hover {
+            opacity: 0.75;
+        }
+    }
+
+    &__BtnOutline {
+        all: unset;
+        cursor: pointer;
+        padding: 0.25rem 0.625rem;
+        font-size: 0.75rem;
+        @include StandardBorder;
+        box-sizing: border-box;
+        align-self: flex-start;
+
+        &:hover {
+            background-color: var(--colSurface);
+        }
     }
 
     &__LastVersion {

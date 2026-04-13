@@ -1,13 +1,13 @@
 import { useState, useEffect, useLayoutEffect, useCallback, useRef } from "react"
-import { useDebouncedCallback, getHotkeyHandler } from "@mantine/hooks"
-import { useDialogStore } from "@/store/dialogStore"
-import { TextInput, Textarea, Button, Accordion } from "@mantine/core"
-import { DateTimePicker } from "@mantine/dates"
+import { getHotkeyHandler } from "@mantine/hooks"
+import * as Accordion from "@radix-ui/react-accordion"
 import { DateTime } from "luxon"
 import { EditorView, keymap, drawSelection } from "@codemirror/view"
 import { EditorState } from "@codemirror/state"
 import { defaultKeymap, history, historyKeymap } from "@codemirror/commands"
 import { useItems } from "@/hooks/useItems"
+import { useDebounced } from "@/hooks/useDebounced"
+import { useDialogStore } from "@/store/dialogStore"
 import { SHORTCUT_SAVE_AND_CLOSE } from "@/utils/constants"
 import styles from "./ItemDialog.module.scss"
 import type { Item } from "@/types"
@@ -145,7 +145,7 @@ export default function ItemDialog({ item }: Props) {
         closeAllDialogs()
     }, [handleSave])
 
-    const debouncedSave = useDebouncedCallback(handleSave, AUTOSAVE_DEBOUNCE_MS)
+    const debouncedSave = useDebounced(handleSave, AUTOSAVE_DEBOUNCE_MS)
 
     const markChanged = () => {
         hasUnsavedChangesRef.current = true
@@ -174,9 +174,11 @@ export default function ItemDialog({ item }: Props) {
         markChanged()
     }
 
-    const handleJottedAtChange = (value: string | null) => {
-        if (!value) return
-        setJottedAtVal(value)
+    const handleJottedAtChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (!e.target.value) return
+        const isoValue = DateTime.fromISO(e.target.value).toISO()
+        if (!isoValue) return
+        setJottedAtVal(isoValue)
         markChanged()
     }
 
@@ -207,6 +209,10 @@ export default function ItemDialog({ item }: Props) {
 
     const isTextItem = item.type === "text"
 
+    const jottedAtInputVal = jottedAtVal
+        ? DateTime.fromISO(jottedAtVal).toLocal().toFormat("yyyy-MM-dd'T'HH:mm")
+        : ""
+
     const contentEditor = isTextItem ? (
         <CodeMirrorEditor
             initialValue={contentVal}
@@ -214,21 +220,27 @@ export default function ItemDialog({ item }: Props) {
             onSaveAndClose={handleSaveAndClose}
         />
     ) : (
-        <Textarea
-            data-autofocus
-            label="Content"
-            value={contentVal}
-            onChange={handleContentTextareaChange}
-            onKeyDown={getHotkeyHandler([[SHORTCUT_SAVE_AND_CLOSE, handleSaveAndClose]])}
-            rows={4}
-            resize="none"
-        />
+        <div className={styles.ItemDialog__Field}>
+            <label className={styles.ItemDialog__Label}>Content</label>
+            <textarea
+                autoFocus
+                className={styles.ItemDialog__Textarea}
+                value={contentVal}
+                onChange={handleContentTextareaChange}
+                onKeyDown={getHotkeyHandler([[SHORTCUT_SAVE_AND_CLOSE, handleSaveAndClose]])}
+                rows={4}
+            />
+        </div>
     )
 
     const lastVersionSection = isTextItem && item.previousContent && (
-        <Accordion.Item value="last-version">
-            <Accordion.Control>Last version</Accordion.Control>
-            <Accordion.Panel>
+        <Accordion.Item value="last-version" className={styles.ItemDialog__AccordionItem}>
+            <Accordion.Header>
+                <Accordion.Trigger className={styles.ItemDialog__AccordionTrigger}>
+                    Last version
+                </Accordion.Trigger>
+            </Accordion.Header>
+            <Accordion.Content className={styles.ItemDialog__AccordionContent}>
                 <div className={styles.ItemDialog__LastVersion}>
                     {item.previousContentRecordedAt && (
                         <span className={styles.ItemDialog__LastVersionDate}>
@@ -244,53 +256,67 @@ export default function ItemDialog({ item }: Props) {
                         onSaveAndClose={() => {}}
                         isReadOnly
                     />
-                    <Button variant="outline" size="xs" onClick={handleRestoreLastVersion}>
+                    <button
+                        className={styles.ItemDialog__BtnOutline}
+                        onClick={handleRestoreLastVersion}
+                    >
                         Restore this version
-                    </Button>
+                    </button>
                 </div>
-            </Accordion.Panel>
+            </Accordion.Content>
         </Accordion.Item>
     )
 
     return (
         <div className={styles.ItemDialog}>
-            <TextInput
-                label="Title"
-                value={titleVal}
-                onChange={handleTitleInputChange}
-                onKeyDown={getHotkeyHandler([[SHORTCUT_SAVE_AND_CLOSE, handleSaveAndClose]])}
-            />
+            <div className={styles.ItemDialog__Field}>
+                <label className={styles.ItemDialog__Label}>Title</label>
+                <input
+                    value={titleVal}
+                    onChange={handleTitleInputChange}
+                    onKeyDown={getHotkeyHandler([[SHORTCUT_SAVE_AND_CLOSE, handleSaveAndClose]])}
+                />
+            </div>
             {contentEditor}
-            <TextInput
-                label="Tags"
-                value={tagStr}
-                onChange={handleTagStrChange}
-                onKeyDown={getHotkeyHandler([[SHORTCUT_SAVE_AND_CLOSE, handleSaveAndClose]])}
-                placeholder="tag1 tag2 tag3"
-                description="Separated by spaces"
-            />
-            <Accordion>
-                <Accordion.Item value="advanced">
-                    <Accordion.Control>More options</Accordion.Control>
-                    <Accordion.Panel>
-                        <DateTimePicker
-                            label="Jotted at"
-                            value={jottedAtVal}
-                            onChange={handleJottedAtChange}
-                        />
-                    </Accordion.Panel>
+            <div className={styles.ItemDialog__Field}>
+                <label className={styles.ItemDialog__Label}>Tags</label>
+                <input
+                    value={tagStr}
+                    onChange={handleTagStrChange}
+                    onKeyDown={getHotkeyHandler([[SHORTCUT_SAVE_AND_CLOSE, handleSaveAndClose]])}
+                    placeholder="tag1 tag2 tag3"
+                />
+                <span className={styles.ItemDialog__Description}>Separated by spaces</span>
+            </div>
+            <Accordion.Root type="multiple" className={styles.ItemDialog__Accordion}>
+                <Accordion.Item value="advanced" className={styles.ItemDialog__AccordionItem}>
+                    <Accordion.Header>
+                        <Accordion.Trigger className={styles.ItemDialog__AccordionTrigger}>
+                            More options
+                        </Accordion.Trigger>
+                    </Accordion.Header>
+                    <Accordion.Content className={styles.ItemDialog__AccordionContent}>
+                        <div className={styles.ItemDialog__Field}>
+                            <label className={styles.ItemDialog__Label}>Jotted at</label>
+                            <input
+                                type="datetime-local"
+                                value={jottedAtInputVal}
+                                onChange={handleJottedAtChange}
+                            />
+                        </div>
+                    </Accordion.Content>
                 </Accordion.Item>
                 {lastVersionSection}
-            </Accordion>
+            </Accordion.Root>
             <div className={styles.ItemDialog__Footer}>
                 <span className={styles.ItemDialog__SaveStatus}>{saveStatusText}</span>
                 <div className={styles.ItemDialog__Actions}>
-                    <Button variant="subtle" color="red" size="sm" onClick={handleDeleteClick}>
+                    <button className={styles.ItemDialog__BtnDanger} onClick={handleDeleteClick}>
                         Delete
-                    </Button>
-                    <Button size="sm" onClick={handleSaveAndClose}>
+                    </button>
+                    <button className={styles.ItemDialog__BtnPrimary} onClick={handleSaveAndClose}>
                         Save
-                    </Button>
+                    </button>
                 </div>
             </div>
         </div>
