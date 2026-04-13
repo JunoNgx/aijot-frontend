@@ -9,7 +9,8 @@ A minimal keyboard-first note-taking application with a focus on quick keyboard-
 - React on Vite
 - IndexedDB via Dexie for data persistence
 - Zustand and TanStack Query for state management
-- Mantine 8 as UI library
+- Radix UI for accessible primitives (dialogs, accordions, context menus, dropdowns)
+- `sonner` for notifications
 - Google Drive API for cloud backup storage
 - CodeMirror 6 for heavy text editing
     - `standardKeymap` and `defaultKeymap`
@@ -589,7 +590,6 @@ First time user (see `shouldShowDemoDataBanner`) will receive a banner inviting 
     - styles
         - global.scss: global styles, loaded once in main.tsx
     - types.ts
-    - theme.ts: Mantine theme config
     - utils: pure helpers
         - slug generator
         - date formatter
