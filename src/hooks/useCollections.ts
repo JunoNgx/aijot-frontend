@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query"
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 import { DateTime } from "luxon"
 import { storage } from "@/db"
 import { queryKeys } from "@/db/queryKeys"
@@ -28,6 +28,7 @@ function buildCoreCollection(
 }
 
 export function useCollections() {
+    const queryClient = useQueryClient()
     const { all, untagged, trash } = useCoreCollectionSettings()
 
     const collectionsQuery = useQuery({
@@ -43,5 +44,81 @@ export function useCollections() {
         },
     })
 
-    return { collectionsQuery }
+    const invalidateCollectionQueries = () => {
+        queryClient.invalidateQueries({ queryKey: queryKeys.collections })
+    }
+
+    const createCollectionMutation = useMutation({
+        mutationFn: async (collection: Collection) => {
+            await storage.putCollection(collection)
+        },
+        onMutate: async (collection) => {
+            await queryClient.cancelQueries({ queryKey: queryKeys.collections })
+            const previousCollections = queryClient.getQueryData<Collection[]>(
+                queryKeys.collections,
+            )
+            queryClient.setQueryData<Collection[]>(queryKeys.collections, (prev) => [
+                ...(prev ?? []),
+                collection,
+            ])
+            return { previousCollections }
+        },
+        onError: (_err, _collection, context) => {
+            queryClient.setQueryData(queryKeys.collections, context?.previousCollections)
+        },
+        onSettled: () => {
+            invalidateCollectionQueries()
+        },
+    })
+
+    const updateCollectionMutation = useMutation({
+        mutationFn: async (updatedCollection: Collection) => {
+            await storage.putCollection(updatedCollection)
+        },
+        onMutate: async (updatedCollection) => {
+            await queryClient.cancelQueries({ queryKey: queryKeys.collections })
+            const previousCollections = queryClient.getQueryData<Collection[]>(
+                queryKeys.collections,
+            )
+            queryClient.setQueryData<Collection[]>(queryKeys.collections, (prev) =>
+                (prev ?? []).map((c) => (c.id === updatedCollection.id ? updatedCollection : c)),
+            )
+            return { previousCollections }
+        },
+        onError: (_err, _collection, context) => {
+            queryClient.setQueryData(queryKeys.collections, context?.previousCollections)
+        },
+        onSettled: () => {
+            invalidateCollectionQueries()
+        },
+    })
+
+    const deleteCollectionMutation = useMutation({
+        mutationFn: async (collection: Collection) => {
+            await storage.deleteCollection(collection.id)
+        },
+        onMutate: async (collection) => {
+            await queryClient.cancelQueries({ queryKey: queryKeys.collections })
+            const previousCollections = queryClient.getQueryData<Collection[]>(
+                queryKeys.collections,
+            )
+            queryClient.setQueryData<Collection[]>(queryKeys.collections, (prev) =>
+                (prev ?? []).filter((c) => c.id !== collection.id),
+            )
+            return { previousCollections }
+        },
+        onError: (_err, _collection, context) => {
+            queryClient.setQueryData(queryKeys.collections, context?.previousCollections)
+        },
+        onSettled: () => {
+            invalidateCollectionQueries()
+        },
+    })
+
+    return {
+        collectionsQuery,
+        createCollectionMutation,
+        updateCollectionMutation,
+        deleteCollectionMutation,
+    }
 }
