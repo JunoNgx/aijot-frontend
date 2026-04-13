@@ -38,7 +38,7 @@ export const DEFAULT_TRASH_COLLECTION: CoreCollectionConfig = {
 // Keyboard shortcuts
 // ============================================================
 
-// Format follows Mantine's getHotkeyHandler convention: "mod+key"
+// Format: "mod+key", "shift+key", "mod+shift+key"
 // mod = Ctrl on Windows/Linux, Cmd on Mac
 
 export const SHORTCUT_SPOTLIGHT = ["mod+k", "mod+p"]
