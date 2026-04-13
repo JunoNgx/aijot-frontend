@@ -5,7 +5,7 @@ import type { ProfileSettingsStore } from "@/types"
 export const useProfileSettings = create<ProfileSettingsStore>()(
     persist(
         (set) => ({
-            userDisplayName: "",
+            userDisplayName: "User",
             shouldApplyTagsOfCurrCollection: true,
             setUserDisplayName: (userDisplayName) => set({ userDisplayName }),
             setShouldApplyTagsOfCurrCollection: (value) =>
