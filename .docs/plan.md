@@ -229,26 +229,26 @@ Remove all Mantine packages: `@mantine/core`, `@mantine/dates`, `@mantine/hooks`
 
 ## Task 20 — Collection mutations + CollectionDialog
 
-- [ ] `useCreateCollectionMutation`, `useUpdateCollectionMutation`, `useDeleteCollectionMutation`
-- [ ] CollectionDialog: name, slug (auto), type checkboxes, tag list, Save/Delete
+- [x] `useCreateCollectionMutation`, `useUpdateCollectionMutation`, `useDeleteCollectionMutation`
+- [x] CollectionDialog: name, slug (auto), type checkboxes, tag list, Save/Delete
 
 ---
 
 ## Task 21 — CollectionDropdown
 
-- [ ] sorted list: emoji, name, colour, numeric hotkey (1-9)
-- [ ] core collections always present
-- [ ] desktop: top bar; mobile: bottom-right
-- [ ] click + numeric hotkeys navigate to collection
-- [ ] trash notice: notice items older than 7 days are soft deleted
+- [x] sorted list: emoji, name, colour, numeric hotkey (1-9)
+- [x] core collections always present
+- [x] desktop: top bar; mobile: bottom-right
+- [x] click + numeric hotkeys navigate to collection
+- [x] trash notice: notice items older than 7 days are soft deleted
 
 ---
 
 ## Task 22 — Collections page
 
-- [ ] drag-sort with `@hello-pangea/dnd`
-- [ ] create, edit, delete via CollectionDialog
-- [ ] trash always at bottom, not sortable
+- [x] drag-sort with `@hello-pangea/dnd`
+- [x] create, edit, delete via CollectionDialog
+- [x] trash always at bottom, not sortable
 
 ---
 
