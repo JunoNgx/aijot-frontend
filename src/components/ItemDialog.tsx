@@ -1,5 +1,4 @@
-import { useState, useEffect, useLayoutEffect, useCallback, useRef } from "react"
-import { getHotkeyHandler } from "@/utils/hotkeyHandler"
+import { useState, useEffect, useLayoutEffect, useCallback, useRef, useMemo } from "react"
 import * as Accordion from "@radix-ui/react-accordion"
 import { DateTime } from "luxon"
 import { EditorView, keymap, drawSelection } from "@codemirror/view"
@@ -8,6 +7,7 @@ import { defaultKeymap, history, historyKeymap } from "@codemirror/commands"
 import { useItems } from "@/hooks/useItems"
 import { useDebounced } from "@/hooks/useDebounced"
 import { useDialogStore } from "@/store/dialogStore"
+import { getHotkeyHandler } from "@/utils/hotkeyHandler"
 import { SHORTCUT_SAVE_AND_CLOSE } from "@/utils/constants"
 import styles from "./ItemDialog.module.scss"
 import type { Item } from "@/types"
@@ -71,6 +71,7 @@ function CodeMirrorEditor({
         })
         if (!isReadOnly) view.focus()
         return () => view.destroy()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return <div ref={containerRef} className={styles.ItemDialog__CodeMirror} />
@@ -78,10 +79,6 @@ function CodeMirrorEditor({
 
 interface Props {
     item: Item
-}
-
-export function openItemDialog(item: Item) {
-    useDialogStore.getState().openDialog({ children: <ItemDialog item={item} /> })
 }
 
 export default function ItemDialog({ item }: Props) {
@@ -143,7 +140,13 @@ export default function ItemDialog({ item }: Props) {
     const handleSaveAndClose = useCallback(() => {
         handleSave()
         closeAllDialogs()
-    }, [handleSave])
+    }, [handleSave, closeAllDialogs])
+
+    const saveHotkeyHandler = useMemo(
+        // eslint-disable-next-line react-hooks/refs
+        () => getHotkeyHandler([[SHORTCUT_SAVE_AND_CLOSE, handleSaveAndClose]]),
+        [handleSaveAndClose],
+    )
 
     const debouncedSave = useDebounced(handleSave, AUTOSAVE_DEBOUNCE_MS)
 
@@ -227,7 +230,7 @@ export default function ItemDialog({ item }: Props) {
                 className={styles.ItemDialog__Textarea}
                 value={contentVal}
                 onChange={handleContentTextareaChange}
-                onKeyDown={getHotkeyHandler([[SHORTCUT_SAVE_AND_CLOSE, handleSaveAndClose]])}
+                onKeyDown={saveHotkeyHandler}
                 rows={4}
             />
         </div>
@@ -274,7 +277,7 @@ export default function ItemDialog({ item }: Props) {
                 <input
                     value={titleVal}
                     onChange={handleTitleInputChange}
-                    onKeyDown={getHotkeyHandler([[SHORTCUT_SAVE_AND_CLOSE, handleSaveAndClose]])}
+                    onKeyDown={saveHotkeyHandler}
                 />
             </div>
             {contentEditor}
@@ -283,7 +286,7 @@ export default function ItemDialog({ item }: Props) {
                 <input
                     value={tagStr}
                     onChange={handleTagStrChange}
-                    onKeyDown={getHotkeyHandler([[SHORTCUT_SAVE_AND_CLOSE, handleSaveAndClose]])}
+                    onKeyDown={saveHotkeyHandler}
                     placeholder="tag1 tag2 tag3"
                 />
                 <span className={styles.ItemDialog__Description}>Separated by spaces</span>

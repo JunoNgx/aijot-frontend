@@ -13,7 +13,7 @@ import {
 } from "@tabler/icons-react"
 import { DateTime } from "luxon"
 import { useItems } from "@/hooks/useItems"
-import { openItemDialog } from "@/components/ItemDialog"
+import { openItemDialog } from "@/utils/openItemDialog"
 import styles from "./JotItemContextMenu.module.scss"
 import type { Item } from "@/types"
 

@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { getHotkeyHandler } from "@/utils/hotkeyHandler"
 import { useItems } from "@/hooks/useItems"
 import { useMainInputParser, parseCreationData } from "@/hooks/useMainInputParser"
 import { buildItem } from "@/utils/itemFactory"
-import { openItemDialog } from "@/components/ItemDialog"
+import { openItemDialog } from "@/utils/openItemDialog"
 import {
     SHORTCUT_NAV_UP,
     SHORTCUT_NAV_DOWN,
@@ -41,6 +41,7 @@ export default function MainInput({
 
     useEffect(() => {
         onParse(searchData)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchData])
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -88,6 +89,25 @@ export default function MainInput({
         inputRef.current?.blur()
     }
 
+    const hotkeyHandler = useMemo(
+        () =>
+            getHotkeyHandler([
+                ["Enter", handleSubmit],
+                [SHORTCUT_NAV_ACTION, handlePrimaryAction],
+                [SHORTCUT_NAV_DOWN, () => moveSelection(1)],
+                [SHORTCUT_NAV_UP, () => moveSelection(-1)],
+                [SHORTCUT_NAV_DOWN_SKIP, () => moveSelection(5)],
+                [SHORTCUT_NAV_UP_SKIP, () => moveSelection(-5)],
+                [SHORTCUT_NAV_TOP, jumpToTop],
+                [SHORTCUT_NAV_BOTTOM, jumpToBottom],
+                ["Escape", handleEscapePress],
+                [SHORTCUT_ITEM_COPY, handleCopySelected],
+                [SHORTCUT_ITEM_EDIT, () => selectedItem && openItemDialog(selectedItem)],
+            ]),
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [selectedItem],
+    )
+
     return (
         <div className={styles.MainInput}>
             <input
@@ -95,19 +115,7 @@ export default function MainInput({
                 className={styles.MainInput__Input}
                 value={inputValue}
                 onChange={handleInputChange}
-                onKeyDown={getHotkeyHandler([
-                    ["Enter", handleSubmit],
-                    [SHORTCUT_NAV_ACTION, handlePrimaryAction],
-                    [SHORTCUT_NAV_DOWN, () => moveSelection(1)],
-                    [SHORTCUT_NAV_UP, () => moveSelection(-1)],
-                    [SHORTCUT_NAV_DOWN_SKIP, () => moveSelection(5)],
-                    [SHORTCUT_NAV_UP_SKIP, () => moveSelection(-5)],
-                    [SHORTCUT_NAV_TOP, jumpToTop],
-                    [SHORTCUT_NAV_BOTTOM, jumpToBottom],
-                    ["Escape", handleEscapePress],
-                    [SHORTCUT_ITEM_COPY, handleCopySelected],
-                    [SHORTCUT_ITEM_EDIT, () => selectedItem && openItemDialog(selectedItem)],
-                ])}
+                onKeyDown={hotkeyHandler}
                 placeholder="Jot something..."
             />
         </div>
