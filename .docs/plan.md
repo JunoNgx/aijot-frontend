@@ -212,10 +212,10 @@ Remove all Mantine packages: `@mantine/core`, `@mantine/dates`, `@mantine/hooks`
 
 ## Task 19-2d — Mantine removal: hotkeys + notifications + cleanup
 
-- [ ] Replace `getHotkeyHandler` + `useHotkeys` with `react-hotkeys-hook`
-- [ ] Wire sonner: add `<Toaster>` to `main.tsx`, replace all `notifications.show(...)` calls
-- [ ] Remove `theme.ts`; remove `useMantineColorScheme` from `App.tsx`
-- [ ] Uninstall all `@mantine/*` packages
+- [x] Replace `getHotkeyHandler` + `useHotkeys` with `react-hotkeys-hook`
+- [x] Wire sonner: add `<Toaster>` to `main.tsx`, replace all `notifications.show(...)` calls
+- [x] Remove `theme.ts`; remove `useMantineColorScheme` from `App.tsx`
+- [x] Uninstall all `@mantine/*` packages
 
 ---
 
