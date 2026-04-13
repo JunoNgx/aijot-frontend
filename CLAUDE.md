@@ -29,7 +29,7 @@ ai\*jot is a remake of JustJot. Most of JustJot specifications are applicable to
 - CSS custom properties (variables) use `camelCase` (e.g. `--colBg`, `--colTextMuted`)
 - Use CSS variables when possible, especially for common patterns (e.g. `var(--lineThickness)` instead of `1px`). Variables are defined in `src/styles/_vars.scss`
 - Run `yarn format` after every set of changes before handing back
-- Use Mantine components where the benefit outweighs the cost of library coupling. Prefer plain HTML + SCSS for simple layout and typography where Mantine's overhead isn't worth it
+- Use plain HTML + SCSS for all UI. Use Radix UI primitives where accessibility behaviour is non-trivial (e.g. dialogs, accordions, context menus, dropdowns)
 
 ## Patterns from JustJot
 
@@ -37,7 +37,7 @@ Reference codebase: `../justjot-frontend`. Key patterns to carry forward:
 
 ### Packages
 
-- Radix UI for context menus and dropdowns (`@radix-ui/react-context-menu`, `@radix-ui/react-dropdown-menu`) — do NOT use Mantine for these
+- Radix UI for accessible primitives: context menus (`@radix-ui/react-context-menu`), dropdowns (`@radix-ui/react-dropdown-menu`), dialogs (`@radix-ui/react-dialog`), accordions (`@radix-ui/react-accordion`)
 - `@hello-pangea/dnd` for drag-and-drop (collection sort)
 - `luxon` for date formatting
 - `@tabler/icons-react` for icons
@@ -63,42 +63,15 @@ Two-layer split for all data operations:
 
 ### Dialogs
 
-- Ad-hoc dialogs (edit, update): `modals.open({ children: <JSX> })`, close with `modals.closeAll()`
-- Registered dialogs needing stable identity: `modals.openContextModal(...)`, registered in `ModalsProvider`
-- Destructive confirmations: `modals.openConfirmModal(...)`
+- Ad-hoc dialogs: `useDialogStore.getState().openDialog({ children: <JSX> })`, close with `closeAllDialogs()`
+- `<DialogManager>` in `main.tsx` renders the active dialog via Radix `Dialog.Root`
+- Destructive confirmations: use `modals.openConfirmModal(...)` pattern — not yet implemented, use a dedicated dialog component when needed
 
-### Spotlight
+### Hotkeys
 
-- Pass `shortcut={[]}` to the Spotlight component to disable its built-in hotkey
-- Register `mod+K` at App level via `useHotkeys(..., [])` — the `[]` second arg means "fire even when input/textarea is focused"
-
-### Mantine quirks
-
-- `data-autofocus={false}` does NOT disable autofocus. Pass `null` or `undefined` instead.
-- Mantine's `ScrollArea` viewport ref must be used for programmatic scrolling — `window.scrollTo()` won't work if content is inside a `ScrollArea`.
-- `Menu.Item` has no `data-hovered` attribute in v8. Style hover/focus with `:hover` and `:focus` CSS selectors.
-- `useForm`: use `mode: 'uncontrolled'` (recommended default). `form.values` does not update reactively in this mode — read current values via `form.getValues()` inside handlers.
-- `DatePicker` and `DateTimePicker` values are strings, not `Date` objects. `DatePicker` uses `"YYYY-MM-DD"`, `DateTimePicker` uses ISO string.
-
-### Mantine v8: Spotlight API change
-
-`SpotlightProvider` wrapper is gone. Use flat `<Spotlight>` component with external store:
-
-```tsx
-import { Spotlight, spotlight } from '@mantine/spotlight';
-
-<Spotlight actions={[...]} shortcut={['mod + K']} />
-
-spotlight.open();
-spotlight.close();
-spotlight.toggle();
-```
-
-Pass `shortcut={null}` to disable built-in hotkey and manage manually.
-
-### Mantine v8: no native context menu
-
-`Menu` has no `trigger="context-menu"` in v8. Right-click menus require either Radix `ContextMenu` (chosen approach) or a manual controlled `Menu` with a zero-size anchor div at cursor position.
+- Global hotkeys: `useHotkeys` with `{ enableOnFormTags: true }`
+- Inline `onKeyDown` hotkeys: `getHotkeyHandler(tuples)` from `src/utils/hotkeyHandler.ts`
+- Shortcut format: `"mod+key"`, `"shift+key"`, `"mod+shift+key"` — `mod` = Ctrl on Windows/Linux, Cmd on Mac
 
 ### `isPending` guard
 
@@ -139,7 +112,7 @@ TanStack Query wraps all data access including local DB reads.
 
 ### Color scheme
 
-We own the color scheme logic. `themeMode` in `localUserSettings` Zustand store (`"system" | "light" | "dark"`) is the single source of truth. On change, `App.tsx` resolves `system` via `prefers-color-scheme`, sets `data-color-scheme` on `<html>`, and syncs Mantine via `setColorScheme()`. Mantine follows — it does not own the logic. When `themeMode === "system"`, a `matchMedia` change listener keeps the attribute in sync with OS changes.
+We own the color scheme logic. `themeMode` in `localUserSettings` Zustand store (`"system" | "light" | "dark"`) is the single source of truth. On change, `App.tsx` resolves `system` via `prefers-color-scheme` and sets `data-color-scheme` on `<html>`. When `themeMode === "system"`, a `matchMedia` change listener keeps the attribute in sync with OS changes.
 
 CSS variables are defined under `[data-color-scheme="dark|light"]` selectors in `src/styles/_theme.scss`.
 
