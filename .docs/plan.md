@@ -184,10 +184,10 @@
 
 Remove all Mantine packages: `@mantine/core`, `@mantine/dates`, `@mantine/hooks`, `@mantine/modals`, `@mantine/notifications`, `@mantine/spotlight`, `@mantine/form`.
 
-- [ ] Install `@radix-ui/react-accordion`, `sonner`, `react-hotkeys-hook`
-- [ ] `src/hooks/useDebounced.ts` — custom debounce hook to replace `useDebouncedCallback`
-- [ ] Remove `MantineProvider`, `ModalsProvider`, `Notifications` from `main.tsx`; remove all `@mantine/*` CSS imports
-- [ ] Remove `postcss-preset-mantine` from `postcss.config.cjs`
+- [x] Install `@radix-ui/react-accordion`, `sonner`, `react-hotkeys-hook`
+- [x] `src/hooks/useDebounced.ts` — custom debounce hook to replace `useDebouncedCallback`
+- [x] Remove `MantineProvider`, `ModalsProvider`, `Notifications` from `main.tsx`; remove all `@mantine/*` CSS imports
+- [x] Remove `postcss-preset-mantine` from `postcss.config.cjs`
 
 ---
 
