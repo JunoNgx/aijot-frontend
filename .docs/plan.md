@@ -285,7 +285,6 @@ Remove all Mantine packages: `@mantine/core`, `@mantine/dates`, `@mantine/hooks`
 
 - [ ] export `{ items, collections, settings }` pretty-printed JSON
 - [ ] import: parse, merge into DB, invalidate queries
-- [ ] wire to Spotlight
 
 ---
 
