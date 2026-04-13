@@ -231,7 +231,6 @@ Remove all Mantine packages: `@mantine/core`, `@mantine/dates`, `@mantine/hooks`
 
 - [ ] `useCreateCollectionMutation`, `useUpdateCollectionMutation`, `useDeleteCollectionMutation`
 - [ ] CollectionDialog: name, slug (auto), type checkboxes, tag list, Save/Delete
-- [ ] collection tag picker in ItemDialog (highlights matching collections)
 
 ---
 
@@ -318,3 +317,9 @@ Remove all Mantine packages: `@mantine/core`, `@mantine/dates`, `@mantine/hooks`
 - [ ] token refresh flow; folder discovery/cache
 - [ ] download → resolve (last-write-wins) → upload
 - [ ] debounced 15s trigger + manual trigger + disconnect
+
+---
+
+## Task 32 — Post-release polish
+
+- [ ] Collection tag picker in ItemDialog: highlights collections whose tags match the item's tags
