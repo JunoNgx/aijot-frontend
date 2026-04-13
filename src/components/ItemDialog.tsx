@@ -1,6 +1,6 @@
 import { useState, useEffect, useLayoutEffect, useCallback, useRef } from "react"
-import { modals } from "@mantine/modals"
 import { useDebouncedCallback, getHotkeyHandler } from "@mantine/hooks"
+import { useDialogStore } from "@/store/dialogStore"
 import { TextInput, Textarea, Button, Accordion } from "@mantine/core"
 import { DateTimePicker } from "@mantine/dates"
 import { DateTime } from "luxon"
@@ -80,8 +80,13 @@ interface Props {
     item: Item
 }
 
+export function openItemDialog(item: Item) {
+    useDialogStore.getState().openDialog({ children: <ItemDialog item={item} /> })
+}
+
 export default function ItemDialog({ item }: Props) {
     const { updateItemMutation, softDeleteItemMutation } = useItems()
+    const closeAllDialogs = useDialogStore((s) => s.closeAllDialogs)
 
     const [titleVal, setTitleVal] = useState(item.title ?? "")
     const [contentVal, setContentVal] = useState(item.content)
@@ -137,7 +142,7 @@ export default function ItemDialog({ item }: Props) {
 
     const handleSaveAndClose = useCallback(() => {
         handleSave()
-        modals.closeAll()
+        closeAllDialogs()
     }, [handleSave])
 
     const debouncedSave = useDebouncedCallback(handleSave, AUTOSAVE_DEBOUNCE_MS)
@@ -177,7 +182,7 @@ export default function ItemDialog({ item }: Props) {
 
     const handleDeleteClick = () => {
         softDeleteItemMutation.mutate(item)
-        modals.closeAll()
+        closeAllDialogs()
     }
 
     const handleRestoreLastVersion = () => {
@@ -189,7 +194,7 @@ export default function ItemDialog({ item }: Props) {
             previousContentRecordedAt: undefined,
             updatedAt: DateTime.now().toISO(),
         })
-        modals.closeAll()
+        closeAllDialogs()
     }
 
     // Save on unmount if there are unsaved changes the debounce hasn't flushed yet
