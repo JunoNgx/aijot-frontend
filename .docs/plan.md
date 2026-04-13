@@ -268,7 +268,8 @@ Remove all Mantine packages: `@mantine/core`, `@mantine/dates`, `@mantine/hooks`
 
 ## Task 25 — Settings page
 
-- [ ] user display name, core collection config, sync section (connect/disconnect/status, dummy for now)
+- [x] user display name, core collection config, sync section (connect/disconnect/status, dummy for now)
+- [won't do] Note: emoji for core collections deferred — may drop entirely
 
 ---
 
