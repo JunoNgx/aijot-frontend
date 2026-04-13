@@ -1,0 +1,97 @@
+@use "styles/vars" as *;
+@use "styles/mixins" as *;
+
+.CollectionDropdown {
+    // Mobile: fixed bottom-right
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 50;
+
+    // Desktop: static in page flow
+    @media (min-width: $breakpointMobile) {
+        position: static;
+    }
+
+    &__Trigger {
+        all: unset;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.375rem 0.75rem;
+        font-size: 0.875rem;
+        cursor: pointer;
+        @include StandardBorder;
+        background-color: var(--colBg);
+        box-sizing: border-box;
+
+        &:hover {
+            background-color: var(--colSurface);
+        }
+    }
+
+    &__TriggerChevron {
+        color: var(--colText);
+        margin-left: 0.25rem;
+        flex-shrink: 0;
+    }
+
+    &__Content {
+        background-color: var(--colSurface);
+        @include StandardBorder;
+        padding: 0.25rem;
+        min-width: 200px;
+        max-height: 60vh;
+        overflow-y: auto;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        z-index: 100;
+    }
+
+    &__Item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.375rem 0.5rem;
+        font-size: 0.875rem;
+        color: var(--colText);
+        cursor: pointer;
+        outline: none;
+        user-select: none;
+
+        &:hover,
+        &:focus {
+            color: var(--colBg);
+            background-color: var(--colText);
+        }
+
+        &--Active {
+            font-weight: 600;
+        }
+    }
+
+    &__ColourDot {
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+
+    &__Hotkey {
+        font-size: 0.6875rem;
+        opacity: 0.45;
+        margin-left: auto;
+        padding-left: 0.5rem;
+    }
+
+    &__Separator {
+        height: var(--lineThickness);
+        background-color: var(--colBorder);
+        margin: 0.25rem 0;
+    }
+
+    &__TrashNotice {
+        font-size: 0.6875rem;
+        opacity: 0.55;
+        padding: 0 0.5rem 0.25rem;
+    }
+}
