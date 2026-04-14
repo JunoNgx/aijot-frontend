@@ -4,6 +4,7 @@ import { useItemsMutations } from "@/hooks/useItemsMutations"
 import { openItemDialog } from "@/utils/openItemDialog"
 import { buildItem } from "@/utils/itemFactory"
 import { parseCreationData } from "@/hooks/useMainInputParser"
+import { SYNTAX_PREFIX_LONG_TEXT } from "@/utils/constants"
 import { type MouseEvent } from "react"
 import type { Item } from "@/types"
 
@@ -19,7 +20,12 @@ export function useItemActions() {
 
     const createItem = (inputValue: string) => {
         const creationData = parseCreationData(inputValue)
-        createItemMutation.mutate(buildItem(creationData))
+        const isLongText = inputValue.trimStart().startsWith(SYNTAX_PREFIX_LONG_TEXT)
+        createItemMutation.mutate(buildItem(creationData), {
+            onSuccess: (item) => {
+                if (isLongText) openItemDialog(item)
+            },
+        })
     }
 
     const copyContent = (item: Item) => {
