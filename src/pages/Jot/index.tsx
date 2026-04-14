@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react"
 import { useHotkeys } from "react-hotkeys-hook"
-import { useItems } from "@/hooks/useItems"
+import { useItemsQuery } from "@/hooks/useItemsQuery"
 import { useLocalAppData } from "@/store/localAppData"
 import { SHORTCUT_FOCUS_MAIN_INPUT } from "@/utils/constants"
 import MainInput from "@/components/MainInput"
@@ -44,7 +44,7 @@ function filterItems(items: Item[], searchData: MainInputSearchData): Item[] {
 export default function Jot() {
     const [searchData, setSearchData] = useState<MainInputSearchData>(DEFAULT_SEARCH_DATA)
     const [selectedIndex, setSelectedIndex] = useState(-1)
-    const { itemsQuery } = useItems()
+    const { itemsQuery } = useItemsQuery()
     const { shouldShowDemoDataBanner } = useLocalAppData()
     const mainInputRef = useRef<HTMLInputElement>(null)
 

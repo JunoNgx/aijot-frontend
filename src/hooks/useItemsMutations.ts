@@ -1,40 +1,14 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { DateTime } from "luxon"
+import { toast } from "sonner"
 import { storage } from "@/db"
 import { queryKeys } from "@/db/queryKeys"
 import { fetchLinkMeta } from "@/services/linkFetch"
 import type { Item } from "@/types"
-import { toast } from "sonner"
+import { sortItems } from "@/utils/helpers"
 
-function sortItems(items: Item[]): Item[] {
-    const pinnedItems = items.filter((item) => item.isPinned)
-    const unpinnedItems = items.filter((item) => !item.isPinned)
-    return [...pinnedItems, ...unpinnedItems]
-}
-
-export function useItems() {
+export function useItemsMutations() {
     const queryClient = useQueryClient()
-
-    const itemsQuery = useQuery({
-        queryKey: queryKeys.items,
-        queryFn: async () => {
-            const allItems = await storage.getItems()
-            const activeItems = allItems
-                .filter((item) => !item.trashedAt && !item.deletedAt)
-                .sort((a, b) => b.jottedAt.localeCompare(a.jottedAt))
-            return sortItems(activeItems)
-        },
-    })
-
-    const trashedItemsQuery = useQuery({
-        queryKey: queryKeys.trashedItems,
-        queryFn: async () => {
-            const allItems = await storage.getItems()
-            return allItems
-                .filter((item) => !!item.trashedAt && !item.deletedAt)
-                .sort((a, b) => b.trashedAt!.localeCompare(a.trashedAt!))
-        },
-    })
 
     const invalidateItemQueries = () => {
         queryClient.invalidateQueries({ queryKey: queryKeys.items })
@@ -226,8 +200,6 @@ export function useItems() {
     })
 
     return {
-        itemsQuery,
-        trashedItemsQuery,
         createItemMutation,
         updateItemMutation,
         trashItemMutation,

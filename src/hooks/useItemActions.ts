@@ -1,6 +1,6 @@
 import { DateTime } from "luxon"
 import { toast } from "sonner"
-import { useItems } from "@/hooks/useItems"
+import { useItemsMutations } from "@/hooks/useItemsMutations"
 import { openItemDialog } from "@/utils/openItemDialog"
 import { buildItem } from "@/utils/itemFactory"
 import { parseCreationData } from "@/hooks/useMainInputParser"
@@ -14,7 +14,7 @@ export function useItemActions() {
         untrashItemMutation,
         softDeleteItemMutation,
         refetchLinkMetaMutation,
-    } = useItems()
+    } = useItemsMutations()
 
     const createItem = (inputValue: string) => {
         const creationData = parseCreationData(inputValue)

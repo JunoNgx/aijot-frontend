@@ -4,7 +4,7 @@ import { DateTime } from "luxon"
 import { EditorView, keymap, drawSelection } from "@codemirror/view"
 import { EditorState } from "@codemirror/state"
 import { defaultKeymap, history, historyKeymap } from "@codemirror/commands"
-import { useItems } from "@/hooks/useItems"
+import { useItemsMutations } from "@/hooks/useItemsMutations"
 import { useItemActions } from "@/hooks/useItemActions"
 import { useDebounced } from "@/hooks/useDebounced"
 import { useDialogStore } from "@/store/dialogStore"
@@ -83,7 +83,7 @@ interface Props {
 }
 
 export default function ItemDialog({ item }: Props) {
-    const { updateItemMutation } = useItems()
+    const { updateItemMutation } = useItemsMutations()
     const { trashItem } = useItemActions()
     const closeAllDialogs = useDialogStore((s) => s.closeAllDialogs)
 

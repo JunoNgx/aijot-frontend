@@ -1,4 +1,5 @@
 import { DateTime } from "luxon"
+import type { Item } from "@/types"
 
 export function generateSlug(str: string): string {
     return str
@@ -21,4 +22,10 @@ const HEX_COLOUR_REGEX = /#[A-Fa-f0-9]{6}$/
 
 export function isValidHexColourCode(str: string): boolean {
     return HEX_COLOUR_REGEX.test(str.slice(-7))
+}
+
+export function sortItems(items: Item[]): Item[] {
+    const pinnedItems = items.filter((item) => item.isPinned)
+    const unpinnedItems = items.filter((item) => !item.isPinned)
+    return [...pinnedItems, ...unpinnedItems]
 }
