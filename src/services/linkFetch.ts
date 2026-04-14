@@ -24,6 +24,10 @@ export async function fetchLinkMeta(url: string): Promise<LinkFetchResult> {
         })
 
         if (!response.ok) {
+            if (response.status === 429) {
+                throw new Error(`Rate limit exceeded, please try again later`)
+            }
+
             const errorText = await response.text().catch(() => "Unknown error")
             throw new Error(`Failed to fetch link metadata: ${errorText}`)
         }
