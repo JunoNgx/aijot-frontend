@@ -98,7 +98,7 @@ export function useItems() {
         },
     })
 
-    const softDeleteItemMutation = useMutation({
+    const trashItemMutation = useMutation({
         mutationFn: async (item: Item) => {
             const now = DateTime.now().toISO()
             await storage.putItem({ ...item, trashedAt: now, updatedAt: now })
@@ -147,7 +147,7 @@ export function useItems() {
         },
     })
 
-    const hardDeleteItemMutation = useMutation({
+    const softDeleteItemMutation = useMutation({
         mutationFn: async (item: Item) => {
             const now = DateTime.now().toISO()
             await storage.putItem({ ...item, deletedAt: now, updatedAt: now })
@@ -193,9 +193,9 @@ export function useItems() {
         trashedItemsQuery,
         createItemMutation,
         updateItemMutation,
-        softDeleteItemMutation,
+        trashItemMutation,
         untrashItemMutation,
-        hardDeleteItemMutation,
+        softDeleteItemMutation,
         refetchLinkMetaMutation,
     }
 }

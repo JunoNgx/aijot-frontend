@@ -27,9 +27,9 @@ interface Props {
 export default function JotItemContextMenu({ item }: Props) {
     const {
         updateItemMutation,
-        softDeleteItemMutation,
+        trashItemMutation,
         untrashItemMutation,
-        hardDeleteItemMutation,
+        softDeleteItemMutation,
         refetchLinkMetaMutation,
     } = useItems()
 
@@ -37,9 +37,9 @@ export default function JotItemContextMenu({ item }: Props) {
 
     const handleCopy = () => navigator.clipboard.writeText(item.content)
     const handleEdit = () => openItemDialog(item)
-    const handleTrash = () => softDeleteItemMutation.mutate(item)
+    const handleTrash = () => trashItemMutation.mutate(item)
     const handleRestore = () => untrashItemMutation.mutate(item)
-    const handleHardDelete = () => hardDeleteItemMutation.mutate(item)
+    const handleSoftDelete = () => softDeleteItemMutation.mutate(item)
 
     const handlePin = () =>
         updateItemMutation.mutate({
@@ -122,7 +122,7 @@ export default function JotItemContextMenu({ item }: Props) {
             </ContextMenu.Item>
             <ContextMenu.Item
                 className={`${styles.JotItemContextMenu__Item} ${styles["JotItemContextMenu__Item--Destructive"]}`}
-                onClick={handleHardDelete}
+                onClick={handleSoftDelete}
             >
                 <IconTrashX size={ICON_SIZE} />
                 Permanently delete

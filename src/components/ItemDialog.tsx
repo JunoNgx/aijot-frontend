@@ -82,7 +82,7 @@ interface Props {
 }
 
 export default function ItemDialog({ item }: Props) {
-    const { updateItemMutation, softDeleteItemMutation } = useItems()
+    const { updateItemMutation, trashItemMutation } = useItems()
     const closeAllDialogs = useDialogStore((s) => s.closeAllDialogs)
 
     const [titleVal, setTitleVal] = useState(item.title ?? "")
@@ -182,7 +182,7 @@ export default function ItemDialog({ item }: Props) {
     }
 
     const handleDeleteClick = () => {
-        softDeleteItemMutation.mutate(item)
+        trashItemMutation.mutate(item)
         closeAllDialogs()
     }
 
