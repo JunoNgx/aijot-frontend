@@ -274,6 +274,7 @@ Remove all Mantine packages: `@mantine/core`, `@mantine/dates`, `@mantine/hooks`
 ---
 
 ## Task 25-2 - Dropping emoji for collection
+
 - [ ] Remove display of emoji for collections
 - [ ] Remove `icon` from type `Collection`
 - [ ] Remove icon fields for core collections
@@ -282,9 +283,9 @@ Remove all Mantine packages: `@mantine/core`, `@mantine/dates`, `@mantine/hooks`
 
 ## Task 26 — linkFetch service
 
-- [ ] `fetchLinkMeta(url)` — validates via `new URL(url)`, calls backend
-- [ ] offline: toast + return undefined
-- [ ] wire to item create/refetch
+- [x] `fetchLinkMeta(url)` — validates via `new URL(url)`, calls backend
+- [x] offline: toast + return undefined
+- [x] wire to item create/refetch
 
 ---
 
