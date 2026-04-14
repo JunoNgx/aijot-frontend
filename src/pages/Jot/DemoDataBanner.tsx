@@ -26,13 +26,20 @@ export default function DemoDataBanner() {
     return (
         <div className={styles.DemoDataBanner}>
             <div className={styles.DemoDataBanner__Text}>
-                <strong>Welcome to ai*jot.</strong> Your jots are stored locally on this device.
+                <strong>Welcome to ai*jot.</strong> Your jots are stored locally
+                on this device.
             </div>
             <div className={styles.DemoDataBanner__Actions}>
-                <button className={styles.DemoDataBanner__BtnSubtle} onClick={handleDismiss}>
+                <button
+                    className={styles.DemoDataBanner__BtnSubtle}
+                    onClick={handleDismiss}
+                >
                     Dismiss
                 </button>
-                <button className={styles.DemoDataBanner__BtnOutline} onClick={handleLoadDemoData}>
+                <button
+                    className={styles.DemoDataBanner__BtnOutline}
+                    onClick={handleLoadDemoData}
+                >
                     Load demo data
                 </button>
             </div>

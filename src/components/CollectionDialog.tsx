@@ -21,11 +21,18 @@ interface Props {
 
 export default function CollectionDialog({ collection }: Props) {
     const { collectionsQuery } = useCollectionsQuery()
-    const { createCollectionMutation, updateCollectionMutation, deleteCollectionMutation } =
-        useCollectionsMutations()
+    const {
+        createCollectionMutation,
+        updateCollectionMutation,
+        deleteCollectionMutation,
+    } = useCollectionsMutations()
     const closeAllDialogs = useDialogStore((s) => s.closeAllDialogs)
-    const defaultCollectionSlug = useProfileSettings((s) => s.defaultCollectionSlug)
-    const setDefaultCollectionSlug = useProfileSettings((s) => s.setDefaultCollectionSlug)
+    const defaultCollectionSlug = useProfileSettings(
+        (s) => s.defaultCollectionSlug,
+    )
+    const setDefaultCollectionSlug = useProfileSettings(
+        (s) => s.setDefaultCollectionSlug,
+    )
 
     const isEditing = !!collection
 
@@ -33,7 +40,9 @@ export default function CollectionDialog({ collection }: Props) {
     const [slugVal, setSlugVal] = useState(collection?.slug ?? "")
     const [iconVal, setIconVal] = useState(collection?.icon ?? "")
     const [colourVal, setColourVal] = useState(collection?.colour ?? "#d0d0d0")
-    const [typesVal, setTypesVal] = useState<ItemType[]>(collection?.types ?? ALL_TYPES)
+    const [typesVal, setTypesVal] = useState<ItemType[]>(
+        collection?.types ?? ALL_TYPES,
+    )
     const [tagStr, setTagStr] = useState(collection?.tags.join(" ") ?? "")
     const isDefault = isEditing && collection.slug === defaultCollectionSlug
 
@@ -58,7 +67,9 @@ export default function CollectionDialog({ collection }: Props) {
 
     const handleTypeToggle = (type: ItemType) => {
         setTypesVal((prev) =>
-            prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type],
+            prev.includes(type)
+                ? prev.filter((t) => t !== type)
+                : [...prev, type],
         )
     }
 
@@ -87,7 +98,9 @@ export default function CollectionDialog({ collection }: Props) {
                 updatedAt: now,
             })
         } else {
-            const userCollections = (collectionsQuery.data ?? []).filter((c) => !c.coreType)
+            const userCollections = (collectionsQuery.data ?? []).filter(
+                (c) => !c.coreType,
+            )
             const maxSortOrder =
                 userCollections.length > 0
                     ? Math.max(...userCollections.map((c) => c.sortOrder))
@@ -142,7 +155,10 @@ export default function CollectionDialog({ collection }: Props) {
             </div>
             <div className={styles.CollectionDialog__Field}>
                 <label className={styles.CollectionDialog__Label}>Icon</label>
-                <input value={iconVal} onChange={(e) => setIconVal(e.target.value)} />
+                <input
+                    value={iconVal}
+                    onChange={(e) => setIconVal(e.target.value)}
+                />
             </div>
             <div className={styles.CollectionDialog__Field}>
                 <label className={styles.CollectionDialog__Label}>Colour</label>
@@ -160,27 +176,41 @@ export default function CollectionDialog({ collection }: Props) {
             </div>
             <div className={styles.CollectionDialog__Field}>
                 <label className={styles.CollectionDialog__Label}>Types</label>
-                <div className={styles.CollectionDialog__TypesRow}>{typeCheckboxes}</div>
+                <div className={styles.CollectionDialog__TypesRow}>
+                    {typeCheckboxes}
+                </div>
                 <span className={styles.CollectionDialog__Description}>
                     Items of selected types appear in this collection
                 </span>
             </div>
             <div className={styles.CollectionDialog__Field}>
                 <label className={styles.CollectionDialog__Label}>Tags</label>
-                <input value={tagStr} onChange={handleTagStrChange} placeholder="tag1 tag2 tag3" />
-                <span className={styles.CollectionDialog__Description}>Separated by spaces</span>
+                <input
+                    value={tagStr}
+                    onChange={handleTagStrChange}
+                    placeholder="tag1 tag2 tag3"
+                />
+                <span className={styles.CollectionDialog__Description}>
+                    Separated by spaces
+                </span>
             </div>
             {isEditing && (
                 <div className={styles.CollectionDialog__Field}>
                     {isDefault ? (
-                        <span className={styles.CollectionDialog__DefaultIndicator}>
+                        <span
+                            className={
+                                styles.CollectionDialog__DefaultIndicator
+                            }
+                        >
                             This is currently your default collection
                         </span>
                     ) : (
                         <button
                             className={styles.CollectionDialog__BtnSetDefault}
                             type="button"
-                            onClick={() => setDefaultCollectionSlug(collection.slug)}
+                            onClick={() =>
+                                setDefaultCollectionSlug(collection.slug)
+                            }
                         >
                             Set as default collection
                         </button>
@@ -199,7 +229,10 @@ export default function CollectionDialog({ collection }: Props) {
                     )}
                 </div>
                 <div className={styles.CollectionDialog__Actions}>
-                    <button className={styles.CollectionDialog__BtnPrimary} onClick={handleSave}>
+                    <button
+                        className={styles.CollectionDialog__BtnPrimary}
+                        onClick={handleSave}
+                    >
                         Save
                     </button>
                 </div>

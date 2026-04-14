@@ -22,8 +22,13 @@ export function useItemsMutations() {
         },
         onMutate: async (item) => {
             await queryClient.cancelQueries({ queryKey: queryKeys.items })
-            const previousItems = queryClient.getQueryData<Item[]>(queryKeys.items)
-            queryClient.setQueryData<Item[]>(queryKeys.items, (prev) => [item, ...(prev ?? [])])
+            const previousItems = queryClient.getQueryData<Item[]>(
+                queryKeys.items,
+            )
+            queryClient.setQueryData<Item[]>(queryKeys.items, (prev) => [
+                item,
+                ...(prev ?? []),
+            ])
             return { previousItems }
         },
         onError: (_err, _item, context) => {
@@ -59,9 +64,13 @@ export function useItemsMutations() {
         },
         onMutate: async (updatedItem) => {
             await queryClient.cancelQueries({ queryKey: queryKeys.items })
-            const previousItems = queryClient.getQueryData<Item[]>(queryKeys.items)
+            const previousItems = queryClient.getQueryData<Item[]>(
+                queryKeys.items,
+            )
             queryClient.setQueryData<Item[]>(queryKeys.items, (prev) =>
-                (prev ?? []).map((i) => (i.id === updatedItem.id ? updatedItem : i)),
+                (prev ?? []).map((i) =>
+                    i.id === updatedItem.id ? updatedItem : i,
+                ),
             )
             return { previousItems }
         },
@@ -80,7 +89,9 @@ export function useItemsMutations() {
         },
         onMutate: async (item) => {
             await queryClient.cancelQueries({ queryKey: queryKeys.items })
-            const previousItems = queryClient.getQueryData<Item[]>(queryKeys.items)
+            const previousItems = queryClient.getQueryData<Item[]>(
+                queryKeys.items,
+            )
             queryClient.setQueryData<Item[]>(queryKeys.items, (prev) =>
                 (prev ?? []).filter((i) => i.id !== item.id),
             )
@@ -107,11 +118,16 @@ export function useItemsMutations() {
     const untrashItemMutation = useMutation({
         mutationFn: async (item: Item) => {
             const { trashedAt: _trashedAt, ...restoredItem } = item
-            await storage.putItem({ ...restoredItem, updatedAt: DateTime.now().toISO() })
+            await storage.putItem({
+                ...restoredItem,
+                updatedAt: DateTime.now().toISO(),
+            })
         },
         onMutate: async (item) => {
             await queryClient.cancelQueries({ queryKey: queryKeys.items })
-            const previousItems = queryClient.getQueryData<Item[]>(queryKeys.items)
+            const previousItems = queryClient.getQueryData<Item[]>(
+                queryKeys.items,
+            )
             const { trashedAt: _trashedAt, ...restoredItem } = item
             queryClient.setQueryData<Item[]>(queryKeys.items, (prev) =>
                 sortItems(
@@ -137,7 +153,9 @@ export function useItemsMutations() {
         },
         onMutate: async (item) => {
             await queryClient.cancelQueries({ queryKey: queryKeys.items })
-            const previousItems = queryClient.getQueryData<Item[]>(queryKeys.items)
+            const previousItems = queryClient.getQueryData<Item[]>(
+                queryKeys.items,
+            )
             queryClient.setQueryData<Item[]>(queryKeys.items, (prev) =>
                 (prev ?? []).filter((i) => i.id !== item.id),
             )
@@ -164,11 +182,16 @@ export function useItemsMutations() {
     const undeleteItemMutation = useMutation({
         mutationFn: async (item: Item) => {
             const { deletedAt: _deletedAt, ...restoredItem } = item
-            await storage.putItem({ ...restoredItem, updatedAt: DateTime.now().toISO() })
+            await storage.putItem({
+                ...restoredItem,
+                updatedAt: DateTime.now().toISO(),
+            })
         },
         onMutate: async () => {
             await queryClient.cancelQueries({ queryKey: queryKeys.items })
-            const previousItems = queryClient.getQueryData<Item[]>(queryKeys.items)
+            const previousItems = queryClient.getQueryData<Item[]>(
+                queryKeys.items,
+            )
             return { previousItems }
         },
         onError: (_err, _item, context) => {

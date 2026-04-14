@@ -29,7 +29,9 @@ function filterItems(items: Item[], searchData: MainInputSearchData): Item[] {
     }
 
     if (searchData.tags.length > 0) {
-        result = result.filter((item) => searchData.tags.every((tag) => item.tags.includes(tag)))
+        result = result.filter((item) =>
+            searchData.tags.every((tag) => item.tags.includes(tag)),
+        )
     }
 
     if (searchData.searchText) {
@@ -48,19 +50,23 @@ export default function Jot() {
     const { slug } = useParams<{ slug: string }>()
     const { collectionsQuery } = useCollectionsQuery()
     const allSlug = useCoreCollectionSettings((s) => s.all.slug)
-    const [searchData, setSearchData] = useState<MainInputSearchData>(DEFAULT_SEARCH_DATA)
+    const [searchData, setSearchData] =
+        useState<MainInputSearchData>(DEFAULT_SEARCH_DATA)
     const [selectedIndex, setSelectedIndex] = useState(-1)
     const { itemsQuery } = useItemsQuery()
     const { shouldShowDemoDataBanner } = useLocalAppData()
     const mainInputRef = useRef<HTMLInputElement>(null)
 
     if (!collectionsQuery.isPending) {
-        const isValidSlug = (collectionsQuery.data ?? []).some((c) => c.slug === slug)
+        const isValidSlug = (collectionsQuery.data ?? []).some(
+            (c) => c.slug === slug,
+        )
         if (!isValidSlug) return <Navigate to={`/jot/${allSlug}`} replace />
     }
 
     const visibleItems = filterItems(itemsQuery.data ?? [], searchData)
-    const selectedItem = selectedIndex >= 0 ? visibleItems[selectedIndex] : undefined
+    const selectedItem =
+        selectedIndex >= 0 ? visibleItems[selectedIndex] : undefined
 
     useEffect(() => {
         if (selectedIndex <= 0) {
@@ -78,7 +84,12 @@ export default function Jot() {
     })
 
     const itemList = visibleItems.map((item, index) => (
-        <JotItem key={item.id} item={item} isSelected={index === selectedIndex} itemIndex={index} />
+        <JotItem
+            key={item.id}
+            item={item}
+            isSelected={index === selectedIndex}
+            itemIndex={index}
+        />
     ))
 
     return (

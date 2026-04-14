@@ -20,7 +20,9 @@ export function useItemActions() {
 
     const createItem = (inputValue: string) => {
         const creationData = parseCreationData(inputValue)
-        const isLongText = inputValue.trimStart().startsWith(SYNTAX_PREFIX_LONG_TEXT)
+        const isLongText = inputValue
+            .trimStart()
+            .startsWith(SYNTAX_PREFIX_LONG_TEXT)
         createItemMutation.mutate(buildItem(creationData), {
             onSuccess: (item) => {
                 if (isLongText) openItemDialog(item)

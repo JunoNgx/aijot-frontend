@@ -4,7 +4,8 @@ import type { Collection, Item, ItemType, MainInputCreationData } from "@/types"
 
 export function buildDemoItems(): Item[] {
     const base = DateTime.now()
-    const at = (minutesAgo: number) => base.minus({ minutes: minutesAgo }).toISO()
+    const at = (minutesAgo: number) =>
+        base.minus({ minutes: minutesAgo }).toISO()
     return [
         {
             id: uuidv4(),

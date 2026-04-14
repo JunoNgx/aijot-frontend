@@ -67,11 +67,16 @@ export const dexieAdapter: StorageAdapter = {
             .toArray()
         if (expiredItems.length === 0) return
         const nowIso = new Date().toISOString()
-        await db.items.bulkPut(expiredItems.map((item) => ({ ...item, deletedAt: nowIso })))
+        await db.items.bulkPut(
+            expiredItems.map((item) => ({ ...item, deletedAt: nowIso })),
+        )
     },
 
     async purgeSoftDeletedItems(cutoffIso) {
-        const expiredIds = await db.items.where("deletedAt").below(cutoffIso).primaryKeys()
+        const expiredIds = await db.items
+            .where("deletedAt")
+            .below(cutoffIso)
+            .primaryKeys()
         await db.items.bulkDelete(expiredIds as string[])
     },
 }

@@ -4,9 +4,13 @@ import Header from "@/components/Header"
 import { purgeExpiredItems } from "@/db"
 import { useLocalUserSettings } from "@/store/localUserSettings"
 
-function resolveColorScheme(themeMode: "system" | "light" | "dark"): "light" | "dark" {
+function resolveColorScheme(
+    themeMode: "system" | "light" | "dark",
+): "light" | "dark" {
     if (themeMode !== "system") return themeMode
-    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light"
 }
 
 export default function App() {
@@ -15,7 +19,10 @@ export default function App() {
     useEffect(() => {
         const applyColorScheme = () => {
             const colorScheme = resolveColorScheme(themeMode)
-            document.documentElement.setAttribute("data-color-scheme", colorScheme)
+            document.documentElement.setAttribute(
+                "data-color-scheme",
+                colorScheme,
+            )
         }
 
         applyColorScheme()
@@ -37,7 +44,10 @@ export default function App() {
 
         document.addEventListener("visibilitychange", handleVisibilityChange)
         return () => {
-            document.removeEventListener("visibilitychange", handleVisibilityChange)
+            document.removeEventListener(
+                "visibilitychange",
+                handleVisibilityChange,
+            )
         }
     }, [])
 

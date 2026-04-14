@@ -9,7 +9,9 @@ import Terms from "@/pages/Terms"
 import { useProfileSettings } from "@/store/profileSettings"
 
 function JotRedirect() {
-    const defaultCollectionSlug = useProfileSettings((s) => s.defaultCollectionSlug)
+    const defaultCollectionSlug = useProfileSettings(
+        (s) => s.defaultCollectionSlug,
+    )
     return <Navigate to={`/jot/${defaultCollectionSlug}`} replace />
 }
 

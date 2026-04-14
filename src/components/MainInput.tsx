@@ -50,20 +50,26 @@ export default function MainInput({
 
     const handleSubmit = () => {
         if (!inputValue.trim()) return
-        if (searchData.filterType !== undefined || searchData.tags.length > 0) return
+        if (searchData.filterType !== undefined || searchData.tags.length > 0)
+            return
         createItem(inputValue)
         setInputValue("")
     }
 
     const handlePrimaryAction = () => {
         if (selectedIndex < 0) return
-        document.querySelector<HTMLElement>(`[data-item-index="${selectedIndex}"]`)?.click()
+        document
+            .querySelector<HTMLElement>(`[data-item-index="${selectedIndex}"]`)
+            ?.click()
     }
 
     const moveSelection = (delta: number) => {
         if (visibleItemCount === 0) return
         const targetIndex = selectedIndex + delta
-        const clampedIndex = Math.max(-1, Math.min(targetIndex, visibleItemCount - 1))
+        const clampedIndex = Math.max(
+            -1,
+            Math.min(targetIndex, visibleItemCount - 1),
+        )
         onSelectedIndexChange(clampedIndex)
     }
 

@@ -5,7 +5,10 @@ import type { ExportData, ExportSettings, ImportSummary } from "@/types"
 export const EXPORT_VERSION = 1
 
 export async function exportData(settings: ExportSettings): Promise<void> {
-    const [items, collections] = await Promise.all([storage.getItems(), storage.getCollections()])
+    const [items, collections] = await Promise.all([
+        storage.getItems(),
+        storage.getCollections(),
+    ])
 
     const data: ExportData = {
         version: EXPORT_VERSION,
@@ -15,7 +18,9 @@ export async function exportData(settings: ExportSettings): Promise<void> {
         settings,
     }
 
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" })
+    const blob = new Blob([JSON.stringify(data, null, 2)], {
+        type: "application/json",
+    })
     const url = URL.createObjectURL(blob)
     const a = document.createElement("a")
     a.href = url
@@ -35,7 +40,9 @@ export async function parseImportFile(file: File): Promise<ExportData> {
     return data
 }
 
-export async function getImportSummary(data: ExportData): Promise<ImportSummary> {
+export async function getImportSummary(
+    data: ExportData,
+): Promise<ImportSummary> {
     const [existingItems, existingCollections] = await Promise.all([
         storage.getItems(),
         storage.getCollections(),
@@ -46,9 +53,14 @@ export async function getImportSummary(data: ExportData): Promise<ImportSummary>
 
     return {
         newItems: data.items.filter((i) => !existingItemIds.has(i.id)).length,
-        updatedItems: data.items.filter((i) => existingItemIds.has(i.id)).length,
-        newCollections: data.collections.filter((c) => !existingCollectionIds.has(c.id)).length,
-        updatedCollections: data.collections.filter((c) => existingCollectionIds.has(c.id)).length,
+        updatedItems: data.items.filter((i) => existingItemIds.has(i.id))
+            .length,
+        newCollections: data.collections.filter(
+            (c) => !existingCollectionIds.has(c.id),
+        ).length,
+        updatedCollections: data.collections.filter((c) =>
+            existingCollectionIds.has(c.id),
+        ).length,
     }
 }
 

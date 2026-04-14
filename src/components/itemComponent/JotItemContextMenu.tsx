@@ -78,7 +78,9 @@ export default function JotItemContextMenu({ item }: Props) {
                 }}
             >
                 <IconCursorText size={ICON_SIZE} />
-                {item.shouldCopyOnClick ? "Disable copy on click" : "Copy on click"}
+                {item.shouldCopyOnClick
+                    ? "Disable copy on click"
+                    : "Copy on click"}
             </ContextMenu.Item>
             {item.type === "link" && (
                 <ContextMenu.Item
@@ -148,9 +150,13 @@ export default function JotItemContextMenu({ item }: Props) {
                     <IconEdit size={ICON_SIZE} />
                     Edit
                 </ContextMenu.Item>
-                <ContextMenu.Separator className={styles.JotItemContextMenu__Separator} />
+                <ContextMenu.Separator
+                    className={styles.JotItemContextMenu__Separator}
+                />
                 {secondaryItems}
-                <ContextMenu.Separator className={styles.JotItemContextMenu__Separator} />
+                <ContextMenu.Separator
+                    className={styles.JotItemContextMenu__Separator}
+                />
                 {destructiveItems}
             </ContextMenu.Content>
         </ContextMenu.Portal>

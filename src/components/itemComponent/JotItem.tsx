@@ -1,6 +1,12 @@
 import { useState, type MouseEvent } from "react"
 import * as ContextMenu from "@radix-ui/react-context-menu"
-import { IconNote, IconLink, IconSquare, IconSquareCheck, IconPin } from "@tabler/icons-react"
+import {
+    IconNote,
+    IconLink,
+    IconSquare,
+    IconSquareCheck,
+    IconPin,
+} from "@tabler/icons-react"
 import { isValidHexColourCode, formatJottedAt } from "@/utils/helpers"
 import { useItemActions } from "@/hooks/useItemActions"
 import JotItemContextMenu from "./JotItemContextMenu"
@@ -30,7 +36,11 @@ function FaviconIcon({ url }: { url: string }) {
 
 function ItemIcon({ item }: { item: Item }) {
     if (item.type === "todo") {
-        return item.isDone ? <IconSquareCheck size={ICON_SIZE} /> : <IconSquare size={ICON_SIZE} />
+        return item.isDone ? (
+            <IconSquareCheck size={ICON_SIZE} />
+        ) : (
+            <IconSquare size={ICON_SIZE} />
+        )
     }
     if (item.type === "link") {
         if (item.faviconUrl) return <FaviconIcon url={item.faviconUrl} />
@@ -50,15 +60,20 @@ function ItemIcon({ item }: { item: Item }) {
 export default function JotItem({ item, isSelected, itemIndex }: Props) {
     const { triggerPrimaryAction } = useItemActions()
 
-    const primaryText = item.type === "todo" ? item.content : (item.title ?? item.content)
-    const secondaryText = item.type !== "todo" && item.title ? item.content : null
+    const primaryText =
+        item.type === "todo" ? item.content : (item.title ?? item.content)
+    const secondaryText =
+        item.type !== "todo" && item.title ? item.content : null
     const datetime = formatJottedAt(item.jottedAt)
 
     const secondaryTextEl = secondaryText && (
         <span className={styles.JotItem__SecondaryText}>{secondaryText}</span>
     )
 
-    const rootClassName = [styles.JotItem, isSelected ? styles["JotItem--Selected"] : ""].join(" ")
+    const rootClassName = [
+        styles.JotItem,
+        isSelected ? styles["JotItem--Selected"] : "",
+    ].join(" ")
 
     const wrapperProps =
         item.type === "link"
@@ -84,19 +99,27 @@ export default function JotItem({ item, isSelected, itemIndex }: Props) {
     return (
         <ContextMenu.Root>
             <ContextMenu.Trigger asChild>
-                <Tag className={rootClassName} data-item-index={itemIndex} {...rest}>
+                <Tag
+                    className={rootClassName}
+                    data-item-index={itemIndex}
+                    {...rest}
+                >
                     <span className={styles.JotItem__Icon}>
                         <ItemIcon item={item} />
                     </span>
                     <div className={styles.JotItem__Body}>
                         <div className={styles.JotItem__Header}>
-                            <span className={styles.JotItem__PrimaryText}>{primaryText}</span>
+                            <span className={styles.JotItem__PrimaryText}>
+                                {primaryText}
+                            </span>
                             {item.isPinned && (
                                 <span className={styles.JotItem__PinIcon}>
                                     <IconPin size={16} />
                                 </span>
                             )}
-                            <span className={styles.JotItem__Datetime}>{datetime}</span>
+                            <span className={styles.JotItem__Datetime}>
+                                {datetime}
+                            </span>
                         </div>
                         {secondaryTextEl}
                     </div>

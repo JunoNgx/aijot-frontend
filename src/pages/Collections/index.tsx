@@ -12,7 +12,9 @@ import type { DropResult } from "@hello-pangea/dnd"
 export default function Collections() {
     const { collectionsQuery } = useCollectionsQuery()
     const { updateCollectionMutation } = useCollectionsMutations()
-    const defaultCollectionSlug = useProfileSettings((s) => s.defaultCollectionSlug)
+    const defaultCollectionSlug = useProfileSettings(
+        (s) => s.defaultCollectionSlug,
+    )
 
     const allCollections = collectionsQuery.data ?? []
     const userCollections = allCollections.filter((c) => !c.coreType)
@@ -42,17 +44,26 @@ export default function Collections() {
     }
 
     const draggableRows = userCollections.map((collection, index) => (
-        <Draggable key={collection.id} draggableId={collection.id} index={index}>
+        <Draggable
+            key={collection.id}
+            draggableId={collection.id}
+            index={index}
+        >
             {(provided, snapshot) => (
                 <div
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     className={[
                         styles.Collections__Row,
-                        snapshot.isDragging ? styles["Collections__Row--Dragging"] : "",
+                        snapshot.isDragging
+                            ? styles["Collections__Row--Dragging"]
+                            : "",
                     ].join(" ")}
                 >
-                    <span className={styles.Collections__DragHandle} {...provided.dragHandleProps}>
+                    <span
+                        className={styles.Collections__DragHandle}
+                        {...provided.dragHandleProps}
+                    >
                         <IconGripVertical size={16} />
                     </span>
                     <CollectionRow
@@ -67,12 +78,16 @@ export default function Collections() {
 
     const trashRow = trashCollection && (
         <div className={styles.Collections__TrashRow}>
-            <span className={styles.Collections__Icon}>{trashCollection.icon}</span>
+            <span className={styles.Collections__Icon}>
+                {trashCollection.icon}
+            </span>
             <span
                 className={styles.Collections__ColourDot}
                 style={{ backgroundColor: trashCollection.colour }}
             />
-            <span className={styles.Collections__Name}>{trashCollection.name}</span>
+            <span className={styles.Collections__Name}>
+                {trashCollection.name}
+            </span>
         </div>
     )
 
@@ -127,7 +142,9 @@ function CollectionRow({ collection, isDefault, onEdit }: CollectionRowProps) {
             />
             <span className={styles.Collections__Name}>{collection.name}</span>
             {isDefault && (
-                <span className={styles.Collections__DefaultBadge}>default</span>
+                <span className={styles.Collections__DefaultBadge}>
+                    default
+                </span>
             )}
             <button className={styles.Collections__BtnEdit} onClick={onEdit}>
                 <IconPencil size={15} />

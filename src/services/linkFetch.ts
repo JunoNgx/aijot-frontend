@@ -18,10 +18,13 @@ export async function fetchLinkMeta(url: string): Promise<LinkFetchResult> {
 
     try {
         const encodedUrl = encodeURIComponent(normalizedUrl)
-        const response = await fetch(`${BACKEND_URL}/api/link/fetch?url=${encodedUrl}`, {
-            method: "GET",
-            credentials: "include",
-        })
+        const response = await fetch(
+            `${BACKEND_URL}/api/link/fetch?url=${encodedUrl}`,
+            {
+                method: "GET",
+                credentials: "include",
+            },
+        )
 
         if (!response.ok) {
             if (response.status === 429) {
@@ -35,7 +38,10 @@ export async function fetchLinkMeta(url: string): Promise<LinkFetchResult> {
         const data = await response.json()
         return data as LinkFetchResult
     } catch (error) {
-        const message = error instanceof Error ? error.message : "Failed to refetch link metadata"
+        const message =
+            error instanceof Error
+                ? error.message
+                : "Failed to refetch link metadata"
         throw new Error(message)
     }
 }

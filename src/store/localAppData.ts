@@ -6,7 +6,8 @@ export const useLocalAppData = create<LocalAppDataStore>()(
     persist(
         (set) => ({
             shouldShowDemoDataBanner: true,
-            setShouldShowDemoDataBanner: (value) => set({ shouldShowDemoDataBanner: value }),
+            setShouldShowDemoDataBanner: (value) =>
+                set({ shouldShowDemoDataBanner: value }),
         }),
         { name: "localAppData" },
     ),

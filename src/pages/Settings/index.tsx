@@ -20,7 +20,9 @@ export default function Settings() {
     const queryClient = useQueryClient()
     const importInputRef = useRef<HTMLInputElement>(null)
     const [pendingImport, setPendingImport] = useState<ExportData | null>(null)
-    const [importSummary, setImportSummary] = useState<ImportSummary | null>(null)
+    const [importSummary, setImportSummary] = useState<ImportSummary | null>(
+        null,
+    )
 
     const themeMode = useLocalUserSettings((s) => s.themeMode)
     const setThemeMode = useLocalUserSettings((s) => s.setThemeMode)
@@ -75,7 +77,9 @@ export default function Settings() {
         try {
             const settings = await commitImport(pendingImport)
             setUserDisplayName(settings.profile.userDisplayName)
-            setShouldApplyTagsOfCurrCollection(settings.profile.shouldApplyTagsOfCurrCollection)
+            setShouldApplyTagsOfCurrCollection(
+                settings.profile.shouldApplyTagsOfCurrCollection,
+            )
             setAll(settings.coreCollections.all)
             setUntagged(settings.coreCollections.untagged)
             setTrash(settings.coreCollections.trash)
@@ -105,13 +109,18 @@ export default function Settings() {
 
             <section className={styles.Settings__Section}>
                 <div className={styles.Settings__SectionHeader}>
-                    <h2 className={styles.Settings__SectionTitle}>Appearance</h2>
+                    <h2 className={styles.Settings__SectionTitle}>
+                        Appearance
+                    </h2>
                 </div>
                 <div className={styles.Settings__Field}>
                     <label className={styles.Settings__Label}>Theme</label>
                     <div className={styles.Settings__RadioGroup}>
                         {(["light", "dark", "system"] as const).map((mode) => (
-                            <label key={mode} className={styles.Settings__Radio}>
+                            <label
+                                key={mode}
+                                className={styles.Settings__Radio}
+                            >
                                 <input
                                     type="radio"
                                     name="themeMode"
@@ -133,7 +142,10 @@ export default function Settings() {
                     <h2 className={styles.Settings__SectionTitle}>Profile</h2>
                 </div>
                 <div className={styles.Settings__Field}>
-                    <label className={styles.Settings__Label} htmlFor="displayName">
+                    <label
+                        className={styles.Settings__Label}
+                        htmlFor="displayName"
+                    >
                         Display name
                     </label>
                     <input
@@ -149,7 +161,11 @@ export default function Settings() {
                         <input
                             type="checkbox"
                             checked={shouldApplyTagsOfCurrCollection}
-                            onChange={(e) => setShouldApplyTagsOfCurrCollection(e.target.checked)}
+                            onChange={(e) =>
+                                setShouldApplyTagsOfCurrCollection(
+                                    e.target.checked,
+                                )
+                            }
                         />
                         Auto-apply collection tags when creating items
                     </label>
@@ -158,7 +174,9 @@ export default function Settings() {
 
             <section className={styles.Settings__Section}>
                 <div className={styles.Settings__SectionHeader}>
-                    <h2 className={styles.Settings__SectionTitle}>Core Collections</h2>
+                    <h2 className={styles.Settings__SectionTitle}>
+                        Core Collections
+                    </h2>
                 </div>
                 <div className={styles.Settings__Field}>
                     <label className={styles.Settings__Label} htmlFor="allName">
@@ -182,11 +200,16 @@ export default function Settings() {
                         type="color"
                         className={styles.Settings__ColorInput}
                         value={allCollection.colour}
-                        onChange={(e) => handleColorChange(setAll, e.target.value)}
+                        onChange={(e) =>
+                            handleColorChange(setAll, e.target.value)
+                        }
                     />
                 </div>
                 <div className={styles.Settings__Field}>
-                    <label className={styles.Settings__Label} htmlFor="untaggedName">
+                    <label
+                        className={styles.Settings__Label}
+                        htmlFor="untaggedName"
+                    >
                         Untagged
                     </label>
                     <input
@@ -207,11 +230,16 @@ export default function Settings() {
                         type="color"
                         className={styles.Settings__ColorInput}
                         value={untaggedCollection.colour}
-                        onChange={(e) => handleColorChange(setUntagged, e.target.value)}
+                        onChange={(e) =>
+                            handleColorChange(setUntagged, e.target.value)
+                        }
                     />
                 </div>
                 <div className={styles.Settings__Field}>
-                    <label className={styles.Settings__Label} htmlFor="trashName">
+                    <label
+                        className={styles.Settings__Label}
+                        htmlFor="trashName"
+                    >
                         Trash
                     </label>
                     <input
@@ -232,7 +260,9 @@ export default function Settings() {
                         type="color"
                         className={styles.Settings__ColorInput}
                         value={trashCollection.colour}
-                        onChange={(e) => handleColorChange(setTrash, e.target.value)}
+                        onChange={(e) =>
+                            handleColorChange(setTrash, e.target.value)
+                        }
                     />
                 </div>
             </section>
@@ -270,11 +300,13 @@ export default function Settings() {
                 {pendingImport && importSummary && (
                     <div className={styles.Settings__ImportPreview}>
                         <span>
-                            {importSummary.newItems} new, {importSummary.updatedItems} updated items
+                            {importSummary.newItems} new,{" "}
+                            {importSummary.updatedItems} updated items
                         </span>
                         <span>
-                            {importSummary.newCollections} new, {importSummary.updatedCollections}{" "}
-                            updated collections
+                            {importSummary.newCollections} new,{" "}
+                            {importSummary.updatedCollections} updated
+                            collections
                         </span>
                         <div className={styles.Settings__ImportPreviewActions}>
                             <button

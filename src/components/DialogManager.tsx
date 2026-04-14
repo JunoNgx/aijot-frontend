@@ -19,7 +19,9 @@ export default function DialogManager() {
                     aria-describedby={undefined}
                     className={styles.DialogManager__Content}
                 >
-                    <Dialog.Title className={styles.DialogManager__Title}>Dialog</Dialog.Title>
+                    <Dialog.Title className={styles.DialogManager__Title}>
+                        Dialog
+                    </Dialog.Title>
                     {children}
                 </Dialog.Content>
             </Dialog.Portal>

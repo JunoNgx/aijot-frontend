@@ -11,7 +11,8 @@ export const useProfileSettings = create<ProfileSettingsStore>()(
             setUserDisplayName: (userDisplayName) => set({ userDisplayName }),
             setShouldApplyTagsOfCurrCollection: (value) =>
                 set({ shouldApplyTagsOfCurrCollection: value }),
-            setDefaultCollectionSlug: (slug) => set({ defaultCollectionSlug: slug }),
+            setDefaultCollectionSlug: (slug) =>
+                set({ defaultCollectionSlug: slug }),
         }),
         { name: "profileSettings" },
     ),

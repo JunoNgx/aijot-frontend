@@ -7,7 +7,10 @@ import { useNavigateRoutes } from "@/hooks/useNavigateRoutes"
 import { COLLECTION_HOTKEY_COUNT } from "@/utils/constants"
 import styles from "./CollectionDropdown.module.scss"
 
-const HOTKEYS = Array.from({ length: COLLECTION_HOTKEY_COUNT }, (_, i) => `mod+${i + 1}`)
+const HOTKEYS = Array.from(
+    { length: COLLECTION_HOTKEY_COUNT },
+    (_, i) => `mod+${i + 1}`,
+)
 
 export default function CollectionDropdown() {
     const { slug: activeSlug } = useParams<{ slug: string }>()
@@ -60,7 +63,9 @@ export default function CollectionDropdown() {
                     <span>{collection.icon}</span>
                     <span>{collection.name}</span>
                     {hotkeyNum !== null && (
-                        <span className={styles.CollectionDropdown__Hotkey}>{hotkeyNum}</span>
+                        <span className={styles.CollectionDropdown__Hotkey}>
+                            {hotkeyNum}
+                        </span>
                     )}
                 </DropdownMenu.Item>
             </div>
@@ -70,7 +75,9 @@ export default function CollectionDropdown() {
     return (
         <div className={styles.CollectionDropdown}>
             <DropdownMenu.Root>
-                <DropdownMenu.Trigger className={styles.CollectionDropdown__Trigger}>
+                <DropdownMenu.Trigger
+                    className={styles.CollectionDropdown__Trigger}
+                >
                     {trigger}
                     <IconChevronDown
                         size={14}

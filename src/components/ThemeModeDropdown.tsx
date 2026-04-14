@@ -13,7 +13,11 @@ function ThemeIcon({ mode }: { mode: ThemeMode }) {
     return <IconDeviceDesktop size={ICON_SIZE} />
 }
 
-const OPTIONS: { value: ThemeMode; label: string; Icon: ComponentType<{ size: number }> }[] = [
+const OPTIONS: {
+    value: ThemeMode
+    label: string
+    Icon: ComponentType<{ size: number }>
+}[] = [
     { value: "light", label: "Light", Icon: IconSun },
     { value: "dark", label: "Dark", Icon: IconMoon },
     { value: "system", label: "System", Icon: IconDeviceDesktop },

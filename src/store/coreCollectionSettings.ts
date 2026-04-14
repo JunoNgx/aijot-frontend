@@ -13,10 +13,14 @@ export const useCoreCollectionSettings = create<CoreCollectionSettingsStore>()(
             all: DEFAULT_ALL_COLLECTION,
             untagged: DEFAULT_UNTAGGED_COLLECTION,
             trash: DEFAULT_TRASH_COLLECTION,
-            setAll: (config) => set((state) => ({ all: { ...state.all, ...config } })),
+            setAll: (config) =>
+                set((state) => ({ all: { ...state.all, ...config } })),
             setUntagged: (config) =>
-                set((state) => ({ untagged: { ...state.untagged, ...config } })),
-            setTrash: (config) => set((state) => ({ trash: { ...state.trash, ...config } })),
+                set((state) => ({
+                    untagged: { ...state.untagged, ...config },
+                })),
+            setTrash: (config) =>
+                set((state) => ({ trash: { ...state.trash, ...config } })),
         }),
         { name: "coreCollectionSettings" },
     ),

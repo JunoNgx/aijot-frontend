@@ -19,14 +19,17 @@ export function useCollectionsMutations() {
             const previousCollections = queryClient.getQueryData<Collection[]>(
                 queryKeys.collections,
             )
-            queryClient.setQueryData<Collection[]>(queryKeys.collections, (prev) => [
-                ...(prev ?? []),
-                collection,
-            ])
+            queryClient.setQueryData<Collection[]>(
+                queryKeys.collections,
+                (prev) => [...(prev ?? []), collection],
+            )
             return { previousCollections }
         },
         onError: (_err, _collection, context) => {
-            queryClient.setQueryData(queryKeys.collections, context?.previousCollections)
+            queryClient.setQueryData(
+                queryKeys.collections,
+                context?.previousCollections,
+            )
         },
         onSettled: () => {
             invalidateCollectionQueries()
@@ -42,13 +45,20 @@ export function useCollectionsMutations() {
             const previousCollections = queryClient.getQueryData<Collection[]>(
                 queryKeys.collections,
             )
-            queryClient.setQueryData<Collection[]>(queryKeys.collections, (prev) =>
-                (prev ?? []).map((c) => (c.id === updatedCollection.id ? updatedCollection : c)),
+            queryClient.setQueryData<Collection[]>(
+                queryKeys.collections,
+                (prev) =>
+                    (prev ?? []).map((c) =>
+                        c.id === updatedCollection.id ? updatedCollection : c,
+                    ),
             )
             return { previousCollections }
         },
         onError: (_err, _collection, context) => {
-            queryClient.setQueryData(queryKeys.collections, context?.previousCollections)
+            queryClient.setQueryData(
+                queryKeys.collections,
+                context?.previousCollections,
+            )
         },
         onSettled: () => {
             invalidateCollectionQueries()
@@ -64,13 +74,17 @@ export function useCollectionsMutations() {
             const previousCollections = queryClient.getQueryData<Collection[]>(
                 queryKeys.collections,
             )
-            queryClient.setQueryData<Collection[]>(queryKeys.collections, (prev) =>
-                (prev ?? []).filter((c) => c.id !== collection.id),
+            queryClient.setQueryData<Collection[]>(
+                queryKeys.collections,
+                (prev) => (prev ?? []).filter((c) => c.id !== collection.id),
             )
             return { previousCollections }
         },
         onError: (_err, _collection, context) => {
-            queryClient.setQueryData(queryKeys.collections, context?.previousCollections)
+            queryClient.setQueryData(
+                queryKeys.collections,
+                context?.previousCollections,
+            )
         },
         onSettled: () => {
             invalidateCollectionQueries()

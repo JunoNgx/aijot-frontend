@@ -19,7 +19,10 @@ export default function UserDropdown() {
             <DropdownMenu.Root>
                 <DropdownMenu.Trigger className={styles.UserDropdown__Trigger}>
                     {userDisplayName}
-                    <IconChevronDown size={14} className={styles.UserDropdown__Chevron} />
+                    <IconChevronDown
+                        size={14}
+                        className={styles.UserDropdown__Chevron}
+                    />
                 </DropdownMenu.Trigger>
                 <DropdownMenu.Portal>
                     <DropdownMenu.Content
@@ -39,7 +42,9 @@ export default function UserDropdown() {
                         >
                             Manage Collections
                         </DropdownMenu.Item>
-                        <DropdownMenu.Separator className={styles.UserDropdown__Separator} />
+                        <DropdownMenu.Separator
+                            className={styles.UserDropdown__Separator}
+                        />
                         <DropdownMenu.Item
                             className={styles.UserDropdown__Item}
                             onSelect={navigateToHelp}

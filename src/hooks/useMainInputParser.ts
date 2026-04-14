@@ -12,7 +12,11 @@ import {
     SYNTAX_FILTER_TYPE_COMPLETED_TODO,
     SYNTAX_SEARCH_TAG_PREFIX,
 } from "@/utils/constants"
-import type { MainInputCreationData, MainInputSearchData, FilterType } from "@/types"
+import type {
+    MainInputCreationData,
+    MainInputSearchData,
+    FilterType,
+} from "@/types"
 
 function isUrl(input: string): boolean {
     try {
@@ -31,8 +35,10 @@ function isUrl(input: string): boolean {
 
 function detectFilterType(input: string): FilterType | undefined {
     const lower = input.toLowerCase()
-    if (lower.includes(SYNTAX_FILTER_TYPE_INCOMPLETE_TODO)) return "incompleteTodo"
-    if (lower.includes(SYNTAX_FILTER_TYPE_COMPLETED_TODO)) return "completedTodo"
+    if (lower.includes(SYNTAX_FILTER_TYPE_INCOMPLETE_TODO))
+        return "incompleteTodo"
+    if (lower.includes(SYNTAX_FILTER_TYPE_COMPLETED_TODO))
+        return "completedTodo"
     if (lower.includes(SYNTAX_FILTER_TYPE_TODO)) return "todo"
     if (lower.includes(SYNTAX_FILTER_TYPE_TEXT)) return "text"
     if (lower.includes(SYNTAX_FILTER_TYPE_LINK)) return "link"
@@ -81,7 +87,9 @@ function extractFlagArgs(allFlagsStr: string, targetFlagSyntax: string) {
         return []
     }
 
-    const afterTargetFlagStr = allFlagsStr.slice(targetFlagStartsIndex + targetFlagSyntax.length)
+    const afterTargetFlagStr = allFlagsStr.slice(
+        targetFlagStartsIndex + targetFlagSyntax.length,
+    )
 
     const argStr = afterTargetFlagStr.split(SYNTAX_FLAG_COMMON_PREFIX)[0].trim()
     const argArr = argStr.split(" ").filter((word) => word.length > 0)
@@ -98,7 +106,9 @@ function extractSearchText(trimmedInputText: string): string | undefined {
         .trim()
 
     const tokens = textWithoutFilterSyntax.split(" ")
-    const nonTagTokens = tokens.filter((token) => !token.startsWith(SYNTAX_SEARCH_TAG_PREFIX))
+    const nonTagTokens = tokens.filter(
+        (token) => !token.startsWith(SYNTAX_SEARCH_TAG_PREFIX),
+    )
     const text = nonTagTokens.join(" ").trim()
 
     return text || undefined
@@ -115,7 +125,11 @@ function parseSearchData(raw: string): MainInputSearchData {
 
 function parseCreationData(raw: string): MainInputCreationData {
     const trimmedInputText = raw.trim()
-    const { content: parsedContent, tags, colSlugs } = parseCreationFlags(trimmedInputText)
+    const {
+        content: parsedContent,
+        tags,
+        colSlugs,
+    } = parseCreationFlags(trimmedInputText)
 
     if (parsedContent.startsWith(SYNTAX_PREFIX_TODO)) {
         return {
@@ -139,7 +153,9 @@ function parseCreationData(raw: string): MainInputCreationData {
 
     const isUrlInput = isUrl(parsedContent)
     const normalizedUrl =
-        isUrlInput && !parsedContent.startsWith("http") ? `https://${parsedContent}` : parsedContent
+        isUrlInput && !parsedContent.startsWith("http")
+            ? `https://${parsedContent}`
+            : parsedContent
 
     return {
         itemType: isUrlInput ? "link" : "text",
