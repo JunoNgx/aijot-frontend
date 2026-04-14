@@ -1,6 +1,7 @@
 import { useRef, useState } from "react"
 import { useQueryClient } from "@tanstack/react-query"
 import { toast } from "sonner"
+import { useLocalUserSettings } from "@/store/localUserSettings"
 import { useProfileSettings } from "@/store/profileSettings"
 import { useCoreCollectionSettings } from "@/store/coreCollectionSettings"
 import { useLocalSyncData } from "@/store/localSyncData"
@@ -20,6 +21,9 @@ export default function Settings() {
     const importInputRef = useRef<HTMLInputElement>(null)
     const [pendingImport, setPendingImport] = useState<ExportData | null>(null)
     const [importSummary, setImportSummary] = useState<ImportSummary | null>(null)
+
+    const themeMode = useLocalUserSettings((s) => s.themeMode)
+    const setThemeMode = useLocalUserSettings((s) => s.setThemeMode)
 
     const userDisplayName = useProfileSettings((s) => s.userDisplayName)
     const setUserDisplayName = useProfileSettings((s) => s.setUserDisplayName)
@@ -98,6 +102,31 @@ export default function Settings() {
     return (
         <div className={styles.Settings}>
             <h1 className={styles.Settings__Title}>Settings</h1>
+
+            <section className={styles.Settings__Section}>
+                <div className={styles.Settings__SectionHeader}>
+                    <h2 className={styles.Settings__SectionTitle}>Appearance</h2>
+                </div>
+                <div className={styles.Settings__Field}>
+                    <label className={styles.Settings__Label}>Theme</label>
+                    <div className={styles.Settings__RadioGroup}>
+                        {(["light", "dark", "system"] as const).map((mode) => (
+                            <label key={mode} className={styles.Settings__Radio}>
+                                <input
+                                    type="radio"
+                                    name="themeMode"
+                                    value={mode}
+                                    checked={themeMode === mode}
+                                    onChange={() => {
+                                        setThemeMode(mode)
+                                    }}
+                                />
+                                {mode.charAt(0).toUpperCase() + mode.slice(1)}
+                            </label>
+                        ))}
+                    </div>
+                </div>
+            </section>
 
             <section className={styles.Settings__Section}>
                 <div className={styles.Settings__SectionHeader}>

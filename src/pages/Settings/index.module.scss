@@ -99,6 +99,19 @@
         }
     }
 
+    &__RadioGroup {
+        display: flex;
+        gap: 1.25rem;
+    }
+
+    &__Radio {
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+        font-size: 0.9375rem;
+        cursor: pointer;
+    }
+
     &__Checkbox {
         display: flex;
         align-items: center;
