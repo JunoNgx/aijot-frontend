@@ -169,6 +169,14 @@ export function useItems() {
             )
             return { previousItems }
         },
+        onSuccess: (_data, item) => {
+            toast("Item has been deleted", {
+                action: {
+                    label: "Undo",
+                    onClick: () => undeleteItemMutation.mutate(item)
+                }
+            })
+        },
         onError: (_err, _item, context) => {
             queryClient.setQueryData(queryKeys.items, context?.previousItems)
         },
