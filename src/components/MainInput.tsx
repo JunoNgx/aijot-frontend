@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { getHotkeyHandler } from "@/utils/hotkeyHandler"
 import { useItems } from "@/hooks/useItems"
+import { useItemAction } from "@/hooks/useItemAction"
 import { useMainInputParser, parseCreationData } from "@/hooks/useMainInputParser"
 import { buildItem } from "@/utils/itemFactory"
 import { openItemDialog } from "@/utils/openItemDialog"
@@ -38,6 +39,7 @@ export default function MainInput({
 }: Props) {
     const [inputValue, setInputValue] = useState("")
     const { createItemMutation, trashItemMutation } = useItems()
+    const { copyContent } = useItemAction()
     const searchData = useMainInputParser(inputValue)
 
     useEffect(() => {
@@ -65,7 +67,7 @@ export default function MainInput({
 
     const handleCopySelected = () => {
         if (!selectedItem) return
-        navigator.clipboard.writeText(selectedItem.content)
+        copyContent(selectedItem)
     }
 
     const moveSelection = (delta: number) => {
