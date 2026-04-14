@@ -298,13 +298,13 @@ Remove all Mantine packages: `@mantine/core`, `@mantine/dates`, `@mantine/hooks`
 
 ## Task 28 — PWA
 
-- [ ] manifest icons
+- [x] manifest icons
 
 ---
 
 ## Task 29 — Landing page
 
-- [ ] app name + tagline, three feature sections
+- [x] app name + tagline, three feature sections
 
 ---
 
