@@ -2,6 +2,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 import { DateTime } from "luxon"
 import { storage } from "@/db"
 import { queryKeys } from "@/db/queryKeys"
+import { fetchLinkMeta } from "@/services/linkFetch"
 import type { Item } from "@/types"
 
 function sortItems(items: Item[]): Item[] {
@@ -42,6 +43,22 @@ export function useItems() {
     const createItemMutation = useMutation({
         mutationFn: async (item: Item) => {
             await storage.putItem(item)
+
+            if (item.type === "link" && navigator.onLine) {
+                fetchLinkMeta(item.content).then((meta) => {
+                    if (!meta) return
+                    const updatedItem = {
+                        ...item,
+                        title: meta.title,
+                        faviconUrl: meta.faviconUrl,
+                        updatedAt: DateTime.now().toISO(),
+                    }
+                    storage.putItem(updatedItem).then(() => {
+                        invalidateItemQueries()
+                    })
+                })
+            }
+
             return item
         },
         onMutate: async (item) => {
@@ -162,6 +179,26 @@ export function useItems() {
         },
     })
 
+    const refetchLinkMetaMutation = useMutation({
+        mutationFn: async (item: Item) => {
+            if (item.type !== "link") {
+                throw new Error("Item is not a link")
+            }
+            const meta = await fetchLinkMeta(item.content)
+            const updatedItem = {
+                ...item,
+                title: meta.title,
+                faviconUrl: meta.faviconUrl,
+                updatedAt: DateTime.now().toISO(),
+            }
+            await storage.putItem(updatedItem)
+            return updatedItem
+        },
+        onSettled: () => {
+            invalidateItemQueries()
+        },
+    })
+
     return {
         itemsQuery,
         trashedItemsQuery,
@@ -170,5 +207,6 @@ export function useItems() {
         softDeleteItemMutation,
         untrashItemMutation,
         hardDeleteItemMutation,
+        refetchLinkMetaMutation,
     }
 }

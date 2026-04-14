@@ -12,6 +12,7 @@ import {
     IconCursorText,
 } from "@tabler/icons-react"
 import { DateTime } from "luxon"
+import { toast } from "sonner"
 import { useItems } from "@/hooks/useItems"
 import { openItemDialog } from "@/utils/openItemDialog"
 import styles from "./JotItemContextMenu.module.scss"
@@ -29,6 +30,7 @@ export default function JotItemContextMenu({ item }: Props) {
         softDeleteItemMutation,
         untrashItemMutation,
         hardDeleteItemMutation,
+        refetchLinkMetaMutation,
     } = useItems()
 
     const isInTrash = !!item.trashedAt
@@ -97,9 +99,13 @@ export default function JotItemContextMenu({ item }: Props) {
             {item.type === "link" && (
                 <ContextMenu.Item
                     className={styles.JotItemContextMenu__Item}
-                    onClick={() => {
-                        /* task 26 */
-                    }}
+                    onClick={() =>
+                        refetchLinkMetaMutation.mutate(item, {
+                            onError: (error) => {
+                                toast.error(error.message)
+                            },
+                        })
+                    }
                 >
                     <IconRefresh size={ICON_SIZE} />
                     Refetch
