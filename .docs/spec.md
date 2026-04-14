@@ -537,11 +537,10 @@ Sync is triggered debounced to 15s, after the user has made a change to `items` 
 ### Storage structure:
 
 - All JSON files are pretty printed for human readability purpose.
-
+- Everything is stored in one single file to reduce the upload/download time.
+- Cloud storage data file has the exact shape as exported file
 - /ai-jot
-    - `items.json`
-    - `collections.json`
-    - `settings.json` (only data in `profileSettings`; `localSettings` is not synced)
+    - `data.json`
 
 ### Resolution logic
 
@@ -556,6 +555,27 @@ Sync is triggered debounced to 15s, after the user has made a change to `items` 
 ## Data export/import
 
 User can export all data to one single json file. The same data can be re-imported back. All data are pretty printed.
+
+- Export file shape:
+```
+ {
+    "version": 1,
+    "exportedAt": "2026-04-14T10:00:00.000Z",
+    "items": [...],
+    "collections": [...],
+    "settings": {
+        "profile": {
+            "userDisplayName": "User",
+            "shouldApplyTagsOfCurrCollection": true
+        },
+        "coreCollections": {
+            "all": { "name": "All", "slug": "all", "colour": "#ffffff" },
+            "untagged": { "name": "Untagged", "slug": "untagged", "colour": "#ffffff" },
+            "trash": { "name": "Trash", "slug": "trash", "colour": "#ffffff" }
+        }
+    }
+}
+```
 
 ## Onboarding
 
