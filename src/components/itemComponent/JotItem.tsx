@@ -2,7 +2,7 @@ import { useState } from "react"
 import * as ContextMenu from "@radix-ui/react-context-menu"
 import { IconNote, IconLink, IconSquare, IconSquareCheck, IconPin } from "@tabler/icons-react"
 import { isValidHexColourCode, formatJottedAt } from "@/utils/helpers"
-import { useItemAction } from "@/hooks/useItemAction"
+import { useItemActions } from "@/hooks/useItemActions"
 import JotItemContextMenu from "./JotItemContextMenu"
 import type { Item } from "@/types"
 import styles from "./JotItem.module.scss"
@@ -48,7 +48,7 @@ function ItemIcon({ item }: { item: Item }) {
 }
 
 export default function JotItem({ item, isSelected, itemIndex }: Props) {
-    const { triggerPrimaryAction } = useItemAction()
+    const { triggerPrimaryAction } = useItemActions()
 
     const primaryText = item.type === "todo" ? item.content : (item.title ?? item.content)
     const secondaryText = item.type !== "todo" && item.title ? item.content : null

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { getHotkeyHandler } from "@/utils/hotkeyHandler"
-import { useItemAction } from "@/hooks/useItemAction"
+import { useItemActions } from "@/hooks/useItemActions"
 import { useMainInputParser } from "@/hooks/useMainInputParser"
 import {
     SHORTCUT_NAV_UP,
@@ -35,7 +35,7 @@ export default function MainInput({
     onSelectedIndexChange,
 }: Props) {
     const [inputValue, setInputValue] = useState("")
-    const { createItem, copyContent, editItem, trashItem } = useItemAction()
+    const { createItem, copyContent, editItem, trashItem } = useItemActions()
     const searchData = useMainInputParser(inputValue)
 
     useEffect(() => {

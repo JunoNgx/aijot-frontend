@@ -5,7 +5,7 @@ import { EditorView, keymap, drawSelection } from "@codemirror/view"
 import { EditorState } from "@codemirror/state"
 import { defaultKeymap, history, historyKeymap } from "@codemirror/commands"
 import { useItems } from "@/hooks/useItems"
-import { useItemAction } from "@/hooks/useItemAction"
+import { useItemActions } from "@/hooks/useItemActions"
 import { useDebounced } from "@/hooks/useDebounced"
 import { useDialogStore } from "@/store/dialogStore"
 import { getHotkeyHandler } from "@/utils/hotkeyHandler"
@@ -84,7 +84,7 @@ interface Props {
 
 export default function ItemDialog({ item }: Props) {
     const { updateItemMutation } = useItems()
-    const { trashItem } = useItemAction()
+    const { trashItem } = useItemActions()
     const closeAllDialogs = useDialogStore((s) => s.closeAllDialogs)
 
     const [titleVal, setTitleVal] = useState(item.title ?? "")

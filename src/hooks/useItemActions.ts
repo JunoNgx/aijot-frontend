@@ -6,7 +6,7 @@ import { buildItem } from "@/utils/itemFactory"
 import { parseCreationData } from "@/hooks/useMainInputParser"
 import type { Item } from "@/types"
 
-export function useItemAction() {
+export function useItemActions() {
     const {
         createItemMutation,
         updateItemMutation,

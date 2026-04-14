@@ -11,7 +11,7 @@ import {
     IconSquareCheck,
     IconCursorText,
 } from "@tabler/icons-react"
-import { useItemAction } from "@/hooks/useItemAction"
+import { useItemActions } from "@/hooks/useItemActions"
 import styles from "./JotItemContextMenu.module.scss"
 import type { Item } from "@/types"
 
@@ -33,7 +33,7 @@ export default function JotItemContextMenu({ item }: Props) {
         convertToTodo,
         toggleCopyOnClick,
         refetchLinkMeta,
-    } = useItemAction()
+    } = useItemActions()
 
     const isInTrash = !!item.trashedAt
 
