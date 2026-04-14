@@ -7,9 +7,11 @@ export const useProfileSettings = create<ProfileSettingsStore>()(
         (set) => ({
             userDisplayName: "User",
             shouldApplyTagsOfCurrCollection: true,
+            defaultCollectionSlug: "all",
             setUserDisplayName: (userDisplayName) => set({ userDisplayName }),
             setShouldApplyTagsOfCurrCollection: (value) =>
                 set({ shouldApplyTagsOfCurrCollection: value }),
+            setDefaultCollectionSlug: (slug) => set({ defaultCollectionSlug: slug }),
         }),
         { name: "profileSettings" },
     ),

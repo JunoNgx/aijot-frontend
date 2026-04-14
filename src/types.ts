@@ -93,8 +93,10 @@ export interface LocalSyncDataStore {
 export interface ProfileSettingsStore {
     userDisplayName: string
     shouldApplyTagsOfCurrCollection: boolean
+    defaultCollectionSlug: string
     setUserDisplayName: (name: string) => void
     setShouldApplyTagsOfCurrCollection: (value: boolean) => void
+    setDefaultCollectionSlug: (slug: string) => void
 }
 
 export interface CoreCollectionConfig {
