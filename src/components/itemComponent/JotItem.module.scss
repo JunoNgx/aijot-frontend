@@ -47,6 +47,11 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+
+        &--TodoDone {
+            text-decoration: line-through;
+            opacity: 0.45;
+        }
     }
 
     &__PinIcon {

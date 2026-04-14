@@ -110,7 +110,14 @@ export default function JotItem({ item, isSelected, itemIndex }: Props) {
                     </span>
                     <div className={styles.JotItem__Body}>
                         <div className={styles.JotItem__Header}>
-                            <span className={styles.JotItem__PrimaryText}>
+                            <span
+                                className={[
+                                    styles.JotItem__PrimaryText,
+                                    item.isDone
+                                        ? styles["JotItem__PrimaryText--TodoDone"]
+                                        : "",
+                                ].join(" ")}
+                            >
                                 {primaryText}
                             </span>
                             {item.isPinned && (
