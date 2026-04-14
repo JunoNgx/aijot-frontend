@@ -291,8 +291,8 @@ Remove all Mantine packages: `@mantine/core`, `@mantine/dates`, `@mantine/hooks`
 
 ## Task 27 — Export + Import
 
-- [ ] export `{ items, collections, settings }` pretty-printed JSON
-- [ ] import: parse, merge into DB, invalidate queries
+- [x] export `{ items, collections, settings }` pretty-printed JSON
+- [x] import: parse, merge into DB, invalidate queries
 
 ---
 
