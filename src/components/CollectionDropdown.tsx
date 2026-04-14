@@ -4,7 +4,7 @@ import { useHotkeys } from "react-hotkeys-hook"
 import { IconChevronDown } from "@tabler/icons-react"
 import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
 import { useNavigateRoutes } from "@/hooks/useNavigateRoutes"
-import { COLLECTION_HOTKEY_COUNT, TRASH_PURGE_DURATION_DAY } from "@/utils/constants"
+import { COLLECTION_HOTKEY_COUNT } from "@/utils/constants"
 import styles from "./CollectionDropdown.module.scss"
 
 const HOTKEYS = Array.from({ length: COLLECTION_HOTKEY_COUNT }, (_, i) => `mod+${i + 1}`)
@@ -41,7 +41,6 @@ export default function CollectionDropdown() {
     const menuItems = collections.map((collection, index) => {
         const hotkeyNum = index < COLLECTION_HOTKEY_COUNT ? index + 1 : null
         const isActive = collection.slug === currentSlug
-        const isTrash = collection.coreType === "trash"
 
         const itemClassName = [
             styles.CollectionDropdown__Item,
@@ -64,11 +63,6 @@ export default function CollectionDropdown() {
                         <span className={styles.CollectionDropdown__Hotkey}>{hotkeyNum}</span>
                     )}
                 </DropdownMenu.Item>
-                {isTrash && (
-                    <div className={styles.CollectionDropdown__TrashNotice}>
-                        Items older than {TRASH_PURGE_DURATION_DAY}d are permanently deleted
-                    </div>
-                )}
             </div>
         )
     })
