@@ -299,7 +299,6 @@ Remove all Mantine packages: `@mantine/core`, `@mantine/dates`, `@mantine/hooks`
 ## Task 28 — PWA
 
 - [ ] manifest icons
-- [ ] offline: link fetch toast, sync status handling
 
 ---
 
@@ -331,3 +330,7 @@ Remove all Mantine packages: `@mantine/core`, `@mantine/dates`, `@mantine/hooks`
 
 - [ ] Spotlight: setup + actions (theme, nav, export, sync)
 - [ ] Collection tag picker in ItemDialog: highlights collections whose tags match the item's tags
+
+## Task 33 - Offline handling
+- [ ] Implement service worker for offline support
+- [ ] Implement offline sync status
