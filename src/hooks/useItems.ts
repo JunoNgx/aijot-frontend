@@ -177,6 +177,24 @@ export function useItems() {
         },
     })
 
+    const undeleteItemMutation = useMutation({
+        mutationFn: async (item: Item) => {
+            const { deletedAt: _deletedAt, ...restoredItem } = item
+            await storage.putItem({ ...restoredItem, updatedAt: DateTime.now().toISO() })
+        },
+        onMutate: async () => {
+            await queryClient.cancelQueries({ queryKey: queryKeys.items })
+            const previousItems = queryClient.getQueryData<Item[]>(queryKeys.items)
+            return { previousItems }
+        },
+        onError: (_err, _item, context) => {
+            queryClient.setQueryData(queryKeys.items, context?.previousItems)
+        },
+        onSettled: () => {
+            invalidateItemQueries()
+        },
+    })
+
     const refetchLinkMetaMutation = useMutation({
         mutationFn: async (item: Item) => {
             if (item.type !== "link") {
@@ -205,6 +223,7 @@ export function useItems() {
         trashItemMutation,
         untrashItemMutation,
         softDeleteItemMutation,
+        undeleteItemMutation,
         refetchLinkMetaMutation,
     }
 }
