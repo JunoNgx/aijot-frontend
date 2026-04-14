@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, type MouseEvent } from "react"
 import * as ContextMenu from "@radix-ui/react-context-menu"
 import { IconNote, IconLink, IconSquare, IconSquareCheck, IconPin } from "@tabler/icons-react"
 import { isValidHexColourCode, formatJottedAt } from "@/utils/helpers"
@@ -60,17 +60,31 @@ export default function JotItem({ item, isSelected, itemIndex }: Props) {
 
     const rootClassName = [styles.JotItem, isSelected ? styles["JotItem--Selected"] : ""].join(" ")
 
+    const wrapperProps =
+        item.type === "link"
+            ? {
+                  as: "a" as const,
+                  href: item.content,
+                  target: "_blank",
+                  rel: "noopener noreferrer",
+                  onClick: (e: MouseEvent) => {
+                      triggerPrimaryAction(item, e)
+                  },
+              }
+            : {
+                  as: "div" as const,
+                  onClick: (e: MouseEvent) => {
+                      triggerPrimaryAction(item, e)
+                  },
+              }
+
+    const { as: Tag, ...rest } = wrapperProps
+
     // TODO: fix this layout manually
     return (
         <ContextMenu.Root>
             <ContextMenu.Trigger asChild>
-                <div
-                    className={rootClassName}
-                    data-item-index={itemIndex}
-                    onClick={() => {
-                        triggerPrimaryAction(item)
-                    }}
-                >
+                <Tag className={rootClassName} data-item-index={itemIndex} {...rest}>
                     <span className={styles.JotItem__Icon}>
                         <ItemIcon item={item} />
                     </span>
@@ -86,7 +100,7 @@ export default function JotItem({ item, isSelected, itemIndex }: Props) {
                         </div>
                         {secondaryTextEl}
                     </div>
-                </div>
+                </Tag>
             </ContextMenu.Trigger>
             <JotItemContextMenu item={item} />
         </ContextMenu.Root>

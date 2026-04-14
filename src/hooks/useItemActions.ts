@@ -4,6 +4,7 @@ import { useItemsMutations } from "@/hooks/useItemsMutations"
 import { openItemDialog } from "@/utils/openItemDialog"
 import { buildItem } from "@/utils/itemFactory"
 import { parseCreationData } from "@/hooks/useMainInputParser"
+import { type MouseEvent } from "react"
 import type { Item } from "@/types"
 
 export function useItemActions() {
@@ -87,13 +88,13 @@ export function useItemActions() {
         softDeleteItemMutation.mutate(item)
     }
 
-    const triggerPrimaryAction = (item: Item) => {
+    const triggerPrimaryAction = (item: Item, e?: MouseEvent) => {
         if (item.shouldCopyOnClick) {
+            e?.preventDefault()
             copyContent(item)
             return
         }
         if (item.type === "link") {
-            window.open(item.content, "_blank")
             return
         }
         if (item.type === "text") {
