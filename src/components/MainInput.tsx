@@ -14,6 +14,7 @@ import {
     SHORTCUT_NAV_ACTION,
     SHORTCUT_ITEM_EDIT,
     SHORTCUT_ITEM_COPY,
+    SHORTCUT_ITEM_TRASH,
 } from "@/utils/constants"
 import styles from "./MainInput.module.scss"
 import type { MainInputSearchData, Item } from "@/types"
@@ -36,7 +37,7 @@ export default function MainInput({
     onSelectedIndexChange,
 }: Props) {
     const [inputValue, setInputValue] = useState("")
-    const { createItemMutation } = useItems()
+    const { createItemMutation, trashItemMutation } = useItems()
     const searchData = useMainInputParser(inputValue)
 
     useEffect(() => {
@@ -101,6 +102,7 @@ export default function MainInput({
         ["Escape", handleEscapePress],
         [SHORTCUT_ITEM_COPY, handleCopySelected],
         [SHORTCUT_ITEM_EDIT, () => selectedItem && openItemDialog(selectedItem)],
+        [SHORTCUT_ITEM_TRASH, () => selectedItem && trashItemMutation.mutate(selectedItem)],
     ])
 
     return (

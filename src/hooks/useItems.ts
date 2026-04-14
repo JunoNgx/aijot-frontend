@@ -4,6 +4,7 @@ import { storage } from "@/db"
 import { queryKeys } from "@/db/queryKeys"
 import { fetchLinkMeta } from "@/services/linkFetch"
 import type { Item } from "@/types"
+import { toast } from "sonner"
 
 function sortItems(items: Item[]): Item[] {
     const pinnedItems = items.filter((item) => item.isPinned)
@@ -110,6 +111,9 @@ export function useItems() {
                 (prev ?? []).filter((i) => i.id !== item.id),
             )
             return { previousItems }
+        },
+        onSuccess: () => {
+            toast("Item moved to trash bin")
         },
         onError: (_err, _item, context) => {
             queryClient.setQueryData(queryKeys.items, context?.previousItems)
