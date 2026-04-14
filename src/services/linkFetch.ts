@@ -35,9 +35,7 @@ export async function fetchLinkMeta(url: string): Promise<LinkFetchResult> {
         const data = await response.json()
         return data as LinkFetchResult
     } catch (error) {
-        const message = error instanceof Error
-            ? error.message
-            : "Failed to refetch link metadata"
+        const message = error instanceof Error ? error.message : "Failed to refetch link metadata"
         throw new Error(message)
     }
 }

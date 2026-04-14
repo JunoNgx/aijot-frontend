@@ -557,6 +557,7 @@ Sync is triggered debounced to 15s, after the user has made a change to `items` 
 User can export all data to one single json file. The same data can be re-imported back. All data are pretty printed.
 
 - Export file shape:
+
 ```
  {
     "version": 1,

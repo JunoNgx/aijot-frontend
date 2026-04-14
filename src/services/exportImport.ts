@@ -5,10 +5,7 @@ import type { ExportData, ExportSettings, ImportSummary } from "@/types"
 export const EXPORT_VERSION = 1
 
 export async function exportData(settings: ExportSettings): Promise<void> {
-    const [items, collections] = await Promise.all([
-        storage.getItems(),
-        storage.getCollections(),
-    ])
+    const [items, collections] = await Promise.all([storage.getItems(), storage.getCollections()])
 
     const data: ExportData = {
         version: EXPORT_VERSION,

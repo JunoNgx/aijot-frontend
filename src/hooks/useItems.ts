@@ -116,8 +116,10 @@ export function useItems() {
             toast("Item moved to trash bin", {
                 action: {
                     label: "Undo",
-                    onClick: () => { untrashItemMutation.mutate(item) },
-                }
+                    onClick: () => {
+                        untrashItemMutation.mutate(item)
+                    },
+                },
             })
         },
         onError: (_err, _item, context) => {
@@ -171,8 +173,10 @@ export function useItems() {
             toast("Item has been deleted", {
                 action: {
                     label: "Undo",
-                    onClick: () => { undeleteItemMutation.mutate(item) }
-                }
+                    onClick: () => {
+                        undeleteItemMutation.mutate(item)
+                    },
+                },
             })
         },
         onError: (_err, _item, context) => {

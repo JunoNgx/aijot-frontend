@@ -5,7 +5,12 @@ import { useProfileSettings } from "@/store/profileSettings"
 import { useCoreCollectionSettings } from "@/store/coreCollectionSettings"
 import { useLocalSyncData } from "@/store/localSyncData"
 import { isValidHexColourCode } from "@/utils/helpers"
-import { exportData, parseImportFile, getImportSummary, commitImport } from "@/services/exportImport"
+import {
+    exportData,
+    parseImportFile,
+    getImportSummary,
+    commitImport,
+} from "@/services/exportImport"
 import type { ExportData, ImportSummary } from "@/types"
 import { queryKeys } from "@/db/queryKeys"
 import styles from "./index.module.scss"
@@ -38,7 +43,11 @@ export default function Settings() {
     const handleExport = async () => {
         await exportData({
             profile: { userDisplayName, shouldApplyTagsOfCurrCollection },
-            coreCollections: { all: allCollection, untagged: untaggedCollection, trash: trashCollection },
+            coreCollections: {
+                all: allCollection,
+                untagged: untaggedCollection,
+                trash: trashCollection,
+            },
         })
     }
 
@@ -207,10 +216,18 @@ export default function Settings() {
                     Export or import your items, collections, and settings
                 </p>
                 <div className={styles.Settings__BtnRow}>
-                    <button className={styles.Settings__BtnAction} type="button" onClick={handleExport}>
+                    <button
+                        className={styles.Settings__BtnAction}
+                        type="button"
+                        onClick={handleExport}
+                    >
                         Export
                     </button>
-                    <button className={styles.Settings__BtnAction} type="button" onClick={() => importInputRef.current?.click()}>
+                    <button
+                        className={styles.Settings__BtnAction}
+                        type="button"
+                        onClick={() => importInputRef.current?.click()}
+                    >
                         Import
                     </button>
                     <input
@@ -223,13 +240,29 @@ export default function Settings() {
                 </div>
                 {pendingImport && importSummary && (
                     <div className={styles.Settings__ImportPreview}>
-                        <span>{importSummary.newItems} new, {importSummary.updatedItems} updated items</span>
-                        <span>{importSummary.newCollections} new, {importSummary.updatedCollections} updated collections</span>
+                        <span>
+                            {importSummary.newItems} new, {importSummary.updatedItems} updated items
+                        </span>
+                        <span>
+                            {importSummary.newCollections} new, {importSummary.updatedCollections}{" "}
+                            updated collections
+                        </span>
                         <div className={styles.Settings__ImportPreviewActions}>
-                            <button className={styles.Settings__BtnAction} type="button" onClick={handleConfirmImport}>
+                            <button
+                                className={styles.Settings__BtnAction}
+                                type="button"
+                                onClick={handleConfirmImport}
+                            >
                                 Confirm
                             </button>
-                            <button className={styles.Settings__BtnAction} type="button" onClick={() => { setPendingImport(null); setImportSummary(null) }}>
+                            <button
+                                className={styles.Settings__BtnAction}
+                                type="button"
+                                onClick={() => {
+                                    setPendingImport(null)
+                                    setImportSummary(null)
+                                }}
+                            >
                                 Cancel
                             </button>
                         </div>
