@@ -11,10 +11,22 @@ import CollectionDropdown from "@/components/CollectionDropdown"
 import JotItem from "@/components/itemComponent/JotItem"
 import DemoDataBanner from "./DemoDataBanner"
 import styles from "./index.module.scss"
-import type { MainInputSearchData, Item } from "@/types"
+import type { Collection, MainInputSearchData, Item } from "@/types"
 
 const DEFAULT_SEARCH_DATA: MainInputSearchData = {
     tags: [],
+}
+
+function filterByCollection(items: Item[], collection: Collection): Item[] {
+    if (collection.coreType === "all") return items
+    if (collection.coreType === "untagged") {
+        return items.filter((item) => item.tags.length === 0)
+    }
+    return items.filter(
+        (item) =>
+            collection.types.includes(item.type) &&
+            collection.tags.every((tag) => item.tags.includes(tag)),
+    )
 }
 
 function filterItems(items: Item[], searchData: MainInputSearchData): Item[] {
@@ -49,22 +61,29 @@ function filterItems(items: Item[], searchData: MainInputSearchData): Item[] {
 export default function Jot() {
     const { slug } = useParams<{ slug: string }>()
     const { collectionsQuery } = useCollectionsQuery()
-    const allSlug = useCoreCollectionSettings((s) => s.all.slug)
     const [searchData, setSearchData] =
         useState<MainInputSearchData>(DEFAULT_SEARCH_DATA)
     const [selectedIndex, setSelectedIndex] = useState(-1)
-    const { itemsQuery } = useItemsQuery()
+    const { itemsQuery, trashedItemsQuery } = useItemsQuery()
     const { shouldShowDemoDataBanner } = useLocalAppData()
     const mainInputRef = useRef<HTMLInputElement>(null)
 
-    if (!collectionsQuery.isPending) {
-        const isValidSlug = (collectionsQuery.data ?? []).some(
-            (c) => c.slug === slug,
-        )
-        if (!isValidSlug) return <Navigate to={`/jot/${allSlug}`} replace />
+    const collections = collectionsQuery.data ?? []
+    const currCollection = collections.find((c) => c.slug === slug)
+    const allSlug = useCoreCollectionSettings((s) => s.all.slug)
+
+    if (!collectionsQuery.isPending && !currCollection) {
+        return <Navigate to={`/jot/${allSlug}`} replace />
     }
 
-    const visibleItems = filterItems(itemsQuery.data ?? [], searchData)
+    const isTrash = currCollection?.coreType === "trash"
+    const baseItems = isTrash
+        ? (trashedItemsQuery.data ?? [])
+        : (itemsQuery.data ?? [])
+    const collectionItems = currCollection
+        ? filterByCollection(baseItems, currCollection)
+        : baseItems
+    const visibleItems = filterItems(collectionItems, searchData)
     const selectedItem =
         selectedIndex >= 0 ? visibleItems[selectedIndex] : undefined
 
