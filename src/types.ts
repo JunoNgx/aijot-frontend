@@ -139,6 +139,37 @@ export interface MainInputCreationData {
 }
 
 // ============================================================
+// Export / Import
+// ============================================================
+
+export interface ExportSettings {
+    profile: {
+        userDisplayName: string
+        shouldApplyTagsOfCurrCollection: boolean
+    }
+    coreCollections: {
+        all: CoreCollectionConfig
+        untagged: CoreCollectionConfig
+        trash: CoreCollectionConfig
+    }
+}
+
+export interface ImportSummary {
+    newItems: number
+    updatedItems: number
+    newCollections: number
+    updatedCollections: number
+}
+
+export interface ExportData {
+    version: number
+    exportedAt: string
+    items: Item[]
+    collections: Collection[]
+    settings: ExportSettings
+}
+
+// ============================================================
 // Link fetch
 // ============================================================
 

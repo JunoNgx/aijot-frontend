@@ -116,6 +116,43 @@
         margin-bottom: 0.75rem;
     }
 
+    &__ImportPreview {
+        display: inline-flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-top: 0.75rem;
+        padding: 0.5rem 0.625rem;
+        font-size: 0.8125rem;
+        background-color: var(--colSurface);
+        @include StandardBorder;
+
+        &Actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+    }
+
+    &__BtnRow {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.75rem;
+    }
+
+    &__BtnAction {
+        all: unset;
+        cursor: pointer;
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+        background-color: var(--colSurface);
+        color: var(--colText);
+        @include StandardBorder;
+        box-sizing: border-box;
+
+        &:hover {
+            opacity: 0.85;
+        }
+    }
+
     &__BtnConnect {
         all: unset;
         cursor: pointer;
