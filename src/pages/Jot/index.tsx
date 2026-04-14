@@ -63,6 +63,7 @@ export default function Jot() {
 
     useHotkeys(SHORTCUT_FOCUS_MAIN_INPUT, () => mainInputRef.current?.focus(), {
         enableOnFormTags: true,
+        preventDefault: true,
     })
 
     const itemList = visibleItems.map((item, index) => (
