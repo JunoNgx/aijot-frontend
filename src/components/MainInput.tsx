@@ -18,7 +18,7 @@ import styles from "./MainInput.module.scss"
 import type { MainInputSearchData, Item } from "@/types"
 
 interface Props {
-    inputRef: React.RefObject<HTMLInputElement>
+    inputRef: React.RefObject<HTMLInputElement | null>
     onParse: (searchData: MainInputSearchData) => void
     selectedIndex: number
     selectedItem: Item | undefined
