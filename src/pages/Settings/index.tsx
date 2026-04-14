@@ -27,6 +27,9 @@ export default function Settings() {
     const themeMode = useLocalUserSettings((s) => s.themeMode)
     const setThemeMode = useLocalUserSettings((s) => s.setThemeMode)
 
+    const use24HourClock = useProfileSettings((s) => s.use24HourClock)
+    const setUse24HourClock = useProfileSettings((s) => s.setUse24HourClock)
+
     const userDisplayName = useProfileSettings((s) => s.userDisplayName)
     const setUserDisplayName = useProfileSettings((s) => s.setUserDisplayName)
     const shouldApplyTagsOfCurrCollection = useProfileSettings(
@@ -134,6 +137,18 @@ export default function Settings() {
                             </label>
                         ))}
                     </div>
+                </div>
+                <div className={styles.Settings__Field}>
+                    <label className={styles.Settings__Checkbox}>
+                        <input
+                            type="checkbox"
+                            checked={use24HourClock}
+                            onChange={(e) => {
+                                setUse24HourClock(e.target.checked)
+                            }}
+                        />
+                        Use 24-hour clock
+                    </label>
                 </div>
             </section>
 

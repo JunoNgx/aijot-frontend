@@ -10,10 +10,15 @@ export function generateSlug(str: string): string {
         .replace(/-+/g, "-")
 }
 
-export function formatJottedAt(isoString: string): string {
+export function formatJottedAt(
+    isoString: string,
+    use24HourClock = true,
+): string {
     const date = DateTime.fromISO(isoString)
     const now = DateTime.now()
-    if (now.diff(date, "hours").hours < 24) return date.toFormat("HH:mm")
+    if (now.diff(date, "hours").hours < 24) {
+        return date.toFormat(use24HourClock ? "HH:mm" : "h:mm a")
+    }
     if (now.diff(date, "years").years < 1) return date.toFormat("MMM d")
     return date.toFormat("MMM d, yyyy")
 }

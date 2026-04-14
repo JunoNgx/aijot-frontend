@@ -8,6 +8,7 @@ import {
     IconPin,
 } from "@tabler/icons-react"
 import { isValidHexColourCode, formatJottedAt } from "@/utils/helpers"
+import { useProfileSettings } from "@/store/profileSettings"
 import { useItemActions } from "@/hooks/useItemActions"
 import JotItemContextMenu from "./JotItemContextMenu"
 import type { Item } from "@/types"
@@ -60,12 +61,13 @@ function ItemIcon({ item }: { item: Item }) {
 
 export default function JotItem({ item, isSelected, itemIndex }: Props) {
     const { triggerPrimaryAction } = useItemActions()
+    const use24HourClock = useProfileSettings((s) => s.use24HourClock)
 
     const primaryText =
         item.type === "todo" ? item.content : (item.title ?? item.content)
     const secondaryText =
         item.type !== "todo" && item.title ? item.content : null
-    const datetime = formatJottedAt(item.jottedAt)
+    const datetime = formatJottedAt(item.jottedAt, use24HourClock)
 
     const secondaryTextEl = secondaryText && (
         <span className={styles.JotItem__SecondaryText}>{secondaryText}</span>
