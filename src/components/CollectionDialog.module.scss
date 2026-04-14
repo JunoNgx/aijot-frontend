@@ -48,6 +48,22 @@
         cursor: pointer;
     }
 
+    &__DefaultIndicator {
+        font-size: 0.8125rem;
+        opacity: 0.5;
+    }
+
+    &__BtnSetDefault {
+        all: unset;
+        cursor: pointer;
+        font-size: 0.8125rem;
+        opacity: 0.6;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
     &__Footer {
         display: flex;
         align-items: center;

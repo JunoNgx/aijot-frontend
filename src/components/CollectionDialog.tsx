@@ -3,6 +3,7 @@ import { DateTime } from "luxon"
 import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
 import { useCollectionsMutations } from "@/hooks/useCollectionsMutations"
 import { useDialogStore } from "@/store/dialogStore"
+import { useProfileSettings } from "@/store/profileSettings"
 import { generateSlug, isValidHexColourCode } from "@/utils/helpers"
 import styles from "./CollectionDialog.module.scss"
 import type { Collection, ItemType } from "@/types"
@@ -23,6 +24,8 @@ export default function CollectionDialog({ collection }: Props) {
     const { createCollectionMutation, updateCollectionMutation, deleteCollectionMutation } =
         useCollectionsMutations()
     const closeAllDialogs = useDialogStore((s) => s.closeAllDialogs)
+    const defaultCollectionSlug = useProfileSettings((s) => s.defaultCollectionSlug)
+    const setDefaultCollectionSlug = useProfileSettings((s) => s.setDefaultCollectionSlug)
 
     const isEditing = !!collection
 
@@ -32,6 +35,7 @@ export default function CollectionDialog({ collection }: Props) {
     const [colourVal, setColourVal] = useState(collection?.colour ?? "#d0d0d0")
     const [typesVal, setTypesVal] = useState<ItemType[]>(collection?.types ?? ALL_TYPES)
     const [tagStr, setTagStr] = useState(collection?.tags.join(" ") ?? "")
+    const isDefault = isEditing && collection.slug === defaultCollectionSlug
 
     const isSlugManuallyEditedRef = useRef(isEditing)
 
@@ -65,11 +69,17 @@ export default function CollectionDialog({ collection }: Props) {
             .split(" ")
             .filter((t) => t.length > 0)
 
+        const newSlug = slugVal.trim()
+
+        if (isEditing && collection.slug === defaultCollectionSlug) {
+            setDefaultCollectionSlug(newSlug)
+        }
+
         if (isEditing) {
             updateCollectionMutation.mutate({
                 ...collection,
                 name: nameVal.trim(),
-                slug: slugVal.trim(),
+                slug: newSlug,
                 icon: iconVal,
                 colour: colourVal,
                 types: typesVal,
@@ -88,7 +98,7 @@ export default function CollectionDialog({ collection }: Props) {
                 createdAt: now,
                 updatedAt: now,
                 name: nameVal.trim(),
-                slug: slugVal.trim(),
+                slug: newSlug,
                 icon: iconVal,
                 colour: colourVal,
                 types: typesVal,
@@ -160,6 +170,23 @@ export default function CollectionDialog({ collection }: Props) {
                 <input value={tagStr} onChange={handleTagStrChange} placeholder="tag1 tag2 tag3" />
                 <span className={styles.CollectionDialog__Description}>Separated by spaces</span>
             </div>
+            {isEditing && (
+                <div className={styles.CollectionDialog__Field}>
+                    {isDefault ? (
+                        <span className={styles.CollectionDialog__DefaultIndicator}>
+                            This is currently your default collection
+                        </span>
+                    ) : (
+                        <button
+                            className={styles.CollectionDialog__BtnSetDefault}
+                            type="button"
+                            onClick={() => setDefaultCollectionSlug(collection.slug)}
+                        >
+                            Set as default collection
+                        </button>
+                    )}
+                </div>
+            )}
             <div className={styles.CollectionDialog__Footer}>
                 <div>
                     {isEditing && (

@@ -3,6 +3,7 @@ import { IconGripVertical, IconPencil } from "@tabler/icons-react"
 import { DateTime } from "luxon"
 import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
 import { useCollectionsMutations } from "@/hooks/useCollectionsMutations"
+import { useProfileSettings } from "@/store/profileSettings"
 import { openCollectionDialog } from "@/utils/openCollectionDialog"
 import styles from "./index.module.scss"
 import type { Collection } from "@/types"
@@ -11,6 +12,7 @@ import type { DropResult } from "@hello-pangea/dnd"
 export default function Collections() {
     const { collectionsQuery } = useCollectionsQuery()
     const { updateCollectionMutation } = useCollectionsMutations()
+    const defaultCollectionSlug = useProfileSettings((s) => s.defaultCollectionSlug)
 
     const allCollections = collectionsQuery.data ?? []
     const userCollections = allCollections.filter((c) => !c.coreType)
@@ -55,6 +57,7 @@ export default function Collections() {
                     </span>
                     <CollectionRow
                         collection={collection}
+                        isDefault={collection.slug === defaultCollectionSlug}
                         onEdit={() => openCollectionDialog(collection)}
                     />
                 </div>
@@ -110,10 +113,11 @@ export default function Collections() {
 
 interface CollectionRowProps {
     collection: Collection
+    isDefault: boolean
     onEdit: () => void
 }
 
-function CollectionRow({ collection, onEdit }: CollectionRowProps) {
+function CollectionRow({ collection, isDefault, onEdit }: CollectionRowProps) {
     return (
         <>
             <span className={styles.Collections__Icon}>{collection.icon}</span>
@@ -122,6 +126,9 @@ function CollectionRow({ collection, onEdit }: CollectionRowProps) {
                 style={{ backgroundColor: collection.colour }}
             />
             <span className={styles.Collections__Name}>{collection.name}</span>
+            {isDefault && (
+                <span className={styles.Collections__DefaultBadge}>default</span>
+            )}
             <button className={styles.Collections__BtnEdit} onClick={onEdit}>
                 <IconPencil size={15} />
             </button>
