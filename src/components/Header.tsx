@@ -1,25 +1,13 @@
-import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import UserDropdown from "./UserDropdown"
 import styles from "./Header.module.scss"
 
 export default function Header() {
-    const navigate = useNavigate()
-
-    const handleLogoClick = () => {
-        navigate("/jot")
-    }
-
     return (
         <header className={styles.Header}>
-            <span
-                className={styles.Header__Logo}
-                onClick={handleLogoClick}
-                role="link"
-                tabIndex={0}
-                onKeyDown={(e) => e.key === "Enter" && handleLogoClick()}
-            >
+            <Link to="/jot" className={styles.Header__Logo}>
                 ai*jot
-            </span>
+            </Link>
             <UserDropdown />
         </header>
     )
