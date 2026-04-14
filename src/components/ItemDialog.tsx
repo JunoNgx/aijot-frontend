@@ -80,9 +80,10 @@ function CodeMirrorEditor({
 
 interface Props {
     item: Item
+    onClose?: () => void
 }
 
-export default function ItemDialog({ item }: Props) {
+export default function ItemDialog({ item, onClose }: Props) {
     const { updateItemMutation } = useItemsMutations()
     const { trashItem } = useItemActions()
     const closeAllDialogs = useDialogStore((s) => s.closeAllDialogs)
@@ -207,6 +208,12 @@ export default function ItemDialog({ item }: Props) {
             mutateRef.current(buildUpdatedItem())
         }
     }, [buildUpdatedItem])
+
+    useEffect(() => {
+        return () => {
+            onClose?.()
+        }
+    }, [onClose])
 
     const isTextItem = item.type === "text"
 
