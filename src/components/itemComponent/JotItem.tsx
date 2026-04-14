@@ -46,11 +46,12 @@ function ItemIcon({ item }: { item: Item }) {
         if (item.faviconUrl) return <FaviconIcon url={item.faviconUrl} />
         return <IconLink size={ICON_SIZE} />
     }
-    if (isValidHexColourCode(item.content)) {
+    const lastSevenChars = item.content.slice(-7)
+    if (isValidHexColourCode(lastSevenChars)) {
         return (
             <span
                 className={styles.JotItem__ColourSwatch}
-                style={{ backgroundColor: item.content }}
+                style={{ backgroundColor: lastSevenChars }}
             />
         )
     }
