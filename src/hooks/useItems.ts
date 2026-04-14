@@ -130,14 +130,12 @@ export function useItems() {
 
     const untrashItemMutation = useMutation({
         mutationFn: async (item: Item) => {
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { trashedAt: _trashedAt, ...restoredItem } = item
             await storage.putItem({ ...restoredItem, updatedAt: DateTime.now().toISO() })
         },
         onMutate: async (item) => {
             await queryClient.cancelQueries({ queryKey: queryKeys.items })
             const previousItems = queryClient.getQueryData<Item[]>(queryKeys.items)
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { trashedAt: _trashedAt, ...restoredItem } = item
             queryClient.setQueryData<Item[]>(queryKeys.items, (prev) =>
                 sortItems(
