@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef } from "react"
+import { useParams, Navigate } from "react-router-dom"
 import { useHotkeys } from "react-hotkeys-hook"
 import { useItemsQuery } from "@/hooks/useItemsQuery"
+import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
+import { useCoreCollectionSettings } from "@/store/coreCollectionSettings"
 import { useLocalAppData } from "@/store/localAppData"
 import { SHORTCUT_FOCUS_MAIN_INPUT } from "@/utils/constants"
 import MainInput from "@/components/MainInput"
@@ -42,11 +45,19 @@ function filterItems(items: Item[], searchData: MainInputSearchData): Item[] {
 }
 
 export default function Jot() {
+    const { slug } = useParams<{ slug: string }>()
+    const { collectionsQuery } = useCollectionsQuery()
+    const allSlug = useCoreCollectionSettings((s) => s.all.slug)
     const [searchData, setSearchData] = useState<MainInputSearchData>(DEFAULT_SEARCH_DATA)
     const [selectedIndex, setSelectedIndex] = useState(-1)
     const { itemsQuery } = useItemsQuery()
     const { shouldShowDemoDataBanner } = useLocalAppData()
     const mainInputRef = useRef<HTMLInputElement>(null)
+
+    if (!collectionsQuery.isPending) {
+        const isValidSlug = (collectionsQuery.data ?? []).some((c) => c.slug === slug)
+        if (!isValidSlug) return <Navigate to={`/jot/${allSlug}`} replace />
+    }
 
     const visibleItems = filterItems(itemsQuery.data ?? [], searchData)
     const selectedItem = selectedIndex >= 0 ? visibleItems[selectedIndex] : undefined
