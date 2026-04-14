@@ -1,7 +1,7 @@
 import { openItemDialog } from "@/utils/openItemDialog"
 import type { Item } from "@/types"
 
-export function triggerItemAction(item: Item) {
+export function triggerItemAction(item: Item, onToggleTodo: (item: Item) => void) {
     if (item.shouldCopyOnClick) {
         navigator.clipboard.writeText(item.content)
         return
@@ -15,6 +15,6 @@ export function triggerItemAction(item: Item) {
         return
     }
     if (item.type === "todo") {
-        return
+        onToggleTodo(item)
     }
 }
