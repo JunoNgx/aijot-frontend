@@ -8,6 +8,11 @@
     padding: 1rem;
     border-bottom: var(--lineThickness) solid var(--colBorder);
 
+    &__Actions {
+        display: flex;
+        align-items: center;
+    }
+
     &__Logo {
         font-size: 1rem;
         font-weight: 600;
