@@ -4,6 +4,8 @@ import type { CoreCollectionConfig } from "@/types"
 // App
 // ============================================================
 
+export const DB_VERSION = 1
+
 export const TRASH_PURGE_DURATION_DAY = 7
 export const SOFT_DELETE_PURGE_DURATION_DAY = 60
 

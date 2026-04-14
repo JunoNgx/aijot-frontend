@@ -1,6 +1,7 @@
 import Dexie, { type Table } from "dexie"
 import type { Item, Collection } from "@/types"
 import type { StorageAdapter } from "@/db/storage.interface"
+import { DB_VERSION } from "@/utils/constants"
 
 class AijotDb extends Dexie {
     items!: Table<Item>
@@ -8,7 +9,7 @@ class AijotDb extends Dexie {
 
     constructor() {
         super("aijot")
-        this.version(1).stores({
+        this.version(DB_VERSION).stores({
             items: "id, type, jottedAt, trashedAt, deletedAt, *tags",
             collections: "id, sortOrder, slug",
         })
