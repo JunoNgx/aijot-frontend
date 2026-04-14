@@ -1,4 +1,4 @@
-import { useState, useEffect, useLayoutEffect, useCallback, useRef, useMemo } from "react"
+import { useState, useEffect, useLayoutEffect, useCallback, useRef } from "react"
 import * as Accordion from "@radix-ui/react-accordion"
 import { DateTime } from "luxon"
 import { EditorView, keymap, drawSelection } from "@codemirror/view"
@@ -137,16 +137,12 @@ export default function ItemDialog({ item }: Props) {
         hasUnsavedChangesRef.current = false
     }, [buildUpdatedItem])
 
-    const handleSaveAndClose = useCallback(() => {
+    const handleSaveAndClose = () => {
         handleSave()
         closeAllDialogs()
-    }, [handleSave, closeAllDialogs])
+    }
 
-    const saveHotkeyHandler = useMemo(
-        // eslint-disable-next-line react-hooks/refs
-        () => getHotkeyHandler([[SHORTCUT_SAVE_AND_CLOSE, handleSaveAndClose]]),
-        [handleSaveAndClose],
-    )
+    const saveHotkeyHandler = getHotkeyHandler([[SHORTCUT_SAVE_AND_CLOSE, handleSaveAndClose]])
 
     const debouncedSave = useDebounced(handleSave, AUTOSAVE_DEBOUNCE_MS)
 
