@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react"
 import { getHotkeyHandler } from "@/utils/hotkeyHandler"
-import { useItems } from "@/hooks/useItems"
 import { useItemAction } from "@/hooks/useItemAction"
-import { useMainInputParser, parseCreationData } from "@/hooks/useMainInputParser"
-import { buildItem } from "@/utils/itemFactory"
-import { openItemDialog } from "@/utils/openItemDialog"
+import { useMainInputParser } from "@/hooks/useMainInputParser"
 import {
     SHORTCUT_NAV_UP,
     SHORTCUT_NAV_DOWN,
@@ -21,7 +18,7 @@ import styles from "./MainInput.module.scss"
 import type { MainInputSearchData, Item } from "@/types"
 
 interface Props {
-    inputRef: React.RefObject<HTMLInputElement | null>
+    inputRef: React.RefObject<HTMLInputElement>
     onParse: (searchData: MainInputSearchData) => void
     selectedIndex: number
     selectedItem: Item | undefined
@@ -38,8 +35,7 @@ export default function MainInput({
     onSelectedIndexChange,
 }: Props) {
     const [inputValue, setInputValue] = useState("")
-    const { createItemMutation, trashItemMutation } = useItems()
-    const { copyContent } = useItemAction()
+    const { createItem, copyContent, editItem, trashItem } = useItemAction()
     const searchData = useMainInputParser(inputValue)
 
     useEffect(() => {
@@ -55,19 +51,13 @@ export default function MainInput({
     const handleSubmit = () => {
         if (!inputValue.trim()) return
         if (searchData.filterType !== undefined || searchData.tags.length > 0) return
-        const creationData = parseCreationData(inputValue)
-        createItemMutation.mutate(buildItem(creationData))
+        createItem(inputValue)
         setInputValue("")
     }
 
     const handlePrimaryAction = () => {
         if (selectedIndex < 0) return
         document.querySelector<HTMLElement>(`[data-item-index="${selectedIndex}"]`)?.click()
-    }
-
-    const handleCopySelected = () => {
-        if (!selectedItem) return
-        copyContent(selectedItem)
     }
 
     const moveSelection = (delta: number) => {
@@ -102,9 +92,24 @@ export default function MainInput({
         [SHORTCUT_NAV_TOP, jumpToTop],
         [SHORTCUT_NAV_BOTTOM, jumpToBottom],
         ["Escape", handleEscapePress],
-        [SHORTCUT_ITEM_COPY, handleCopySelected],
-        [SHORTCUT_ITEM_EDIT, () => selectedItem && openItemDialog(selectedItem)],
-        [SHORTCUT_ITEM_TRASH, () => selectedItem && trashItemMutation.mutate(selectedItem)],
+        [
+            SHORTCUT_ITEM_COPY,
+            () => {
+                if (selectedItem) copyContent(selectedItem)
+            },
+        ],
+        [
+            SHORTCUT_ITEM_EDIT,
+            () => {
+                if (selectedItem) editItem(selectedItem)
+            },
+        ],
+        [
+            SHORTCUT_ITEM_TRASH,
+            () => {
+                if (selectedItem) trashItem(selectedItem)
+            },
+        ],
     ])
 
     return (

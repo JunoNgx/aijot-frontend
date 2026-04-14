@@ -11,10 +11,7 @@ import {
     IconSquareCheck,
     IconCursorText,
 } from "@tabler/icons-react"
-import { DateTime } from "luxon"
-import { toast } from "sonner"
-import { useItems } from "@/hooks/useItems"
-import { openItemDialog } from "@/utils/openItemDialog"
+import { useItemAction } from "@/hooks/useItemAction"
 import styles from "./JotItemContextMenu.module.scss"
 import type { Item } from "@/types"
 
@@ -26,56 +23,39 @@ interface Props {
 
 export default function JotItemContextMenu({ item }: Props) {
     const {
-        updateItemMutation,
-        trashItemMutation,
-        untrashItemMutation,
-        softDeleteItemMutation,
-        refetchLinkMetaMutation,
-    } = useItems()
+        copyContent,
+        editItem,
+        trashItem,
+        restoreItem,
+        softDeleteItem,
+        pinItem,
+        unpinItem,
+        convertToTodo,
+        toggleCopyOnClick,
+        refetchLinkMeta,
+    } = useItemAction()
 
     const isInTrash = !!item.trashedAt
-
-    const handleCopy = () => navigator.clipboard.writeText(item.content)
-    const handleEdit = () => openItemDialog(item)
-    const handleTrash = () => trashItemMutation.mutate(item)
-    const handleRestore = () => untrashItemMutation.mutate(item)
-    const handleSoftDelete = () => softDeleteItemMutation.mutate(item)
-
-    const handlePin = () =>
-        updateItemMutation.mutate({
-            ...item,
-            isPinned: true,
-            updatedAt: DateTime.now().toISO(),
-        })
-    const handleUnpin = () =>
-        updateItemMutation.mutate({
-            ...item,
-            isPinned: undefined,
-            updatedAt: DateTime.now().toISO(),
-        })
-    const handleConvertToTodo = () =>
-        updateItemMutation.mutate({
-            ...item,
-            type: "todo",
-            title: undefined,
-            updatedAt: DateTime.now().toISO(),
-        })
-    const handleToggleCopyOnClick = () =>
-        updateItemMutation.mutate({
-            ...item,
-            shouldCopyOnClick: item.shouldCopyOnClick ? undefined : true,
-            updatedAt: DateTime.now().toISO(),
-        })
 
     const secondaryItems = (
         <>
             {item.isPinned ? (
-                <ContextMenu.Item className={styles.JotItemContextMenu__Item} onClick={handleUnpin}>
+                <ContextMenu.Item
+                    className={styles.JotItemContextMenu__Item}
+                    onClick={() => {
+                        unpinItem(item)
+                    }}
+                >
                     <IconPinnedOff size={ICON_SIZE} />
                     Unpin
                 </ContextMenu.Item>
             ) : (
-                <ContextMenu.Item className={styles.JotItemContextMenu__Item} onClick={handlePin}>
+                <ContextMenu.Item
+                    className={styles.JotItemContextMenu__Item}
+                    onClick={() => {
+                        pinItem(item)
+                    }}
+                >
                     <IconPin size={ICON_SIZE} />
                     Pin
                 </ContextMenu.Item>
@@ -83,7 +63,9 @@ export default function JotItemContextMenu({ item }: Props) {
             {item.type === "text" && (
                 <ContextMenu.Item
                     className={styles.JotItemContextMenu__Item}
-                    onClick={handleConvertToTodo}
+                    onClick={() => {
+                        convertToTodo(item)
+                    }}
                 >
                     <IconSquareCheck size={ICON_SIZE} />
                     Convert to Todo
@@ -91,7 +73,9 @@ export default function JotItemContextMenu({ item }: Props) {
             )}
             <ContextMenu.Item
                 className={styles.JotItemContextMenu__Item}
-                onClick={handleToggleCopyOnClick}
+                onClick={() => {
+                    toggleCopyOnClick(item)
+                }}
             >
                 <IconCursorText size={ICON_SIZE} />
                 {item.shouldCopyOnClick ? "Disable copy on click" : "Copy on click"}
@@ -99,13 +83,9 @@ export default function JotItemContextMenu({ item }: Props) {
             {item.type === "link" && (
                 <ContextMenu.Item
                     className={styles.JotItemContextMenu__Item}
-                    onClick={() =>
-                        refetchLinkMetaMutation.mutate(item, {
-                            onError: (error) => {
-                                toast.error(error.message)
-                            },
-                        })
-                    }
+                    onClick={() => {
+                        refetchLinkMeta(item)
+                    }}
                 >
                     <IconRefresh size={ICON_SIZE} />
                     Refetch
@@ -116,13 +96,20 @@ export default function JotItemContextMenu({ item }: Props) {
 
     const destructiveItems = isInTrash ? (
         <>
-            <ContextMenu.Item className={styles.JotItemContextMenu__Item} onClick={handleRestore}>
+            <ContextMenu.Item
+                className={styles.JotItemContextMenu__Item}
+                onClick={() => {
+                    restoreItem(item)
+                }}
+            >
                 <IconArrowBackUp size={ICON_SIZE} />
                 Restore
             </ContextMenu.Item>
             <ContextMenu.Item
                 className={`${styles.JotItemContextMenu__Item} ${styles["JotItemContextMenu__Item--Destructive"]}`}
-                onClick={handleSoftDelete}
+                onClick={() => {
+                    softDeleteItem(item)
+                }}
             >
                 <IconTrashX size={ICON_SIZE} />
                 Permanently delete
@@ -131,7 +118,9 @@ export default function JotItemContextMenu({ item }: Props) {
     ) : (
         <ContextMenu.Item
             className={`${styles.JotItemContextMenu__Item} ${styles["JotItemContextMenu__Item--Destructive"]}`}
-            onClick={handleTrash}
+            onClick={() => {
+                trashItem(item)
+            }}
         >
             <IconTrash size={ICON_SIZE} />
             Trash
@@ -141,11 +130,21 @@ export default function JotItemContextMenu({ item }: Props) {
     return (
         <ContextMenu.Portal>
             <ContextMenu.Content className={styles.JotItemContextMenu}>
-                <ContextMenu.Item className={styles.JotItemContextMenu__Item} onClick={handleCopy}>
+                <ContextMenu.Item
+                    className={styles.JotItemContextMenu__Item}
+                    onClick={() => {
+                        copyContent(item)
+                    }}
+                >
                     <IconCopy size={ICON_SIZE} />
                     Copy
                 </ContextMenu.Item>
-                <ContextMenu.Item className={styles.JotItemContextMenu__Item} onClick={handleEdit}>
+                <ContextMenu.Item
+                    className={styles.JotItemContextMenu__Item}
+                    onClick={() => {
+                        editItem(item)
+                    }}
+                >
                     <IconEdit size={ICON_SIZE} />
                     Edit
                 </ContextMenu.Item>
