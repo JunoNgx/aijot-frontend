@@ -2,7 +2,7 @@ import * as DropdownMenu from "@radix-ui/react-dropdown-menu"
 import { useParams } from "react-router-dom"
 import { useHotkeys } from "react-hotkeys-hook"
 import { IconChevronDown } from "@tabler/icons-react"
-import { useCollections } from "@/hooks/useCollections"
+import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
 import { useNavigateRoutes } from "@/hooks/useNavigateRoutes"
 import { COLLECTION_HOTKEY_COUNT, TRASH_PURGE_DURATION_DAY } from "@/utils/constants"
 import styles from "./CollectionDropdown.module.scss"
@@ -11,7 +11,7 @@ const HOTKEYS = Array.from({ length: COLLECTION_HOTKEY_COUNT }, (_, i) => `mod+$
 
 export default function CollectionDropdown() {
     const { slug: activeSlug } = useParams<{ slug: string }>()
-    const { collectionsQuery } = useCollections()
+    const { collectionsQuery } = useCollectionsQuery()
     const { navigateToCollection } = useNavigateRoutes()
 
     const collections = collectionsQuery.data ?? []

@@ -1,6 +1,7 @@
 import { useState, useRef } from "react"
 import { DateTime } from "luxon"
-import { useCollections } from "@/hooks/useCollections"
+import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
+import { useCollectionsMutations } from "@/hooks/useCollectionsMutations"
 import { useDialogStore } from "@/store/dialogStore"
 import { generateSlug, isValidHexColourCode } from "@/utils/helpers"
 import styles from "./CollectionDialog.module.scss"
@@ -18,12 +19,9 @@ interface Props {
 }
 
 export default function CollectionDialog({ collection }: Props) {
-    const {
-        collectionsQuery,
-        createCollectionMutation,
-        updateCollectionMutation,
-        deleteCollectionMutation,
-    } = useCollections()
+    const { collectionsQuery } = useCollectionsQuery()
+    const { createCollectionMutation, updateCollectionMutation, deleteCollectionMutation } =
+        useCollectionsMutations()
     const closeAllDialogs = useDialogStore((s) => s.closeAllDialogs)
 
     const isEditing = !!collection

@@ -1,5 +1,5 @@
 import { DateTime } from "luxon"
-import type { Item } from "@/types"
+import type { Item, Collection, CoreCollectionConfig } from "@/types"
 
 export function generateSlug(str: string): string {
     return str
@@ -28,4 +28,26 @@ export function sortItems(items: Item[]): Item[] {
     const pinnedItems = items.filter((item) => item.isPinned)
     const unpinnedItems = items.filter((item) => !item.isPinned)
     return [...pinnedItems, ...unpinnedItems]
+}
+
+export function buildCoreCollection(
+    id: string,
+    config: CoreCollectionConfig,
+    sortOrder: number,
+    coreType: Collection["coreType"],
+): Collection {
+    const now = DateTime.now().toISO()
+    return {
+        id,
+        createdAt: now,
+        updatedAt: now,
+        name: config.name,
+        icon: config.icon,
+        colour: config.colour,
+        slug: config.slug,
+        sortOrder,
+        tags: [],
+        types: ["text", "todo", "link"],
+        coreType,
+    }
 }

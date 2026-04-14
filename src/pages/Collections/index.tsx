@@ -1,14 +1,16 @@
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd"
 import { IconGripVertical, IconPencil } from "@tabler/icons-react"
 import { DateTime } from "luxon"
-import { useCollections } from "@/hooks/useCollections"
+import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
+import { useCollectionsMutations } from "@/hooks/useCollectionsMutations"
 import { openCollectionDialog } from "@/utils/openCollectionDialog"
 import styles from "./index.module.scss"
 import type { Collection } from "@/types"
 import type { DropResult } from "@hello-pangea/dnd"
 
 export default function Collections() {
-    const { collectionsQuery, updateCollectionMutation } = useCollections()
+    const { collectionsQuery } = useCollectionsQuery()
+    const { updateCollectionMutation } = useCollectionsMutations()
 
     const allCollections = collectionsQuery.data ?? []
     const userCollections = allCollections.filter((c) => !c.coreType)
