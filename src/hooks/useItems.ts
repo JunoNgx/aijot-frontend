@@ -43,22 +43,6 @@ export function useItems() {
     const createItemMutation = useMutation({
         mutationFn: async (item: Item) => {
             await storage.putItem(item)
-
-            if (item.type === "link" && navigator.onLine) {
-                fetchLinkMeta(item.content).then((meta) => {
-                    if (!meta) return
-                    const updatedItem = {
-                        ...item,
-                        title: meta.title,
-                        faviconUrl: meta.faviconUrl,
-                        updatedAt: DateTime.now().toISO(),
-                    }
-                    storage.putItem(updatedItem).then(() => {
-                        invalidateItemQueries()
-                    })
-                })
-            }
-
             return item
         },
         onMutate: async (item) => {
@@ -69,6 +53,11 @@ export function useItems() {
         },
         onError: (_err, _item, context) => {
             queryClient.setQueryData(queryKeys.items, context?.previousItems)
+        },
+        onSuccess: (item) => {
+            if (item.type === "link") {
+                refetchLinkMetaMutation.mutate(item)
+            }
         },
         onSettled: () => {
             invalidateItemQueries()
