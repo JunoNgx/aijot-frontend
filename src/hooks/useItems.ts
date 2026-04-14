@@ -112,8 +112,13 @@ export function useItems() {
             )
             return { previousItems }
         },
-        onSuccess: () => {
-            toast("Item moved to trash bin")
+        onSuccess: (_data, item) => {
+            toast("Item moved to trash bin", {
+                action: {
+                    label: "Undo",
+                    onClick: () => untrashItemMutation.mutate(item),
+                }
+            })
         },
         onError: (_err, _item, context) => {
             queryClient.setQueryData(queryKeys.items, context?.previousItems)
