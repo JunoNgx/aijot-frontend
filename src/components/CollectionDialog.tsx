@@ -99,7 +99,11 @@ export default function CollectionDialog({ collection }: Props) {
             if (collection.coreType === "all") setAll(coreConfig)
             if (collection.coreType === "untagged") setUntagged(coreConfig)
             if (collection.coreType === "trash") setTrash(coreConfig)
-        } else if (isEditing) {
+            closeAllDialogs()
+            return
+        }
+
+        if (isEditing) {
             updateCollectionMutation.mutate({
                 ...collection,
                 name: nameVal.trim(),
@@ -110,28 +114,30 @@ export default function CollectionDialog({ collection }: Props) {
                 tags,
                 updatedAt: now,
             })
-        } else {
-            const userCollections = (collectionsQuery.data ?? []).filter(
-                (c) => !c.coreType,
-            )
-            const maxSortOrder =
-                userCollections.length > 0
-                    ? Math.max(...userCollections.map((c) => c.sortOrder))
-                    : 0
-
-            createCollectionMutation.mutate({
-                id: crypto.randomUUID(),
-                createdAt: now,
-                updatedAt: now,
-                name: nameVal.trim(),
-                slug: newSlug,
-                icon: iconVal,
-                colour: colourVal,
-                types: typesVal,
-                tags,
-                sortOrder: maxSortOrder + 1000,
-            })
+            closeAllDialogs()
+            return
         }
+
+        const userCollections = (collectionsQuery.data ?? []).filter(
+            (c) => !c.coreType,
+        )
+        const maxSortOrder =
+            userCollections.length > 0
+                ? Math.max(...userCollections.map((c) => c.sortOrder))
+                : 0
+
+        createCollectionMutation.mutate({
+            id: crypto.randomUUID(),
+            createdAt: now,
+            updatedAt: now,
+            name: nameVal.trim(),
+            slug: newSlug,
+            icon: iconVal,
+            colour: colourVal,
+            types: typesVal,
+            tags,
+            sortOrder: maxSortOrder + 1000,
+        })
 
         closeAllDialogs()
     }
