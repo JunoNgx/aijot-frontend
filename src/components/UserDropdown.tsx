@@ -53,13 +53,18 @@ export default function UserDropdown() {
                         sideOffset={sideOffsetVal}
                     >
                         {shouldShowJotNav && (
-                            <DropdownMenu.Item
-                                className={styles.UserDropdown__Item}
-                                onSelect={navigateToJot}
-                            >
-                                <IconWritingSign {...ICON_PROPS_NORMAL} />
-                                Jot
-                            </DropdownMenu.Item>
+                            <>
+                                <DropdownMenu.Item
+                                    className={styles.UserDropdown__Item}
+                                    onSelect={navigateToJot}
+                                >
+                                    <IconWritingSign {...ICON_PROPS_NORMAL} />
+                                    Jot
+                                </DropdownMenu.Item>
+                                <DropdownMenu.Separator
+                                    className={styles.UserDropdown__Separator}
+                                />
+                            </>
                         )}
                         <DropdownMenu.Item
                             className={styles.UserDropdown__Item}
