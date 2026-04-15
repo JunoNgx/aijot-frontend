@@ -94,6 +94,7 @@ export default function CollectionDialog({ collection }: Props) {
                 slug: newSlug,
                 icon: iconVal,
                 colour: colourVal,
+                updatedAt: now,
             }
             if (collection.coreType === "all") setAll(coreConfig)
             if (collection.coreType === "untagged") setUntagged(coreConfig)

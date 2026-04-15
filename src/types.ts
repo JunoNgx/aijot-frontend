@@ -107,6 +107,8 @@ export interface CoreCollectionConfig {
     icon: string
     colour: string
     sortOrder: number
+    createdAt: string
+    updatedAt: string
 }
 
 export interface DialogStore {

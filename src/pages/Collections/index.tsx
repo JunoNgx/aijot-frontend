@@ -49,15 +49,24 @@ export default function Collections() {
         else newSortOrder = (prev.sortOrder + next.sortOrder) / 2
 
         if (moved.coreType === "all") {
-            setAll({ sortOrder: newSortOrder })
+            setAll({
+                sortOrder: newSortOrder,
+                updatedAt: DateTime.now().toISO(),
+            })
             return
         }
         if (moved.coreType === "untagged") {
-            setUntagged({ sortOrder: newSortOrder })
+            setUntagged({
+                sortOrder: newSortOrder,
+                updatedAt: DateTime.now().toISO(),
+            })
             return
         }
         if (moved.coreType === "trash") {
-            setTrash({ sortOrder: newSortOrder })
+            setTrash({
+                sortOrder: newSortOrder,
+                updatedAt: DateTime.now().toISO(),
+            })
             return
         }
 

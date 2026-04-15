@@ -41,11 +41,10 @@ export function buildCoreCollection(
     sortOrder: number,
     coreType: Collection["coreType"],
 ): Collection {
-    const now = DateTime.now().toISO()
     return {
         id,
-        createdAt: now,
-        updatedAt: now,
+        createdAt: config.createdAt,
+        updatedAt: config.updatedAt,
         name: config.name,
         icon: config.icon,
         colour: config.colour,

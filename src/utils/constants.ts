@@ -1,4 +1,7 @@
+import { DateTime } from "luxon"
 import type { CoreCollectionConfig } from "@/types"
+
+const CORE_COLLECTION_INIT_TIME = DateTime.now().toISO()
 
 // ============================================================
 // App
@@ -59,6 +62,8 @@ export const DEFAULT_ALL_COLLECTION: CoreCollectionConfig = {
     icon: "📦",
     colour: "#d0d0d0",
     sortOrder: 0,
+    createdAt: CORE_COLLECTION_INIT_TIME,
+    updatedAt: CORE_COLLECTION_INIT_TIME,
 }
 
 export const DEFAULT_UNTAGGED_COLLECTION: CoreCollectionConfig = {
@@ -67,6 +72,8 @@ export const DEFAULT_UNTAGGED_COLLECTION: CoreCollectionConfig = {
     icon: "🏷️",
     colour: "#f5a623",
     sortOrder: 1,
+    createdAt: CORE_COLLECTION_INIT_TIME,
+    updatedAt: CORE_COLLECTION_INIT_TIME,
 }
 
 export const DEFAULT_TRASH_COLLECTION: CoreCollectionConfig = {
@@ -75,6 +82,8 @@ export const DEFAULT_TRASH_COLLECTION: CoreCollectionConfig = {
     icon: "🗑️",
     colour: "#c0392b",
     sortOrder: 2,
+    createdAt: CORE_COLLECTION_INIT_TIME,
+    updatedAt: CORE_COLLECTION_INIT_TIME,
 }
 
 // ============================================================
