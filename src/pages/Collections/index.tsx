@@ -84,29 +84,34 @@ export default function Collections() {
             index={index}
         >
             {(provided, snapshot) => (
-                <button
+                <div
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     className={[
-                        styles.Collections__Row,
+                        styles.CollectionItem,
                         snapshot.isDragging
-                            ? styles["Collections__Row--Dragging"]
+                            ? styles["CollectionItem--Dragging"]
                             : "",
                     ].join(" ")}
-                    onClick={() => openCollectionDialog(collection)}
                 >
-                    <CollectionRow
-                        collection={collection}
-                        isDefault={collection.slug === defaultCollectionSlug}
-                    />
+                    <button
+                        className={styles.CollectionItem__TriggerBtn}
+                        onClick={() => openCollectionDialog(collection)}
+                    >
+                        <CollectionRow
+                            collection={collection}
+                            isDefault={
+                                collection.slug === defaultCollectionSlug
+                            }
+                        />
+                    </button>
                     <span
-                        className={styles.Collections__DragHandle}
+                        className={styles.CollectionItem__DragHandle}
                         {...provided.dragHandleProps}
-                        onClick={(e) => e.stopPropagation()}
                     >
                         <IconGripVertical {...ICON_PROPS_NORMAL} />
                     </span>
-                </button>
+                </div>
             )}
         </Draggable>
     ))
@@ -150,14 +155,18 @@ interface CollectionRowProps {
 function CollectionRow({ collection, isDefault }: CollectionRowProps) {
     return (
         <>
-            <span className={styles.Collections__Icon}>{collection.icon}</span>
+            <span className={styles.CollectionItem__Icon}>
+                {collection.icon}
+            </span>
             <span
-                className={styles.Collections__ColourDot}
+                className={styles.CollectionItem__ColourDot}
                 style={{ backgroundColor: collection.colour }}
             />
-            <span className={styles.Collections__Name}>{collection.name}</span>
+            <span className={styles.CollectionItem__Name}>
+                {collection.name}
+            </span>
             {isDefault && (
-                <span className={styles.Collections__DefaultBadge}>
+                <span className={styles.CollectionItem__DefaultBadge}>
                     default
                 </span>
             )}

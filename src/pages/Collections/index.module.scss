@@ -26,31 +26,31 @@
         display: flex;
         flex-direction: column;
     }
+}
 
-    &__Row {
-        appearance: none;
-        background: none;
-        border: none;
-        border-bottom: var(--lineWidth) solid var(--colBorder);
-        font: inherit;
-        color: inherit;
-        cursor: pointer;
-        width: 100%;
-        text-align: left;
+.CollectionItem {
+    display: flex;
+    align-items: center;
+    border-bottom: var(--lineWidth) solid var(--colBorder);
+    padding: 0 0.5rem 0 0;
+
+    &__TriggerBtn {
+        @include ClearBtn;
         display: flex;
         align-items: center;
         gap: 0.75rem;
-        padding: 0.625rem 0.5rem;
+        flex: 1;
+        min-width: 0;
+        padding: 0.5rem;
+    }
 
-        &--Dragging {
-            background-color: var(--colSurface);
-            @include StandardBorder;
-        }
+    &--Dragging {
+        background-color: var(--colSurface);
+        @include StandardBorder;
     }
 
     &__DragHandle {
         cursor: grab;
-        opacity: 0.35;
         flex-shrink: 0;
         display: flex;
         align-items: center;
@@ -68,7 +68,6 @@
     }
 
     &__Icon {
-        font-size: 1rem;
         flex-shrink: 0;
         width: 1.25rem;
         text-align: center;
@@ -76,7 +75,6 @@
 
     &__Name {
         flex: 1;
-        font-size: 0.9375rem;
         min-width: 0;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -84,10 +82,9 @@
     }
 
     &__DefaultBadge {
-        font-size: 0.6875rem;
+        font-size: 0.75rem;
         opacity: 0.5;
         letter-spacing: 0.03em;
         flex-shrink: 0;
     }
-
 }
