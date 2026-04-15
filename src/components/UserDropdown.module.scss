@@ -23,7 +23,6 @@
         background-color: var(--colSurface);
         @include StandardBorder;
         padding: 0.25rem;
-        min-width: 180px;
         box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
         z-index: 100;
     }

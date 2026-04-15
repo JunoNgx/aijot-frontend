@@ -40,7 +40,7 @@ export default function UserDropdown() {
                             className={styles.UserDropdown__Item}
                             onSelect={navigateToCollections}
                         >
-                            Manage Collections
+                            Collections
                         </DropdownMenu.Item>
                         <DropdownMenu.Separator
                             className={styles.UserDropdown__Separator}
