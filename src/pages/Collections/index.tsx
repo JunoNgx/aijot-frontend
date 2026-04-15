@@ -6,6 +6,7 @@ import { useCollectionsMutations } from "@/hooks/useCollectionsMutations"
 import { useProfileSettings } from "@/store/profileSettings"
 import { openCollectionDialog } from "@/utils/openCollectionDialog"
 import styles from "./index.module.scss"
+import BackBtn from "@/components/BackBtn"
 import type { Collection } from "@/types"
 import type { DropResult } from "@hello-pangea/dnd"
 
@@ -93,6 +94,7 @@ export default function Collections() {
 
     return (
         <div className={styles.Collections}>
+            <BackBtn />
             <div className={styles.Collections__Header}>
                 <h1 className={styles.Collections__Title}>Collections</h1>
                 <button

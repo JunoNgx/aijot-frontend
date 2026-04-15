@@ -15,6 +15,7 @@ import {
 import type { ExportData, ImportSummary } from "@/types"
 import { queryKeys } from "@/db/queryKeys"
 import styles from "./index.module.scss"
+import BackBtn from "@/components/BackBtn"
 
 export default function Settings() {
     const queryClient = useQueryClient()
@@ -108,6 +109,7 @@ export default function Settings() {
 
     return (
         <div className={styles.Settings}>
+            <BackBtn />
             <h1 className={styles.Settings__Title}>Settings</h1>
 
             <section className={styles.Settings__Section}>
