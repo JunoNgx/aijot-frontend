@@ -72,6 +72,11 @@ input {
         color: var(--colText);
         text-decoration: underline;
     }
+
+    &--Quart {
+        color: var(--colTextSec);
+        text-decoration: none;
+    }
 }
 
 .BtnRow {
