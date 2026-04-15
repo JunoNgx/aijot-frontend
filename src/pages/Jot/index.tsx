@@ -7,7 +7,6 @@ import { useCoreCollectionSettings } from "@/store/coreCollectionSettings"
 import { useLocalAppData } from "@/store/localAppData"
 import { SHORTCUT_FOCUS_MAIN_INPUT, ROUTE_JOT } from "@/utils/constants"
 import MainInput from "@/components/MainInput"
-import CollectionDropdown from "@/components/CollectionDropdown"
 import JotItem from "@/components/itemComponent/JotItem"
 import DemoDataBanner from "./DemoDataBanner"
 import styles from "./index.module.scss"
@@ -113,7 +112,6 @@ export default function Jot() {
 
     return (
         <div className={styles.Jot}>
-            <CollectionDropdown />
             <div className={styles.Jot__NoticeWrapper}>
                 {shouldShowDemoDataBanner && <DemoDataBanner />}
             </div>

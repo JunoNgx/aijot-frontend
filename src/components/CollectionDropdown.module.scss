@@ -2,20 +2,10 @@
 @use "styles/mixins" as *;
 
 .CollectionDropdown {
-    // Mobile: fixed bottom-right
-    position: fixed;
-    bottom: 1rem;
-    right: 1rem;
-    z-index: 50;
-
-    // Desktop: static in page flow
-    @media (min-width: $breakpointMobile) {
-        position: static;
-    }
-
     &__Trigger {
         composes: Dropdown__Trigger from global;
-        @include StandardBorder;
+        @include ClearBtn;
+        padding: 0.5rem 0.5rem 0.5rem 0 !important;
         background-color: var(--colBg);
         box-sizing: border-box;
     }

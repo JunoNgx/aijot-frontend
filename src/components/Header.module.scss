@@ -6,12 +6,19 @@
     position: fixed;
     top: 0;
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.75rem 0.75rem 0.75rem 1rem;
-    border-bottom: var(--lineWidth) solid var(--colBorder);
+    border-color: var(--colBorder);
+    border-style: solid;
+    border-width: 0 0 var(--lineWidth) 0;
     background-color: var(--colBg);
+
+    &__Wrapper {
+        max-width: $contentWidth;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.75rem 0.75rem 0.75rem 1rem;
+    }
 
     &__Logo {
         font-size: 1rem;
@@ -21,8 +28,24 @@
         cursor: pointer;
     }
 
-    &__RightItems {
+    &__Block {
         display: flex;
         gap: 0.5rem;
+        align-items: center;
+
+        &--Left {
+            gap: 1rem;
+        }
+    }
+
+    &__Separator {
+        font-size: 1.5rem;
+        color: var(--colTextSec);
+    }
+
+    @media (width <= $breakpointMobile) {
+        top: auto;
+        bottom: 0;
+        border-width: var(--lineWidth) 0 0 0;
     }
 }
