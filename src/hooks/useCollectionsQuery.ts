@@ -27,7 +27,9 @@ export function useCollectionsQuery() {
                     "trash",
                 ),
             ]
-            return [...coreCollections, ...userCollections]
+            return [...coreCollections, ...userCollections].sort(
+                (a, b) => a.sortOrder - b.sortOrder,
+            )
         },
     })
 
