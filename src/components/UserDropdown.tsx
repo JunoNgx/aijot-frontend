@@ -1,17 +1,23 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu"
-import { IconChevronDown, IconSettings, IconStack2, IconHelp } from "@tabler/icons-react"
+import { IconChevronDown, IconSettings, IconStack2, IconHelp, IconWritingSign } from "@tabler/icons-react"
 import { useProfileSettings } from "@/store/profileSettings"
 import { useNavigateRoutes } from "@/hooks/useNavigateRoutes"
-import { DEFAULT_USERNAME, ICON_PROPS_NORMAL } from "@/utils/constants"
+import { DEFAULT_USERNAME, ICON_PROPS_NORMAL, ROUTE_COLLECTION, ROUTE_JOT } from "@/utils/constants"
 import styles from "./UserDropdown.module.scss"
+import { useMatch } from "react-router-dom"
 
 export default function UserDropdown() {
     const userDisplayName = useProfileSettings((s) => s.userDisplayName) || DEFAULT_USERNAME
     const {
+        navigateToJot,
         navigateToSettings,
         navigateToCollections,
         navigateToHelp,
     } = useNavigateRoutes()
+
+    const isJotRoute = useMatch(ROUTE_JOT)
+    const isJotCollectionRoute = useMatch(ROUTE_COLLECTION)
+    const shouldShowJotNav = !isJotRoute && !isJotCollectionRoute
 
     return (
         <div className={styles.UserDropdown}>
@@ -29,6 +35,13 @@ export default function UserDropdown() {
                         align="end"
                         sideOffset={4}
                     >
+                        {shouldShowJotNav && (<DropdownMenu.Item
+                            className={styles.UserDropdown__Item}
+                            onSelect={navigateToJot}
+                        >
+                            <IconWritingSign {...ICON_PROPS_NORMAL} />
+                            Jot
+                        </DropdownMenu.Item>)}
                         <DropdownMenu.Item
                             className={styles.UserDropdown__Item}
                             onSelect={navigateToSettings}
