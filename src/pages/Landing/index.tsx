@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import styles from "./index.module.scss"
+import { ROUTE_JOT } from "@/utils/constants"
 
 export default function Landing() {
     return (
@@ -9,7 +10,7 @@ export default function Landing() {
             <p className={styles.Landing__Tagline}>
                 A minimal keyboard-first note app
             </p>
-            <Link to="/jot" className={styles.Landing__Btn}>
+            <Link to={ROUTE_JOT} className={styles.Landing__Btn}>
                 Get started
             </Link>
         </div>

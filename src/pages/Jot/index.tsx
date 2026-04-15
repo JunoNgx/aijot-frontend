@@ -5,7 +5,7 @@ import { useItemsQuery } from "@/hooks/useItemsQuery"
 import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
 import { useCoreCollectionSettings } from "@/store/coreCollectionSettings"
 import { useLocalAppData } from "@/store/localAppData"
-import { SHORTCUT_FOCUS_MAIN_INPUT } from "@/utils/constants"
+import { SHORTCUT_FOCUS_MAIN_INPUT, ROUTE_JOT } from "@/utils/constants"
 import MainInput from "@/components/MainInput"
 import CollectionDropdown from "@/components/CollectionDropdown"
 import JotItem from "@/components/itemComponent/JotItem"
@@ -73,7 +73,7 @@ export default function Jot() {
     const allSlug = useCoreCollectionSettings((s) => s.all.slug)
 
     if (!collectionsQuery.isPending && !currCollection) {
-        return <Navigate to={`/jot/${allSlug}`} replace />
+        return <Navigate to={`${ROUTE_JOT}/${allSlug}`} replace />
     }
 
     const isTrash = currCollection?.coreType === "trash"

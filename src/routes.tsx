@@ -8,6 +8,15 @@ import Privacy from "@/pages/Privacy"
 import Terms from "@/pages/Terms"
 import Header from "@/components/Header"
 import { useProfileSettings } from "@/store/profileSettings"
+import {
+    ROUTE_JOT,
+    ROUTE_COLLECTION,
+    ROUTE_COLLECTIONS,
+    ROUTE_SETTINGS,
+    ROUTE_HELP,
+    ROUTE_PRIVACY,
+    ROUTE_TERMS,
+} from "@/utils/constants"
 
 function AppLayout() {
     return (
@@ -22,7 +31,7 @@ function JotRedirect() {
     const defaultCollectionSlug = useProfileSettings(
         (s) => s.defaultCollectionSlug,
     )
-    return <Navigate to={`/jot/${defaultCollectionSlug}`} replace />
+    return <Navigate to={`${ROUTE_JOT}/${defaultCollectionSlug}`} replace />
 }
 
 export default function AppRoutes() {
@@ -30,13 +39,13 @@ export default function AppRoutes() {
         <Routes>
             <Route path="/" element={<Landing />} />
             <Route element={<AppLayout />}>
-                <Route path="/jot" element={<JotRedirect />} />
-                <Route path="/jot/:slug" element={<Jot />} />
-                <Route path="/collections" element={<Collections />} />
-                <Route path="/settings" element={<Settings />} />
-                <Route path="/help" element={<Help />} />
-                <Route path="/privacy" element={<Privacy />} />
-                <Route path="/terms" element={<Terms />} />
+                <Route path={ROUTE_JOT} element={<JotRedirect />} />
+                <Route path={ROUTE_COLLECTION} element={<Jot />} />
+                <Route path={ROUTE_COLLECTIONS} element={<Collections />} />
+                <Route path={ROUTE_SETTINGS} element={<Settings />} />
+                <Route path={ROUTE_HELP} element={<Help />} />
+                <Route path={ROUTE_PRIVACY} element={<Privacy />} />
+                <Route path={ROUTE_TERMS} element={<Terms />} />
             </Route>
         </Routes>
     )
