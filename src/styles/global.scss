@@ -2,6 +2,7 @@
 // BEM convention: PascalCase namespace (e.g. JotItem__PrimaryText--Selected)
 
 @use "vars";
+@use "mixins" as *;
 
 *,
 *::before,
@@ -86,5 +87,42 @@ input {
 
     &--Right {
         justify-content: flex-end;
+    }
+}
+
+// ============================================================
+// Dropdown
+// ============================================================
+
+.Dropdown {
+    &__Content {
+        background-color: var(--colBg);
+        @include StandardBorder;
+        padding: 0.25rem;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        z-index: 100;
+    }
+
+    &__Item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem;
+        color: var(--colText);
+        cursor: pointer;
+        outline: none;
+        user-select: none;
+
+        &:hover,
+        &:focus {
+            color: var(--colBg);
+            background-color: var(--colText);
+        }
+    }
+
+    &__Separator {
+        height: var(--lineWidth);
+        background-color: var(--colBorder);
+        margin: 0.25rem 0;
     }
 }

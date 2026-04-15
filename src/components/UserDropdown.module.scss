@@ -20,33 +20,14 @@
     }
 
     &__Content {
-        background-color: var(--colSurface);
-        @include StandardBorder;
-        padding: 0.25rem;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-        z-index: 100;
+        composes: Dropdown__Content from global;
     }
 
     &__Item {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.5rem 0.75rem;
-        color: var(--colText);
-        cursor: pointer;
-        outline: none;
-        user-select: none;
-
-        &:hover,
-        &:focus {
-            color: var(--colBg);
-            background-color: var(--colText);
-        }
+        composes: Dropdown__Item from global;
     }
 
     &__Separator {
-        height: var(--lineWidth);
-        background-color: var(--colBorder);
-        margin: 0.25rem 0;
+        composes: Dropdown__Separator from global;
     }
 }
