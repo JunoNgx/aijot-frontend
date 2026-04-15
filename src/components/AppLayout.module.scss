@@ -1,0 +1,15 @@
+@use "styles/vars" as *;
+
+.AppLayout {
+    &__OutletWrapper {
+        max-width: $contentWidth;
+        margin: 0 auto;
+        padding-top: var(--verticalPaddingLg);
+        padding-bottom: var(--verticalPaddingSm);
+
+        @media (width <= $breakpointMobile) {
+            padding-top: var(--verticalPaddingSm);
+            padding-bottom: var(--verticalPaddingLg);
+        }
+    }
+}
