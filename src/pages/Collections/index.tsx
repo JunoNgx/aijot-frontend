@@ -36,33 +36,33 @@ export default function Collections() {
         if (!result.destination) return
         if (result.source.index === result.destination.index) return
 
-        const reordered = [...sortedCollections]
-        const [moved] = reordered.splice(result.source.index, 1)
-        reordered.splice(result.destination.index, 0, moved)
+        const reorderedItems = [...sortedCollections]
+        const [draggedItem] = reorderedItems.splice(result.source.index, 1)
+        reorderedItems.splice(result.destination.index, 0, draggedItem)
 
-        const prev = reordered[result.destination.index - 1]
-        const next = reordered[result.destination.index + 1]
+        const itemBefore = reorderedItems[result.destination.index - 1]
+        const itemAfter = reorderedItems[result.destination.index + 1]
 
         let newSortOrder: number
-        if (!prev) newSortOrder = (next?.sortOrder ?? 0) - 1000
-        else if (!next) newSortOrder = prev.sortOrder + 1000
-        else newSortOrder = (prev.sortOrder + next.sortOrder) / 2
+        if (!itemBefore) newSortOrder = (itemAfter?.sortOrder ?? 0) - 1000
+        else if (!itemAfter) newSortOrder = itemBefore.sortOrder + 1000
+        else newSortOrder = (itemBefore.sortOrder + itemAfter.sortOrder) / 2
 
-        if (moved.coreType === "all") {
+        if (draggedItem.coreType === "all") {
             setAll({
                 sortOrder: newSortOrder,
                 updatedAt: DateTime.now().toISO(),
             })
             return
         }
-        if (moved.coreType === "untagged") {
+        if (draggedItem.coreType === "untagged") {
             setUntagged({
                 sortOrder: newSortOrder,
                 updatedAt: DateTime.now().toISO(),
             })
             return
         }
-        if (moved.coreType === "trash") {
+        if (draggedItem.coreType === "trash") {
             setTrash({
                 sortOrder: newSortOrder,
                 updatedAt: DateTime.now().toISO(),
@@ -71,7 +71,7 @@ export default function Collections() {
         }
 
         updateCollectionMutation.mutate({
-            ...moved,
+            ...draggedItem,
             sortOrder: newSortOrder,
             updatedAt: DateTime.now().toISO(),
         })
