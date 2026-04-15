@@ -289,16 +289,16 @@ export default function Settings() {
                 <p className={styles.Settings__SectionDescription}>
                     Export or import your items, collections, and settings
                 </p>
-                <div className={styles.Settings__BtnRow}>
+                <div className="BtnRow">
                     <button
-                        className={styles.Settings__BtnAction}
+                        className="Btn Btn--Sec"
                         type="button"
                         onClick={handleExport}
                     >
                         Export
                     </button>
                     <button
-                        className={styles.Settings__BtnAction}
+                        className="Btn Btn--Sec"
                         type="button"
                         onClick={() => importInputRef.current?.click()}
                     >
@@ -360,9 +360,11 @@ export default function Settings() {
                         {lastSyncTime && `Last sync: ${lastSyncTime}`}
                     </div>
                 )}
-                <button className={styles.Settings__BtnConnect} type="button">
-                    Connect
-                </button>
+                <div className="BtnRow">
+                    <button className="Btn Btn--Pri" type="button">
+                        Connect
+                    </button>
+                </div>
             </section>
         </div>
     )
