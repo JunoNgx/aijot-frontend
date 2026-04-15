@@ -10,7 +10,7 @@ export default function Header() {
             <Link to={ROUTE_JOT} className={styles.Header__Logo}>
                 ai*jot
             </Link>
-            <div className={styles.Header__Actions}>
+            <div className={styles.Header__RightItems}>
                 <ThemeModeDropdown />
                 <UserDropdown />
             </div>
