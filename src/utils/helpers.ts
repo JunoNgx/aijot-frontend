@@ -12,12 +12,12 @@ export function generateSlug(str: string): string {
 
 export function formatJottedAt(
     isoString: string,
-    use24HourClock = true,
+    is24HourClock = true,
 ): string {
     const date = DateTime.fromISO(isoString)
     const now = DateTime.now()
     if (now.diff(date, "hours").hours < 24) {
-        return date.toFormat(use24HourClock ? "HH:mm" : "h:mm a")
+        return date.toFormat(is24HourClock ? "HH:mm" : "h:mm a")
     }
     if (now.diff(date, "years").years < 1) return date.toFormat("MMM d")
     return date.toFormat("MMM d, yyyy")

@@ -60,13 +60,13 @@ function ItemIcon({ item }: { item: Item }) {
 
 export default function JotItem({ item, isSelected, itemIndex }: Props) {
     const { triggerPrimaryAction } = useItemActions()
-    const use24HourClock = useProfileSettings((s) => s.use24HourClock)
+    const is24HourClock = useProfileSettings((s) => s.is24HourClock)
 
     const primaryText =
         item.type === "todo" ? item.content : (item.title ?? item.content)
     const secondaryText =
         item.type !== "todo" && item.title ? item.content : null
-    const datetime = formatJottedAt(item.jottedAt, use24HourClock)
+    const datetime = formatJottedAt(item.jottedAt, is24HourClock)
 
     const secondaryTextEl = secondaryText && (
         <span className={styles.JotItem__SecondaryText}>{secondaryText}</span>

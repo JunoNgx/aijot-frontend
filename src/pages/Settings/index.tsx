@@ -27,8 +27,8 @@ export default function Settings() {
     const themeMode = useLocalUserSettings((s) => s.themeMode)
     const setThemeMode = useLocalUserSettings((s) => s.setThemeMode)
 
-    const use24HourClock = useProfileSettings((s) => s.use24HourClock)
-    const setUse24HourClock = useProfileSettings((s) => s.setUse24HourClock)
+    const is24HourClock = useProfileSettings((s) => s.is24HourClock)
+    const setIs24HourClock = useProfileSettings((s) => s.setIs24HourClock)
 
     const userDisplayName = useProfileSettings((s) => s.userDisplayName)
     const setUserDisplayName = useProfileSettings((s) => s.setUserDisplayName)
@@ -134,9 +134,9 @@ export default function Settings() {
                     <label className={styles.Settings__Checkbox}>
                         <input
                             type="checkbox"
-                            checked={use24HourClock}
+                            checked={is24HourClock}
                             onChange={(e) => {
-                                setUse24HourClock(e.target.checked)
+                                setIs24HourClock(e.target.checked)
                             }}
                         />
                         Use 24-hour clock
