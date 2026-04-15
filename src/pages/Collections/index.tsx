@@ -1,5 +1,5 @@
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd"
-import { IconGripVertical, IconPencil, IconPlus } from "@tabler/icons-react"
+import { IconGripVertical, IconPlus } from "@tabler/icons-react"
 import { DateTime } from "luxon"
 import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
 import { useCollectionsMutations } from "@/hooks/useCollectionsMutations"
@@ -84,7 +84,7 @@ export default function Collections() {
             index={index}
         >
             {(provided, snapshot) => (
-                <div
+                <button
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     className={[
@@ -93,19 +93,20 @@ export default function Collections() {
                             ? styles["Collections__Row--Dragging"]
                             : "",
                     ].join(" ")}
+                    onClick={() => openCollectionDialog(collection)}
                 >
                     <CollectionRow
                         collection={collection}
                         isDefault={collection.slug === defaultCollectionSlug}
-                        onEdit={() => openCollectionDialog(collection)}
                     />
                     <span
                         className={styles.Collections__DragHandle}
                         {...provided.dragHandleProps}
+                        onClick={(e) => e.stopPropagation()}
                     >
                         <IconGripVertical {...ICON_PROPS_NORMAL} />
                     </span>
-                </div>
+                </button>
             )}
         </Draggable>
     ))
@@ -144,10 +145,9 @@ export default function Collections() {
 interface CollectionRowProps {
     collection: Collection
     isDefault: boolean
-    onEdit: () => void
 }
 
-function CollectionRow({ collection, isDefault, onEdit }: CollectionRowProps) {
+function CollectionRow({ collection, isDefault }: CollectionRowProps) {
     return (
         <>
             <span className={styles.Collections__Icon}>{collection.icon}</span>
@@ -161,9 +161,6 @@ function CollectionRow({ collection, isDefault, onEdit }: CollectionRowProps) {
                     default
                 </span>
             )}
-            <button className={styles.Collections__BtnEdit} onClick={onEdit}>
-                <IconPencil {...ICON_PROPS_NORMAL} />
-            </button>
         </>
     )
 }

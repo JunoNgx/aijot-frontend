@@ -28,11 +28,19 @@
     }
 
     &__Row {
+        appearance: none;
+        background: none;
+        border: none;
+        border-bottom: var(--lineWidth) solid var(--colBorder);
+        font: inherit;
+        color: inherit;
+        cursor: pointer;
+        width: 100%;
+        text-align: left;
         display: flex;
         align-items: center;
         gap: 0.75rem;
         padding: 0.625rem 0.5rem;
-        border-bottom: var(--lineWidth) solid var(--colBorder);
 
         &--Dragging {
             background-color: var(--colSurface);
@@ -82,7 +90,4 @@
         flex-shrink: 0;
     }
 
-    &__BtnEdit {
-        composes: Btn Btn--Tert from global;
-    }
 }
