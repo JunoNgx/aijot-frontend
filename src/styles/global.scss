@@ -173,6 +173,7 @@ input {
         cursor: pointer;
         outline: none;
         user-select: none;
+        max-width: min(90vw, 500px);
 
         &:hover,
         &:focus {

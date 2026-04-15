@@ -64,7 +64,9 @@ export default function CollectionDropdown() {
                         style={{ backgroundColor: collection.colour }}
                     />
                     <span>{collection.icon}</span>
-                    <span>{collection.name}</span>
+                    <span className={styles.CollectionDropdown__ItemLabel}>
+                        {collection.name}
+                    </span>
                     {hotkeyNum !== null && (
                         <span className={styles.CollectionDropdown__Hotkey}>
                             {hotkeyNum}
