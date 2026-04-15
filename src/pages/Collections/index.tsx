@@ -94,17 +94,17 @@ export default function Collections() {
                             : "",
                     ].join(" ")}
                 >
+                    <CollectionRow
+                        collection={collection}
+                        isDefault={collection.slug === defaultCollectionSlug}
+                        onEdit={() => openCollectionDialog(collection)}
+                    />
                     <span
                         className={styles.Collections__DragHandle}
                         {...provided.dragHandleProps}
                     >
                         <IconGripVertical {...ICON_PROPS_NORMAL} />
                     </span>
-                    <CollectionRow
-                        collection={collection}
-                        isDefault={collection.slug === defaultCollectionSlug}
-                        onEdit={() => openCollectionDialog(collection)}
-                    />
                 </div>
             )}
         </Draggable>
