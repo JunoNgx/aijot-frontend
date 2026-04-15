@@ -21,7 +21,7 @@ export default function CollectionDropdown() {
     const collections = collectionsQuery.data ?? []
     const hotkeyed = collections.slice(0, COLLECTION_HOTKEY_COUNT)
     const currentSlug = activeSlug ?? "all"
-    const activeCollection = collections.find((c) => c.slug === currentSlug)
+    const currCollection = collections.find((c) => c.slug === currentSlug)
 
     useHotkeys(HOTKEYS, (e) => {
         const index = parseInt(e.key) - 1
@@ -29,15 +29,15 @@ export default function CollectionDropdown() {
         if (target) navigateToCollection(target.slug)
     })
 
-    const trigger = activeCollection ? (
+    const trigger = currCollection ? (
         <>
             <span
                 className={styles.CollectionDropdown__ColourDot}
-                style={{ backgroundColor: activeCollection.colour }}
+                style={{ backgroundColor: currCollection.colour }}
             />
-            <span>{activeCollection.icon}</span>
+            <span>{currCollection.icon}</span>
             <span className={styles.CollectionDropdown__TriggerLabel}>
-                {activeCollection.name}
+                {currCollection.name}
             </span>
         </>
     ) : (
