@@ -24,7 +24,7 @@ body {
 }
 
 input {
-    border: var(--lineThickness) solid var(--colText);
+    border: var(--lineWidth) solid var(--colText);
     background-color: var(--colBg);
     color: var(--colText);
     box-shadow: none;
@@ -58,7 +58,7 @@ input {
     }
 
     &--Sec {
-        border: var(--lineThickness) solid var(--colText);
+        border: var(--lineWidth) solid var(--colText);
         color: var(--colText);
         background-color: transparent;
         padding: 0.5rem 1rem;

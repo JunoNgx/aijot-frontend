@@ -38,7 +38,7 @@
     }
 
     &__TrashSeparator {
-        height: var(--lineThickness);
+        height: var(--lineWidth);
         background-color: var(--colBorder);
         margin: 0.5rem 0;
     }
@@ -48,7 +48,7 @@
         align-items: center;
         gap: 0.75rem;
         padding: 0.625rem 0.5rem;
-        border-bottom: var(--lineThickness) solid var(--colBorder);
+        border-bottom: var(--lineWidth) solid var(--colBorder);
 
         &--Dragging {
             background-color: var(--colSurface);

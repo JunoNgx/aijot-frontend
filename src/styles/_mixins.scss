@@ -1,7 +1,7 @@
 @mixin StandardBorder {
-    border: var(--lineThickness) solid var(--colText);
+    border: var(--lineWidth) solid var(--colText);
 }
 
 @mixin StandardOutline {
-    outline: var(--lineThickness) solid var(--colText);
+    outline: var(--lineWidth) solid var(--colText);
 }

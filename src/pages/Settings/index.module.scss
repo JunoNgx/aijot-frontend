@@ -41,7 +41,7 @@
         padding: 0.5rem 0;
 
         & + & {
-            border-top: var(--lineThickness) solid var(--colBorder);
+            border-top: var(--lineWidth) solid var(--colBorder);
         }
     }
 
@@ -65,7 +65,7 @@
         box-sizing: border-box;
 
         &:focus {
-            outline: var(--lineThickness) solid var(--colText);
+            outline: var(--lineWidth) solid var(--colText);
         }
     }
 
@@ -80,7 +80,7 @@
         box-sizing: border-box;
 
         &:focus {
-            outline: var(--lineThickness) solid var(--colText);
+            outline: var(--lineWidth) solid var(--colText);
         }
     }
 
