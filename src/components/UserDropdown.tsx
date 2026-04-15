@@ -2,10 +2,11 @@ import * as DropdownMenu from "@radix-ui/react-dropdown-menu"
 import { IconChevronDown } from "@tabler/icons-react"
 import { useProfileSettings } from "@/store/profileSettings"
 import { useNavigateRoutes } from "@/hooks/useNavigateRoutes"
+import { DEFAULT_USERNAME } from "@/utils/constants"
 import styles from "./UserDropdown.module.scss"
 
 export default function UserDropdown() {
-    const userDisplayName = useProfileSettings((s) => s.userDisplayName)
+    const userDisplayName = useProfileSettings((s) => s.userDisplayName) || DEFAULT_USERNAME
     const {
         navigateToSettings,
         navigateToCollections,

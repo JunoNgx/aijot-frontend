@@ -1,6 +1,7 @@
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
 import type { ProfileSettingsStore } from "@/types"
+import { DEFAULT_USERNAME } from "@/utils/constants"
 
 const detectUse24HourClock = () => {
     const { hourCycle } = new Intl.DateTimeFormat(undefined, {
@@ -12,7 +13,7 @@ const detectUse24HourClock = () => {
 export const useProfileSettings = create<ProfileSettingsStore>()(
     persist(
         (set) => ({
-            userDisplayName: "User",
+            userDisplayName: DEFAULT_USERNAME,
             shouldApplyTagsOfCurrCollection: true,
             defaultCollectionSlug: "all",
             use24HourClock: detectUse24HourClock(),
