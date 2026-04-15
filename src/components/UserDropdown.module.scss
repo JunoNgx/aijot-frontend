@@ -2,9 +2,16 @@
 @use "styles/mixins" as *;
 
 .UserDropdown {
+    min-width: 0;
+
     &__Trigger {
         composes: Dropdown__Trigger from global;
         @include ClearBtn;
+        max-width: 100%;
+    }
+
+    &__TriggerLabel {
+        @include Ellipsified;
     }
 
     &__Chevron {

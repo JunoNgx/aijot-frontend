@@ -22,3 +22,9 @@
     text-align: left;
     text-decoration: none;
 }
+
+@mixin Ellipsified {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

@@ -35,6 +35,14 @@
 
         &--Left {
             gap: 1rem;
+            flex-shrink: 1;
+            min-width: 0;
+        }
+
+        &--Right {
+            justify-content: flex-end;
+            flex-shrink: 2;
+            min-width: 0;
         }
     }
 

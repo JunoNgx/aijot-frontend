@@ -26,7 +26,9 @@ export default function UserDropdown() {
         <div className={styles.UserDropdown}>
             <DropdownMenu.Root>
                 <DropdownMenu.Trigger className={styles.UserDropdown__Trigger}>
-                    {userDisplayName}
+                    <span className={styles.UserDropdown__TriggerLabel} >
+                        {userDisplayName}
+                    </span>
                     <IconChevronDown
                         {...ICON_PROPS_NORMAL}
                         className={styles.UserDropdown__Chevron}

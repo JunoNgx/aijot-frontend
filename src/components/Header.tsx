@@ -27,7 +27,7 @@ export default function Header() {
                         </>
                     }
                 </div>
-                <div className={styles.Header__Block}>
+                <div className={`${styles.Header__Block} ${styles["Header__Block--Right"]}`}>
                     <ThemeModeDropdown />
                     <UserDropdown />
                 </div>

@@ -36,7 +36,9 @@ export default function CollectionDropdown() {
                 style={{ backgroundColor: activeCollection.colour }}
             />
             <span>{activeCollection.icon}</span>
-            <span>{activeCollection.name}</span>
+            <span className={styles.CollectionDropdown__TriggerLabel}>
+                {activeCollection.name}
+            </span>
         </>
     ) : (
         <span>Collections</span>
