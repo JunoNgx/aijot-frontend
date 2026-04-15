@@ -50,7 +50,7 @@
 
         &--TodoDone {
             text-decoration: line-through;
-            opacity: 0.45;
+            color: var(--colTextSec);
         }
     }
 
