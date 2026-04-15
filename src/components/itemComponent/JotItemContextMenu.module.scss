@@ -7,7 +7,7 @@
         composes: Dropdown__Item from global;
 
         &--Destructive {
-            color: var(--colDanger);
+            color: var(--colDanger) !important;
         }
     }
 
