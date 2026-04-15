@@ -144,4 +144,13 @@
             gap: 0.5rem;
         }
     }
+
+    &__BtnAction {
+        composes: Btn Btn--Sec from global;
+        font-size: 0.8125rem;
+    }
+
+    &__BtnConnect {
+        composes: Btn Btn--Pri from global;
+    }
 }

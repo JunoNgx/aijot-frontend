@@ -221,7 +221,7 @@ export default function CollectionDialog({ collection }: Props) {
                 <div>
                     {isEditing && (
                         <button
-                            className={styles.CollectionDialog__BtnDanger}
+                            className={styles.CollectionDialog__BtnDelete}
                             onClick={handleDelete}
                         >
                             Delete
@@ -230,7 +230,7 @@ export default function CollectionDialog({ collection }: Props) {
                 </div>
                 <div className={styles.CollectionDialog__Actions}>
                     <button
-                        className={styles.CollectionDialog__BtnPrimary}
+                        className={styles.CollectionDialog__BtnSave}
                         onClick={handleSave}
                     >
                         Save

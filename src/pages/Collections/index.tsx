@@ -1,12 +1,12 @@
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd"
-import { IconGripVertical, IconPencil } from "@tabler/icons-react"
+import { IconGripVertical, IconPencil, IconPlus } from "@tabler/icons-react"
 import { DateTime } from "luxon"
 import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
 import { useCollectionsMutations } from "@/hooks/useCollectionsMutations"
 import { useProfileSettings } from "@/store/profileSettings"
 import { openCollectionDialog } from "@/utils/openCollectionDialog"
 import styles from "./index.module.scss"
-import { ICON_PROPS_NORMAL } from "@/utils/constants"
+import { ICON_PROPS_BUTTON, ICON_PROPS_NORMAL } from "@/utils/constants"
 import BackBtn from "@/components/BackBtn"
 import type { Collection } from "@/types"
 import type { DropResult } from "@hello-pangea/dnd"
@@ -102,6 +102,7 @@ export default function Collections() {
                     className={styles.Collections__BtnNew}
                     onClick={() => openCollectionDialog()}
                 >
+                    <IconPlus {...ICON_PROPS_BUTTON} />
                     New
                 </button>
             </div>

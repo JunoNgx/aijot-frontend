@@ -54,14 +54,7 @@
     }
 
     &__BtnSetDefault {
-        all: unset;
-        cursor: pointer;
-        font-size: 0.8125rem;
-        opacity: 0.6;
-
-        &:hover {
-            opacity: 1;
-        }
+        composes: Btn from global;
     }
 
     &__Footer {
@@ -73,34 +66,14 @@
     }
 
     &__Actions {
-        display: flex;
-        gap: 0.5rem;
+        composes: BtnRow from global;
     }
 
-    &__BtnPrimary {
-        all: unset;
-        cursor: pointer;
-        padding: 0.375rem 0.875rem;
-        font-size: 0.875rem;
-        background-color: var(--colAccent);
-        color: var(--colBg);
-        box-sizing: border-box;
-
-        &:hover {
-            opacity: 0.85;
-        }
+    &__BtnSave {
+        composes: Btn Btn--Pri from global;
     }
 
-    &__BtnDanger {
-        all: unset;
-        cursor: pointer;
-        padding: 0.375rem 0.875rem;
-        font-size: 0.875rem;
-        color: var(--colDanger);
-        box-sizing: border-box;
-
-        &:hover {
-            opacity: 0.75;
-        }
+    &__BtnDelete {
+        composes: Btn Btn--Danger from global;
     }
 }

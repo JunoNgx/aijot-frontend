@@ -32,6 +32,11 @@ export const ICON_PROPS_ACTION = {
     strokeWidth: 2,
 }
 
+export const ICON_PROPS_BUTTON = {
+    size: 20,
+    strokeWidth: 2,
+}
+
 // ============================================================
 // Routes
 // ============================================================

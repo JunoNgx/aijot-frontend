@@ -21,16 +21,6 @@
     }
 
     &__Btn {
-        margin-top: 0.5rem;
-        padding: 0.625rem 1.5rem;
-        font-size: 0.9375rem;
-        font-family: inherit;
-        background-color: var(--colText);
-        color: var(--colBg);
-        text-decoration: none;
-
-        &:hover {
-            opacity: 0.85;
-        }
+        composes: Btn Btn--Pri from global;
     }
 }

@@ -293,14 +293,14 @@ export default function Settings() {
                 </p>
                 <div className="BtnRow">
                     <button
-                        className="Btn Btn--Sec"
+                        className={styles.Settings__BtnAction}
                         type="button"
                         onClick={handleExport}
                     >
                         Export
                     </button>
                     <button
-                        className="Btn Btn--Sec"
+                        className={styles.Settings__BtnAction}
                         type="button"
                         onClick={() => importInputRef.current?.click()}
                     >
@@ -363,7 +363,7 @@ export default function Settings() {
                     </div>
                 )}
                 <div className="BtnRow">
-                    <button className="Btn Btn--Pri" type="button">
+                    <button className={styles.Settings__BtnConnect} type="button">
                         Connect
                     </button>
                 </div>

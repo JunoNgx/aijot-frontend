@@ -284,7 +284,7 @@ export default function ItemDialog({ item, onClose }: Props) {
                         isReadOnly
                     />
                     <button
-                        className={styles.ItemDialog__BtnOutline}
+                        className={styles.ItemDialog__BtnAction}
                         onClick={handleRestoreLastVersion}
                     >
                         Restore this version
@@ -355,13 +355,13 @@ export default function ItemDialog({ item, onClose }: Props) {
                 </span>
                 <div className={styles.ItemDialog__Actions}>
                     <button
-                        className={styles.ItemDialog__BtnDanger}
+                        className={styles.ItemDialog__BtnDelete}
                         onClick={handleDeleteClick}
                     >
                         Delete
                     </button>
                     <button
-                        className={styles.ItemDialog__BtnPrimary}
+                        className={styles.ItemDialog__BtnSave}
                         onClick={handleSaveAndClose}
                     >
                         Save

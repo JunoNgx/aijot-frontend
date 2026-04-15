@@ -78,6 +78,14 @@ input {
         color: var(--colTextSec);
         text-decoration: none;
     }
+
+    &--Danger {
+        color: var(--colDanger);
+
+        &:hover {
+            opacity: 0.75;
+        }
+    }
 }
 
 .BtnRow {
