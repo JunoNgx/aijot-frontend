@@ -3,12 +3,12 @@ import UserDropdown from "./UserDropdown"
 import ThemeModeDropdown from "./ThemeModeDropdown"
 import CollectionDropdown from "./CollectionDropdown"
 import styles from "./Header.module.scss"
-import { ROUTE_JOT, ROUTE_COLLECTION, ROUTE_COLLECTIONS } from "@/utils/constants"
+import { ROUTE_JOT, ROUTE_COLLECTION } from "@/utils/constants"
 
 export default function Header() {
-    const isJot = useMatch(ROUTE_COLLECTION)
-    const isCollections = useMatch(ROUTE_COLLECTIONS)
-    const shouldShowCollectionDropdown = isJot || isCollections
+    const isJotRoute = useMatch(ROUTE_COLLECTION)
+    const isJotCollectionRoute = useMatch(ROUTE_COLLECTION)
+    const shouldShowCollectionDropdown = isJotRoute || isJotCollectionRoute
 
     return (
         <header className={styles.Header}>
