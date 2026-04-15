@@ -106,6 +106,7 @@ export interface CoreCollectionConfig {
     slug: string
     icon: string
     colour: string
+    sortOrder: number
 }
 
 export interface DialogStore {

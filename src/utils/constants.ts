@@ -58,6 +58,7 @@ export const DEFAULT_ALL_COLLECTION: CoreCollectionConfig = {
     slug: "all",
     icon: "📦",
     colour: "#d0d0d0",
+    sortOrder: 0,
 }
 
 export const DEFAULT_UNTAGGED_COLLECTION: CoreCollectionConfig = {
@@ -65,6 +66,7 @@ export const DEFAULT_UNTAGGED_COLLECTION: CoreCollectionConfig = {
     slug: "untagged",
     icon: "🏷️",
     colour: "#f5a623",
+    sortOrder: 1,
 }
 
 export const DEFAULT_TRASH_COLLECTION: CoreCollectionConfig = {
@@ -72,6 +74,7 @@ export const DEFAULT_TRASH_COLLECTION: CoreCollectionConfig = {
     slug: "trash",
     icon: "🗑️",
     colour: "#c0392b",
+    sortOrder: 2,
 }
 
 // ============================================================
