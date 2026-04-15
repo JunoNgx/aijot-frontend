@@ -35,6 +35,31 @@ input {
     box-shadow: none;
 }
 
+
+input[type="radio"] {
+    appearance: none;
+    width: 1em;
+    height: 1em;
+    border: var(--lineWidth) solid var(--colText);
+    border-radius: 50%;
+    background-color: var(--colBg);
+    padding: 0;
+    cursor: pointer;
+    position: relative;
+    vertical-align: middle;
+
+    &:checked::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        margin: auto;
+        width: 0.4em;
+        height: 0.4em;
+        border-radius: 50%;
+        background-color: var(--colText);
+    }
+}
+
 input[type="checkbox"] {
     appearance: none;
     width: 1em;
