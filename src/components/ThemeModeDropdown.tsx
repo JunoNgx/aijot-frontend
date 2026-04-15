@@ -5,6 +5,7 @@ import { useLocalUserSettings } from "@/store/localUserSettings"
 import { ICON_PROPS_HEADER, ICON_PROPS_NORMAL } from "@/utils/constants"
 import type { ThemeMode } from "@/types"
 import styles from "./ThemeModeDropdown.module.scss"
+import { useDropdownOffsetCalc } from "@/hooks/useDropdownOffsetCalculation"
 
 
 function ThemeIcon({ mode }: { mode: ThemeMode }) {
@@ -27,6 +28,8 @@ export default function ThemeModeDropdown() {
     const themeMode = useLocalUserSettings((s) => s.themeMode)
     const setThemeMode = useLocalUserSettings((s) => s.setThemeMode)
 
+    const sideOffsetVal = useDropdownOffsetCalc();
+
     return (
         <DropdownMenu.Root>
             <DropdownMenu.Trigger className={styles.ThemeModeDropdown__Trigger}>
@@ -36,7 +39,7 @@ export default function ThemeModeDropdown() {
                 <DropdownMenu.Content
                     className={styles.ThemeModeDropdown__Content}
                     align="end"
-                    sideOffset={4}
+                    sideOffset={sideOffsetVal}
                 >
                     {OPTIONS.map((option) => (
                         <DropdownMenu.Item

@@ -5,6 +5,7 @@ import { useNavigateRoutes } from "@/hooks/useNavigateRoutes"
 import { DEFAULT_USERNAME, ICON_PROPS_NORMAL, ROUTE_COLLECTION, ROUTE_JOT } from "@/utils/constants"
 import styles from "./UserDropdown.module.scss"
 import { useMatch } from "react-router-dom"
+import { useDropdownOffsetCalc } from "@/hooks/useDropdownOffsetCalculation"
 
 export default function UserDropdown() {
     const userDisplayName = useProfileSettings((s) => s.userDisplayName) || DEFAULT_USERNAME
@@ -18,6 +19,8 @@ export default function UserDropdown() {
     const isJotRoute = useMatch(ROUTE_JOT)
     const isJotCollectionRoute = useMatch(ROUTE_COLLECTION)
     const shouldShowJotNav = !isJotRoute && !isJotCollectionRoute
+
+    const sideOffsetVal = useDropdownOffsetCalc();
 
     return (
         <div className={styles.UserDropdown}>
@@ -33,7 +36,7 @@ export default function UserDropdown() {
                     <DropdownMenu.Content
                         className={styles.UserDropdown__Content}
                         align="end"
-                        sideOffset={4}
+                        sideOffset={sideOffsetVal}
                     >
                         {shouldShowJotNav && (<DropdownMenu.Item
                             className={styles.UserDropdown__Item}
