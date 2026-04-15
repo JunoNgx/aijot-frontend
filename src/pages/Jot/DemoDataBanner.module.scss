@@ -3,43 +3,19 @@
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    padding: 0.625rem 0.5rem;
+    padding: 1rem;
     border-bottom: var(--lineWidth) solid var(--colBorder);
-    font-size: 0.875rem;
 
     &__Text {
-        flex: 1;
-        min-width: 0;
+        flex-shrink: 10;
     }
 
-    &__Actions {
-        display: flex;
-        gap: 0.5rem;
-        flex-shrink: 0;
+    &__BtnDismiss {
+        composes: Btn Btn--Tert from global;
     }
 
-    &__BtnSubtle {
-        all: unset;
-        cursor: pointer;
-        padding: 0.25rem 0.5rem;
-        font-size: 0.75rem;
-        box-sizing: border-box;
-
-        &:hover {
-            opacity: 0.7;
-        }
-    }
-
-    &__BtnOutline {
-        all: unset;
-        cursor: pointer;
-        padding: 0.25rem 0.5rem;
-        font-size: 0.75rem;
-        border: var(--lineWidth) solid var(--colText);
-        box-sizing: border-box;
-
-        &:hover {
-            background-color: var(--colSurface);
-        }
+    &__BtnLoad {
+        composes: Btn Btn--Pri from global;
+        flex-shrink: 1;
     }
 }
