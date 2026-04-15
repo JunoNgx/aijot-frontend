@@ -2,21 +2,21 @@ import type { ComponentType } from "react"
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu"
 import { IconSun, IconMoon, IconDeviceDesktop } from "@tabler/icons-react"
 import { useLocalUserSettings } from "@/store/localUserSettings"
+import { ICON_PROPS_NORMAL } from "@/utils/constants"
 import type { ThemeMode } from "@/types"
 import styles from "./ThemeModeDropdown.module.scss"
 
-const ICON_SIZE = 16
 
 function ThemeIcon({ mode }: { mode: ThemeMode }) {
-    if (mode === "light") return <IconSun size={ICON_SIZE} />
-    if (mode === "dark") return <IconMoon size={ICON_SIZE} />
-    return <IconDeviceDesktop size={ICON_SIZE} />
+    if (mode === "light") return <IconSun {...ICON_PROPS_NORMAL} />
+    if (mode === "dark") return <IconMoon {...ICON_PROPS_NORMAL} />
+    return <IconDeviceDesktop {...ICON_PROPS_NORMAL} />
 }
 
 const OPTIONS: {
     value: ThemeMode
     label: string
-    Icon: ComponentType<{ size: number }>
+    Icon: ComponentType<{ size?: number; strokeWidth?: number }>
 }[] = [
     { value: "light", label: "Light", Icon: IconSun },
     { value: "dark", label: "Dark", Icon: IconMoon },
@@ -46,7 +46,7 @@ export default function ThemeModeDropdown() {
                                 setThemeMode(option.value)
                             }}
                         >
-                            <option.Icon size={ICON_SIZE} />
+                            <option.Icon {...ICON_PROPS_NORMAL} />
                             {option.label}
                         </DropdownMenu.Item>
                     ))}

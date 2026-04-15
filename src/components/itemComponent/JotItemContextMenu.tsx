@@ -12,10 +12,10 @@ import {
     IconCursorText,
 } from "@tabler/icons-react"
 import { useItemActions } from "@/hooks/useItemActions"
+import { ICON_PROPS_NORMAL } from "@/utils/constants"
 import styles from "./JotItemContextMenu.module.scss"
 import type { Item } from "@/types"
 
-const ICON_SIZE = 14
 
 interface Props {
     item: Item
@@ -46,7 +46,7 @@ export default function JotItemContextMenu({ item }: Props) {
                         unpinItem(item)
                     }}
                 >
-                    <IconPinnedOff size={ICON_SIZE} />
+                    <IconPinnedOff {...ICON_PROPS_NORMAL} />
                     Unpin
                 </ContextMenu.Item>
             ) : (
@@ -56,7 +56,7 @@ export default function JotItemContextMenu({ item }: Props) {
                         pinItem(item)
                     }}
                 >
-                    <IconPin size={ICON_SIZE} />
+                    <IconPin {...ICON_PROPS_NORMAL} />
                     Pin
                 </ContextMenu.Item>
             )}
@@ -67,7 +67,7 @@ export default function JotItemContextMenu({ item }: Props) {
                         convertToTodo(item)
                     }}
                 >
-                    <IconSquareCheck size={ICON_SIZE} />
+                    <IconSquareCheck {...ICON_PROPS_NORMAL} />
                     Convert to Todo
                 </ContextMenu.Item>
             )}
@@ -77,7 +77,7 @@ export default function JotItemContextMenu({ item }: Props) {
                     toggleCopyOnClick(item)
                 }}
             >
-                <IconCursorText size={ICON_SIZE} />
+                <IconCursorText {...ICON_PROPS_NORMAL} />
                 {item.shouldCopyOnClick
                     ? "Disable copy on click"
                     : "Copy on click"}
@@ -89,7 +89,7 @@ export default function JotItemContextMenu({ item }: Props) {
                         refetchLinkMeta(item)
                     }}
                 >
-                    <IconRefresh size={ICON_SIZE} />
+                    <IconRefresh {...ICON_PROPS_NORMAL} />
                     Refetch
                 </ContextMenu.Item>
             )}
@@ -104,7 +104,7 @@ export default function JotItemContextMenu({ item }: Props) {
                     restoreItem(item)
                 }}
             >
-                <IconArrowBackUp size={ICON_SIZE} />
+                <IconArrowBackUp {...ICON_PROPS_NORMAL} />
                 Restore
             </ContextMenu.Item>
             <ContextMenu.Item
@@ -113,7 +113,7 @@ export default function JotItemContextMenu({ item }: Props) {
                     softDeleteItem(item)
                 }}
             >
-                <IconTrashX size={ICON_SIZE} />
+                <IconTrashX {...ICON_PROPS_NORMAL} />
                 Permanently delete
             </ContextMenu.Item>
         </>
@@ -124,7 +124,7 @@ export default function JotItemContextMenu({ item }: Props) {
                 trashItem(item)
             }}
         >
-            <IconTrash size={ICON_SIZE} />
+            <IconTrash {...ICON_PROPS_NORMAL} />
             Trash
         </ContextMenu.Item>
     )
@@ -138,7 +138,7 @@ export default function JotItemContextMenu({ item }: Props) {
                         copyContent(item)
                     }}
                 >
-                    <IconCopy size={ICON_SIZE} />
+                    <IconCopy {...ICON_PROPS_NORMAL} />
                     Copy
                 </ContextMenu.Item>
                 <ContextMenu.Item
@@ -147,7 +147,7 @@ export default function JotItemContextMenu({ item }: Props) {
                         editItem(item)
                     }}
                 >
-                    <IconEdit size={ICON_SIZE} />
+                    <IconEdit {...ICON_PROPS_NORMAL} />
                     Edit
                 </ContextMenu.Item>
                 <ContextMenu.Separator

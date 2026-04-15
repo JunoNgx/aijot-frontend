@@ -2,7 +2,7 @@ import * as DropdownMenu from "@radix-ui/react-dropdown-menu"
 import { IconChevronDown, IconSettings, IconStack2, IconHelp } from "@tabler/icons-react"
 import { useProfileSettings } from "@/store/profileSettings"
 import { useNavigateRoutes } from "@/hooks/useNavigateRoutes"
-import { DEFAULT_USERNAME } from "@/utils/constants"
+import { DEFAULT_USERNAME, ICON_PROPS_NORMAL } from "@/utils/constants"
 import styles from "./UserDropdown.module.scss"
 
 export default function UserDropdown() {
@@ -19,7 +19,7 @@ export default function UserDropdown() {
                 <DropdownMenu.Trigger className={styles.UserDropdown__Trigger}>
                     {userDisplayName}
                     <IconChevronDown
-                        size={14}
+                        {...ICON_PROPS_NORMAL}
                         className={styles.UserDropdown__Chevron}
                     />
                 </DropdownMenu.Trigger>
@@ -33,14 +33,14 @@ export default function UserDropdown() {
                             className={styles.UserDropdown__Item}
                             onSelect={navigateToSettings}
                         >
-                            <IconSettings size={14} />
+                            <IconSettings {...ICON_PROPS_NORMAL} />
                             Settings
                         </DropdownMenu.Item>
                         <DropdownMenu.Item
                             className={styles.UserDropdown__Item}
                             onSelect={navigateToCollections}
                         >
-                            <IconStack2 size={14} />
+                            <IconStack2 {...ICON_PROPS_NORMAL} />
                             Collections
                         </DropdownMenu.Item>
                         <DropdownMenu.Separator
@@ -50,7 +50,7 @@ export default function UserDropdown() {
                             className={styles.UserDropdown__Item}
                             onSelect={navigateToHelp}
                         >
-                            <IconHelp size={14} />
+                            <IconHelp {...ICON_PROPS_NORMAL} />
                             Help
                         </DropdownMenu.Item>
                     </DropdownMenu.Content>

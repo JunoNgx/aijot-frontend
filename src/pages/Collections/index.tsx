@@ -6,6 +6,7 @@ import { useCollectionsMutations } from "@/hooks/useCollectionsMutations"
 import { useProfileSettings } from "@/store/profileSettings"
 import { openCollectionDialog } from "@/utils/openCollectionDialog"
 import styles from "./index.module.scss"
+import { ICON_PROPS_NORMAL } from "@/utils/constants"
 import BackBtn from "@/components/BackBtn"
 import type { Collection } from "@/types"
 import type { DropResult } from "@hello-pangea/dnd"
@@ -65,7 +66,7 @@ export default function Collections() {
                         className={styles.Collections__DragHandle}
                         {...provided.dragHandleProps}
                     >
-                        <IconGripVertical size={16} />
+                        <IconGripVertical {...ICON_PROPS_NORMAL} />
                     </span>
                     <CollectionRow
                         collection={collection}
@@ -149,7 +150,7 @@ function CollectionRow({ collection, isDefault, onEdit }: CollectionRowProps) {
                 </span>
             )}
             <button className={styles.Collections__BtnEdit} onClick={onEdit}>
-                <IconPencil size={15} />
+                <IconPencil {...ICON_PROPS_NORMAL} />
             </button>
         </>
     )

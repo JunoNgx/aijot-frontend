@@ -8,13 +8,13 @@ import {
     IconPin,
 } from "@tabler/icons-react"
 import { isValidHexColourCode, formatJottedAt } from "@/utils/helpers"
+import { ICON_PROPS_NORMAL } from "@/utils/constants"
 import { useProfileSettings } from "@/store/profileSettings"
 import { useItemActions } from "@/hooks/useItemActions"
 import JotItemContextMenu from "./JotItemContextMenu"
 import type { Item } from "@/types"
 import styles from "./JotItem.module.scss"
 
-const ICON_SIZE = 16
 
 interface Props {
     item: Item
@@ -24,7 +24,7 @@ interface Props {
 
 function FaviconIcon({ url }: { url: string }) {
     const [hasFailed, setHasFailed] = useState(false)
-    if (hasFailed) return <IconLink size={ICON_SIZE} />
+    if (hasFailed) return <IconLink {...ICON_PROPS_NORMAL} />
     return (
         <img
             src={url}
@@ -38,14 +38,14 @@ function FaviconIcon({ url }: { url: string }) {
 function ItemIcon({ item }: { item: Item }) {
     if (item.type === "todo") {
         return item.isDone ? (
-            <IconSquareCheck size={ICON_SIZE} />
+            <IconSquareCheck {...ICON_PROPS_NORMAL} />
         ) : (
-            <IconSquare size={ICON_SIZE} />
+            <IconSquare {...ICON_PROPS_NORMAL} />
         )
     }
     if (item.type === "link") {
         if (item.faviconUrl) return <FaviconIcon url={item.faviconUrl} />
-        return <IconLink size={ICON_SIZE} />
+        return <IconLink {...ICON_PROPS_NORMAL} />
     }
     const lastSevenChars = item.content.slice(-7)
     if (isValidHexColourCode(lastSevenChars)) {
@@ -56,7 +56,7 @@ function ItemIcon({ item }: { item: Item }) {
             />
         )
     }
-    return <IconNote size={ICON_SIZE} />
+    return <IconNote {...ICON_PROPS_NORMAL} />
 }
 
 export default function JotItem({ item, isSelected, itemIndex }: Props) {
@@ -124,7 +124,7 @@ export default function JotItem({ item, isSelected, itemIndex }: Props) {
                             </span>
                             {item.isPinned && (
                                 <span className={styles.JotItem__PinIcon}>
-                                    <IconPin size={16} />
+                                    <IconPin {...ICON_PROPS_NORMAL} />
                                 </span>
                             )}
                             <span className={styles.JotItem__Datetime}>
