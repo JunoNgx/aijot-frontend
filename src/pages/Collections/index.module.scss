@@ -73,16 +73,31 @@
         text-align: center;
     }
 
-    &__Name {
+    &__NameRow {
         flex: 1;
         min-width: 0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        display: flex;
+        align-items: baseline;
+        gap: 0.5rem;
+    }
+
+    &__Name {
+        flex-shrink: 1;
+        min-width: 0;
+        @include Ellipsified;
+    }
+
+    &__Tags {
+        flex-shrink: 2;
+        min-width: 0;
+        font-size: 0.75rem;
+        color: var(--colTextSec);
+        @include Ellipsified;
     }
 
     &__DefaultBadge,
     &__CoreBadge {
+        min-width: 0;
         font-size: 0.75rem;
         flex-shrink: 0;
         color: var(--colTextSec);

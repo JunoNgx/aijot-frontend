@@ -165,6 +165,11 @@ function CollectionRow({ collection, isDefault }: CollectionRowProps) {
             <span className={styles.CollectionItem__Name}>
                 {collection.name}
             </span>
+            {collection.tags.length > 0 && (
+                <span className={styles.CollectionItem__Tags}>
+                    {collection.tags.join(" ")}
+                </span>
+            )}
             {isDefault && (
                 <span className={styles.CollectionItem__DefaultBadge}>
                     [default]
