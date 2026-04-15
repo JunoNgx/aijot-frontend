@@ -55,14 +55,9 @@
     }
 
     &__Input {
+        composes: Dialog__Input from global;
         width: 160px;
-        padding: 0.375rem 0.5rem;
         font-size: 0.875rem;
-        font-family: inherit;
-        background-color: var(--colBg);
-        color: var(--colText);
-        @include StandardBorder;
-        box-sizing: border-box;
 
         &:focus {
             outline: var(--lineWidth) solid var(--colText);
@@ -70,14 +65,12 @@
     }
 
     &__SlugInput {
+        composes: Dialog__Input from global;
         width: 120px;
         padding: 0.25rem 0.375rem;
         font-size: 0.8125rem;
         font-family: "Space Mono", monospace;
         background-color: var(--colSurface);
-        color: var(--colText);
-        @include StandardBorder;
-        box-sizing: border-box;
 
         &:focus {
             outline: var(--lineWidth) solid var(--colText);

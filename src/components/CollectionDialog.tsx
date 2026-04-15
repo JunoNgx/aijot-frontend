@@ -147,15 +147,16 @@ export default function CollectionDialog({ collection }: Props) {
         <div className={styles.CollectionDialog}>
             <div className={styles.CollectionDialog__Field}>
                 <label className={styles.CollectionDialog__Label}>Name</label>
-                <input autoFocus value={nameVal} onChange={handleNameChange} />
+                <input className="Dialog__Input" autoFocus value={nameVal} onChange={handleNameChange} />
             </div>
             <div className={styles.CollectionDialog__Field}>
                 <label className={styles.CollectionDialog__Label}>Slug</label>
-                <input value={slugVal} onChange={handleSlugChange} />
+                <input className="Dialog__Input" value={slugVal} onChange={handleSlugChange} />
             </div>
             <div className={styles.CollectionDialog__Field}>
                 <label className={styles.CollectionDialog__Label}>Icon</label>
                 <input
+                    className="Dialog__Input"
                     value={iconVal}
                     onChange={(e) => setIconVal(e.target.value)}
                 />
@@ -164,6 +165,7 @@ export default function CollectionDialog({ collection }: Props) {
                 <label className={styles.CollectionDialog__Label}>Colour</label>
                 <div className={styles.CollectionDialog__ColourRow}>
                     <input
+                        className="Dialog__Input"
                         value={colourVal}
                         onChange={(e) => setColourVal(e.target.value)}
                         placeholder="#rrggbb"
@@ -176,24 +178,26 @@ export default function CollectionDialog({ collection }: Props) {
             </div>
             <div className={styles.CollectionDialog__Field}>
                 <label className={styles.CollectionDialog__Label}>Types</label>
-                <div className={styles.CollectionDialog__TypesRow}>
-                    {typeCheckboxes}
-                </div>
                 <span className={styles.CollectionDialog__Description}>
                     Items of selected types appear in this collection
                 </span>
+                <div className={styles.CollectionDialog__TypesRow}>
+                    {typeCheckboxes}
+                </div>
             </div>
             <div className={styles.CollectionDialog__Field}>
                 <label className={styles.CollectionDialog__Label}>Tags</label>
+                <span className={styles.CollectionDialog__Description}>
+                    Separated by spaces
+                </span>
                 <input
+                    className="Dialog__Input"
                     value={tagStr}
                     onChange={handleTagStrChange}
                     placeholder="tag1 tag2 tag3"
                 />
-                <span className={styles.CollectionDialog__Description}>
-                    Separated by spaces
-                </span>
             </div>
+            {/* TODO: don't stretch this button fully wide */}
             {isEditing && (
                 <div className={styles.CollectionDialog__Field}>
                     {isDefault ? (

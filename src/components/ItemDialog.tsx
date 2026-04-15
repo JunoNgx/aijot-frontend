@@ -163,7 +163,7 @@ export default function ItemDialog({ item, onClose }: Props) {
 
     const markChanged = () => {
         hasUnsavedChangesRef.current = true
-        setSaveStatusText("Unsaved changes...")
+        setSaveStatusText("Pending changes...")
         debouncedSave()
     }
 
@@ -299,23 +299,30 @@ export default function ItemDialog({ item, onClose }: Props) {
             <div className={styles.ItemDialog__Field}>
                 <label className={styles.ItemDialog__Label}>Title</label>
                 <input
+                    className="Dialog__Input"
                     value={titleVal}
                     onChange={handleTitleInputChange}
                     onKeyDown={saveHotkeyHandler}
                 />
             </div>
             {contentEditor}
+            <div className={styles.ItemDialog__EditBottomWrapper}>
+                <span className={styles.ItemDialog__SaveStatus}>
+                    {saveStatusText}
+                </span>
+            </div>
             <div className={styles.ItemDialog__Field}>
                 <label className={styles.ItemDialog__Label}>Tags</label>
+                <span className={styles.ItemDialog__Description}>
+                    Separated by spaces
+                </span>
                 <input
+                    className="Dialog__Input"
                     value={tagStr}
                     onChange={handleTagStrChange}
                     onKeyDown={saveHotkeyHandler}
                     placeholder="tag1 tag2 tag3"
                 />
-                <span className={styles.ItemDialog__Description}>
-                    Separated by spaces
-                </span>
             </div>
             <Accordion.Root
                 type="multiple"
@@ -340,6 +347,7 @@ export default function ItemDialog({ item, onClose }: Props) {
                                 Jotted at
                             </label>
                             <input
+                                className="Dialog__Input"
                                 type="datetime-local"
                                 value={jottedAtInputVal}
                                 onChange={handleJottedAtChange}
@@ -350,23 +358,18 @@ export default function ItemDialog({ item, onClose }: Props) {
                 {lastVersionSection}
             </Accordion.Root>
             <div className={styles.ItemDialog__Footer}>
-                <span className={styles.ItemDialog__SaveStatus}>
-                    {saveStatusText}
-                </span>
-                <div className={styles.ItemDialog__Actions}>
-                    <button
-                        className={styles.ItemDialog__BtnDelete}
-                        onClick={handleDeleteClick}
-                    >
-                        Delete
-                    </button>
-                    <button
-                        className={styles.ItemDialog__BtnSave}
-                        onClick={handleSaveAndClose}
-                    >
-                        Save
-                    </button>
-                </div>
+                <button
+                    className={styles.ItemDialog__BtnDelete}
+                    onClick={handleDeleteClick}
+                >
+                    Delete
+                </button>
+                <button
+                    className={styles.ItemDialog__BtnSave}
+                    onClick={handleSaveAndClose}
+                >
+                    Save
+                </button>
             </div>
         </div>
     )

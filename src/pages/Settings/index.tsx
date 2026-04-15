@@ -291,7 +291,7 @@ export default function Settings() {
                 <p className={styles.Settings__SectionDescription}>
                     Export or import your items, collections, and settings
                 </p>
-                <div className="BtnRow">
+                <div className="FlexRow">
                     <button
                         className={styles.Settings__BtnAction}
                         type="button"
@@ -362,7 +362,7 @@ export default function Settings() {
                         {lastSyncTime && `Last sync: ${lastSyncTime}`}
                     </div>
                 )}
-                <div className="BtnRow">
+                <div className="FlexRow">
                     <button className={styles.Settings__BtnConnect} type="button">
                         Connect
                     </button>

@@ -1,25 +1,18 @@
 @use "styles/mixins" as *;
 
 .CollectionDialog {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding-bottom: 0.5rem;
+    composes: Dialog from global;
 
     &__Field {
-        display: flex;
-        flex-direction: column;
-        gap: 0.25rem;
+        composes: Dialog__Field from global;
     }
 
     &__Label {
-        font-size: 0.875rem;
-        font-weight: 500;
+        composes: Dialog__Label from global;
     }
 
     &__Description {
-        font-size: 0.75rem;
-        opacity: 0.6;
+        composes: Dialog__Description from global;
     }
 
     &__ColourRow {
@@ -49,24 +42,19 @@
     }
 
     &__DefaultIndicator {
-        font-size: 0.8125rem;
-        opacity: 0.5;
+        color: var(--colTextSec);
     }
 
     &__BtnSetDefault {
-        composes: Btn from global;
+        composes: Btn Btn--Sec from global;
     }
 
     &__Footer {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding-top: 0.5rem;
-        border-top: var(--lineWidth) solid var(--colBorder);
+        composes: FlexRow FlexRow--Apart from global;
     }
 
     &__Actions {
-        composes: BtnRow from global;
+        composes: FlexRow from global;
     }
 
     &__BtnSave {

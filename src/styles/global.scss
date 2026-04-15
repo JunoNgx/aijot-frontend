@@ -15,7 +15,7 @@ body {
     margin: 0;
     padding: 0;
     height: 100%;
-    font-family: "Space Grotesk", sans-serif;
+    font-family: var(--fontFamily);
     background-color: var(--colBg);
     color: var(--colText);
 }
@@ -25,9 +25,13 @@ body {
 }
 
 input {
+    font-family: var(--fontFamilyMono);
+    font-size: inherit;
+    box-sizing: border-box;
     border: var(--lineWidth) solid var(--colText);
-    background-color: var(--colBg);
+    padding: 0.375rem 0.5rem;
     color: var(--colText);
+    background-color: var(--colBg);
     box-shadow: none;
 }
 
@@ -47,11 +51,11 @@ input {
     background: none;
     padding: 0;
     text-decoration: none;
+    padding: 0.5rem 1rem;
 
     &--Pri {
         background-color: var(--colText);
         color: var(--colBg);
-        padding: 0.5rem 1rem;
 
         &:hover {
             opacity: 0.85;
@@ -62,16 +66,12 @@ input {
         border: var(--lineWidth) solid var(--colText);
         color: var(--colText);
         background-color: transparent;
-        padding: 0.5rem 1rem;
-
-        &:hover {
-            opacity: 0.85;
-        }
     }
 
     &--Tert {
         color: var(--colText);
         text-decoration: underline;
+        padding: 0;
     }
 
     &--Quart {
@@ -80,21 +80,58 @@ input {
     }
 
     &--Danger {
+        padding: 0.5rem 1rem;
         color: var(--colDanger);
 
         &:hover {
-            opacity: 0.75;
+            background-color: color-mix(in srgb, var(--colDanger), transparent 80%);
         }
     }
 }
 
-.BtnRow {
+// ============================================================
+// Flex row
+// ============================================================
+
+.FlexRow {
     display: flex;
+    align-items: center;
     gap: 0.5rem;
     margin-top: 0.75rem;
 
     &--Right {
         justify-content: flex-end;
+    }
+
+    &--Apart {
+        justify-content: space-between;
+    }
+}
+
+// ============================================================
+// Dialog
+// ============================================================
+
+.Dialog {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-bottom: 0.5rem;
+
+    &__Field {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    &__Label {
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    &__Description {
+        font-size: 0.75rem;
+        opacity: 0.6;
     }
 }
 

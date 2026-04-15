@@ -1,25 +1,18 @@
 @use "styles/mixins" as *;
 
 .ItemDialog {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding-bottom: 0.5rem;
+    composes: Dialog from global;
 
     &__Field {
-        display: flex;
-        flex-direction: column;
-        gap: 0.25rem;
+        composes: Dialog__Field from global;
     }
 
     &__Label {
-        font-size: 0.875rem;
-        font-weight: 500;
+        composes: Dialog__Label from global;
     }
 
     &__Description {
-        font-size: 0.75rem;
-        opacity: 0.6;
+        composes: Dialog__Description from global;
     }
 
     &__Textarea {
@@ -51,6 +44,12 @@
         :global(.cm-scroller) {
             overflow: auto;
         }
+    }
+
+    &__EditBottomWrapper {
+        composes: FlexRow FlexRow--Right from global;
+        margin-top: 0 !important;
+        color: var(--colTextSec)
     }
 
     &__Accordion {
@@ -85,19 +84,7 @@
     }
 
     &__Footer {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    &__SaveStatus {
-        font-size: 0.75rem;
-        color: var(--colText);
-    }
-
-    &__Actions {
-        display: flex;
-        gap: 0.5rem;
+        composes: FlexRow FlexRow--Apart from global;
     }
 
     &__BtnAction {
