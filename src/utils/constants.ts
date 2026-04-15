@@ -17,6 +17,11 @@ export const DEFAULT_USERNAME = "David"
 // Icon props
 // ============================================================
 
+export const ICON_PROPS_HEADER = {
+    size: 20,
+    strokeWidth: 2,
+}
+
 export const ICON_PROPS_NORMAL = {
     size: 16,
     strokeWidth: 2,
