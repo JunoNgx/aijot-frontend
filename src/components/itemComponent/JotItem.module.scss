@@ -62,6 +62,11 @@
         opacity: 0.5;
     }
 
+    &__ClipboardIcon {
+        flex-shrink: 0;
+        color: var(--colBorder);
+    }
+
     &__Datetime {
         font-size: 1rem;
         color: var(--colText);

@@ -6,6 +6,7 @@ import {
     IconSquare,
     IconCheckbox,
     IconPin,
+    IconClipboard,
 } from "@tabler/icons-react"
 import { isValidHexColourCode, formatJottedAt } from "@/utils/helpers"
 import { ICON_PROPS_NORMAL } from "@/utils/constants"
@@ -126,6 +127,11 @@ export default function JotItem({ item, isSelected, itemIndex }: Props) {
                             {item.isPinned && (
                                 <span className={styles.JotItem__PinIcon}>
                                     <IconPin {...ICON_PROPS_NORMAL} />
+                                </span>
+                            )}
+                            {item.shouldCopyOnClick && (
+                                <span className={styles.JotItem__ClipboardIcon}>
+                                    <IconClipboard {...ICON_PROPS_NORMAL} />
                                 </span>
                             )}
                             <span className={styles.JotItem__Datetime}>
