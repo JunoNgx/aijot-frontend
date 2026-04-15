@@ -8,8 +8,9 @@ import {
     IconRefresh,
     IconPin,
     IconPinnedOff,
-    IconSquareCheck,
-    IconCursorText,
+    IconArrowMoveRight,
+    IconCheckbox,
+    IconSquare,
 } from "@tabler/icons-react"
 import { useItemActions } from "@/hooks/useItemActions"
 import { ICON_PROPS_NORMAL } from "@/utils/constants"
@@ -66,20 +67,18 @@ export default function JotItemContextMenu({ item }: Props) {
                         convertToTodo(item)
                     }}
                 >
-                    <IconSquareCheck {...ICON_PROPS_NORMAL} />
+                    <IconArrowMoveRight {...ICON_PROPS_NORMAL} />
                     Convert to Todo
                 </ContextMenu.Item>
             )}
             <ContextMenu.Item
                 className={styles.JotItemContextMenu__Item}
-                onClick={() => {
-                    toggleCopyOnClick(item)
-                }}
+                onClick={() => toggleCopyOnClick(item)}
             >
-                <IconCursorText {...ICON_PROPS_NORMAL} />
                 {item.shouldCopyOnClick
-                    ? "Disable copy on click"
-                    : "Copy on click"}
+                    ? <IconCheckbox {...ICON_PROPS_NORMAL} />
+                    : <IconSquare {...ICON_PROPS_NORMAL} />}
+                Copy on click
             </ContextMenu.Item>
             {item.type === "link" && (
                 <ContextMenu.Item
