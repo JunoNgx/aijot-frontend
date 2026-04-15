@@ -47,5 +47,22 @@
         top: auto;
         bottom: 0;
         border-width: var(--lineWidth) 0 0 0;
+
+        &__Wrapper {
+            padding: 0.5rem 0.5rem 0.5rem 1rem;
+        }
+
+        &__Block {
+            gap: 0.25rem;
+
+            &--Left {
+                gap: 0.5rem;
+            }
+        }
+
+        &__Logo,
+        &__Separator {
+            display: none;
+        }
     }
 }
