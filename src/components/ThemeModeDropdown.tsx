@@ -48,6 +48,9 @@ export default function ThemeModeDropdown() {
                         >
                             <option.Icon {...ICON_PROPS_NORMAL} />
                             {option.label}
+                            {option.value === themeMode && (
+                                <span className={styles.ThemeModeDropdown__ActiveDot} />
+                            )}
                         </DropdownMenu.Item>
                     ))}
                 </DropdownMenu.Content>

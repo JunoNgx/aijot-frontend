@@ -39,4 +39,12 @@
             background-color: var(--colText);
         }
     }
+
+    &__ActiveDot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: var(--colText);
+        margin-left: auto;
+    }
 }
