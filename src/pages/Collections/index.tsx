@@ -167,7 +167,12 @@ function CollectionRow({ collection, isDefault }: CollectionRowProps) {
             </span>
             {isDefault && (
                 <span className={styles.CollectionItem__DefaultBadge}>
-                    default
+                    [default]
+                </span>
+            )}
+            {collection.coreType && (
+                <span className={styles.CollectionItem__CoreBadge}>
+                    [core]
                 </span>
             )}
         </>
