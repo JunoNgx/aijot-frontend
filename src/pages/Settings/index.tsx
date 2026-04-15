@@ -363,7 +363,10 @@ export default function Settings() {
                     </div>
                 )}
                 <div className="FlexRow">
-                    <button className={styles.Settings__BtnConnect} type="button">
+                    <button
+                        className={styles.Settings__BtnConnect}
+                        type="button"
+                    >
                         Connect
                     </button>
                 </div>

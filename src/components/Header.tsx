@@ -13,21 +13,25 @@ export default function Header() {
     return (
         <header className={styles.Header}>
             <div className={styles.Header__Wrapper}>
-                <div className={`
+                <div
+                    className={`
                     ${styles.Header__Block}
                     ${styles["Header__Block--Left"]}
-                `}>
+                `}
+                >
                     <Link to={ROUTE_JOT} className={styles.Header__Logo}>
                         ai*jot
                     </Link>
-                    {shouldShowCollectionDropdown &&
+                    {shouldShowCollectionDropdown && (
                         <>
                             <span className={styles.Header__Separator}>/</span>
                             <CollectionDropdown />
                         </>
-                    }
+                    )}
                 </div>
-                <div className={`${styles.Header__Block} ${styles["Header__Block--Right"]}`}>
+                <div
+                    className={`${styles.Header__Block} ${styles["Header__Block--Right"]}`}
+                >
                     <ThemeModeDropdown />
                     <UserDropdown />
                 </div>

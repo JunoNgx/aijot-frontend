@@ -12,7 +12,8 @@ export function useNavigateRoutes() {
     const navigate = useNavigate()
     return {
         navigateToJot: () => navigate(ROUTE_JOT),
-        navigateToCollection: (slug: string) => navigate(`${ROUTE_JOT}/${slug}`),
+        navigateToCollection: (slug: string) =>
+            navigate(`${ROUTE_JOT}/${slug}`),
         navigateToCollections: () => navigate(ROUTE_COLLECTIONS),
         navigateToSettings: () => navigate(ROUTE_SETTINGS),
         navigateToHelp: () => navigate(ROUTE_HELP),

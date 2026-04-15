@@ -77,7 +77,7 @@ export default function CollectionDropdown() {
         )
     })
 
-    const sideOffsetVal = useDropdownOffsetCalc();
+    const sideOffsetVal = useDropdownOffsetCalc()
 
     return (
         <div className={styles.CollectionDropdown}>

@@ -15,7 +15,6 @@ import JotItemContextMenu from "./JotItemContextMenu"
 import type { Item } from "@/types"
 import styles from "./JotItem.module.scss"
 
-
 interface Props {
     item: Item
     isSelected: boolean
@@ -116,7 +115,9 @@ export default function JotItem({ item, isSelected, itemIndex }: Props) {
                                 className={[
                                     styles.JotItem__PrimaryText,
                                     item.isDone
-                                        ? styles["JotItem__PrimaryText--TodoDone"]
+                                        ? styles[
+                                              "JotItem__PrimaryText--TodoDone"
+                                          ]
                                         : "",
                                 ].join(" ")}
                             >

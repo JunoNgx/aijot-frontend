@@ -16,7 +16,6 @@ import { ICON_PROPS_NORMAL } from "@/utils/constants"
 import styles from "./JotItemContextMenu.module.scss"
 import type { Item } from "@/types"
 
-
 interface Props {
     item: Item
 }

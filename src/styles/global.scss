@@ -84,7 +84,11 @@ input {
         color: var(--colDanger);
 
         &:hover {
-            background-color: color-mix(in srgb, var(--colDanger), transparent 80%);
+            background-color: color-mix(
+                in srgb,
+                var(--colDanger),
+                transparent 80%
+            );
         }
     }
 }

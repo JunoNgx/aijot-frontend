@@ -49,7 +49,7 @@
     &__EditBottomWrapper {
         composes: FlexRow FlexRow--Right from global;
         margin-top: 0 !important;
-        color: var(--colTextSec)
+        color: var(--colTextSec);
     }
 
     &__Accordion {

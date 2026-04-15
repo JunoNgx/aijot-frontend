@@ -7,7 +7,6 @@ import type { ThemeMode } from "@/types"
 import styles from "./ThemeModeDropdown.module.scss"
 import { useDropdownOffsetCalc } from "@/hooks/useDropdownOffsetCalculation"
 
-
 function ThemeIcon({ mode }: { mode: ThemeMode }) {
     if (mode === "light") return <IconSun {...ICON_PROPS_HEADER} />
     if (mode === "dark") return <IconMoon {...ICON_PROPS_HEADER} />
@@ -28,7 +27,7 @@ export default function ThemeModeDropdown() {
     const themeMode = useLocalUserSettings((s) => s.themeMode)
     const setThemeMode = useLocalUserSettings((s) => s.setThemeMode)
 
-    const sideOffsetVal = useDropdownOffsetCalc();
+    const sideOffsetVal = useDropdownOffsetCalc()
 
     return (
         <DropdownMenu.Root>
@@ -52,7 +51,11 @@ export default function ThemeModeDropdown() {
                             <option.Icon {...ICON_PROPS_NORMAL} />
                             {option.label}
                             {option.value === themeMode && (
-                                <span className={styles.ThemeModeDropdown__ActiveDot} />
+                                <span
+                                    className={
+                                        styles.ThemeModeDropdown__ActiveDot
+                                    }
+                                />
                             )}
                         </DropdownMenu.Item>
                     ))}

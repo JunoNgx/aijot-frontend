@@ -7,7 +7,10 @@ export default function BackBtn() {
     const navigate = useNavigate()
 
     return (
-        <button className={`Btn Btn--Quart ${styles.BackBtn}`} onClick={() => navigate(-1)}>
+        <button
+            className={`Btn Btn--Quart ${styles.BackBtn}`}
+            onClick={() => navigate(-1)}
+        >
             <IconArrowNarrowLeft {...ICON_PROPS_ACTION} />
             return
         </button>

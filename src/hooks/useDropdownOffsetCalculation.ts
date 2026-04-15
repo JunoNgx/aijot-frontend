@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
 
-const OFFSET_DESKTOP = 20;
-const OFFSET_MOBILE = 16;
+const OFFSET_DESKTOP = 20
+const OFFSET_MOBILE = 16
 
 function useMediaQuery(query: string): boolean {
     const [matches, setMatches] = useState(
-        () => window.matchMedia(query).matches
+        () => window.matchMedia(query).matches,
     )
 
     useEffect(() => {
@@ -19,7 +19,5 @@ function useMediaQuery(query: string): boolean {
 }
 
 export function useDropdownOffsetCalc() {
-    return useMediaQuery("(max-width: 767px)")
-        ? OFFSET_MOBILE
-        : OFFSET_DESKTOP;
+    return useMediaQuery("(max-width: 767px)") ? OFFSET_MOBILE : OFFSET_DESKTOP
 }

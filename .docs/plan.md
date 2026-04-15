@@ -332,5 +332,6 @@ Remove all Mantine packages: `@mantine/core`, `@mantine/dates`, `@mantine/hooks`
 - [ ] Collection tag picker in ItemDialog: highlights collections whose tags match the item's tags
 
 ## Task 33 - Offline handling
+
 - [ ] Implement service worker for offline support
 - [ ] Implement offline sync status
