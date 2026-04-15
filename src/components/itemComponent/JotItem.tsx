@@ -4,7 +4,7 @@ import {
     IconNote,
     IconLink,
     IconSquare,
-    IconSquareCheck,
+    IconCheckbox,
     IconPin,
 } from "@tabler/icons-react"
 import { isValidHexColourCode, formatJottedAt } from "@/utils/helpers"
@@ -37,7 +37,7 @@ function FaviconIcon({ url }: { url: string }) {
 function ItemIcon({ item }: { item: Item }) {
     if (item.type === "todo") {
         return item.isDone ? (
-            <IconSquareCheck {...ICON_PROPS_NORMAL} />
+            <IconCheckbox {...ICON_PROPS_NORMAL} />
         ) : (
             <IconSquare {...ICON_PROPS_NORMAL} />
         )
