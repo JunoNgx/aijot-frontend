@@ -10,8 +10,6 @@ export default function UserDropdown() {
         navigateToSettings,
         navigateToCollections,
         navigateToHelp,
-        navigateToPrivacy,
-        navigateToTerms,
     } = useNavigateRoutes()
 
     return (
@@ -50,18 +48,6 @@ export default function UserDropdown() {
                             onSelect={navigateToHelp}
                         >
                             Help
-                        </DropdownMenu.Item>
-                        <DropdownMenu.Item
-                            className={styles.UserDropdown__Item}
-                            onSelect={navigateToPrivacy}
-                        >
-                            Privacy
-                        </DropdownMenu.Item>
-                        <DropdownMenu.Item
-                            className={styles.UserDropdown__Item}
-                            onSelect={navigateToTerms}
-                        >
-                            Terms
                         </DropdownMenu.Item>
                     </DropdownMenu.Content>
                 </DropdownMenu.Portal>
