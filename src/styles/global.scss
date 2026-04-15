@@ -140,6 +140,22 @@ input {
 // ============================================================
 
 .Dropdown {
+    &__Trigger {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem;
+        color: var(--colText);
+
+        &:hover {
+            color: var(--colAccent);
+        }
+    }
+
+    &__Chevron {
+        flex-shrink: 0;
+    }
+
     &__Content {
         background-color: var(--colBg);
         @include StandardBorder;

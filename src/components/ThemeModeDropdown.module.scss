@@ -1,21 +1,16 @@
 @use "styles/vars" as *;
+@use "styles/mixins" as *;
 
 .ThemeModeDropdown {
     &__Trigger {
-        all: unset;
-        display: flex;
-        align-items: center;
+        composes: Dropdown__Trigger from global;
+        @include ClearBtn;
         padding: 0.25rem 0.5rem;
-        cursor: pointer;
-
-        &:hover {
-            color: var(--colAccent);
-        }
     }
 
     &__Content {
         composes: Dropdown__Content from global;
-        min-width: 120px;
+        min-width: 130px;
     }
 
     &__Item {
