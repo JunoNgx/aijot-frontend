@@ -95,11 +95,19 @@
         @include Ellipsified;
     }
 
+    &__Indicators {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.25rem;
+        min-width: 0;
+        flex-shrink: 1;
+        flex-grow: 2;
+    }
+
     &__DefaultBadge,
     &__CoreBadge {
-        min-width: 0;
         font-size: 0.75rem;
-        flex-shrink: 0;
         color: var(--colTextSec);
+        @include Ellipsified;
     }
 }
