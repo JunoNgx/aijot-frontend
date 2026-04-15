@@ -5,7 +5,6 @@ import { useLocalUserSettings } from "@/store/localUserSettings"
 import { useProfileSettings } from "@/store/profileSettings"
 import { useCoreCollectionSettings } from "@/store/coreCollectionSettings"
 import { useLocalSyncData } from "@/store/localSyncData"
-import { isValidHexColourCode } from "@/utils/helpers"
 import {
     exportData,
     parseImportFile,
@@ -98,15 +97,6 @@ export default function Settings() {
         }
     }
 
-    const handleColorChange = (
-        setter: (config: { name?: string; colour?: string }) => void,
-        value: string,
-    ) => {
-        if (isValidHexColourCode(value)) {
-            setter({ colour: value.slice(-7) })
-        }
-    }
-
     return (
         <div className={styles.Settings}>
             <BackBtn />
@@ -186,101 +176,6 @@ export default function Settings() {
                         />
                         Auto-apply collection tags when creating items
                     </label>
-                </div>
-            </section>
-
-            <section className={styles.Settings__Section}>
-                <div className={styles.Settings__SectionHeader}>
-                    <h2 className={styles.Settings__SectionTitle}>
-                        Core Collections
-                    </h2>
-                </div>
-                <div className={styles.Settings__Field}>
-                    <label className={styles.Settings__Label} htmlFor="allName">
-                        All items
-                    </label>
-                    <input
-                        id="allName"
-                        type="text"
-                        className={styles.Settings__Input}
-                        value={allCollection.name}
-                        onChange={(e) => setAll({ name: e.target.value })}
-                    />
-                    <input
-                        type="text"
-                        className={styles.Settings__SlugInput}
-                        value={allCollection.slug}
-                        onChange={(e) => setAll({ slug: e.target.value })}
-                        aria-label="Slug"
-                    />
-                    <input
-                        type="color"
-                        className={styles.Settings__ColorInput}
-                        value={allCollection.colour}
-                        onChange={(e) =>
-                            handleColorChange(setAll, e.target.value)
-                        }
-                    />
-                </div>
-                <div className={styles.Settings__Field}>
-                    <label
-                        className={styles.Settings__Label}
-                        htmlFor="untaggedName"
-                    >
-                        Untagged
-                    </label>
-                    <input
-                        id="untaggedName"
-                        type="text"
-                        className={styles.Settings__Input}
-                        value={untaggedCollection.name}
-                        onChange={(e) => setUntagged({ name: e.target.value })}
-                    />
-                    <input
-                        type="text"
-                        className={styles.Settings__SlugInput}
-                        value={untaggedCollection.slug}
-                        onChange={(e) => setUntagged({ slug: e.target.value })}
-                        aria-label="Slug"
-                    />
-                    <input
-                        type="color"
-                        className={styles.Settings__ColorInput}
-                        value={untaggedCollection.colour}
-                        onChange={(e) =>
-                            handleColorChange(setUntagged, e.target.value)
-                        }
-                    />
-                </div>
-                <div className={styles.Settings__Field}>
-                    <label
-                        className={styles.Settings__Label}
-                        htmlFor="trashName"
-                    >
-                        Trash
-                    </label>
-                    <input
-                        id="trashName"
-                        type="text"
-                        className={styles.Settings__Input}
-                        value={trashCollection.name}
-                        onChange={(e) => setTrash({ name: e.target.value })}
-                    />
-                    <input
-                        type="text"
-                        className={styles.Settings__SlugInput}
-                        value={trashCollection.slug}
-                        onChange={(e) => setTrash({ slug: e.target.value })}
-                        aria-label="Slug"
-                    />
-                    <input
-                        type="color"
-                        className={styles.Settings__ColorInput}
-                        value={trashCollection.colour}
-                        onChange={(e) =>
-                            handleColorChange(setTrash, e.target.value)
-                        }
-                    />
                 </div>
             </section>
 
