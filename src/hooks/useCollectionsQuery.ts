@@ -13,9 +13,19 @@ export function useCollectionsQuery() {
         queryFn: async () => {
             const userCollections = await storage.getCollections()
             const coreCollections: Collection[] = [
-                buildCoreCollection("core-all", all, -3, "all"),
-                buildCoreCollection("core-untagged", untagged, -2, "untagged"),
-                buildCoreCollection("core-trash", trash, -1, "trash"),
+                buildCoreCollection("core-all", all, all.sortOrder, "all"),
+                buildCoreCollection(
+                    "core-untagged",
+                    untagged,
+                    untagged.sortOrder,
+                    "untagged",
+                ),
+                buildCoreCollection(
+                    "core-trash",
+                    trash,
+                    trash.sortOrder,
+                    "trash",
+                ),
             ]
             return [...coreCollections, ...userCollections]
         },

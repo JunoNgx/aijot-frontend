@@ -3,6 +3,7 @@ import { IconGripVertical, IconPencil, IconPlus } from "@tabler/icons-react"
 import { DateTime } from "luxon"
 import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
 import { useCollectionsMutations } from "@/hooks/useCollectionsMutations"
+import { useCoreCollectionSettings } from "@/store/coreCollectionSettings"
 import { useProfileSettings } from "@/store/profileSettings"
 import { openCollectionDialog } from "@/utils/openCollectionDialog"
 import styles from "./index.module.scss"
@@ -14,19 +15,28 @@ import type { DropResult } from "@hello-pangea/dnd"
 export default function Collections() {
     const { collectionsQuery } = useCollectionsQuery()
     const { updateCollectionMutation } = useCollectionsMutations()
+    const { setAll, setUntagged, setTrash, all, untagged, trash } =
+        useCoreCollectionSettings()
     const defaultCollectionSlug = useProfileSettings(
         (s) => s.defaultCollectionSlug,
     )
 
-    const allCollections = collectionsQuery.data ?? []
-    const userCollections = allCollections.filter((c) => !c.coreType)
-    const trashCollection = allCollections.find((c) => c.coreType === "trash")
+    const sortedCollections = (collectionsQuery.data ?? [])
+        .map((c) => {
+            if (c.coreType === "all") return { ...c, sortOrder: all.sortOrder }
+            if (c.coreType === "untagged")
+                return { ...c, sortOrder: untagged.sortOrder }
+            if (c.coreType === "trash")
+                return { ...c, sortOrder: trash.sortOrder }
+            return c
+        })
+        .sort((a, b) => a.sortOrder - b.sortOrder)
 
     const handleDragEnd = (result: DropResult) => {
         if (!result.destination) return
         if (result.source.index === result.destination.index) return
 
-        const reordered = [...userCollections]
+        const reordered = [...sortedCollections]
         const [moved] = reordered.splice(result.source.index, 1)
         reordered.splice(result.destination.index, 0, moved)
 
@@ -38,6 +48,19 @@ export default function Collections() {
         else if (!next) newSortOrder = prev.sortOrder + 1000
         else newSortOrder = (prev.sortOrder + next.sortOrder) / 2
 
+        if (moved.coreType === "all") {
+            setAll({ sortOrder: newSortOrder })
+            return
+        }
+        if (moved.coreType === "untagged") {
+            setUntagged({ sortOrder: newSortOrder })
+            return
+        }
+        if (moved.coreType === "trash") {
+            setTrash({ sortOrder: newSortOrder })
+            return
+        }
+
         updateCollectionMutation.mutate({
             ...moved,
             sortOrder: newSortOrder,
@@ -45,7 +68,7 @@ export default function Collections() {
         })
     }
 
-    const draggableRows = userCollections.map((collection, index) => (
+    const draggableRows = sortedCollections.map((collection, index) => (
         <Draggable
             key={collection.id}
             draggableId={collection.id}
@@ -78,21 +101,6 @@ export default function Collections() {
         </Draggable>
     ))
 
-    const trashRow = trashCollection && (
-        <div className={styles.Collections__TrashRow}>
-            <span className={styles.Collections__Icon}>
-                {trashCollection.icon}
-            </span>
-            <span
-                className={styles.Collections__ColourDot}
-                style={{ backgroundColor: trashCollection.colour }}
-            />
-            <span className={styles.Collections__Name}>
-                {trashCollection.name}
-            </span>
-        </div>
-    )
-
     return (
         <div className={styles.Collections}>
             <BackBtn />
@@ -120,12 +128,6 @@ export default function Collections() {
                     )}
                 </Droppable>
             </DragDropContext>
-            {trashCollection && (
-                <>
-                    <div className={styles.Collections__TrashSeparator} />
-                    {trashRow}
-                </>
-            )}
         </div>
     )
 }

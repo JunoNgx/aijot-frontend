@@ -27,12 +27,6 @@
         flex-direction: column;
     }
 
-    &__TrashSeparator {
-        height: var(--lineWidth);
-        background-color: var(--colBorder);
-        margin: 0.5rem 0;
-    }
-
     &__Row {
         display: flex;
         align-items: center;
@@ -90,13 +84,5 @@
 
     &__BtnEdit {
         composes: Btn Btn--Tert from global;
-    }
-
-    &__TrashRow {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        padding: 0.625rem 0.5rem;
-        opacity: 0.6;
     }
 }

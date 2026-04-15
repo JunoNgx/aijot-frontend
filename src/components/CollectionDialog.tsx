@@ -2,6 +2,7 @@ import { useState, useRef } from "react"
 import { DateTime } from "luxon"
 import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
 import { useCollectionsMutations } from "@/hooks/useCollectionsMutations"
+import { useCoreCollectionSettings } from "@/store/coreCollectionSettings"
 import { useDialogStore } from "@/store/dialogStore"
 import { useProfileSettings } from "@/store/profileSettings"
 import { generateSlug, isValidHexColourCode } from "@/utils/helpers"
@@ -26,6 +27,7 @@ export default function CollectionDialog({ collection }: Props) {
         updateCollectionMutation,
         deleteCollectionMutation,
     } = useCollectionsMutations()
+    const { setAll, setUntagged, setTrash } = useCoreCollectionSettings()
     const closeAllDialogs = useDialogStore((s) => s.closeAllDialogs)
     const defaultCollectionSlug = useProfileSettings(
         (s) => s.defaultCollectionSlug,
@@ -86,7 +88,17 @@ export default function CollectionDialog({ collection }: Props) {
             setDefaultCollectionSlug(newSlug)
         }
 
-        if (isEditing) {
+        if (isEditing && collection.coreType) {
+            const coreConfig = {
+                name: nameVal.trim(),
+                slug: newSlug,
+                icon: iconVal,
+                colour: colourVal,
+            }
+            if (collection.coreType === "all") setAll(coreConfig)
+            if (collection.coreType === "untagged") setUntagged(coreConfig)
+            if (collection.coreType === "trash") setTrash(coreConfig)
+        } else if (isEditing) {
             updateCollectionMutation.mutate({
                 ...collection,
                 name: nameVal.trim(),
@@ -147,11 +159,20 @@ export default function CollectionDialog({ collection }: Props) {
         <div className={styles.CollectionDialog}>
             <div className={styles.CollectionDialog__Field}>
                 <label className={styles.CollectionDialog__Label}>Name</label>
-                <input className="Dialog__Input" autoFocus value={nameVal} onChange={handleNameChange} />
+                <input
+                    className="Dialog__Input"
+                    autoFocus
+                    value={nameVal}
+                    onChange={handleNameChange}
+                />
             </div>
             <div className={styles.CollectionDialog__Field}>
                 <label className={styles.CollectionDialog__Label}>Slug</label>
-                <input className="Dialog__Input" value={slugVal} onChange={handleSlugChange} />
+                <input
+                    className="Dialog__Input"
+                    value={slugVal}
+                    onChange={handleSlugChange}
+                />
             </div>
             <div className={styles.CollectionDialog__Field}>
                 <label className={styles.CollectionDialog__Label}>Icon</label>
@@ -223,7 +244,7 @@ export default function CollectionDialog({ collection }: Props) {
             )}
             <div className={styles.CollectionDialog__Footer}>
                 <div>
-                    {isEditing && (
+                    {isEditing && !collection.coreType && (
                         <button
                             className={styles.CollectionDialog__BtnDelete}
                             onClick={handleDelete}
