@@ -4,7 +4,7 @@ import { useHotkeys } from "react-hotkeys-hook"
 import { IconChevronDown } from "@tabler/icons-react"
 import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
 import { useNavigateRoutes } from "@/hooks/useNavigateRoutes"
-import { COLLECTION_HOTKEY_COUNT } from "@/utils/constants"
+import { COLLECTION_HOTKEY_COUNT, ICON_PROPS_NORMAL } from "@/utils/constants"
 import styles from "./CollectionDropdown.module.scss"
 
 const HOTKEYS = Array.from(
@@ -80,7 +80,7 @@ export default function CollectionDropdown() {
                 >
                     {trigger}
                     <IconChevronDown
-                        size={14}
+                        {...ICON_PROPS_NORMAL}
                         className={styles.CollectionDropdown__TriggerChevron}
                     />
                 </DropdownMenu.Trigger>
