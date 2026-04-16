@@ -4,6 +4,7 @@ import { DateTime } from "luxon"
 import Picker from "@emoji-mart/react"
 import data from "@emoji-mart/data"
 import { HexColorPicker } from "react-colorful"
+import { IconArrowsShuffle } from "@tabler/icons-react"
 import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
 import { useCollectionsMutations } from "@/hooks/useCollectionsMutations"
 import { useCoreCollectionSettings } from "@/store/coreCollectionSettings"
@@ -12,6 +13,7 @@ import { useProfileSettings } from "@/store/profileSettings"
 import { generateSlug, isValidHexColourCode } from "@/utils/helpers"
 import styles from "./CollectionDialog.module.scss"
 import type { Collection, ItemType } from "@/types"
+import { ICON_PROPS_ACTION } from "@/utils/constants"
 
 const RANDOM_ICONS = [
     "💼", // work
@@ -36,6 +38,7 @@ const RANDOM_ICONS = [
     "🎁", // gifts / wishlist
 ]
 const getRandomIcon = () => RANDOM_ICONS[Math.floor(Math.random() * RANDOM_ICONS.length)]
+const getRandomColour = () => "#" + Math.floor(Math.random() * 0xffffff).toString(16).padStart(6, "0")
 
 const ALL_TYPES: ItemType[] = ["text", "todo", "link"]
 const TYPE_LABELS: Record<ItemType, string> = {
@@ -345,6 +348,13 @@ export default function CollectionDialog({ collection }: Props) {
                                     setIsColourPickerOpen((prev) => !prev)
                                 }
                             />
+                            <button
+                                type="button"
+                                className={styles.CollectionDialog__BtnRandomise}
+                                onClick={() => setColourVal(getRandomColour())}
+                            >
+                                <IconArrowsShuffle {...ICON_PROPS_ACTION} />
+                            </button>
                         </div>
                         {isColourPickerOpen && (
                             <div
