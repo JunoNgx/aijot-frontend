@@ -3,6 +3,7 @@ import { useQueryClient } from "@tanstack/react-query"
 import { toast } from "sonner"
 import { useGoogleAuth } from "@/hooks/useGoogleAuth"
 import { useSyncFn } from "@/hooks/useSync"
+import { useNavigateRoutes } from "@/hooks/useNavigateRoutes"
 import { useLocalUserSettings } from "@/store/localUserSettings"
 import { useProfileSettings } from "@/store/profileSettings"
 import { useCoreCollectionSettings } from "@/store/coreCollectionSettings"
@@ -61,6 +62,8 @@ export default function Settings() {
         authToken,
     } = useGoogleAuth()
     const { sync } = useSyncFn()
+    const { navigateToHelp, navigateToPrivacy, navigateToTerms } =
+        useNavigateRoutes()
 
     const handleExport = async () => {
         await exportData({
@@ -312,6 +315,42 @@ export default function Settings() {
                             {isConnecting ? "Connecting..." : "Connect"}
                         </button>
                     )}
+                </div>
+            </section>
+
+            <section className={styles.Settings__Section}>
+                <div className={styles.Settings__SectionHeader}>
+                    <h2 className={styles.Settings__SectionTitle}>Help</h2>
+                </div>
+                <button
+                    className={styles.Settings__BtnAction}
+                    type="button"
+                    onClick={navigateToHelp}
+                >
+                    Help guide
+                </button>
+            </section>
+
+            <section className={styles.Settings__Section}>
+                <div className={styles.Settings__SectionHeader}>
+                    <h2 className={styles.Settings__SectionTitle}>About</h2>
+                </div>
+                <p className={styles.Settings__Version}>Version 0.0.1</p>
+                <div className="FlexRow">
+                    <button
+                        className={styles.Settings__BtnAction}
+                        type="button"
+                        onClick={navigateToPrivacy}
+                    >
+                        Privacy policy
+                    </button>
+                    <button
+                        className={styles.Settings__BtnAction}
+                        type="button"
+                        onClick={navigateToTerms}
+                    >
+                        Terms of Services
+                    </button>
                 </div>
             </section>
         </div>

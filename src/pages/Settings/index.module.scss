@@ -115,4 +115,10 @@
     &__BtnConnect {
         composes: Btn Btn--Pri from global;
     }
+
+    &__Version {
+        font-size: var(--fontSizeSm);
+        color: var(--colTextSec);
+        margin: 0.5rem 0 0;
+    }
 }
