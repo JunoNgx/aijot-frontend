@@ -46,6 +46,7 @@ export default function CollectionDialog({ collection }: Props) {
         collection?.types ?? ALL_TYPES,
     )
     const [tagStr, setTagStr] = useState(collection?.tags.join(" ") ?? "")
+    const [saveError, setSaveError] = useState<string | null>(null)
     const isDefault = isEditing && collection.slug === defaultCollectionSlug
 
     const isSlugManuallyEditedRef = useRef(isEditing)
@@ -76,6 +77,16 @@ export default function CollectionDialog({ collection }: Props) {
     }
 
     const handleSave = () => {
+        if (!nameVal.trim()) {
+            setSaveError("Name is required.")
+            return
+        }
+        if (!slugVal.trim()) {
+            setSaveError("Slug is required.")
+            return
+        }
+        setSaveError(null)
+
         const now = DateTime.now().toISO()
         const tags = tagStr
             .trim()
@@ -252,6 +263,9 @@ export default function CollectionDialog({ collection }: Props) {
                         </button>
                     )}
                 </div>
+            )}
+            {saveError && (
+                <p className={styles.CollectionDialog__Error}>{saveError}</p>
             )}
             <div className={styles.CollectionDialog__Footer}>
                 <div>

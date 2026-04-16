@@ -63,4 +63,9 @@
     &__BtnDelete {
         composes: Btn Btn--Danger from global;
     }
+
+    &__Error {
+        margin: 0;
+        color: var(--colDanger);
+    }
 }
