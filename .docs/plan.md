@@ -362,3 +362,58 @@ Remove all Mantine packages: `@mantine/core`, `@mantine/dates`, `@mantine/hooks`
 
 - [ ] Implement service worker for offline support
 - [ ] Implement offline sync status
+
+---
+
+## Task 34 — Danger Zone + Reset App
+
+### 34a — Storage layer
+
+- [ ] Add `clearAllData()` to `src/db/dexie.adapter.ts` — clears `items` and `collections` tables
+- [ ] Export `forceDeleteDb()` from `src/db/index.ts` — closes Dexie, calls `indexedDB.deleteDatabase("aijot")`
+
+### 34b — Clear data utility
+
+- [ ] Create `src/utils/clearData.ts`
+- [ ] `clearAllData()` — clears IndexedDB tables (items + collections)
+- [ ] `forceDeleteDb()` — deletes entire IndexedDB by name
+- [ ] `clearAllCaches()` — clears PWA service worker caches via `caches.keys()` + `caches.delete()`
+- [ ] `resetZustandStores()` — calls `persist.clearStorage()` on all 5 stores (localUserSettings, localAppData, localSyncData, profileSettings, coreCollectionSettings)
+
+### 34c — Settings UI: Danger Zone section
+
+- [ ] Add "Danger Zone" section to Settings page below Sync section
+- [ ] Section heading with danger styling
+- [ ] Description: "Removes all items and collections. Your data on Google Drive will remain intact."
+- [ ] "Clear all data" button (danger variant)
+
+### 34d — Settings UI: Clear data confirmation
+
+- [ ] Add `isClearDataDialogOpen` state to Settings
+- [ ] Confirmation dialog via `useDialogStore.openDialog()`:
+    - Title: "Clear all data?"
+    - Body: "This cannot be undone."
+    - Footer: Cancel (light) + Clear (danger, with loading state)
+- [ ] On confirm: disconnect Drive → `clearAllData()` → set `shouldShowDemoDataBanner(true)` → reload page
+
+### 34e — Settings UI: Reset App (debug mode)
+
+- [ ] Add `isDebugMode` state to Settings (hidden by default)
+- [ ] Enable debug mode: tap Settings heading 5 times (show indicator)
+- [ ] "Reset" section visible only when `isDebugMode` is true
+- [ ] Description: "Wipes local database and all local app data. Cannot be undone."
+- [ ] "Reset app" button (danger variant)
+
+### 34f — Settings UI: Reset app confirmation
+
+- [ ] Add `isResetAppDialogOpen` state to Settings
+- [ ] Confirmation dialog via `useDialogStore.openDialog()`:
+    - Title: "Confirm resetting app?"
+    - Body: "This cannot be undone."
+    - Footer: Cancel (light) + Reset (danger, with loading state)
+- [ ] On confirm: `localStorage.clear()` → `sessionStorage.clear()` → `forceDeleteDb()` → `clearAllCaches()` → redirect to `/`
+
+### 34g — Styling
+
+- [ ] Add `Settings__BtnDanger` class to `Settings/index.module.scss` using `Btn--Danger`
+- [ ] Add danger zone section styling
