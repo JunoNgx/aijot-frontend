@@ -13,6 +13,8 @@ export function buildDemoItems(): Item[] {
             content: "https://www.mozilla.org/en-US/",
             title: "Mozilla",
             tags: ["organisation", "web", "pretty"],
+            faviconUrl:
+                "https://www.mozilla.org/media/img/favicons/mozilla/apple-touch-icon.05aa000f6748.png",
             createdAt: at(12),
             jottedAt: at(12),
             updatedAt: at(12),
@@ -23,6 +25,7 @@ export function buildDemoItems(): Item[] {
             content: "https://xkcd.com/",
             title: "xkcd",
             tags: ["fun"],
+            faviconUrl: "https://xkcd.com/s/919f27.ico",
             createdAt: at(11),
             jottedAt: at(11),
             updatedAt: at(11),
@@ -34,6 +37,7 @@ export function buildDemoItems(): Item[] {
                 "https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_code_values",
             title: "Keyboard code reference",
             tags: ["work", "programming", "web"],
+            faviconUrl: "https://developer.mozilla.org/favicon.ico",
             createdAt: at(10),
             jottedAt: at(10),
             updatedAt: at(10),
@@ -44,6 +48,8 @@ export function buildDemoItems(): Item[] {
             content: "https://fredrocha.net/2025/05/21/small-web-is-beautiful/",
             title: "Small (web) is beautiful",
             tags: ["small-web", "essay", "goodread", "web"],
+            faviconUrl:
+                "https://fredrocha.net/wp-content/themes/fredrocha.net/favicon.png",
             createdAt: at(9),
             jottedAt: at(9),
             updatedAt: at(9),
