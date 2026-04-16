@@ -25,16 +25,16 @@
 
     &__Block {
         display: flex;
-        gap: 0.5rem;
         align-items: center;
 
         &--Left {
-            gap: 1rem;
+            gap: 0;
             flex-shrink: 1;
             min-width: 0;
         }
 
         &--Right {
+            gap: 0.5rem;
             justify-content: flex-end;
             flex-shrink: 2;
             min-width: 0;
@@ -44,6 +44,7 @@
     &__Separator {
         font-size: var(--fontSizeSeparator);
         color: var(--colTextSec);
+        margin-left: 0.5rem;
     }
 
     @media (width <= $breakpointMobile) {

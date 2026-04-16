@@ -223,7 +223,7 @@ kbd {
         color: var(--colText);
 
         &:hover {
-            color: var(--colAccent);
+            background-color: var(--colBgSec);
         }
     }
 
