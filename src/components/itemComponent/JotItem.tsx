@@ -96,10 +96,48 @@ export default function JotItem({ item, isSelected, itemIndex }: Props) {
                       triggerPrimaryAction(item, e)
                   },
               }
-
     const { as: Tag, ...rest } = wrapperProps
+    const itemBody = (
+        <div className={styles.JotItem__Body}>
+            <div className={styles.JotItem__Header}>
+                <span
+                    className={[
+                        styles.JotItem__PrimaryText,
+                        item.isDone
+                            ? styles[
+                                    "JotItem__PrimaryText--TodoDone"
+                                ]
+                            : "",
+                    ].join(" ")}
+                >
+                    {primaryText}
+                </span>
+                {item.isPinned && (
+                    <span className={styles.JotItem__PinIcon}>
+                        <IconPin {...ICON_PROPS_NORMAL} />
+                    </span>
+                )}
+                {item.shouldCopyOnClick && (
+                    <span className={styles.JotItem__ClipboardIcon}>
+                        <IconClipboard {...ICON_PROPS_NORMAL} />
+                    </span>
+                )}
+            </div>
+            {secondaryTextEl}
+        </div>
+    )
 
-    // TODO: fix this layout manually
+    const itemIcon = (
+        <span className={styles.JotItem__Icon}>
+            <ItemIcon item={item} />
+        </span>
+    )
+    const itemDatetime = (
+        <span className={styles.JotItem__Datetime}>
+            {datetime}
+        </span>
+    )
+
     return (
         <ContextMenu.Root>
             <ContextMenu.Trigger asChild>
@@ -108,39 +146,9 @@ export default function JotItem({ item, isSelected, itemIndex }: Props) {
                     data-item-index={itemIndex}
                     {...rest}
                 >
-                    <span className={styles.JotItem__Icon}>
-                        <ItemIcon item={item} />
-                    </span>
-                    <div className={styles.JotItem__Body}>
-                        <div className={styles.JotItem__Header}>
-                            <span
-                                className={[
-                                    styles.JotItem__PrimaryText,
-                                    item.isDone
-                                        ? styles[
-                                              "JotItem__PrimaryText--TodoDone"
-                                          ]
-                                        : "",
-                                ].join(" ")}
-                            >
-                                {primaryText}
-                            </span>
-                            {item.isPinned && (
-                                <span className={styles.JotItem__PinIcon}>
-                                    <IconPin {...ICON_PROPS_NORMAL} />
-                                </span>
-                            )}
-                            {item.shouldCopyOnClick && (
-                                <span className={styles.JotItem__ClipboardIcon}>
-                                    <IconClipboard {...ICON_PROPS_NORMAL} />
-                                </span>
-                            )}
-                            <span className={styles.JotItem__Datetime}>
-                                {datetime}
-                            </span>
-                        </div>
-                        {secondaryTextEl}
-                    </div>
+                    {itemIcon}
+                    {itemBody}
+                    {itemDatetime}
                 </Tag>
             </ContextMenu.Trigger>
             <JotItemContextMenu item={item} />
