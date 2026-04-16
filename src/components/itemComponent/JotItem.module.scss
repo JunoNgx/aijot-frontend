@@ -2,9 +2,10 @@
 
 .JotItem {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 0.5rem;
     padding: 0.625rem 0.5rem;
+    text-decoration: none;
     cursor: pointer;
 
     &:hover {
@@ -18,34 +19,44 @@
     }
 
     &__Icon {
-        display: flex;
+        display: grid;
         align-items: center;
         flex-shrink: 0;
-        padding-top: 0.125rem;
         color: var(--colText);
     }
 
-    &__Body {
-        flex: 1;
-        min-width: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 0.125rem;
+    $iconSize: 16px;
+
+    &__Favicon {
+        width: $iconSize;
+        height: $iconSize;
+        object-fit: contain;
     }
 
-    &__Header {
+    &__ColourBlock {
+        display: inline-block;
+        width: $iconSize;
+        height: $iconSize;
+        border-radius: 50%;
+    }
+
+    &__Body {
         display: flex;
-        justify-content: space-between;
-        align-items: baseline;
+        align-items: center;
+        min-width: 0;
         gap: 0.5rem;
+        flex-grow: 10;
+    }
+
+    &__PrimaryText,
+    &__SecondaryText {
+        @include Ellipsified;
     }
 
     &__PrimaryText {
         font-size: var(--fontSizeMd);
         color: var(--colText);
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        flex-shrink: 1;
 
         &--TodoDone {
             text-decoration: line-through;
@@ -53,41 +64,29 @@
         }
     }
 
-    &__PinIcon {
-        display: flex;
-        align-items: center;
-        flex-shrink: 0;
+    &__SecondaryText {
+        font-size: var(--fontSizeSm);
         color: var(--colTextSec);
+        flex-shrink: 10;
     }
 
-    &__ClipboardIcon {
+    &__StatusWrapper {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
         flex-shrink: 0;
-        color: var(--colText);
+        margin-left: auto;
+    }
+
+    &__StatusIcon {
+        display: grid;
+        place-items: center;
+        color: var(--colTextSec);
     }
 
     &__Datetime {
         font-size: var(--fontSizeMd);
         color: var(--colText);
         flex-shrink: 0;
-    }
-
-    &__SecondaryText {
-        font-size: var(--fontSizeSm);
-        color: var(--colText);
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-
-    &__Favicon {
-        width: 16px;
-        height: 16px;
-        object-fit: contain;
-    }
-
-    &__ColourSwatch {
-        display: inline-block;
-        width: 16px;
-        height: 16px;
     }
 }

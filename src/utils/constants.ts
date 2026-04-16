@@ -40,6 +40,16 @@ export const ICON_PROPS_BUTTON = {
     strokeWidth: 2,
 }
 
+export const ICON_PROPS_ITEM_ICON = {
+    size: 20,
+    strokeWidth: 2,
+}
+
+export const ICON_PROPS_ITEM_STATUS = {
+    size: 16,
+    strokeWidth: 2,
+}
+
 // ============================================================
 // Misc UI values
 // ============================================================
