@@ -41,7 +41,7 @@
         padding: 0.5rem 0;
 
         & + & {
-            border-top: var(--lineWidth) solid var(--colBorder);
+            border-top: var(--lineWidth) solid var(--colText);
         }
     }
 

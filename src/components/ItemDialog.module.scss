@@ -56,7 +56,7 @@
 
     &__AccordionItem {
         & + & {
-            border-top: var(--lineWidth) solid var(--colBorder);
+            border-top: var(--lineWidth) solid var(--colText);
         }
     }
 
@@ -79,7 +79,7 @@
 
     &__AccordionContent {
         padding: 0.75rem;
-        border-top: var(--lineWidth) solid var(--colBorder);
+        border-top: var(--lineWidth) solid var(--colText);
     }
 
     &__Footer {
