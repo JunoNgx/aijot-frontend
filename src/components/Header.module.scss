@@ -5,10 +5,7 @@
     position: fixed;
     top: 0;
     width: 100%;
-    border-color: var(--colText);
-    border-style: solid;
-    border-width: 0 0 var(--lineWidth) 0;
-    background-color: var(--colBg);
+    @include GlassBlur;
 
     &__Wrapper {
         max-width: $contentWidth;
@@ -16,7 +13,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 0.75rem 0.75rem 0.75rem 1rem;
+        padding: 0.5rem 0.5rem 0.5rem 1rem;
     }
 
     &__Logo {
@@ -52,11 +49,6 @@
     @media (width <= $breakpointMobile) {
         top: auto;
         bottom: 0;
-        border-width: var(--lineWidth) 0 0 0;
-
-        &__Wrapper {
-            padding: 0.5rem 0.5rem 0.5rem 1rem;
-        }
 
         &__Block {
             gap: 0.25rem;

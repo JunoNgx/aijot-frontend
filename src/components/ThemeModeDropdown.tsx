@@ -2,10 +2,9 @@ import type { ComponentType } from "react"
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu"
 import { IconSun, IconMoon, IconDeviceDesktop } from "@tabler/icons-react"
 import { useLocalUserSettings } from "@/store/localUserSettings"
-import { ICON_PROPS_HEADER, ICON_PROPS_NORMAL } from "@/utils/constants"
+import { DROPDOWN_OFFSET, ICON_PROPS_HEADER, ICON_PROPS_NORMAL } from "@/utils/constants"
 import type { ThemeMode } from "@/types"
 import styles from "./ThemeModeDropdown.module.scss"
-import { useDropdownOffsetCalc } from "@/hooks/useDropdownOffsetCalculation"
 
 function ThemeIcon({ mode }: { mode: ThemeMode }) {
     if (mode === "light") return <IconSun {...ICON_PROPS_HEADER} />
@@ -27,8 +26,6 @@ export default function ThemeModeDropdown() {
     const themeMode = useLocalUserSettings((s) => s.themeMode)
     const setThemeMode = useLocalUserSettings((s) => s.setThemeMode)
 
-    const sideOffsetVal = useDropdownOffsetCalc()
-
     return (
         <DropdownMenu.Root>
             <DropdownMenu.Trigger className={styles.ThemeModeDropdown__Trigger}>
@@ -38,7 +35,7 @@ export default function ThemeModeDropdown() {
                 <DropdownMenu.Content
                     className={styles.ThemeModeDropdown__Content}
                     align="end"
-                    sideOffset={sideOffsetVal}
+                    sideOffset={DROPDOWN_OFFSET}
                 >
                     {OPTIONS.map((option) => (
                         <DropdownMenu.Item

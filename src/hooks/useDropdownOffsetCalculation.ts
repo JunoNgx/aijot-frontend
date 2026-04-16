@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 
+// TODO: File unused
 const OFFSET_DESKTOP = 20
 const OFFSET_MOBILE = 16
 

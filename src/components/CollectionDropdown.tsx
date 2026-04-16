@@ -4,9 +4,8 @@ import { useHotkeys } from "react-hotkeys-hook"
 import { IconChevronDown } from "@tabler/icons-react"
 import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
 import { useNavigateRoutes } from "@/hooks/useNavigateRoutes"
-import { COLLECTION_HOTKEY_COUNT, ICON_PROPS_NORMAL } from "@/utils/constants"
+import { COLLECTION_HOTKEY_COUNT, DROPDOWN_OFFSET, ICON_PROPS_NORMAL } from "@/utils/constants"
 import styles from "./CollectionDropdown.module.scss"
-import { useDropdownOffsetCalc } from "@/hooks/useDropdownOffsetCalculation"
 
 const HOTKEYS = Array.from(
     { length: COLLECTION_HOTKEY_COUNT },
@@ -77,8 +76,6 @@ export default function CollectionDropdown() {
         )
     })
 
-    const sideOffsetVal = useDropdownOffsetCalc()
-
     return (
         <div className={styles.CollectionDropdown}>
             <DropdownMenu.Root>
@@ -95,7 +92,7 @@ export default function CollectionDropdown() {
                     <DropdownMenu.Content
                         className={styles.CollectionDropdown__Content}
                         align="start"
-                        sideOffset={sideOffsetVal}
+                        sideOffset={DROPDOWN_OFFSET}
                     >
                         {menuItems}
                     </DropdownMenu.Content>
