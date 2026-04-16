@@ -28,3 +28,8 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
+@mixin GlassBlur {
+    background-color: rgba(var(--colBg), 0.1);
+    backdrop-filter: blur(0.75rem);
+}
