@@ -2,7 +2,7 @@
 
 .AppLayout {
     &__OutletWrapper {
-        max-width: $contentWidth;
+        max-width: var(--fullWidth);
         margin: 0 auto;
         padding-top: var(--verticalPaddingLg);
         padding-bottom: var(--verticalPaddingSm);

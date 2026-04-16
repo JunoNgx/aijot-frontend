@@ -8,7 +8,7 @@
     @include GlassBlur;
 
     &__Wrapper {
-        max-width: $contentWidth;
+        max-width: var(--fullWidth);
         margin: auto;
         display: flex;
         align-items: center;

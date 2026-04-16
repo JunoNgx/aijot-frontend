@@ -19,7 +19,7 @@
         @include StandardBorder;
         padding: 1.5rem;
         width: 90vw;
-        max-width: 600px;
+        max-width: var(--dialogWidth);
         max-height: 85vh;
         overflow-y: auto;
     }
