@@ -16,6 +16,7 @@ import { useDebounced } from "@/hooks/useDebounced"
 import { useDialogStore } from "@/store/dialogStore"
 import { getHotkeyHandler } from "@/utils/hotkeyHandler"
 import { SHORTCUT_SAVE_AND_CLOSE } from "@/utils/constants"
+import { formatDatetime } from "@/utils/helpers"
 import styles from "./ItemDialog.module.scss"
 import type { Item } from "@/types"
 
@@ -101,7 +102,7 @@ export default function ItemDialog({ item, onClose }: Props) {
     const [tagStr, setTagStr] = useState(item.tags.join(" "))
     const [jottedAtVal, setJottedAtVal] = useState<string | null>(item.jottedAt)
     const [saveStatusText, setSaveStatusText] = useState(
-        `Saved ${DateTime.fromISO(item.updatedAt).toLocaleString(DateTime.TIME_WITH_SECONDS)}`,
+        `Saved ${formatDatetime(item.updatedAt)}`,
     )
 
     const titleRef = useRef(titleVal)
@@ -144,9 +145,7 @@ export default function ItemDialog({ item, onClose }: Props) {
 
     const handleSave = useCallback(() => {
         mutateRef.current(buildUpdatedItem())
-        setSaveStatusText(
-            `Saved at ${DateTime.now().toLocaleString(DateTime.TIME_WITH_SECONDS)}`,
-        )
+        setSaveStatusText(`Saved ${formatDatetime(DateTime.now().toISO())}`)
         hasUnsavedChangesRef.current = false
     }, [buildUpdatedItem])
 

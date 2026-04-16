@@ -8,7 +8,7 @@ import {
     IconPin,
     IconClipboard,
 } from "@tabler/icons-react"
-import { isValidHexColourCode, formatJottedAt } from "@/utils/helpers"
+import { isValidHexColourCode, formatDatetime } from "@/utils/helpers"
 import { ICON_PROPS_NORMAL } from "@/utils/constants"
 import { useProfileSettings } from "@/store/profileSettings"
 import { useItemActions } from "@/hooks/useItemActions"
@@ -67,7 +67,7 @@ export default function JotItem({ item, isSelected, itemIndex }: Props) {
         item.type === "todo" ? item.content : (item.title ?? item.content)
     const secondaryText =
         item.type !== "todo" && item.title ? item.content : null
-    const datetime = formatJottedAt(item.jottedAt, is24HourClock)
+    const datetime = formatDatetime(item.jottedAt, is24HourClock)
 
     const secondaryTextEl = secondaryText && (
         <span className={styles.JotItem__SecondaryText}>{secondaryText}</span>
@@ -104,9 +104,7 @@ export default function JotItem({ item, isSelected, itemIndex }: Props) {
                     className={[
                         styles.JotItem__PrimaryText,
                         item.isDone
-                            ? styles[
-                                    "JotItem__PrimaryText--TodoDone"
-                                ]
+                            ? styles["JotItem__PrimaryText--TodoDone"]
                             : "",
                     ].join(" ")}
                 >
@@ -133,9 +131,7 @@ export default function JotItem({ item, isSelected, itemIndex }: Props) {
         </span>
     )
     const itemDatetime = (
-        <span className={styles.JotItem__Datetime}>
-            {datetime}
-        </span>
+        <span className={styles.JotItem__Datetime}>{datetime}</span>
     )
 
     return (

@@ -10,7 +10,7 @@ export function generateSlug(str: string): string {
         .replace(/-+/g, "-")
 }
 
-export function formatJottedAt(
+export function formatDatetime(
     isoString: string,
     is24HourClock = true,
 ): string {
