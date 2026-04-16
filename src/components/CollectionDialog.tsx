@@ -204,15 +204,19 @@ export default function CollectionDialog({ collection }: Props) {
                     />
                 </div>
             </div>
-            <div className={styles.CollectionDialog__Field}>
-                <label className={styles.CollectionDialog__Label}>Types</label>
-                <span className={styles.CollectionDialog__Description}>
-                    Items of selected types appear in this collection
-                </span>
-                <div className={styles.CollectionDialog__TypesRow}>
-                    {typeCheckboxes}
+            {!collection?.coreType && (
+                <div className={styles.CollectionDialog__Field}>
+                    <label className={styles.CollectionDialog__Label}>
+                        Types
+                    </label>
+                    <span className={styles.CollectionDialog__Description}>
+                        Items of selected types appear in this collection
+                    </span>
+                    <div className={styles.CollectionDialog__TypesRow}>
+                        {typeCheckboxes}
+                    </div>
                 </div>
-            </div>
+            )}
             <div className={styles.CollectionDialog__Field}>
                 <label className={styles.CollectionDialog__Label}>Tags</label>
                 <span className={styles.CollectionDialog__Description}>
