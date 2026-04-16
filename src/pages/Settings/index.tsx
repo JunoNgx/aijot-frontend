@@ -4,16 +4,19 @@ import { toast } from "sonner"
 import { useGoogleAuth } from "@/hooks/useGoogleAuth"
 import { useSyncFn } from "@/hooks/useSync"
 import { useNavigateRoutes } from "@/hooks/useNavigateRoutes"
+import { useLocalAppData } from "@/store/localAppData"
 import { useLocalUserSettings } from "@/store/localUserSettings"
 import { useProfileSettings } from "@/store/profileSettings"
 import { useCoreCollectionSettings } from "@/store/coreCollectionSettings"
 import { useLocalSyncData } from "@/store/localSyncData"
+import { useDialogStore } from "@/store/dialogStore"
 import {
     exportData,
     parseImportFile,
     getImportSummary,
     commitImport,
 } from "@/services/exportImport"
+import { clearAllData, resetApp } from "@/utils/clearData"
 import type { ExportData, ImportSummary } from "@/types"
 import { queryKeys } from "@/db/queryKeys"
 import styles from "./index.module.scss"
@@ -26,6 +29,9 @@ export default function Settings() {
     const [importSummary, setImportSummary] = useState<ImportSummary | null>(
         null,
     )
+    const [isClearingData, setIsClearingData] = useState(false)
+    const [isResettingApp, setIsResettingApp] = useState(false)
+    const [isDebugMode, setIsDebugMode] = useState(false)
 
     const themeMode = useLocalUserSettings((s) => s.themeMode)
     const setThemeMode = useLocalUserSettings((s) => s.setThemeMode)
@@ -52,6 +58,9 @@ export default function Settings() {
     const syncStatus = useLocalSyncData((s) => s.syncStatus)
     const syncError = useLocalSyncData((s) => s.syncError)
     const lastSyncTime = useLocalSyncData((s) => s.lastSyncTime)
+    const setShouldShowDemoDataBanner = useLocalAppData(
+        (s) => s.setShouldShowDemoDataBanner,
+    )
 
     const {
         isConnected,
@@ -64,6 +73,8 @@ export default function Settings() {
     const { sync } = useSyncFn()
     const { navigateToHelp, navigateToPrivacy, navigateToTerms } =
         useNavigateRoutes()
+
+    const closeAllDialogs = useDialogStore((s) => s.closeAllDialogs)
 
     const handleExport = async () => {
         await exportData({
@@ -113,10 +124,98 @@ export default function Settings() {
         }
     }
 
+    const handleClearData = async () => {
+        setIsClearingData(true)
+        try {
+            disconnect()
+            await clearAllData()
+            setShouldShowDemoDataBanner(true)
+            toast("All data cleared. Reloading...")
+            setTimeout(() => window.location.reload(), 1500)
+        } catch {
+            toast.error("Failed to clear data")
+            setIsClearingData(false)
+        }
+    }
+
+    const handleResetApp = async () => {
+        setIsResettingApp(true)
+        try {
+            await resetApp()
+        } catch {
+            toast.error("Failed to reset app")
+            setIsResettingApp(false)
+        }
+    }
+
+    const openClearDataDialog = () => {
+        useDialogStore.getState().openDialog({
+            children: (
+                <>
+                    <p className={styles.Settings__DialogWarning}>
+                        This cannot be undone.
+                    </p>
+                    <div className={styles.Settings__DialogFooter}>
+                        <button
+                            className={styles.Settings__BtnAction}
+                            type="button"
+                            onClick={closeAllDialogs}
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            className={styles.Settings__BtnDanger}
+                            type="button"
+                            disabled={isClearingData}
+                            onClick={handleClearData}
+                        >
+                            {isClearingData ? "Clearing..." : "Clear"}
+                        </button>
+                    </div>
+                </>
+            ),
+        })
+    }
+
+    const openResetAppDialog = () => {
+        useDialogStore.getState().openDialog({
+            children: (
+                <>
+                    <p className={styles.Settings__DialogWarning}>
+                        This cannot be undone.
+                    </p>
+                    <div className={styles.Settings__DialogFooter}>
+                        <button
+                            className={styles.Settings__BtnAction}
+                            type="button"
+                            onClick={closeAllDialogs}
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            className={styles.Settings__BtnDanger}
+                            type="button"
+                            disabled={isResettingApp}
+                            onClick={handleResetApp}
+                        >
+                            {isResettingApp ? "Resetting..." : "Reset app"}
+                        </button>
+                    </div>
+                </>
+            ),
+        })
+    }
+
+    const handleTitleClick = () => {
+        setIsDebugMode((prev) => !prev)
+    }
+
     return (
         <div className={styles.Settings}>
             <BackBtn />
-            <h1 className={styles.Settings__Title}>Settings</h1>
+            <h1 className={styles.Settings__Title} onClick={handleTitleClick}>
+                Settings
+            </h1>
 
             <section className={styles.Settings__Section}>
                 <div className={styles.Settings__SectionHeader}>
@@ -353,6 +452,48 @@ export default function Settings() {
                     </button>
                 </div>
             </section>
+
+            <section
+                className={`${styles.Settings__Section} ${styles["Settings__Section--Spaced"]}`}
+            >
+                <div className={styles.Settings__SectionHeader}>
+                    <h2
+                        className={`${styles.Settings__SectionTitle} ${styles["Settings__SectionTitle--Danger"]}`}
+                    >
+                        Danger Zone
+                    </h2>
+                </div>
+                <p className={styles.Settings__SectionDescription}>
+                    Removes all items and collections. Your data on Google Drive
+                    will remain intact.
+                </p>
+                <button
+                    className={styles.Settings__BtnDanger}
+                    type="button"
+                    onClick={openClearDataDialog}
+                >
+                    Clear all data
+                </button>
+            </section>
+
+            {isDebugMode && (
+                <section className={styles.Settings__Section}>
+                    <div className={styles.Settings__SectionHeader}>
+                        <h2 className={styles.Settings__SectionTitle}>Reset</h2>
+                    </div>
+                    <p className={styles.Settings__SectionDescription}>
+                        Wipes local database and all local app data. Cannot be
+                        undone.
+                    </p>
+                    <button
+                        className={styles.Settings__BtnDanger}
+                        type="button"
+                        onClick={openResetAppDialog}
+                    >
+                        Reset app
+                    </button>
+                </section>
+            )}
         </div>
     )
 }

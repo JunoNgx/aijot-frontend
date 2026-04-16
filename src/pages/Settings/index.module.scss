@@ -12,6 +12,10 @@
     &__Section {
         margin-bottom: 2rem;
 
+        &--Spaced {
+            margin-top: 4rem;
+        }
+
         &Header {
             display: flex;
             align-items: baseline;
@@ -23,6 +27,10 @@
             font-size: var(--fontSizeMd);
             font-weight: 600;
             margin: 0;
+
+            &--Danger {
+                color: var(--colDanger);
+            }
         }
 
         &Description {
@@ -110,6 +118,22 @@
 
     &__BtnConnect {
         composes: Btn Btn--Pri from global;
+    }
+
+    &__BtnDanger {
+        composes: Btn Btn--Danger from global;
+    }
+
+    &__DialogWarning {
+        font-size: var(--fontSizeMd);
+        color: var(--colDanger);
+        margin: 0 0 1rem;
+    }
+
+    &__DialogFooter {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.5rem;
     }
 
     &__Version {
