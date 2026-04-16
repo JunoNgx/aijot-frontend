@@ -184,3 +184,47 @@ export interface LinkFetchResult {
     title: string
     faviconUrl: string
 }
+
+// ============================================================
+// Auth
+// ============================================================
+
+export type TokenResult = string | null | { expired: string }
+
+export interface GisTokenError {
+    type: string
+    message?: string
+}
+
+export interface GisCodeResponse {
+    code: string
+    error?: string
+    error_description?: string
+}
+
+export interface GisCodeClientConfig {
+    client_id: string
+    scope: string
+    ux_mode: "popup" | "redirect"
+    prompt?: string
+    callback: (response: GisCodeResponse) => void
+    error_callback?: (error: GisTokenError) => void
+}
+
+export interface GisCodeClient {
+    requestCode: () => void
+}
+
+declare global {
+    interface Window {
+        google?: {
+            accounts: {
+                oauth2: {
+                    initCodeClient: (
+                        config: GisCodeClientConfig,
+                    ) => GisCodeClient
+                }
+            }
+        }
+    }
+}
