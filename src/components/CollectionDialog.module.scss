@@ -5,6 +5,11 @@
 
     &__Field {
         composes: Dialog__Field from global;
+        flex: 1;
+    }
+
+    &__FieldAuto {
+        composes: Dialog__Field from global;
     }
 
     &__Label {
@@ -15,17 +20,47 @@
         composes: Dialog__Description from global;
     }
 
+    &__EmojiField {
+        position: relative;
+    }
+
+    &__EmojiBtn {
+        composes: Btn Btn--Sec from global;
+        font-size: var(--fontSizeLg);
+        padding: 0.25rem 0.5rem;
+        @include StandardBorder;
+    }
+
+    &__EmojiPicker {
+        position: fixed;
+        transform: translateX(-100%);
+        z-index: 9999;
+    }
+
+    &__ColourField {
+        position: relative;
+    }
+
     &__ColourRow {
         display: flex;
         align-items: center;
         gap: 0.5rem;
     }
 
-    &__ColourSwatch {
-        width: 1.5rem;
-        height: 1.5rem;
+    &__ColourPreviewBlock {
+        width: 2.25rem;
+        height: 2.25rem;
         flex-shrink: 0;
+        cursor: pointer;
+        padding: 0;
         @include StandardBorder;
+    }
+
+    &__ColourPicker {
+        position: absolute;
+        top: calc(100% + 0.25rem);
+        left: 0;
+        z-index: 10;
     }
 
     &__TypesRow {

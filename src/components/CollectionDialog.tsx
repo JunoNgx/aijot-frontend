@@ -1,5 +1,9 @@
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
+import { createPortal } from "react-dom"
 import { DateTime } from "luxon"
+import Picker from "@emoji-mart/react"
+import data from "@emoji-mart/data"
+import { HexColorPicker } from "react-colorful"
 import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
 import { useCollectionsMutations } from "@/hooks/useCollectionsMutations"
 import { useCoreCollectionSettings } from "@/store/coreCollectionSettings"
@@ -47,9 +51,47 @@ export default function CollectionDialog({ collection }: Props) {
     )
     const [tagStr, setTagStr] = useState(collection?.tags.join(" ") ?? "")
     const [saveError, setSaveError] = useState<string | null>(null)
+    const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false)
+    const [isColourPickerOpen, setIsColourPickerOpen] = useState(false)
     const isDefault = isEditing && collection.slug === defaultCollectionSlug
 
     const isSlugManuallyEditedRef = useRef(isEditing)
+    const emojiBtnRef = useRef<HTMLButtonElement>(null)
+    const emojiPortalRef = useRef<HTMLDivElement>(null)
+    const colourPickerRef = useRef<HTMLDivElement>(null)
+    const [emojiPickerPos, setEmojiPickerPos] = useState<{
+        top: number
+        left: number
+    } | null>(null)
+
+    useEffect(() => {
+        if (!isEmojiPickerOpen) return
+        const handleClickOutside = (e: MouseEvent) => {
+            const target = e.target as Node
+            if (
+                !emojiBtnRef.current?.contains(target) &&
+                !emojiPortalRef.current?.contains(target)
+            ) {
+                setIsEmojiPickerOpen(false)
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside)
+        return () =>
+            document.removeEventListener("mousedown", handleClickOutside)
+    }, [isEmojiPickerOpen])
+
+    useEffect(() => {
+        if (!isColourPickerOpen) return
+        const handleClickOutside = (e: MouseEvent) => {
+            if (!colourPickerRef.current?.contains(e.target as Node)) {
+                setIsColourPickerOpen(false)
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside)
+        return () =>
+            document.removeEventListener("mousedown", handleClickOutside)
+    }, [isColourPickerOpen])
+
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setNameVal(e.target.value)
@@ -66,6 +108,25 @@ export default function CollectionDialog({ collection }: Props) {
     const handleTagStrChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const collapsed = e.target.value.replace(/  +/g, " ")
         setTagStr(collapsed)
+    }
+
+    const handleEmojiSelect = (emoji: { native: string }) => {
+        setIconVal(emoji.native)
+        setIsEmojiPickerOpen(false)
+        setEmojiPickerPos(null)
+    }
+
+    const handleEmojiBtnClick = () => {
+        if (isEmojiPickerOpen) {
+            setIsEmojiPickerOpen(false)
+            setEmojiPickerPos(null)
+            return
+        }
+        const rect = emojiBtnRef.current?.getBoundingClientRect()
+        if (rect) {
+            setEmojiPickerPos({ top: rect.bottom + 4, left: rect.right })
+        }
+        setIsEmojiPickerOpen(true)
     }
 
     const handleTypeToggle = (type: ItemType) => {
@@ -175,44 +236,107 @@ export default function CollectionDialog({ collection }: Props) {
 
     return (
         <div className={styles.CollectionDialog}>
-            <div className={styles.CollectionDialog__Field}>
-                <label className={styles.CollectionDialog__Label}>Name</label>
-                <input
-                    className="Dialog__Input"
-                    autoFocus
-                    value={nameVal}
-                    onChange={handleNameChange}
-                />
-            </div>
-            <div className={styles.CollectionDialog__Field}>
-                <label className={styles.CollectionDialog__Label}>Slug</label>
-                <input
-                    className="Dialog__Input"
-                    value={slugVal}
-                    onChange={handleSlugChange}
-                />
-            </div>
-            <div className={styles.CollectionDialog__Field}>
-                <label className={styles.CollectionDialog__Label}>Icon</label>
-                <input
-                    className="Dialog__Input"
-                    value={iconVal}
-                    onChange={(e) => setIconVal(e.target.value)}
-                />
-            </div>
-            <div className={styles.CollectionDialog__Field}>
-                <label className={styles.CollectionDialog__Label}>Colour</label>
-                <div className={styles.CollectionDialog__ColourRow}>
+            <div className="FlexRow">
+                <div className={styles.CollectionDialog__Field}>
+                    <label className={styles.CollectionDialog__Label}>
+                        Name
+                    </label>
                     <input
                         className="Dialog__Input"
-                        value={colourVal}
-                        onChange={(e) => setColourVal(e.target.value)}
-                        placeholder="#rrggbb"
+                        autoFocus
+                        value={nameVal}
+                        onChange={handleNameChange}
                     />
+                </div>
+                <div className={styles.CollectionDialog__FieldAuto}>
+                    <label className={styles.CollectionDialog__Label}>
+                        Icon
+                    </label>
+                    <div className={styles.CollectionDialog__EmojiField}>
+                        <button
+                            ref={emojiBtnRef}
+                            type="button"
+                            className={styles.CollectionDialog__EmojiBtn}
+                            onClick={handleEmojiBtnClick}
+                        >
+                            {iconVal || "..."}
+                        </button>
+                        {isEmojiPickerOpen &&
+                            emojiPickerPos &&
+                            createPortal(
+                                <div
+                                    ref={emojiPortalRef}
+                                    className={
+                                        styles.CollectionDialog__EmojiPicker
+                                    }
+                                    style={{
+                                        top: emojiPickerPos.top,
+                                        left: emojiPickerPos.left,
+                                    }}
+                                >
+                                    <Picker
+                                        data={data}
+                                        onEmojiSelect={handleEmojiSelect}
+                                        theme="auto"
+                                    />
+                                </div>,
+                                document.body,
+                            )}
+                    </div>
+                </div>
+            </div>
+            <div className="FlexRow">
+                <div className={styles.CollectionDialog__Field}>
+                    <label className={styles.CollectionDialog__Label}>
+                        Slug
+                    </label>
+                    <input
+                        className="Dialog__Input"
+                        value={slugVal}
+                        onChange={handleSlugChange}
+                    />
+                </div>
+                <div className={styles.CollectionDialog__Field}>
+                    <label className={styles.CollectionDialog__Label}>
+                        Colour
+                    </label>
                     <div
-                        className={styles.CollectionDialog__ColourSwatch}
-                        style={{ backgroundColor: swatchColour }}
-                    />
+                        className={styles.CollectionDialog__ColourField}
+                        ref={colourPickerRef}
+                    >
+                        <div className={styles.CollectionDialog__ColourRow}>
+                            <input
+                                className="Dialog__Input"
+                                value={colourVal}
+                                onChange={(e) => setColourVal(e.target.value)}
+                                placeholder="#rrggbb"
+                            />
+                            <button
+                                type="button"
+                                className={
+                                    styles.CollectionDialog__ColourPreviewBlock
+                                }
+                                style={{ backgroundColor: swatchColour }}
+                                onClick={() =>
+                                    setIsColourPickerOpen((prev) => !prev)
+                                }
+                            />
+                        </div>
+                        {isColourPickerOpen && (
+                            <div
+                                className={
+                                    styles.CollectionDialog__ColourPicker
+                                }
+                            >
+                                <HexColorPicker
+                                    color={
+                                        isColourValid ? colourVal : "#d0d0d0"
+                                    }
+                                    onChange={setColourVal}
+                                />
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
             {!collection?.coreType && (
