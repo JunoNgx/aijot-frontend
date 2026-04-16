@@ -318,38 +318,38 @@ Remove all Mantine packages: `@mantine/core`, `@mantine/dates`, `@mantine/hooks`
 
 ## Task 31b — GIS types + auth service
 
-- [ ] Add GIS types to `src/types.ts`
-- [ ] `src/services/auth.ts`: `postAuthCallback`, `postAuthRefresh`, `postAuthLogout`
+- [x] Add GIS types to `src/types.ts`
+- [x] `src/services/googleAuth.ts`: `postAuthCallback`, `postAuthRefresh`, `postAuthLogout`
 
 ---
 
 ## Task 31c — useGoogleAuth hook
 
-- [ ] `src/hooks/useGoogleAuth.ts`: GIS script loader, `connect` (initCodeClient popup), `disconnect`, `getValidToken`
+- [x] `src/hooks/useGoogleAuth.ts`: GIS script loader, `connect` (initCodeClient popup), `disconnect`, `getValidToken`
 
 ---
 
 ## Task 31d — Drive client
 
-- [ ] `src/services/driveClient.ts`: folder discovery/create, file list, download, upsert
+- [x] `src/services/driveClient.ts`: folder discovery/create, file list, download, upsert
 
 ---
 
 ## Task 31e — Drive sync logic
 
-- [ ] `src/services/driveSync.ts`: `runFullDriveSync` — download `data.json`, last-write-wins merge on items + collections, upload
+- [x] `src/services/driveSync.ts`: `runFullDriveSync` — download `data.json`, last-write-wins merge on items + collections, upload
 
 ---
 
 ## Task 31f — useSync hook
 
-- [ ] `src/hooks/useSync.ts`: `useSyncFn` + `useSync` with debounced mutation trigger + visibility change handler
+- [x] `src/hooks/useSync.ts`: `useSyncFn` + `useSync` with debounced mutation trigger + visibility change handler
 
 ---
 
 ## Task 31g — Settings page sync UI
 
-- [ ] Wire connect/disconnect, sync status, manual sync button in Settings page
+- [x] Wire connect/disconnect, sync status, manual sync button in Settings page
 
 ---
 
