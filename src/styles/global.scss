@@ -24,6 +24,11 @@ body {
     height: 100%;
 }
 
+*:focus-visible {
+    outline: var(--lineWidth) solid var(--colAccent);
+    outline-offset: 2px;
+}
+
 input {
     font-family: var(--fontFamilyMono);
     font-size: inherit;

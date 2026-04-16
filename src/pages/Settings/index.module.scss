@@ -56,10 +56,6 @@
         composes: Dialog__Input from global;
         width: 160px;
         font-size: var(--fontSizeMd);
-
-        &:focus {
-            outline: var(--lineWidth) solid var(--colText);
-        }
     }
 
     &__RadioGroup {
