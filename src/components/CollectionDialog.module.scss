@@ -60,6 +60,15 @@
         top: calc(100% + 0.25rem);
         left: 0;
         z-index: 10;
+
+        :global(.react-colorful) {
+            @include StandardBorder;
+        }
+
+        :global(.react-colorful__last-control),
+        :global(.react-colorful__saturation) {
+            border-radius: 0;
+        }
     }
 
     &__BtnRandomise {
