@@ -44,7 +44,7 @@ export const ICON_PROPS_BUTTON = {
 // Misc UI values
 // ============================================================
 
-export const DROPDOWN_OFFSET = 16
+export const DROPDOWN_OFFSET = 10
 
 // ============================================================
 // Routes
