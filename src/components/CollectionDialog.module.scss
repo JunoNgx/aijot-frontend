@@ -43,13 +43,12 @@
 
     &__ColourRow {
         display: flex;
-        align-items: center;
+        align-items: stretch;
         gap: 0.5rem;
     }
 
     &__ColourPreviewBlock {
-        width: 2.25rem;
-        height: 2.25rem;
+        width: 2.5rem;
         flex-shrink: 0;
         cursor: pointer;
         padding: 0;
