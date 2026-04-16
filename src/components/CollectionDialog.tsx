@@ -13,6 +13,30 @@ import { generateSlug, isValidHexColourCode } from "@/utils/helpers"
 import styles from "./CollectionDialog.module.scss"
 import type { Collection, ItemType } from "@/types"
 
+const RANDOM_ICONS = [
+    "💼", // work
+    "🏠", // home
+    "📚", // reading / learning
+    "🎯", // goals
+    "💡", // ideas
+    "✈️", // travel
+    "🍽️", // food / recipes
+    "💰", // finance
+    "🎵", // music
+    "🎬", // films / media
+    "🏋️", // fitness
+    "🌱", // projects / growth
+    "💻", // tech / coding
+    "🎮", // gaming
+    "🛒", // shopping
+    "❤️", // personal / favourites
+    "📸", // photos
+    "🎓", // education
+    "🔬", // research
+    "🎁", // gifts / wishlist
+]
+const getRandomIcon = () => RANDOM_ICONS[Math.floor(Math.random() * RANDOM_ICONS.length)]
+
 const ALL_TYPES: ItemType[] = ["text", "todo", "link"]
 const TYPE_LABELS: Record<ItemType, string> = {
     text: "Text",
@@ -44,7 +68,7 @@ export default function CollectionDialog({ collection }: Props) {
 
     const [nameVal, setNameVal] = useState(collection?.name ?? "")
     const [slugVal, setSlugVal] = useState(collection?.slug ?? "")
-    const [iconVal, setIconVal] = useState(collection?.icon ?? "")
+    const [iconVal, setIconVal] = useState(collection?.icon ?? getRandomIcon())
     const [colourVal, setColourVal] = useState(collection?.colour ?? "#d0d0d0")
     const [typesVal, setTypesVal] = useState<ItemType[]>(
         collection?.types ?? ALL_TYPES,
