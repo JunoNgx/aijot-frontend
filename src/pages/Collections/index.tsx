@@ -170,15 +170,15 @@ function CollectionRow({ collection, isDefault }: CollectionRowProps) {
                     {collection.tags.join(" ")}
                 </span>
             )}
+            {collection.coreType && (
+                <span className={styles.CollectionItem__CoreBadge}>
+                    [{collection.coreType}]
+                </span>
+            )}
             <span className={styles.CollectionItem__Indicators}>
                 {isDefault && (
                     <span className={styles.CollectionItem__DefaultBadge}>
                         [default]
-                    </span>
-                )}
-                {collection.coreType && (
-                    <span className={styles.CollectionItem__CoreBadge}>
-                        [core]
                     </span>
                 )}
             </span>
