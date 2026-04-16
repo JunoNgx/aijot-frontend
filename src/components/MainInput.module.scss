@@ -1,8 +1,6 @@
 @use "styles/mixins" as *;
 
 .MainInput {
-    padding: 1rem;
-
     &__Input {
         width: 100%;
         padding: 0.5rem;
@@ -10,9 +8,8 @@
 
         &:focus,
         &:focus-visible {
-            outline-offset: 5px;
-
-            @include StandardOutline;
+            outline-style: none;
+            border-color: var(--colAccent);
         }
     }
 }

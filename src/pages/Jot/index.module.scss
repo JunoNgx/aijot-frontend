@@ -2,6 +2,7 @@
     composes: Router from global;
     display: flex;
     flex-direction: column;
+    gap: 2rem;
     height: 100%;
     padding: 0;
 
@@ -12,6 +13,6 @@
     &__List {
         display: flex;
         flex-direction: column;
-        margin: 0 0.5rem;
+        gap: 0.25rem;
     }
 }
