@@ -312,17 +312,28 @@ export default function CollectionDialog({ collection }: Props) {
                     </div>
                 </div>
             </div>
+            <div className={styles.CollectionDialog__Field}>
+                <label className={styles.CollectionDialog__Label}>Slug</label>
+                <input
+                    className="Dialog__Input"
+                    value={slugVal}
+                    onChange={handleSlugChange}
+                />
+            </div>
             <div className="FlexRow">
-                <div className={styles.CollectionDialog__Field}>
-                    <label className={styles.CollectionDialog__Label}>
-                        Slug
-                    </label>
-                    <input
-                        className="Dialog__Input"
-                        value={slugVal}
-                        onChange={handleSlugChange}
-                    />
-                </div>
+                {!collection?.coreType && (
+                    <div className={styles.CollectionDialog__Field}>
+                        <label className={styles.CollectionDialog__Label}>
+                            Types
+                        </label>
+                        <span className={styles.CollectionDialog__Description}>
+                            Items of selected types appear in this collection
+                        </span>
+                        <div className={styles.CollectionDialog__TypesRow}>
+                            {typeCheckboxes}
+                        </div>
+                    </div>
+                )}
                 <div className={styles.CollectionDialog__Field}>
                     <label className={styles.CollectionDialog__Label}>
                         Colour
@@ -333,7 +344,7 @@ export default function CollectionDialog({ collection }: Props) {
                     >
                         <div className={styles.CollectionDialog__ColourRow}>
                             <input
-                                className="Dialog__Input"
+                                className={`Dialog__Input ${styles.CollectionDialog__ColourInput}`}
                                 value={colourVal}
                                 onChange={(e) => setColourVal(e.target.value)}
                                 placeholder="#rrggbb"
@@ -373,19 +384,6 @@ export default function CollectionDialog({ collection }: Props) {
                     </div>
                 </div>
             </div>
-            {!collection?.coreType && (
-                <div className={styles.CollectionDialog__Field}>
-                    <label className={styles.CollectionDialog__Label}>
-                        Types
-                    </label>
-                    <span className={styles.CollectionDialog__Description}>
-                        Items of selected types appear in this collection
-                    </span>
-                    <div className={styles.CollectionDialog__TypesRow}>
-                        {typeCheckboxes}
-                    </div>
-                </div>
-            )}
             <div className={styles.CollectionDialog__Field}>
                 <label className={styles.CollectionDialog__Label}>Tags</label>
                 <span className={styles.CollectionDialog__Description}>

@@ -39,12 +39,19 @@
 
     &__ColourField {
         position: relative;
+        min-width: 0;
     }
 
     &__ColourRow {
         display: flex;
         align-items: stretch;
         gap: 0.5rem;
+    }
+
+    &__ColourInput {
+        min-width: 0;
+        flex-shrink: 1;
+        width: 8rem;
     }
 
     &__ColourPreviewBlock {
