@@ -316,13 +316,40 @@ Remove all Mantine packages: `@mantine/core`, `@mantine/dates`, `@mantine/hooks`
 
 ---
 
-## Task 31 — Auth + Google Drive sync
+## Task 31b — GIS types + auth service
 
-- [ ] `src/services/auth.ts`: postAuthCallback, postAuthRefresh, postAuthLogout
-- [ ] GIS script loader + initCodeClient
-- [ ] token refresh flow; folder discovery/cache
-- [ ] download → resolve (last-write-wins) → upload
-- [ ] debounced 15s trigger + manual trigger + disconnect
+- [ ] Add GIS types to `src/types.ts`
+- [ ] `src/services/auth.ts`: `postAuthCallback`, `postAuthRefresh`, `postAuthLogout`
+
+---
+
+## Task 31c — useGoogleAuth hook
+
+- [ ] `src/hooks/useGoogleAuth.ts`: GIS script loader, `connect` (initCodeClient popup), `disconnect`, `getValidToken`
+
+---
+
+## Task 31d — Drive client
+
+- [ ] `src/services/driveClient.ts`: folder discovery/create, file list, download, upsert
+
+---
+
+## Task 31e — Drive sync logic
+
+- [ ] `src/services/driveSync.ts`: `runFullDriveSync` — download `data.json`, last-write-wins merge on items + collections, upload
+
+---
+
+## Task 31f — useSync hook
+
+- [ ] `src/hooks/useSync.ts`: `useSyncFn` + `useSync` with debounced mutation trigger + visibility change handler
+
+---
+
+## Task 31g — Settings page sync UI
+
+- [ ] Wire connect/disconnect, sync status, manual sync button in Settings page
 
 ---
 
