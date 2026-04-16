@@ -4,7 +4,11 @@ import { useHotkeys } from "react-hotkeys-hook"
 import { IconChevronDown } from "@tabler/icons-react"
 import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
 import { useNavigateRoutes } from "@/hooks/useNavigateRoutes"
-import { COLLECTION_HOTKEY_COUNT, DROPDOWN_OFFSET, ICON_PROPS_NORMAL } from "@/utils/constants"
+import {
+    COLLECTION_HOTKEY_COUNT,
+    DROPDOWN_OFFSET,
+    ICON_PROPS_NORMAL,
+} from "@/utils/constants"
 import styles from "./CollectionDropdown.module.scss"
 
 const HOTKEYS = Array.from(

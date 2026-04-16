@@ -2,7 +2,11 @@ import type { ComponentType } from "react"
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu"
 import { IconSun, IconMoon, IconDeviceDesktop } from "@tabler/icons-react"
 import { useLocalUserSettings } from "@/store/localUserSettings"
-import { DROPDOWN_OFFSET, ICON_PROPS_HEADER, ICON_PROPS_NORMAL } from "@/utils/constants"
+import {
+    DROPDOWN_OFFSET,
+    ICON_PROPS_HEADER,
+    ICON_PROPS_NORMAL,
+} from "@/utils/constants"
 import type { ThemeMode } from "@/types"
 import styles from "./ThemeModeDropdown.module.scss"
 
