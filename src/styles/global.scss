@@ -264,7 +264,7 @@ kbd {
 // ============================================================
 
 .Router {
-    max-width: 720px;
+    max-width: var(--routeWidth);
     margin: auto;
     padding: 2rem 1rem;
 
