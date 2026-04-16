@@ -3,13 +3,18 @@ import * as ContextMenu from "@radix-ui/react-context-menu"
 import {
     IconNote,
     IconLink,
+    IconWorld,
     IconSquare,
     IconCheckbox,
     IconPin,
     IconClipboard,
 } from "@tabler/icons-react"
 import { isValidHexColourCode, formatDatetime } from "@/utils/helpers"
-import { ICON_PROPS_ITEM_ICON, ICON_PROPS_ITEM_STATUS, ICON_PROPS_NORMAL } from "@/utils/constants"
+import {
+    ICON_PROPS_ITEM_ICON,
+    ICON_PROPS_ITEM_STATUS,
+    ICON_PROPS_NORMAL,
+} from "@/utils/constants"
 import { useProfileSettings } from "@/store/profileSettings"
 import { useItemActions } from "@/hooks/useItemActions"
 import JotItemContextMenu from "./JotItemContextMenu"
@@ -45,7 +50,7 @@ function ItemIcon({ item }: { item: Item }) {
     }
     if (item.type === "link") {
         if (item.faviconUrl) return <FaviconIcon url={item.faviconUrl} />
-        return <IconLink {...ICON_PROPS_ITEM_ICON} />
+        return <IconWorld {...ICON_PROPS_ITEM_ICON} />
     }
     const lastSevenChars = item.content.slice(-7)
     if (isValidHexColourCode(lastSevenChars)) {
@@ -118,9 +123,7 @@ export default function JotItem({ item, isSelected, itemIndex }: Props) {
             <span
                 className={[
                     styles.JotItem__PrimaryText,
-                    item.isDone
-                        ? styles["JotItem__PrimaryText--TodoDone"]
-                        : "",
+                    item.isDone ? styles["JotItem__PrimaryText--TodoDone"] : "",
                 ].join(" ")}
             >
                 {primaryText}
