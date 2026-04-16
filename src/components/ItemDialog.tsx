@@ -255,6 +255,52 @@ export default function ItemDialog({ item, onClose }: Props) {
         </div>
     )
 
+    const moreOptionsAccordion = (
+        <Accordion.Item
+            value="advanced"
+            className={styles.ItemDialog__AccordionItem}
+        >
+            <Accordion.Header className={styles.ItemDialog__AccordionHeader}>
+                <Accordion.Trigger
+                    className={styles.ItemDialog__AccordionTrigger}
+                >
+                    More options
+                </Accordion.Trigger>
+            </Accordion.Header>
+            <Accordion.Content className={styles.ItemDialog__AccordionContent}>
+                <div className={styles.ItemDialog__Field}>
+                    <label className={styles.ItemDialog__Label}>
+                        Jotted at
+                    </label>
+                    <input
+                        className="Dialog__Input"
+                        type="datetime-local"
+                        value={jottedAtInputVal}
+                        onChange={handleJottedAtChange}
+                    />
+                </div>
+            </Accordion.Content>
+        </Accordion.Item>
+    )
+
+    const deleteButton = (
+        <button
+            className={styles.ItemDialog__BtnDelete}
+            onClick={handleDeleteClick}
+        >
+            Delete
+        </button>
+    )
+
+    const saveButton = (
+        <button
+            className={styles.ItemDialog__BtnSave}
+            onClick={handleSaveAndClose}
+        >
+            Save
+        </button>
+    )
+
     const lastVersionSection = isTextItem && item.previousContent && (
         <Accordion.Item
             value="last-version"
@@ -328,50 +374,12 @@ export default function ItemDialog({ item, onClose }: Props) {
                 type="multiple"
                 className={styles.ItemDialog__Accordion}
             >
-                <Accordion.Item
-                    value="advanced"
-                    className={styles.ItemDialog__AccordionItem}
-                >
-                    <Accordion.Header
-                        className={styles.ItemDialog__AccordionHeader}
-                    >
-                        <Accordion.Trigger
-                            className={styles.ItemDialog__AccordionTrigger}
-                        >
-                            More options
-                        </Accordion.Trigger>
-                    </Accordion.Header>
-                    <Accordion.Content
-                        className={styles.ItemDialog__AccordionContent}
-                    >
-                        <div className={styles.ItemDialog__Field}>
-                            <label className={styles.ItemDialog__Label}>
-                                Jotted at
-                            </label>
-                            <input
-                                className="Dialog__Input"
-                                type="datetime-local"
-                                value={jottedAtInputVal}
-                                onChange={handleJottedAtChange}
-                            />
-                        </div>
-                    </Accordion.Content>
-                </Accordion.Item>
+                {moreOptionsAccordion}
                 {lastVersionSection}
             </Accordion.Root>
             <div className={styles.ItemDialog__Footer}>
-                <button
-                    className={styles.ItemDialog__BtnDelete}
-                    onClick={handleDeleteClick}
-                >
-                    Delete
-                </button>
-                <button
-                    className={styles.ItemDialog__BtnSave}
-                    onClick={handleSaveAndClose}
-                >
-                    Save
-                </button>
+                {deleteButton}
+                {saveButton}
             </div>
         </div>
     )
