@@ -8,7 +8,6 @@
         composes: Dropdown__Trigger from global;
         @include ClearBtn;
         padding: 0.5rem 0.5rem 0.5rem 0 !important;
-        background-color: var(--colBg);
         box-sizing: border-box;
         max-width: 100%;
     }
