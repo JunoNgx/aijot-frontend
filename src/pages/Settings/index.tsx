@@ -1,6 +1,8 @@
 import { useRef, useState } from "react"
 import { useQueryClient } from "@tanstack/react-query"
 import { toast } from "sonner"
+import { useGoogleAuth } from "@/hooks/useGoogleAuth"
+import { useSyncFn } from "@/hooks/useSync"
 import { useLocalUserSettings } from "@/store/localUserSettings"
 import { useProfileSettings } from "@/store/profileSettings"
 import { useCoreCollectionSettings } from "@/store/coreCollectionSettings"
@@ -47,7 +49,18 @@ export default function Settings() {
     const setTrash = useCoreCollectionSettings((s) => s.setTrash)
 
     const syncStatus = useLocalSyncData((s) => s.syncStatus)
+    const syncError = useLocalSyncData((s) => s.syncError)
     const lastSyncTime = useLocalSyncData((s) => s.lastSyncTime)
+
+    const {
+        isConnected,
+        isConnecting,
+        connectError,
+        connect,
+        disconnect,
+        authToken,
+    } = useGoogleAuth()
+    const { sync } = useSyncFn()
 
     const handleExport = async () => {
         await exportData({
@@ -250,20 +263,55 @@ export default function Settings() {
                 <p className={styles.Settings__SectionDescription}>
                     Back up your data to Google Drive
                 </p>
-                {syncStatus !== "idle" && (
+                {isConnected && authToken && (
                     <div className={styles.Settings__SyncStatus}>
-                        {syncStatus === "syncing" && "Syncing..."}
-                        {syncStatus === "error" && "Sync error"}
-                        {lastSyncTime && `Last sync: ${lastSyncTime}`}
+                        <span>Connected as {authToken.email}</span>
+                        {lastSyncTime && (
+                            <span>
+                                Last sync:{" "}
+                                {new Date(lastSyncTime).toLocaleString()}
+                            </span>
+                        )}
+                        {syncStatus === "syncing" && <span>Syncing...</span>}
+                        {syncStatus === "error" && syncError && (
+                            <span>Error: {syncError}</span>
+                        )}
+                    </div>
+                )}
+                {connectError && (
+                    <div className={styles.Settings__SyncStatus}>
+                        {connectError}
                     </div>
                 )}
                 <div className="FlexRow">
-                    <button
-                        className={styles.Settings__BtnConnect}
-                        type="button"
-                    >
-                        Connect
-                    </button>
+                    {isConnected ? (
+                        <>
+                            <button
+                                className={styles.Settings__BtnAction}
+                                type="button"
+                                disabled={syncStatus === "syncing"}
+                                onClick={() => sync()}
+                            >
+                                Sync now
+                            </button>
+                            <button
+                                className={styles.Settings__BtnAction}
+                                type="button"
+                                onClick={disconnect}
+                            >
+                                Disconnect
+                            </button>
+                        </>
+                    ) : (
+                        <button
+                            className={styles.Settings__BtnConnect}
+                            type="button"
+                            disabled={isConnecting}
+                            onClick={connect}
+                        >
+                            {isConnecting ? "Connecting..." : "Connect"}
+                        </button>
+                    )}
                 </div>
             </section>
         </div>
