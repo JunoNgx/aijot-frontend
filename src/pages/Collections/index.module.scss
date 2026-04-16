@@ -4,7 +4,7 @@
     composes: Router from global;
 
     &__Header {
-        composes: Router__Header;
+        composes: Router__Header from global;
     }
 
     &__Title {
