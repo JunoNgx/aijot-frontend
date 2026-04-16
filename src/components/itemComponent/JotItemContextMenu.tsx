@@ -75,9 +75,11 @@ export default function JotItemContextMenu({ item }: Props) {
                 className={styles.JotItemContextMenu__Item}
                 onClick={() => toggleCopyOnClick(item)}
             >
-                {item.shouldCopyOnClick
-                    ? <IconCheckbox {...ICON_PROPS_NORMAL} />
-                    : <IconSquare {...ICON_PROPS_NORMAL} />}
+                {item.shouldCopyOnClick ? (
+                    <IconCheckbox {...ICON_PROPS_NORMAL} />
+                ) : (
+                    <IconSquare {...ICON_PROPS_NORMAL} />
+                )}
                 Copy on click
             </ContextMenu.Item>
             {item.type === "link" && (
