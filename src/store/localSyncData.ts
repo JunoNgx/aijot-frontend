@@ -16,6 +16,13 @@ export const useLocalSyncData = create<LocalSyncDataStore>()(
             setSyncStatus: (syncStatus) => set({ syncStatus }),
             setSyncError: (syncError) => set({ syncError }),
         }),
-        { name: "localSyncData" },
+        {
+            name: "localSyncData",
+            partialize: (state) => ({
+                authToken: state.authToken,
+                driveFolderId: state.driveFolderId,
+                lastSyncTime: state.lastSyncTime,
+            }),
+        },
     ),
 )
