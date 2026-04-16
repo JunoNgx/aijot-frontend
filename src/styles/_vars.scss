@@ -3,21 +3,19 @@
 
 [data-color-scheme="light"] {
     --colBg: #e0e0e0;
-    --colBgSec: #cfcfcf;
+    --colMain: #0098a9;
+    --colSub: #777777;
+    --colBgSub: #cfcfcf;
     --colText: #121212;
-    --colTextSec: #777777;
-    --colAccent: #0098a9;
-    --colAccentAlt: #d57300;
     --colDanger: #fa5252;
 }
 
 [data-color-scheme="dark"] {
     --colBg: #121212;
-    --colBgSec: #333;
+    --colMain: #0098a9;
+    --colSub: #777777;
+    --colBgSub: #333;
     --colText: #e0e0e0;
-    --colTextSec: #777777;
-    --colAccent: #0098a9;
-    --colAccentAlt: #d57300;
     --colDanger: #fa5252;
 }
 

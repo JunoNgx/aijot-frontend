@@ -38,7 +38,7 @@
     }
 
     &--Dragging {
-        background-color: var(--colBgSec);
+        background-color: var(--colBgSub);
         border-width: 0;
     }
 
@@ -84,7 +84,7 @@
         flex-shrink: 2;
         min-width: 0;
         font-size: var(--fontSizeSm);
-        color: var(--colTextSec);
+        color: var(--colSub);
         @include Ellipsified;
     }
 
@@ -100,7 +100,7 @@
     &__DefaultBadge,
     &__CoreBadge {
         font-size: var(--fontSizeSm);
-        color: var(--colTextSec);
+        color: var(--colSub);
         @include Ellipsified;
     }
 }

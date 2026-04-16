@@ -27,7 +27,7 @@
 
         &Description {
             font-size: var(--fontSizeSm);
-            color: var(--colTextSec);
+            color: var(--colSub);
             margin: 0;
         }
     }
@@ -84,7 +84,7 @@
         align-items: center;
         gap: 0.5rem;
         font-size: var(--fontSizeMd);
-        color: var(--colTextSec);
+        color: var(--colSub);
         margin-bottom: 0.75rem;
     }
 
@@ -95,7 +95,7 @@
         margin-top: 0.75rem;
         padding: 0.5rem 0.625rem;
         font-size: var(--fontSizeMd);
-        background-color: var(--colBgSec);
+        background-color: var(--colBgSub);
         @include StandardBorder;
 
         &Actions {
@@ -114,7 +114,7 @@
 
     &__Version {
         font-size: var(--fontSizeSm);
-        color: var(--colTextSec);
+        color: var(--colSub);
         margin: 0.5rem 0 0;
     }
 }
