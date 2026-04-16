@@ -332,7 +332,9 @@ export default function ItemDialog({ item, onClose }: Props) {
                     value="advanced"
                     className={styles.ItemDialog__AccordionItem}
                 >
-                    <Accordion.Header>
+                    <Accordion.Header
+                        className={styles.ItemDialog__AccordionHeader}
+                    >
                         <Accordion.Trigger
                             className={styles.ItemDialog__AccordionTrigger}
                         >

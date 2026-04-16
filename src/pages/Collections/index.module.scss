@@ -13,7 +13,7 @@
     }
 
     &__Title {
-        font-size: 1.25rem;
+        font-size: var(--fontSizeLg);
         font-weight: 600;
         margin: 0;
     }
@@ -90,7 +90,7 @@
     &__Tags {
         flex-shrink: 2;
         min-width: 0;
-        font-size: 0.75rem;
+        font-size: var(--fontSizeSm);
         color: var(--colTextSec);
         @include Ellipsified;
     }
@@ -106,7 +106,7 @@
 
     &__DefaultBadge,
     &__CoreBadge {
-        font-size: 0.75rem;
+        font-size: var(--fontSizeSm);
         color: var(--colTextSec);
         @include Ellipsified;
     }

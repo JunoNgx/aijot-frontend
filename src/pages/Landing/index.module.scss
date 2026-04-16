@@ -9,13 +9,13 @@
     padding: 2rem;
 
     &__Title {
-        font-size: 3rem;
+        font-size: var(--fontSizeLogo);
         font-weight: 700;
         margin: 0;
     }
 
     &__Tagline {
-        font-size: 1rem;
+        font-size: var(--fontSizeMd);
         opacity: 0.6;
         margin: 0;
     }

@@ -42,7 +42,7 @@
     }
 
     &__PrimaryText {
-        font-size: 1rem;
+        font-size: var(--fontSizeMd);
         color: var(--colText);
         overflow: hidden;
         text-overflow: ellipsis;
@@ -68,13 +68,13 @@
     }
 
     &__Datetime {
-        font-size: 1rem;
+        font-size: var(--fontSizeMd);
         color: var(--colText);
         flex-shrink: 0;
     }
 
     &__SecondaryText {
-        font-size: 0.75rem;
+        font-size: var(--fontSizeSm);
         color: var(--colText);
         overflow: hidden;
         text-overflow: ellipsis;

@@ -24,9 +24,19 @@
 :root {
     --fontFamily: "Space Grotesk", sans-serif;
     --fontFamilyMono: "Space Mono", monospace;
+
     --verticalPaddingLg: 6rem;
     --verticalPaddingSm: 4rem;
+
+    --fontSizeSeparator: 1.5rem;
+    --fontSizeSm: 0.75rem;
+    --fontSizeMd: 1rem;
+    --fontSizeLg: 1.25rem;
+    --fontSizeXl: 1.5rem;
+    --fontSizeLogo: 3rem;
+
     --containerWidth: 1000px;
+
     --lineWidth: 2px;
 }
 

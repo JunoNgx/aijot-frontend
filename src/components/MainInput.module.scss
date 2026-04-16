@@ -6,7 +6,7 @@
     &__Input {
         width: 100%;
         padding: 0.5rem;
-        font-size: 1rem;
+        font-size: var(--fontSizeMd);
 
         &:focus,
         &:focus-visible {
