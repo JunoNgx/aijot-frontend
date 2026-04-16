@@ -258,3 +258,30 @@ kbd {
         margin: 0.25rem 0;
     }
 }
+
+// ============================================================
+// Route
+// ============================================================
+
+.Router {
+    max-width: 720px;
+    margin: auto;
+    padding: 2rem 1rem;
+
+    &__Header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1.5rem;
+    }
+
+    &__Title {
+        font-size: var(--fontSizeLg);
+        font-weight: 600;
+        margin: 0;
+    }
+
+    &__BtnNew {
+        composes: Btn Btn--Pri from global;
+    }
+}

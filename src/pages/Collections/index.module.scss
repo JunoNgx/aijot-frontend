@@ -1,25 +1,18 @@
 @use "styles/mixins" as *;
 
 .Collections {
-    max-width: 720px;
-    margin: auto;
-    padding: 2rem 1rem;
+    composes: Router from global;
 
     &__Header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 1.5rem;
+        composes: Router__Header;
     }
 
     &__Title {
-        font-size: var(--fontSizeLg);
-        font-weight: 600;
-        margin: 0;
+        composes: Router__Title from global;
     }
 
     &__BtnNew {
-        composes: Btn Btn--Pri from global;
+        composes: Router__BtnNew from global;
     }
 
     &__List {

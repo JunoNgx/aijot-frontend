@@ -1,9 +1,7 @@
 @use "styles/mixins" as *;
 
 .Settings {
-    max-width: 720px;
-    margin: auto;
-    padding: 2rem 1rem;
+    composes: Router from global;
 
     &__Title {
         font-size: var(--fontSizeXl);

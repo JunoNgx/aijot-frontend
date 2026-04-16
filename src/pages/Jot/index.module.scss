@@ -1,9 +1,9 @@
 .Jot {
+    composes: Router from global;
     display: flex;
     flex-direction: column;
     height: 100%;
-    max-width: 720px;
-    margin: auto;
+    padding: 0;
 
     &__NoticeWrapper {
         padding: 40px 0;
