@@ -80,6 +80,7 @@
 
     &__BtnSetDefault {
         composes: Btn Btn--Sec from global;
+        width: fit-content;
     }
 
     &__Footer {
