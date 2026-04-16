@@ -207,7 +207,10 @@ export default function Settings() {
     }
 
     const handleTitleClick = () => {
-        setIsDebugMode((prev) => !prev)
+        if (!isDebugMode) {
+            setIsDebugMode(true)
+            toast("Debug mode enabled")
+        }
     }
 
     return (
@@ -479,7 +482,7 @@ export default function Settings() {
             {isDebugMode && (
                 <section className={styles.Settings__Section}>
                     <div className={styles.Settings__SectionHeader}>
-                        <h2 className={styles.Settings__SectionTitle}>Reset</h2>
+                        <h2 className={styles.Settings__SectionTitle}>Debug</h2>
                     </div>
                     <p className={styles.Settings__SectionDescription}>
                         Wipes local database and all local app data. Cannot be
