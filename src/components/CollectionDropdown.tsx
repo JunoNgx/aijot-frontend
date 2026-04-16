@@ -68,9 +68,9 @@ export default function CollectionDropdown() {
                         {collection.name}
                     </span>
                     {hotkeyNum !== null && (
-                        <span className={styles.CollectionDropdown__Hotkey}>
+                        <kbd className={styles.CollectionDropdown__Hotkey}>
                             {hotkeyNum}
-                        </span>
+                        </kbd>
                     )}
                 </DropdownMenu.Item>
             </div>
