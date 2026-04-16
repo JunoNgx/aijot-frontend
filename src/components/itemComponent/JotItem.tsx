@@ -126,7 +126,6 @@ export default function JotItem({ item, isSelected, itemIndex }: Props) {
                 {primaryText}
             </span>
             {secondaryTextEl}
-            {itemIndicators}
         </div>
     )
 
@@ -149,6 +148,7 @@ export default function JotItem({ item, isSelected, itemIndex }: Props) {
                 >
                     {itemIcon}
                     {itemBody}
+                    {itemIndicators}
                     {itemDatetime}
                 </Tag>
             </ContextMenu.Trigger>
