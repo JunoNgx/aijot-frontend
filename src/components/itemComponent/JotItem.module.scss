@@ -8,11 +8,10 @@
     cursor: pointer;
 
     &:hover {
-        background-color: var(--colSurface);
+        background-color: var(--colBgSec);
     }
 
     &--Selected {
-        background-color: var(--colSurface);
         outline-offset: -1px;
 
         @include StandardOutline;

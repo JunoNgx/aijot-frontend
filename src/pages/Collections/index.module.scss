@@ -45,8 +45,8 @@
     }
 
     &--Dragging {
-        background-color: var(--colSurface);
-        @include StandardBorder;
+        background-color: var(--colBgSec);
+        border-width: 0;
     }
 
     &__DragHandle {
