@@ -37,8 +37,13 @@ const RANDOM_ICONS = [
     "🔬", // research
     "🎁", // gifts / wishlist
 ]
-const getRandomIcon = () => RANDOM_ICONS[Math.floor(Math.random() * RANDOM_ICONS.length)]
-const getRandomColour = () => "#" + Math.floor(Math.random() * 0xffffff).toString(16).padStart(6, "0")
+const getRandomIcon = () =>
+    RANDOM_ICONS[Math.floor(Math.random() * RANDOM_ICONS.length)]
+const getRandomColour = () =>
+    "#" +
+    Math.floor(Math.random() * 0xffffff)
+        .toString(16)
+        .padStart(6, "0")
 
 const ALL_TYPES: ItemType[] = ["text", "todo", "link"]
 const TYPE_LABELS: Record<ItemType, string> = {
@@ -118,7 +123,6 @@ export default function CollectionDialog({ collection }: Props) {
         return () =>
             document.removeEventListener("mousedown", handleClickOutside)
     }, [isColourPickerOpen])
-
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setNameVal(e.target.value)
@@ -261,6 +265,72 @@ export default function CollectionDialog({ collection }: Props) {
         </label>
     ))
 
+    const emojiPickerPortal =
+        isEmojiPickerOpen &&
+        emojiPickerPos &&
+        createPortal(
+            <div
+                ref={emojiPortalRef}
+                className={styles.CollectionDialog__EmojiPicker}
+                style={{
+                    top: emojiPickerPos.top,
+                    left: emojiPickerPos.left,
+                }}
+            >
+                <Picker
+                    data={data}
+                    onEmojiSelect={handleEmojiSelect}
+                    theme="auto"
+                />
+            </div>,
+            document.body,
+        )
+
+    const colourPickerPanel = isColourPickerOpen && (
+        <div className={styles.CollectionDialog__ColourPicker}>
+            <HexColorPicker
+                color={isColourValid ? colourVal : "#d0d0d0"}
+                onChange={setColourVal}
+            />
+        </div>
+    )
+
+    const defaultSection = isEditing && (
+        <div className={styles.CollectionDialog__Field}>
+            {isDefault ? (
+                <span className={styles.CollectionDialog__DefaultIndicator}>
+                    This is currently your default collection
+                </span>
+            ) : (
+                <button
+                    className={styles.CollectionDialog__BtnSetDefault}
+                    type="button"
+                    onClick={() => setDefaultCollectionSlug(collection.slug)}
+                >
+                    Set as default collection
+                </button>
+            )}
+        </div>
+    )
+
+    const deleteButton = isEditing && !collection.coreType && (
+        <button
+            className={styles.CollectionDialog__BtnDelete}
+            onClick={handleDelete}
+        >
+            Delete
+        </button>
+    )
+
+    const saveButton = (
+        <button
+            className={styles.CollectionDialog__BtnSave}
+            onClick={handleSave}
+        >
+            Save
+        </button>
+    )
+
     return (
         <div className={styles.CollectionDialog}>
             <div className="FlexRow">
@@ -288,27 +358,7 @@ export default function CollectionDialog({ collection }: Props) {
                         >
                             {iconVal || "..."}
                         </button>
-                        {isEmojiPickerOpen &&
-                            emojiPickerPos &&
-                            createPortal(
-                                <div
-                                    ref={emojiPortalRef}
-                                    className={
-                                        styles.CollectionDialog__EmojiPicker
-                                    }
-                                    style={{
-                                        top: emojiPickerPos.top,
-                                        left: emojiPickerPos.left,
-                                    }}
-                                >
-                                    <Picker
-                                        data={data}
-                                        onEmojiSelect={handleEmojiSelect}
-                                        theme="auto"
-                                    />
-                                </div>,
-                                document.body,
-                            )}
+                        {emojiPickerPortal}
                     </div>
                 </div>
             </div>
@@ -361,26 +411,15 @@ export default function CollectionDialog({ collection }: Props) {
                             />
                             <button
                                 type="button"
-                                className={styles.CollectionDialog__BtnRandomise}
+                                className={
+                                    styles.CollectionDialog__BtnRandomise
+                                }
                                 onClick={() => setColourVal(getRandomColour())}
                             >
                                 <IconArrowsShuffle {...ICON_PROPS_ACTION} />
                             </button>
                         </div>
-                        {isColourPickerOpen && (
-                            <div
-                                className={
-                                    styles.CollectionDialog__ColourPicker
-                                }
-                            >
-                                <HexColorPicker
-                                    color={
-                                        isColourValid ? colourVal : "#d0d0d0"
-                                    }
-                                    onChange={setColourVal}
-                                />
-                            </div>
-                        )}
+                        {colourPickerPanel}
                     </div>
                 </div>
             </div>
@@ -396,51 +435,14 @@ export default function CollectionDialog({ collection }: Props) {
                     placeholder="tag1 tag2 tag3"
                 />
             </div>
-            {/* TODO: don't stretch this button fully wide */}
-            {isEditing && (
-                <div className={styles.CollectionDialog__Field}>
-                    {isDefault ? (
-                        <span
-                            className={
-                                styles.CollectionDialog__DefaultIndicator
-                            }
-                        >
-                            This is currently your default collection
-                        </span>
-                    ) : (
-                        <button
-                            className={styles.CollectionDialog__BtnSetDefault}
-                            type="button"
-                            onClick={() =>
-                                setDefaultCollectionSlug(collection.slug)
-                            }
-                        >
-                            Set as default collection
-                        </button>
-                    )}
-                </div>
-            )}
+            {defaultSection}
             {saveError && (
                 <p className={styles.CollectionDialog__Error}>{saveError}</p>
             )}
             <div className={styles.CollectionDialog__Footer}>
-                <div>
-                    {isEditing && !collection.coreType && (
-                        <button
-                            className={styles.CollectionDialog__BtnDelete}
-                            onClick={handleDelete}
-                        >
-                            Delete
-                        </button>
-                    )}
-                </div>
+                <div>{deleteButton}</div>
                 <div className={styles.CollectionDialog__Actions}>
-                    <button
-                        className={styles.CollectionDialog__BtnSave}
-                        onClick={handleSave}
-                    >
-                        Save
-                    </button>
+                    {saveButton}
                 </div>
             </div>
         </div>
