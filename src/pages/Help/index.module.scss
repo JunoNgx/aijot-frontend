@@ -1,0 +1,9 @@
+@use "styles/mixins" as *;
+
+.Help {
+    composes: Router from global;
+
+    &__Title {
+        composes: Router__Title from global;
+    }
+}
