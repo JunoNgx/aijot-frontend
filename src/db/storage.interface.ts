@@ -18,4 +18,5 @@ export interface StorageAdapter {
     // Maintenance
     purgeTrashedItems(cutoffIso: string): Promise<void>
     purgeSoftDeletedItems(cutoffIso: string): Promise<void>
+    clearAllData(): Promise<void>
 }

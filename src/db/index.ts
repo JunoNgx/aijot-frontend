@@ -1,4 +1,4 @@
-import { dexieAdapter } from "@/db/dexie.adapter"
+import { dexieAdapter, closeDb } from "@/db/dexie.adapter"
 import type { StorageAdapter } from "@/db/storage.interface"
 import {
     TRASH_PURGE_DURATION_DAY,
@@ -18,6 +18,19 @@ export async function purgeExpiredItems(): Promise<void> {
         .toISO()
     await storage.purgeTrashedItems(trashCutoff)
     await storage.purgeSoftDeletedItems(tombstoneCutoff)
+}
+
+export async function forceDeleteDb(): Promise<void> {
+    closeDb()
+    await new Promise<void>((resolve, reject) => {
+        const request = indexedDB.deleteDatabase("aijot")
+        request.onsuccess = () => resolve()
+        request.onerror = () => reject(request.error)
+        request.onblocked = () => {
+            console.warn("IndexedDB delete blocked - tab may still be open")
+            resolve()
+        }
+    })
 }
 
 export type { StorageAdapter }

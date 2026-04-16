@@ -18,6 +18,10 @@ class AijotDb extends Dexie {
 
 const db = new AijotDb()
 
+export function closeDb() {
+    db.close()
+}
+
 export const dexieAdapter: StorageAdapter = {
     async getItems() {
         return db.items.toArray()
@@ -78,5 +82,10 @@ export const dexieAdapter: StorageAdapter = {
             .below(cutoffIso)
             .primaryKeys()
         await db.items.bulkDelete(expiredIds as string[])
+    },
+
+    async clearAllData() {
+        await db.items.clear()
+        await db.collections.clear()
     },
 }
