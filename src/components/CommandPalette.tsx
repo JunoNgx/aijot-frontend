@@ -40,6 +40,10 @@ export default function CommandPalette({
         setTheme(originalThemeRef.current)
     }
 
+    const revertTheme = () => {
+        setTheme(originalThemeRef.current)
+    }
+
     useEffect(() => {
         if (mode !== "theme") return
         originalThemeRef.current = currentTheme
@@ -53,7 +57,7 @@ export default function CommandPalette({
 
     useHotkeys("Escape", () => {
         if (mode === "theme") {
-            setTheme(originalThemeRef.current)
+            revertTheme()
         }
         onClose()
     })
@@ -141,6 +145,11 @@ export default function CommandPalette({
         <Dialog.Content
             className={styles.CommandPalette__Content}
             aria-describedby={undefined}
+            onInteractOutside={() => {
+                if (mode === "theme") {
+                    revertTheme()
+                }
+            }}
         >
             <Dialog.Title className="VisuallyHidden">
                 Command Palette
