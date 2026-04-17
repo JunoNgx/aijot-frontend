@@ -1,4 +1,5 @@
 import type { ReactNode } from "react"
+import type { ThemeName } from "@/utils/themes"
 
 // ============================================================
 // Item
@@ -56,7 +57,7 @@ export interface Collection {
 // Zustand store shapes
 // ============================================================
 
-export type ThemeMode = "system" | "light" | "dark"
+export type ThemeMode = ThemeName
 
 export interface LocalUserSettingsStore {
     theme: ThemeMode
@@ -116,6 +117,16 @@ export interface DialogStore {
     children: ReactNode | null
     openDialog: (options: { children: ReactNode }) => void
     closeAllDialogs: () => void
+}
+
+export type CommandPaletteMode = "main" | "theme"
+
+export interface CommandPaletteStore {
+    isOpen: boolean
+    mode: CommandPaletteMode
+    open: (mode?: CommandPaletteMode) => void
+    close: () => void
+    setMode: (mode: CommandPaletteMode) => void
 }
 
 export interface CoreCollectionSettingsStore {
