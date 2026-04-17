@@ -238,11 +238,14 @@ export default function CommandPalette({
                         >
                             {item.icon}
                             <span>{item.label}</span>
-                            {mode === "theme" && item.id === currentTheme && (
-                                <span className={styles.CommandPalette__Check}>
-                                    <IconCheck {...ICON_PROPS_NORMAL} />
-                                </span>
-                            )}
+                            {mode === "theme" &&
+                                item.id === originalThemeRef.current && (
+                                    <span
+                                        className={styles.CommandPalette__Check}
+                                    >
+                                        <IconCheck {...ICON_PROPS_NORMAL} />
+                                    </span>
+                                )}
                         </li>
                     ))
                 )}
