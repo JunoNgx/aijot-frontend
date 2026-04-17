@@ -134,6 +134,16 @@ export default function CommandPalette({
         setTheme(originalThemeRef.current)
     }
 
+    const handleThemePreview = (themeName: ThemeName) => {
+        if (mode !== "theme") return
+        startThemePreview(themeName)
+    }
+
+    const handleThemeRevert = () => {
+        if (mode !== "theme") return
+        revertThemePreview()
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useLayoutEffect(() => {
         if (mode !== "theme") return
@@ -141,9 +151,7 @@ export default function CommandPalette({
     }, [])
 
     useHotkeys("Escape", () => {
-        if (mode === "theme") {
-            revertThemePreview()
-        }
+        handleThemeRevert()
         onClose()
     })
 
@@ -158,26 +166,20 @@ export default function CommandPalette({
         if (filteredItems.length === 0) return
         const newIndex = getNextIndex(selectedIndex, "up")
         setSelectedIndex(newIndex)
-        if (mode === "theme") {
-            startThemePreview(filteredItems[newIndex].id as ThemeName)
-        }
+        handleThemePreview(filteredItems[newIndex].id as ThemeName)
     }
 
     const handleArrowDown = () => {
         if (filteredItems.length === 0) return
         const newIndex = getNextIndex(selectedIndex, "down")
         setSelectedIndex(newIndex)
-        if (mode === "theme") {
-            startThemePreview(filteredItems[newIndex].id as ThemeName)
-        }
+        handleThemePreview(filteredItems[newIndex].id as ThemeName)
     }
 
     const handleEnter = () => {
         const item = filteredItems[selectedIndex]
         if (item) {
-            if (mode === "theme") {
-                startThemePreview(item.id as ThemeName)
-            }
+            handleThemePreview(item.id as ThemeName)
             item.action()
         }
     }
@@ -188,22 +190,12 @@ export default function CommandPalette({
         [SHORTCUT_NAV_SUBMIT, handleEnter],
     ])
 
-    const handleThemeHover = (themeName: ThemeName) => {
-        startThemePreview(themeName)
-    }
-
-    const handleThemeLeave = () => {
-        revertThemePreview()
-    }
-
     return (
         <Dialog.Content
             className={styles.CommandPalette__Content}
             aria-describedby={undefined}
             onInteractOutside={() => {
-                if (mode === "theme") {
-                    revertThemePreview()
-                }
+                handleThemeRevert()
             }}
         >
             <Dialog.Title className="VisuallyHidden">
@@ -236,22 +228,14 @@ export default function CommandPalette({
                             role="option"
                             aria-selected={index === selectedIndex}
                             onClick={() => {
-                                if (mode === "theme") {
-                                    startThemePreview(item.id as ThemeName)
-                                }
+                                handleThemePreview(item.id as ThemeName)
                                 item.action()
                             }}
                             onMouseEnter={() => {
                                 setSelectedIndex(index)
-                                if (mode === "theme") {
-                                    handleThemeHover(item.id as ThemeName)
-                                }
+                                handleThemePreview(item.id as ThemeName)
                             }}
-                            onMouseLeave={() => {
-                                if (mode === "theme") {
-                                    handleThemeLeave()
-                                }
-                            }}
+                            onMouseLeave={handleThemeRevert}
                         >
                             {item.icon}
                             <span>{item.label}</span>
