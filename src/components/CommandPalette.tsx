@@ -3,7 +3,10 @@ import * as Dialog from "@radix-ui/react-dialog"
 import { useHotkeys } from "react-hotkeys-hook"
 import { useLocalUserSettings } from "@/store/localUserSettings"
 import { useNavigateRoutes } from "@/hooks/useNavigateRoutes"
+import { useLocation } from "react-router-dom"
 import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
+import { useProfileSettings } from "@/store/profileSettings"
+import { openCollectionDialog } from "@/utils/openCollectionDialog"
 import { themes } from "@/utils/themes"
 import type { ThemeName } from "@/utils/themes"
 import styles from "./CommandPalette.module.scss"
@@ -12,6 +15,7 @@ import {
     SHORTCUT_NAV_UP,
     SHORTCUT_NAV_DOWN,
     SHORTCUT_NAV_SUBMIT,
+    ROUTE_JOT,
 } from "@/utils/constants"
 import { getHotkeyHandler } from "@/utils/hotkeyHandler"
 import {
@@ -21,6 +25,7 @@ import {
     IconHelp,
     IconPalette,
     IconCheck,
+    IconPlus,
 } from "@tabler/icons-react"
 
 export type CommandPaletteMode = "main" | "theme"
@@ -59,6 +64,11 @@ export default function CommandPalette({
         navigateToHelp,
     } = useNavigateRoutes()
 
+    const location = useLocation()
+    const pathParts = location.pathname.split("/")
+    const isInJot = location.pathname.startsWith(ROUTE_JOT)
+    const currentSlug = isInJot && pathParts[2] ? pathParts[2] : null
+    const { setDefaultCollectionSlug } = useProfileSettings()
     const { collectionsQuery } = useCollectionsQuery()
     const collections = collectionsQuery.data ?? []
 
@@ -146,8 +156,64 @@ export default function CommandPalette({
         category: "Collections",
     }))
 
+    const isInCollection = isInJot && currentSlug
+    // TODO: CommandPalette is rendered at root level so useParams() won't work
+    // Using path parsing as workaround - could be simplified with route context in future
+
+    const collectionActionItems: NavItem[] = isInCollection
+        ? [
+              {
+                  id: "create-collection",
+                  label: "Create new collection",
+                  icon: <IconPlus {...ICON_PROPS_NORMAL} />,
+                  action: () => {
+                      openCollectionDialog()
+                      onClose()
+                  },
+                  category: "Collection Actions",
+              },
+              {
+                  id: "set-default-collection",
+                  label: `Set "${currentSlug}" as default`,
+                  icon: <IconCheck {...ICON_PROPS_NORMAL} />,
+                  action: () => {
+                      setDefaultCollectionSlug(currentSlug)
+                      onClose()
+                  },
+                  category: "Collection Actions",
+              },
+              {
+                  id: "edit-collection",
+                  label: "Edit current collection",
+                  icon: <IconSettings {...ICON_PROPS_NORMAL} />,
+                  action: () => {
+                      const collection = collections.find(
+                          (c) => c.slug === currentSlug,
+                      )
+                      if (collection) {
+                          openCollectionDialog(collection)
+                      }
+                      onClose()
+                  },
+                  category: "Collection Actions",
+              },
+          ]
+        : [
+              {
+                  id: "create-collection",
+                  label: "Create new collection",
+                  icon: <IconPlus {...ICON_PROPS_NORMAL} />,
+                  action: () => {
+                      openCollectionDialog()
+                      onClose()
+                  },
+                  category: "Collection Actions",
+              },
+          ]
+
     const getMainModeItems = () => [
         ...collectionNavItems,
+        ...collectionActionItems,
         ...navItems,
         ...actionItems,
     ]
