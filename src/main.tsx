@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom"
 
 import App from "@/App"
 import DialogManager from "@/components/DialogManager"
+import CommandPaletteManager from "@/components/CommandPaletteManager"
 
 import "@fontsource/space-grotesk"
 import "@fontsource/space-mono"
@@ -26,6 +27,7 @@ createRoot(document.getElementById("root")!).render(
             <QueryClientProvider client={queryClient}>
                 <Toaster position="bottom-right" />
                 <DialogManager />
+                <CommandPaletteManager />
                 <App />
             </QueryClientProvider>
         </BrowserRouter>
