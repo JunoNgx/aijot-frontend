@@ -1,0 +1,88 @@
+.CommandPalette {
+    &__Content {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        max-width: 560px;
+        max-height: 85vh;
+        background-color: var(--colBg);
+        border-radius: 0.5rem;
+        padding: 0.75rem;
+        z-index: 200;
+        box-shadow: 0 16px 70px rgba(0, 0, 0, 0.5);
+    }
+
+    &__Command {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__Input {
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        font-size: 1rem;
+        font-family: inherit;
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid var(--colSub);
+        color: var(--colText);
+        outline: none;
+
+        &::placeholder {
+            color: var(--colSub);
+        }
+    }
+
+    &__List {
+        overflow-y: auto;
+        padding: 0.5rem 0;
+    }
+
+    &__Empty {
+        padding: 1rem 0.75rem;
+        color: var(--colSub);
+        text-align: center;
+    }
+
+    &__Section {
+        margin-bottom: 0.5rem;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &__SectionLabel {
+        padding: 0.25rem 0.75rem;
+        font-size: 0.75rem;
+        color: var(--colSub);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    &__Item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.5rem 0.75rem;
+        cursor: pointer;
+        border-radius: 0.25rem;
+        color: var(--colText);
+
+        &:hover,
+        &[data-selected="true"] {
+            background-color: var(--colBgSub);
+        }
+
+        &[data-disabled="true"] {
+            color: var(--colSub);
+            pointer-events: none;
+        }
+    }
+
+    &__Check {
+        color: var(--colMain);
+    }
+}

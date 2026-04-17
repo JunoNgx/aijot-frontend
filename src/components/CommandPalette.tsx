@@ -1,0 +1,177 @@
+import { useState, useCallback, useEffect } from "react"
+import { Command } from "cmdk"
+import * as Dialog from "@radix-ui/react-dialog"
+import { useHotkeys } from "react-hotkeys-hook"
+import { useLocalUserSettings } from "@/store/localUserSettings"
+import { useNavigateRoutes } from "@/hooks/useNavigateRoutes"
+import { themes } from "@/utils/themes"
+import { useThemePreview } from "@/hooks/useThemePreview"
+import type { ThemeName } from "@/utils/themes"
+import styles from "./CommandPalette.module.scss"
+
+export type CommandPaletteMode = "main" | "theme"
+
+interface CommandPaletteProps {
+    mode: CommandPaletteMode
+    onModeChange: (mode: CommandPaletteMode) => void
+    onClose: () => void
+}
+
+export default function CommandPalette({
+    mode,
+    onModeChange,
+    onClose,
+}: CommandPaletteProps) {
+    const [search, setSearch] = useState("")
+    const currentTheme = useLocalUserSettings((s) => s.theme)
+    const setTheme = useLocalUserSettings((s) => s.setTheme)
+    const {
+        navigateToJot,
+        navigateToCollections,
+        navigateToSettings,
+        navigateToHelp,
+    } = useNavigateRoutes()
+
+    const handleApplyTheme = useCallback(
+        (themeName: ThemeName) => {
+            setTheme(themeName)
+        },
+        [setTheme],
+    )
+
+    const { startPreview, commitPreview, revertPreview } = useThemePreview(
+        currentTheme,
+        handleApplyTheme,
+    )
+
+    useEffect(() => {
+        if (mode === "theme") {
+            revertPreview()
+        }
+    }, [mode, revertPreview])
+
+    const handleThemeSelect = () => {
+        commitPreview()
+        onClose()
+    }
+
+    const handleThemeHover = (themeName: ThemeName) => {
+        startPreview(themeName)
+    }
+
+    const handleThemeLeave = () => {
+        revertPreview()
+    }
+
+    useHotkeys("Escape", () => {
+        if (mode === "theme") {
+            revertPreview()
+        }
+        onClose()
+    })
+
+    const handleNavigate = (navigateFn: () => void) => {
+        navigateFn()
+        onClose()
+    }
+
+    const renderMainContent = () => (
+        <>
+            <div className={styles.CommandPalette__Section}>
+                <p className={styles.CommandPalette__SectionLabel}>
+                    Navigation
+                </p>
+                <Command.Item
+                    className={styles.CommandPalette__Item}
+                    onSelect={() => handleNavigate(navigateToJot)}
+                >
+                    Go to Jot
+                </Command.Item>
+                <Command.Item
+                    className={styles.CommandPalette__Item}
+                    onSelect={() => handleNavigate(navigateToCollections)}
+                >
+                    Go to Collections
+                </Command.Item>
+                <Command.Item
+                    className={styles.CommandPalette__Item}
+                    onSelect={() => handleNavigate(navigateToSettings)}
+                >
+                    Go to Settings
+                </Command.Item>
+                <Command.Item
+                    className={styles.CommandPalette__Item}
+                    onSelect={() => handleNavigate(navigateToHelp)}
+                >
+                    Help Guide
+                </Command.Item>
+            </div>
+            <div className={styles.CommandPalette__Section}>
+                <p className={styles.CommandPalette__SectionLabel}>Actions</p>
+                <Command.Item
+                    className={styles.CommandPalette__Item}
+                    onSelect={() => onModeChange("theme")}
+                >
+                    Change Theme...
+                </Command.Item>
+            </div>
+        </>
+    )
+
+    const renderThemeContent = () => (
+        <>
+            <div className={styles.CommandPalette__Section}>
+                <p className={styles.CommandPalette__SectionLabel}>Theme</p>
+                {themes.map((theme) => (
+                    <Command.Item
+                        key={theme.name}
+                        className={styles.CommandPalette__Item}
+                        onSelect={handleThemeSelect}
+                        onMouseEnter={() =>
+                            handleThemeHover(theme.name as ThemeName)
+                        }
+                        onMouseLeave={handleThemeLeave}
+                    >
+                        <span>
+                            {theme.name.charAt(0).toUpperCase() +
+                                theme.name.slice(1)}
+                        </span>
+                        {theme.name === currentTheme && (
+                            <span className={styles.CommandPalette__Check}>
+                                ✓
+                            </span>
+                        )}
+                    </Command.Item>
+                ))}
+            </div>
+        </>
+    )
+
+    return (
+        <Dialog.Content
+            className={styles.CommandPalette__Content}
+            aria-describedby={undefined}
+        >
+            <Command
+                className={styles.CommandPalette__Command}
+                value={search}
+                onValueChange={setSearch}
+            >
+                <Command.Input
+                    className={styles.CommandPalette__Input}
+                    placeholder={
+                        mode === "theme" ? "Search theme..." : "Search..."
+                    }
+                    autoFocus
+                />
+                <Command.List className={styles.CommandPalette__List}>
+                    <Command.Empty className={styles.CommandPalette__Empty}>
+                        No results found.
+                    </Command.Empty>
+                    {mode === "main" && renderMainContent()}
+                    {mode === "theme" && renderThemeContent()}
+                </Command.List>
+            </Command>
+        </Dialog.Content>
+    )
+}
