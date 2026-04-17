@@ -1,11 +1,10 @@
-import { useState, useCallback, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Command } from "cmdk"
 import * as Dialog from "@radix-ui/react-dialog"
 import { useHotkeys } from "react-hotkeys-hook"
 import { useLocalUserSettings } from "@/store/localUserSettings"
 import { useNavigateRoutes } from "@/hooks/useNavigateRoutes"
 import { themes } from "@/utils/themes"
-import { useThemePreview } from "@/hooks/useThemePreview"
 import type { ThemeName } from "@/utils/themes"
 import styles from "./CommandPalette.module.scss"
 
@@ -25,6 +24,7 @@ export default function CommandPalette({
     const [search, setSearch] = useState("")
     const currentTheme = useLocalUserSettings((s) => s.theme)
     const setTheme = useLocalUserSettings((s) => s.setTheme)
+    const originalThemeRef = useRef(currentTheme)
     const {
         navigateToJot,
         navigateToCollections,
@@ -32,40 +32,28 @@ export default function CommandPalette({
         navigateToHelp,
     } = useNavigateRoutes()
 
-    const handleApplyTheme = useCallback(
-        (themeName: ThemeName) => {
-            setTheme(themeName)
-        },
-        [setTheme],
-    )
+    const handleThemeHover = (themeName: ThemeName) => {
+        setTheme(themeName)
+    }
 
-    const { startPreview, revertPreview } = useThemePreview(
-        currentTheme,
-        handleApplyTheme,
-    )
+    const handleThemeLeave = () => {
+        setTheme(originalThemeRef.current)
+    }
 
     useEffect(() => {
-        if (mode === "theme") {
-            revertPreview()
-        }
-    }, [mode, revertPreview])
+        if (mode !== "theme") return
+        originalThemeRef.current = currentTheme
+        setTheme(currentTheme)
+    }, [mode, currentTheme, setTheme])
 
     const handleThemeSelect = (themeName: ThemeName) => {
         setTheme(themeName)
         onClose()
     }
 
-    const handleThemeHover = (themeName: ThemeName) => {
-        startPreview(themeName)
-    }
-
-    const handleThemeLeave = () => {
-        revertPreview()
-    }
-
     useHotkeys("Escape", () => {
         if (mode === "theme") {
-            revertPreview()
+            setTheme(originalThemeRef.current)
         }
         onClose()
     })
