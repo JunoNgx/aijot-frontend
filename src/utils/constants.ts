@@ -121,6 +121,7 @@ export const SHORTCUT_ITEM_REFETCH = "mod+alt+5"
 export const SHORTCUT_ITEM_CONVERT_TO_TODO = "mod+alt+6"
 
 export const SHORTCUT_SAVE_AND_CLOSE = "mod+s"
+export const SHORTCUT_SHORTCUTS_HELP = "mod+Slash"
 
 export const SHORTCUT_NAV_UP = "ArrowUp"
 export const SHORTCUT_NAV_DOWN = "ArrowDown"

@@ -5,9 +5,11 @@ import {
     IconStack2,
     IconHelp,
     IconWritingSign,
+    IconKeyboard,
 } from "@tabler/icons-react"
 import { useProfileSettings } from "@/store/profileSettings"
 import { useNavigateRoutes } from "@/hooks/useNavigateRoutes"
+import { openShortcutDialog } from "@/utils/openShortcutDialog"
 import {
     DEFAULT_USERNAME,
     DROPDOWN_OFFSET,
@@ -81,6 +83,13 @@ export default function UserDropdown() {
                         <DropdownMenu.Separator
                             className={styles.UserDropdown__Separator}
                         />
+                        <DropdownMenu.Item
+                            className={styles.UserDropdown__Item}
+                            onSelect={openShortcutDialog}
+                        >
+                            <IconKeyboard {...ICON_PROPS_NORMAL} />
+                            Shortcuts
+                        </DropdownMenu.Item>
                         <DropdownMenu.Item
                             className={styles.UserDropdown__Item}
                             onSelect={navigateToHelp}

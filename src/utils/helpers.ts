@@ -77,9 +77,8 @@ export function parseShortcut(shortcut: string): string[] {
         if (lower === "escape") return "Esc"
         if (lower === "home") return "Home"
         if (lower === "end") return "End"
-        // For slash/question, return as-is
-        if (part === "/") return "/"
-        if (part === "?") return "?"
+        // Handle slash key
+        if (lower === "slash") return "/"
         return part
     })
 }
