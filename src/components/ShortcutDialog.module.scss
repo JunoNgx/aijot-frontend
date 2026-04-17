@@ -17,11 +17,6 @@
         margin: 0;
     }
 
-    &__CloseBtn {
-        composes: Btn Btn--Sec from global;
-        font-size: var(--fontSizeSm);
-    }
-
     &__Sections {
         display: flex;
         flex-direction: column;

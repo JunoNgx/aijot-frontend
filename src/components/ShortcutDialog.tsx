@@ -1,3 +1,4 @@
+import { IconX } from "@tabler/icons-react"
 import { useDialogStore } from "@/store/dialogStore"
 import { parseShortcut } from "@/utils/helpers"
 import {
@@ -60,11 +61,12 @@ export default function ShortcutDialog() {
             <div className={styles.ShortcutDialog__Header}>
                 <h2 className={styles.ShortcutDialog__Title}>Shortcuts</h2>
                 <button
-                    className={styles.ShortcutDialog__CloseBtn}
+                    className="Btn Btn--Icon"
                     onClick={closeAllDialogs}
                     type="button"
+                    aria-label="Close"
                 >
-                    Close
+                    <IconX size={20} strokeWidth={2} />
                 </button>
             </div>
 
