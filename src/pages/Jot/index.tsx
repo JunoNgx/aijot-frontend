@@ -5,10 +5,7 @@ import { useItemsQuery } from "@/hooks/useItemsQuery"
 import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
 import { useCoreCollectionSettings } from "@/store/coreCollectionSettings"
 import { useLocalAppData } from "@/store/localAppData"
-import {
-    SHORTCUT_FOCUS_MAIN_INPUT,
-    ROUTE_JOT,
-} from "@/utils/constants"
+import { SHORTCUT_FOCUS_MAIN_INPUT, ROUTE_JOT } from "@/utils/constants"
 import MainInput from "@/components/MainInput"
 import JotItem from "@/components/itemComponent/JotItem"
 import DemoDataBanner from "./DemoDataBanner"

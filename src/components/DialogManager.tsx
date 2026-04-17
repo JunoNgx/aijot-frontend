@@ -23,10 +23,16 @@ export default function DialogManager() {
         openShortcutDialog()
     }
 
-    useHotkeys(SHORTCUT_SHORTCUTS_HELP, () => { toggleShortcutHelp(isOpen) }, {
-        enableOnFormTags: true,
-        preventDefault: true,
-    })
+    useHotkeys(
+        SHORTCUT_SHORTCUTS_HELP,
+        () => {
+            toggleShortcutHelp(isOpen)
+        },
+        {
+            enableOnFormTags: true,
+            preventDefault: true,
+        },
+    )
 
     return (
         <Dialog.Root open={isOpen} onOpenChange={handleOpenChange}>
