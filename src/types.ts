@@ -59,8 +59,8 @@ export interface Collection {
 export type ThemeMode = "system" | "light" | "dark"
 
 export interface LocalUserSettingsStore {
-    themeMode: ThemeMode
-    setThemeMode: (mode: ThemeMode) => void
+    theme: ThemeMode
+    setTheme: (theme: ThemeMode) => void
 }
 
 export interface LocalAppDataStore {

@@ -1,6 +1,6 @@
 import type { ComponentType } from "react"
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu"
-import { IconSun, IconMoon, IconDeviceDesktop } from "@tabler/icons-react"
+import { IconSun, IconMoon } from "@tabler/icons-react"
 import { useLocalUserSettings } from "@/store/localUserSettings"
 import {
     DROPDOWN_OFFSET,
@@ -12,8 +12,7 @@ import styles from "./ThemeModeDropdown.module.scss"
 
 function ThemeIcon({ mode }: { mode: ThemeMode }) {
     if (mode === "light") return <IconSun {...ICON_PROPS_HEADER} />
-    if (mode === "dark") return <IconMoon {...ICON_PROPS_HEADER} />
-    return <IconDeviceDesktop {...ICON_PROPS_HEADER} />
+    return <IconMoon {...ICON_PROPS_HEADER} />
 }
 
 const OPTIONS: {
@@ -23,17 +22,16 @@ const OPTIONS: {
 }[] = [
     { value: "light", label: "Light", Icon: IconSun },
     { value: "dark", label: "Dark", Icon: IconMoon },
-    { value: "system", label: "System", Icon: IconDeviceDesktop },
 ]
 
 export default function ThemeModeDropdown() {
-    const themeMode = useLocalUserSettings((s) => s.themeMode)
-    const setThemeMode = useLocalUserSettings((s) => s.setThemeMode)
+    const theme = useLocalUserSettings((s) => s.theme)
+    const setTheme = useLocalUserSettings((s) => s.setTheme)
 
     return (
         <DropdownMenu.Root>
             <DropdownMenu.Trigger className={styles.ThemeModeDropdown__Trigger}>
-                <ThemeIcon mode={themeMode} />
+                <ThemeIcon mode={theme} />
             </DropdownMenu.Trigger>
             <DropdownMenu.Portal>
                 <DropdownMenu.Content
@@ -46,12 +44,12 @@ export default function ThemeModeDropdown() {
                             key={option.value}
                             className={styles.ThemeModeDropdown__Item}
                             onSelect={() => {
-                                setThemeMode(option.value)
+                                setTheme(option.value)
                             }}
                         >
                             <option.Icon {...ICON_PROPS_NORMAL} />
                             {option.label}
-                            {option.value === themeMode && (
+                            {option.value === theme && (
                                 <span
                                     className={
                                         styles.ThemeModeDropdown__ActiveDot

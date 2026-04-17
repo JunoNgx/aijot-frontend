@@ -33,8 +33,8 @@ export default function Settings() {
     const [isResettingApp, setIsResettingApp] = useState(false)
     const [isDebugMode, setIsDebugMode] = useState(false)
 
-    const themeMode = useLocalUserSettings((s) => s.themeMode)
-    const setThemeMode = useLocalUserSettings((s) => s.setThemeMode)
+    const theme = useLocalUserSettings((s) => s.theme)
+    const setTheme = useLocalUserSettings((s) => s.setTheme)
 
     const is24HourClock = useProfileSettings((s) => s.is24HourClock)
     const setIs24HourClock = useProfileSettings((s) => s.setIs24HourClock)
@@ -238,9 +238,9 @@ export default function Settings() {
                                     type="radio"
                                     name="themeMode"
                                     value={mode}
-                                    checked={themeMode === mode}
+                                    checked={theme === mode}
                                     onChange={() => {
-                                        setThemeMode(mode)
+                                        setTheme(mode)
                                     }}
                                 />
                                 {mode.charAt(0).toUpperCase() + mode.slice(1)}
