@@ -7,10 +7,8 @@ import { useCoreCollectionSettings } from "@/store/coreCollectionSettings"
 import { useLocalAppData } from "@/store/localAppData"
 import {
     SHORTCUT_FOCUS_MAIN_INPUT,
-    SHORTCUT_SHORTCUTS_HELP,
     ROUTE_JOT,
 } from "@/utils/constants"
-import { openShortcutDialog } from "@/utils/openShortcutDialog"
 import MainInput from "@/components/MainInput"
 import JotItem from "@/components/itemComponent/JotItem"
 import DemoDataBanner from "./DemoDataBanner"
@@ -102,11 +100,6 @@ export default function Jot() {
     }, [selectedIndex])
 
     useHotkeys(SHORTCUT_FOCUS_MAIN_INPUT, () => mainInputRef.current?.focus(), {
-        enableOnFormTags: true,
-        preventDefault: true,
-    })
-
-    useHotkeys(SHORTCUT_SHORTCUTS_HELP, openShortcutDialog, {
         enableOnFormTags: true,
         preventDefault: true,
     })
