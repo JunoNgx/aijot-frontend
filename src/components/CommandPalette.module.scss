@@ -79,7 +79,7 @@
         color: var(--colText);
 
         &:hover,
-        &[data-selected="true"] {
+        &[aria-selected="true"] {
             background-color: var(--colBgSub);
         }
 
