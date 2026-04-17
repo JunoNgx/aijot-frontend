@@ -34,15 +34,11 @@ export default function CommandPalette({
         navigateToHelp,
     } = useNavigateRoutes()
 
-    const handleThemeHover = (themeName: ThemeName) => {
+    const startThemePreview = (themeName: ThemeName) => {
         setTheme(themeName)
     }
 
-    const handleThemeLeave = () => {
-        setTheme(originalThemeRef.current)
-    }
-
-    const revertTheme = () => {
+    const revertThemePreview = () => {
         setTheme(originalThemeRef.current)
     }
 
@@ -59,7 +55,7 @@ export default function CommandPalette({
 
     useHotkeys("Escape", () => {
         if (mode === "theme") {
-            revertTheme()
+            revertThemePreview()
         }
         onClose()
     })
@@ -124,12 +120,11 @@ export default function CommandPalette({
                             handleThemeSelect(theme.name as ThemeName)
                         }
                         onFocus={() =>
-                            handleThemeHover(theme.name as ThemeName)
+                            startThemePreview(theme.name as ThemeName)
                         }
                         onMouseEnter={() =>
-                            handleThemeHover(theme.name as ThemeName)
+                            startThemePreview(theme.name as ThemeName)
                         }
-                        onMouseLeave={handleThemeLeave}
                     >
                         <span>
                             {theme.name.charAt(0).toUpperCase() +
@@ -152,7 +147,7 @@ export default function CommandPalette({
             aria-describedby={undefined}
             onInteractOutside={() => {
                 if (mode === "theme") {
-                    revertTheme()
+                    revertThemePreview()
                 }
             }}
         >
