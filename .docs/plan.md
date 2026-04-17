@@ -428,54 +428,52 @@ Refactor theme selection to use cmdk command palette with nested modes. Remove "
 
 ### 35a — Install cmdk
 
-- [ ] `yarn add cmdk`
+- [x] `yarn add cmdk`
 
 ### 35b — Create themes object
 
-- [ ] Create `src/utils/themes.ts`
-- [ ] Export `themes` object with predefined themes (light, dark, plus any others)
-- [ ] Each theme has color values: colBg, colMain, colSub, colBgSub, colText, colDanger
-- [ ] Export `ThemeName` type (union of theme keys)
-- [ ] Export `ThemeColors` type derived from themes object
+- [x] Create `src/utils/themes.ts`
+- [x] Export `themes` object with predefined themes (light, dark)
+- [x] Each theme has color values: colBg, colMain, colSub, colBgSub, colText, colDanger
+- [x] Export `ThemeName` type (union of theme keys)
+- [x] Export `ThemeColors` type derived from themes object
 
 ### 35c — Update types
 
-- [ ] Modify `src/types.ts`
-- [ ] Change `ThemeMode` type from `"light" | "dark" | "system"` to `ThemeName` (keyof typeof themes)
-- [ ] Add `customThemeColors` field to user settings (optional, for custom theme slot - future use)
+- [x] Modify `src/types.ts`
+- [x] Change `ThemeMode` type from `"light" | "dark" | "system"` to `ThemeName`
+- [x] Rename `themeMode` to `theme` in store
+- [x] Set default to "light"
 
 ### 35d — Refactor ThemeManager
 
-- [ ] Modify `src/components/ThemeManager.tsx`
-- [ ] Instead of setting `data-color-scheme` attribute, directly set CSS variables on `<html>` via `document.documentElement.style.setProperty()`
-- [ ] Remove `resolveColorScheme()` function (no more "system" mode)
-- [ ] Remove `matchMedia` listener for system theme changes
-- [ ] Apply theme colors whenever `themeMode` or `customThemeColors` changes
+- [x] Modify `src/components/ThemeManager.tsx`
+- [x] Instead of setting `data-color-scheme` attribute, directly set CSS variables on `<html>` via `document.documentElement.style.setProperty()`
+- [x] Remove `resolveColorScheme()` function (no more "system" mode)
+- [x] Remove `matchMedia` listener for system theme changes
 
 ### 35e — Create CommandPalette component
 
-- [ ] Create `src/components/CommandPalette.tsx`
-- [ ] Use cmdk with Radix Dialog pattern via `useDialogStore`
-- [ ] Support two modes: `main` and `theme`
-- [ ] **Main mode sections**: Navigation (Jot, Collections, Settings, Help), Actions (Change Theme...)
-- [ ] **Theme mode**: List all predefined themes + "Custom Theme" option
-- [ ] Current theme gets checkmark indicator
-- [ ] Keyboard navigation: ↑↓ move, Enter select, Esc close/revert
-- [ ] Mouse hover triggers preview (debounced 1s)
-- [ ] Track original theme on open, revert if closed without commit
+- [x] Create `src/components/CommandPalette.tsx`
+- [x] Use cmdk with Radix Dialog pattern
+- [x] Support two modes: `main` and `theme`
+- [x] **Main mode sections**: Navigation (Jot, Collections, Settings, Help), Actions (Change Theme...)
+- [x] **Theme mode**: List all predefined themes
+- [x] Current theme gets checkmark indicator
+- [x] Keyboard navigation: ↑↓ move, Enter select, Esc close/revert
+- [x] Mouse hover triggers preview (debounced 1s)
 
-### 35f — Create openCommandPalette helper
+### 35f — Create CommandPaletteManager
 
-- [ ] Create `src/utils/openCommandPalette.tsx`
-- [ ] Follow `openShortcutDialog` pattern using `useDialogStore`
-- [ ] Accept `initialMode` parameter ("main" | "theme")
-- [ ] Opens CommandPalette in specified mode
+- [x] Create `src/components/CommandPaletteManager.tsx`
+- [x] Mount in `main.tsx` alongside `DialogManager`
+- [x] Consume `useCommandPaletteStore` for state management
 
 ### 35g — Update spotlight hotkey
 
-- [ ] Modify `src/pages/Jot/index.tsx`
-- [ ] Change `mod+k` hotkey to call `openCommandPalette({ initialMode: "main" })`
-- [ ] Remove `mod+p` or keep as alias
+- [x] Move `mod+k` hotkey registration to `CommandPaletteManager`
+- [x] Remove `mod+p` from `SHORTCUT_SPOTLIGHT`
+- [x] Now globally accessible from any route
 
 ### 35h — Remove ThemeModeDropdown
 
@@ -485,28 +483,20 @@ Refactor theme selection to use cmdk command palette with nested modes. Remove "
 
 ### 35i — Update Settings page
 
-- [ ] Modify `src/pages/Settings/index.tsx`
-- [ ] Replace theme radio buttons with a button that triggers `openCommandPalette({ initialMode: "theme" })`
+- [x] Modify `src/pages/Settings/index.tsx`
+- [x] Remove "system" from theme options
+- [ ] Replace theme radio buttons with button to open CommandPalette in theme mode
 - [ ] Display current theme name next to button
-- [ ] Remove "system" from theme options
-- [ ] Add "Custom Theme" section with color pickers (future task)
 
 ### 35j — Update styles
 
 - [ ] Modify `src/styles/_vars.scss`
 - [ ] Remove `[data-color-scheme="light"]` and `[data-color-scheme="dark"]` selectors
 - [ ] Keep `:root` variables for non-theme values (fonts, spacing, lineWidth)
-- [ ] Add fallback colors in `:root` for SSR/no-JS scenarios
 
 ### 35k — Create useThemePreview hook
 
-- [ ] Create `src/hooks/useThemePreview.ts`
-- [ ] Manages preview state (original theme, previewed theme)
-- [ ] Debounced apply preview (1s)
-- [ ] Revert function for when dialog closes without commit
-
-### 35l — Update AGENTS.md
-
-- [ ] Document cmdk pattern for multi-mode command palettes
-- [ ] Document JS-based theming approach
-- [ ] Add note about 1s debounce for preview UX
+- [x] Create `src/hooks/useThemePreview.ts`
+- [x] Manages preview state (original theme, previewed theme)
+- [x] Debounced apply preview (1s)
+- [x] Revert function for when dialog closes without commit
