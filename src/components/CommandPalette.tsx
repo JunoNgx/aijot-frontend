@@ -80,19 +80,19 @@ export default function CommandPalette({
     }
 
     const revertThemePreview = () => {
-        if (mode !== "theme") return
+        if (!isThemeMode) return
         setTheme(originalThemeRef.current)
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useLayoutEffect(() => {
-        if (mode !== "theme") return
+        if (!isThemeMode) return
         originalThemeRef.current = currentTheme
     }, [])
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
-        if (mode === "theme") {
+        if (isThemeMode) {
             revertThemePreview()
         }
     }, [mode])
@@ -298,7 +298,7 @@ export default function CommandPalette({
     )
 
     const handleThemePreview = (themeName: ThemeName) => {
-        if (mode !== "theme") return
+        if (!isThemeMode) return
         setTheme(themeName)
     }
 
