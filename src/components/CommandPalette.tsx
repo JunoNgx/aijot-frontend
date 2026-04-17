@@ -152,6 +152,9 @@ export default function CommandPalette({
             className={styles.CommandPalette__Content}
             aria-describedby={undefined}
         >
+            <Dialog.Title className="VisuallyHidden">
+                Command Palette
+            </Dialog.Title>
             <Command
                 className={styles.CommandPalette__Command}
                 value={search}
