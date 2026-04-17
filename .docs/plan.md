@@ -477,22 +477,23 @@ Refactor theme selection to use cmdk command palette with nested modes. Remove "
 
 ### 35h — Remove ThemeModeDropdown
 
-- [ ] Delete `src/components/ThemeModeDropdown.tsx`
-- [ ] Delete `src/components/ThemeModeDropdown.module.scss`
-- [ ] Remove from `src/components/Header.tsx`
+- [x] Delete `src/components/ThemeModeDropdown.tsx`
+- [x] Delete `src/components/ThemeModeDropdown.module.scss`
+- [x] Remove from `src/components/Header.tsx`
 
 ### 35i — Update Settings page
 
 - [x] Modify `src/pages/Settings/index.tsx`
 - [x] Remove "system" from theme options
-- [ ] Replace theme radio buttons with button to open CommandPalette in theme mode
-- [ ] Display current theme name next to button
+- [x] Replace theme radio buttons with button to open CommandPalette in theme mode
+- [x] Display current theme name next to button
 
 ### 35j — Update styles
 
-- [ ] Modify `src/styles/_vars.scss`
-- [ ] Remove `[data-color-scheme="light"]` and `[data-color-scheme="dark"]` selectors
-- [ ] Keep `:root` variables for non-theme values (fonts, spacing, lineWidth)
+- [x] Modify `src/styles/_vars.scss`
+- [x] Remove `[data-color-scheme="light"]` and `[data-color-scheme="dark"]` selectors
+- [x] Keep `:root` variables for non-theme values (fonts, spacing, lineWidth)
+- [x] Add fallback colors in `:root` for SSR/no-JS scenarios
 
 ### 35k — Create useThemePreview hook
 
