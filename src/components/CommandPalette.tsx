@@ -132,7 +132,7 @@ export default function CommandPalette({
                             {theme.name.charAt(0).toUpperCase() +
                                 theme.name.slice(1)}
                         </span>
-                        {theme.name === currentTheme && (
+                        {theme.name === originalThemeRef.current && (
                             <span className={styles.CommandPalette__Check}>
                                 <IconCheck {...ICON_PROPS_NORMAL} />
                             </span>
