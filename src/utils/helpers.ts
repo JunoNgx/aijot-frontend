@@ -55,3 +55,30 @@ export function buildCoreCollection(
         coreType,
     }
 }
+
+export function parseShortcut(shortcut: string): string[] {
+    const isMac = navigator.platform.toLowerCase().includes("mac")
+
+    return shortcut.split(/[+,]/).map((part) => {
+        const lower = part.toLowerCase().trim()
+        if (lower === "mod") return isMac ? "Cmd" : "Ctrl"
+        if (lower === "shift") return "Shift"
+        if (lower === "alt") return "Alt"
+        // Capitalize single letter keys
+        if (part.length === 1) return part.toUpperCase()
+        // Handle special keys - use symbols for arrows and enter
+        if (lower === "arrowup") return "↑"
+        if (lower === "arrowdown") return "↓"
+        if (lower === "arrowleft") return "←"
+        if (lower === "arrowright") return "→"
+        if (lower === "backspace") return "BkSp"
+        if (lower === "enter") return "↵"
+        if (lower === "escape") return "Esc"
+        if (lower === "home") return "Home"
+        if (lower === "end") return "End"
+        // For slash/question, return as-is
+        if (part === "/") return "/"
+        if (part === "?") return "?"
+        return part
+    })
+}
