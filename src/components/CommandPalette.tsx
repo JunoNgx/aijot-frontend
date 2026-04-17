@@ -235,7 +235,6 @@ export default function CommandPalette({
                                 setSelectedIndex(index)
                                 handleThemePreview(item.id as ThemeName)
                             }}
-                            onMouseLeave={handleThemeRevert}
                         >
                             {item.icon}
                             <span>{item.label}</span>
