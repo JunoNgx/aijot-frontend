@@ -200,7 +200,41 @@ export default function CommandPalette({
     const placeholder = mode === "theme" ? "Search theme..." : "Search..."
     const isThemeMode = mode === "theme"
 
-    const renderItems = () => {
+    const renderItem = (item: NavItem) => (
+        <li
+            key={item.id}
+            className={styles.CommandPalette__Item}
+            role="option"
+            aria-selected={false}
+            onClick={() => {
+                handleThemePreview(item.id as ThemeName)
+                item.action()
+            }}
+            onMouseEnter={() => {
+                setSelectedIndex(
+                    filteredItems.findIndex((i) => i.id === item.id),
+                )
+                handleThemePreview(item.id as ThemeName)
+            }}
+        >
+            {item.icon}
+            <span>{item.label}</span>
+            {isThemeMode && item.id === originalThemeRef.current && (
+                <span className={styles.CommandPalette__Check}>
+                    <IconCheck {...ICON_PROPS_NORMAL} />
+                </span>
+            )}
+        </li>
+    )
+
+    const renderGroup = (category: string, items: NavItem[]) => (
+        <div key={category}>
+            <p className={styles.CommandPalette__SectionLabel}>{category}</p>
+            {items.map(renderItem)}
+        </div>
+    )
+
+    const renderGroupedItems = () => {
         const groupedItems = filteredItems.reduce(
             (acc, item) => {
                 const category = item.category || "Other"
@@ -211,42 +245,9 @@ export default function CommandPalette({
             {} as Record<string, NavItem[]>,
         )
 
-        return Object.entries(groupedItems).map(([category, items]) => (
-            <div key={category}>
-                <p className={styles.CommandPalette__SectionLabel}>
-                    {category}
-                </p>
-                {items.map((item) => (
-                    <li
-                        key={item.id}
-                        className={styles.CommandPalette__Item}
-                        role="option"
-                        aria-selected={false}
-                        onClick={() => {
-                            handleThemePreview(item.id as ThemeName)
-                            item.action()
-                        }}
-                        onMouseEnter={() => {
-                            setSelectedIndex(
-                                filteredItems.findIndex(
-                                    (i) => i.id === item.id,
-                                ),
-                            )
-                            handleThemePreview(item.id as ThemeName)
-                        }}
-                    >
-                        {item.icon}
-                        <span>{item.label}</span>
-                        {isThemeMode &&
-                            item.id === originalThemeRef.current && (
-                                <span className={styles.CommandPalette__Check}>
-                                    <IconCheck {...ICON_PROPS_NORMAL} />
-                                </span>
-                            )}
-                    </li>
-                ))}
-            </div>
-        ))
+        return Object.entries(groupedItems).map(([category, items]) =>
+            renderGroup(category, items),
+        )
     }
 
     return (
@@ -278,7 +279,7 @@ export default function CommandPalette({
                         No results found.
                     </li>
                 ) : (
-                    renderItems()
+                    renderGroupedItems()
                 )}
             </ul>
         </Dialog.Content>
