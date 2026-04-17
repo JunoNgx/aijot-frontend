@@ -47,6 +47,8 @@ export default function CommandPalette({
         navigateToHelp,
     } = useNavigateRoutes()
 
+    // TODO: CommandPalette is rendered at root level so useParams() won't work
+    // Using path parsing as workaround - could be simplified with route context in future
     const location = useLocation()
     const pathParts = location.pathname.split("/")
     const isInJot = location.pathname.startsWith(ROUTE_JOT)
