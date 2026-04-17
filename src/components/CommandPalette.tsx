@@ -35,6 +35,7 @@ interface NavItem {
     label: string
     icon: React.ReactNode
     action: () => void
+    category?: string
 }
 
 export default function CommandPalette({
@@ -64,6 +65,7 @@ export default function CommandPalette({
                 navigateToJot()
                 onClose()
             },
+            category: "Navigation",
         },
         {
             id: "collections",
@@ -73,6 +75,7 @@ export default function CommandPalette({
                 navigateToCollections()
                 onClose()
             },
+            category: "Navigation",
         },
         {
             id: "settings",
@@ -82,6 +85,7 @@ export default function CommandPalette({
                 navigateToSettings()
                 onClose()
             },
+            category: "Navigation",
         },
         {
             id: "help",
@@ -91,6 +95,7 @@ export default function CommandPalette({
                 navigateToHelp()
                 onClose()
             },
+            category: "Navigation",
         },
     ]
 
@@ -100,6 +105,7 @@ export default function CommandPalette({
             label: "Change Theme...",
             icon: <IconPalette {...ICON_PROPS_NORMAL} />,
             action: () => onModeChange("theme"),
+            category: "Actions",
         },
     ]
 
@@ -111,6 +117,7 @@ export default function CommandPalette({
             setTheme(theme.name as ThemeName)
             onClose()
         },
+        category: "Theme",
     }))
 
     const allItems =
@@ -193,30 +200,54 @@ export default function CommandPalette({
     const placeholder = mode === "theme" ? "Search theme..." : "Search..."
     const isThemeMode = mode === "theme"
 
-    const renderItem = (item: NavItem, index: number) => (
-        <li
-            key={item.id}
-            className={styles.CommandPalette__Item}
-            role="option"
-            aria-selected={index === selectedIndex}
-            onClick={() => {
-                handleThemePreview(item.id as ThemeName)
-                item.action()
-            }}
-            onMouseEnter={() => {
-                setSelectedIndex(index)
-                handleThemePreview(item.id as ThemeName)
-            }}
-        >
-            {item.icon}
-            <span>{item.label}</span>
-            {isThemeMode && item.id === originalThemeRef.current && (
-                <span className={styles.CommandPalette__Check}>
-                    <IconCheck {...ICON_PROPS_NORMAL} />
-                </span>
-            )}
-        </li>
-    )
+    const renderItems = () => {
+        const groupedItems = filteredItems.reduce(
+            (acc, item) => {
+                const category = item.category || "Other"
+                if (!acc[category]) acc[category] = []
+                acc[category].push(item)
+                return acc
+            },
+            {} as Record<string, NavItem[]>,
+        )
+
+        return Object.entries(groupedItems).map(([category, items]) => (
+            <div key={category}>
+                <p className={styles.CommandPalette__SectionLabel}>
+                    {category}
+                </p>
+                {items.map((item) => (
+                    <li
+                        key={item.id}
+                        className={styles.CommandPalette__Item}
+                        role="option"
+                        aria-selected={false}
+                        onClick={() => {
+                            handleThemePreview(item.id as ThemeName)
+                            item.action()
+                        }}
+                        onMouseEnter={() => {
+                            setSelectedIndex(
+                                filteredItems.findIndex(
+                                    (i) => i.id === item.id,
+                                ),
+                            )
+                            handleThemePreview(item.id as ThemeName)
+                        }}
+                    >
+                        {item.icon}
+                        <span>{item.label}</span>
+                        {isThemeMode &&
+                            item.id === originalThemeRef.current && (
+                                <span className={styles.CommandPalette__Check}>
+                                    <IconCheck {...ICON_PROPS_NORMAL} />
+                                </span>
+                            )}
+                    </li>
+                ))}
+            </div>
+        ))
+    }
 
     return (
         <Dialog.Content
@@ -247,7 +278,7 @@ export default function CommandPalette({
                         No results found.
                     </li>
                 ) : (
-                    filteredItems.map((item, index) => renderItem(item, index))
+                    renderItems()
                 )}
             </ul>
         </Dialog.Content>
