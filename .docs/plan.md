@@ -141,11 +141,11 @@
 
 ## Task 15b — Mutation hotkeys (blocked by task 15)
 
-- [ ] `mod+shift+backspace` — trash selected item
-- [ ] `mod+alt+r` — restore selected item, trash only
-- [ ] `mod+alt+4` — toggle copy-on-click
-- [ ] `mod+alt+5` — refetch link meta, links only
-- [ ] `mod+alt+6` — convert to todo, text only
+- [x] `mod+shift+backspace` — trash selected item
+- [x] `mod+alt+r` — restore selected item, trash only
+- [x] `mod+alt+4` — toggle copy-on-click
+- [x] `mod+alt+5` — refetch link meta, links only
+- [x] `mod+alt+6` — convert to todo, text only
 
 ---
 
