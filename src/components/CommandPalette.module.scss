@@ -89,6 +89,30 @@
         }
     }
 
+    &__ItemContent {
+        display: flex;
+        flex-direction: column;
+        gap: 0.125rem;
+    }
+
+    &__LabelLine {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    &__SubLabel {
+        font-size: var(--fontSizeSm);
+        color: var(--colSub);
+    }
+
+    &__ColourBlock {
+        width: 0.75rem;
+        height: 0.75rem;
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+
     &__Check {
         color: var(--colMain);
     }

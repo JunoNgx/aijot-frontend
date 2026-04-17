@@ -3,6 +3,7 @@ import * as Dialog from "@radix-ui/react-dialog"
 import { useHotkeys } from "react-hotkeys-hook"
 import { useLocalUserSettings } from "@/store/localUserSettings"
 import { useNavigateRoutes } from "@/hooks/useNavigateRoutes"
+import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
 import { themes } from "@/utils/themes"
 import type { ThemeName } from "@/utils/themes"
 import styles from "./CommandPalette.module.scss"
@@ -32,7 +33,8 @@ interface CommandPaletteProps {
 
 interface NavItem {
     id: string
-    label: string
+    label: string | React.ReactNode
+    subLabel?: string
     icon: React.ReactNode
     action: () => void
     category?: string
@@ -51,10 +53,14 @@ export default function CommandPalette({
     const inputRef = useRef<HTMLInputElement>(null)
     const {
         navigateToJot,
+        navigateToCollection,
         navigateToCollections,
         navigateToSettings,
         navigateToHelp,
     } = useNavigateRoutes()
+
+    const { collectionsQuery } = useCollectionsQuery()
+    const collections = collectionsQuery.data ?? []
 
     const navItems: NavItem[] = [
         {
@@ -109,9 +115,10 @@ export default function CommandPalette({
         },
     ]
 
-    const themeItems = themes.map((theme) => ({
+    const themeItems: NavItem[] = themes.map((theme) => ({
         id: theme.name,
         label: theme.name.charAt(0).toUpperCase() + theme.name.slice(1),
+        subLabel: undefined,
         icon: null,
         action: () => {
             setTheme(theme.name as ThemeName)
@@ -120,12 +127,38 @@ export default function CommandPalette({
         category: "Theme",
     }))
 
+    const collectionNavItems: NavItem[] = collections.map((collection) => ({
+        id: collection.slug,
+        label: (
+            <>
+                <span
+                    className={styles.CommandPalette__ColourBlock}
+                    style={{ backgroundColor: collection.colour }}
+                />
+                {collection.name}
+            </>
+        ),
+        subLabel: `/${collection.slug}`,
+        icon: <span>{collection.icon}</span>,
+        action: () => {
+            navigateToCollection(collection.slug)
+            onClose()
+        },
+        category: "Collections",
+    }))
+
     const allItems =
-        mode === "main" ? [...navItems, ...actionItems] : themeItems
+        mode === "main"
+            ? [...collectionNavItems, ...navItems, ...actionItems]
+            : themeItems
 
     const filteredItems = search
-        ? allItems.filter((item) =>
-              item.label.toLowerCase().includes(search.toLowerCase()),
+        ? allItems.filter(
+              (item) =>
+                  String(item.label)
+                      .toLowerCase()
+                      .includes(search.toLowerCase()) ||
+                  item.subLabel?.toLowerCase().includes(search.toLowerCase()),
           )
         : allItems
 
@@ -200,32 +233,44 @@ export default function CommandPalette({
     const placeholder = mode === "theme" ? "Search theme..." : "Search..."
     const isThemeMode = mode === "theme"
 
-    const renderItem = (item: NavItem) => (
-        <li
-            key={item.id}
-            className={styles.CommandPalette__Item}
-            role="option"
-            aria-selected={false}
-            onClick={() => {
-                handleThemePreview(item.id as ThemeName)
-                item.action()
-            }}
-            onMouseEnter={() => {
-                setSelectedIndex(
-                    filteredItems.findIndex((i) => i.id === item.id),
-                )
-                handleThemePreview(item.id as ThemeName)
-            }}
-        >
-            {item.icon}
-            <span>{item.label}</span>
-            {isThemeMode && item.id === originalThemeRef.current && (
-                <span className={styles.CommandPalette__Check}>
-                    <IconCheck {...ICON_PROPS_NORMAL} />
-                </span>
-            )}
-        </li>
-    )
+    const renderItem = (item: NavItem) => {
+        const index = filteredItems.findIndex((i) => i.id === item.id)
+        const isSelected = index === selectedIndex
+
+        return (
+            <li
+                key={item.id}
+                className={styles.CommandPalette__Item}
+                role="option"
+                aria-selected={isSelected}
+                onClick={() => {
+                    handleThemePreview(item.id as ThemeName)
+                    item.action()
+                }}
+                onMouseEnter={() => {
+                    setSelectedIndex(index)
+                    handleThemePreview(item.id as ThemeName)
+                }}
+            >
+                {item.icon}
+                <div className={styles.CommandPalette__ItemContent}>
+                    <span className={styles.CommandPalette__LabelLine}>
+                        {item.label}
+                    </span>
+                    {item.subLabel && (
+                        <span className={styles.CommandPalette__SubLabel}>
+                            {item.subLabel}
+                        </span>
+                    )}
+                </div>
+                {isThemeMode && item.id === originalThemeRef.current && (
+                    <span className={styles.CommandPalette__Check}>
+                        <IconCheck {...ICON_PROPS_NORMAL} />
+                    </span>
+                )}
+            </li>
+        )
+    }
 
     const renderGroup = (category: string, items: NavItem[]) => (
         <div key={category}>
