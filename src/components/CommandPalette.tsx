@@ -84,6 +84,7 @@ export default function CommandPalette({
         setTheme(originalThemeRef.current)
     }
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useLayoutEffect(() => {
         if (mode !== "theme") return
         originalThemeRef.current = currentTheme
