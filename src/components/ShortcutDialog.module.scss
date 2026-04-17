@@ -46,6 +46,17 @@
         font-size: var(--fontSizeMd);
     }
 
+    &__Keys {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    &__Or {
+        color: var(--colSub);
+        font-size: var(--fontSizeSm);
+    }
+
     &__Key {
         display: inline-flex;
         align-items: center;

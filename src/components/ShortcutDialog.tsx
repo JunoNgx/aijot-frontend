@@ -3,7 +3,8 @@ import { useDialogStore } from "@/store/dialogStore"
 import { parseShortcut } from "@/utils/helpers"
 import {
     SHORTCUT_FOCUS_MAIN_INPUT,
-    SHORTCUT_SPOTLIGHT,
+    SHORTCUT_CMD_PAL,
+    SHORTCUT_CMD_PAL_ALT,
     SHORTCUT_NAV_UP,
     SHORTCUT_NAV_DOWN,
     SHORTCUT_NAV_UP_SKIP,
@@ -26,6 +27,7 @@ import styles from "./ShortcutDialog.module.scss"
 interface ShortcutItemProps {
     shortcut: string
     description: string
+    shortcutAlt?: string
 }
 
 function ShortcutCombo({ shortcut }: { shortcut: string }) {
@@ -44,10 +46,22 @@ function ShortcutCombo({ shortcut }: { shortcut: string }) {
     )
 }
 
-function ShortcutItem({ shortcut, description }: ShortcutItemProps) {
+function ShortcutItem({
+    shortcut,
+    description,
+    shortcutAlt,
+}: ShortcutItemProps) {
     return (
         <div className={styles.ShortcutDialog__Item}>
-            <ShortcutCombo shortcut={shortcut} />
+            <div className={styles.ShortcutDialog__Keys}>
+                <ShortcutCombo shortcut={shortcut} />
+                {shortcutAlt && (
+                    <>
+                        <span className={styles.ShortcutDialog__Or}>or</span>
+                        <ShortcutCombo shortcut={shortcutAlt} />
+                    </>
+                )}
+            </div>
             <span className={styles.ShortcutDialog__Desc}>{description}</span>
         </div>
     )
@@ -155,8 +169,9 @@ export default function ShortcutDialog() {
                             description="Focus input"
                         />
                         <ShortcutItem
-                            shortcut={SHORTCUT_SPOTLIGHT[0]}
-                            description="Spotlight search"
+                            shortcut={SHORTCUT_CMD_PAL}
+                            shortcutAlt={SHORTCUT_CMD_PAL_ALT}
+                            description="Command palette"
                         />
                         <ShortcutItem
                             shortcut={SHORTCUT_SAVE_AND_CLOSE}

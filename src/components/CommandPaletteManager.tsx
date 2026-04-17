@@ -1,7 +1,7 @@
 import * as Dialog from "@radix-ui/react-dialog"
 import { useHotkeys } from "react-hotkeys-hook"
 import { useCommandPaletteStore } from "@/store/commandPaletteStore"
-import { SHORTCUT_SPOTLIGHT } from "@/utils/constants"
+import { SHORTCUT_CMD_PAL, SHORTCUT_CMD_PAL_ALT } from "@/utils/constants"
 import CommandPalette from "./CommandPalette"
 import styles from "./CommandPalette.module.scss"
 
@@ -12,7 +12,11 @@ export default function CommandPaletteManager() {
     const setMode = useCommandPaletteStore((s) => s.setMode)
     const open = useCommandPaletteStore((s) => s.open)
 
-    useHotkeys(SHORTCUT_SPOTLIGHT, () => open("main"), {
+    useHotkeys(SHORTCUT_CMD_PAL, () => open("main"), {
+        enableOnFormTags: true,
+        preventDefault: true,
+    })
+    useHotkeys(SHORTCUT_CMD_PAL_ALT, () => open("main"), {
         enableOnFormTags: true,
         preventDefault: true,
     })

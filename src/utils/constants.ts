@@ -109,7 +109,8 @@ export const DEFAULT_TRASH_COLLECTION: CoreCollectionConfig = {
 // Format: "mod+key", "shift+key", "mod+shift+key"
 // mod = Ctrl on Windows/Linux, Cmd on Mac
 
-export const SHORTCUT_SPOTLIGHT = "mod+k"
+export const SHORTCUT_CMD_PAL = "mod+k"
+export const SHORTCUT_CMD_PAL_ALT = "mod+p"
 export const SHORTCUT_FOCUS_MAIN_INPUT = "mod+f"
 
 export const SHORTCUT_ITEM_EDIT = "mod+e"
