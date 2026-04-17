@@ -295,6 +295,11 @@ export default function CommandPalette({
         </Command.Group>
     )
 
+    const handleThemePreview = (themeName: ThemeName) => {
+        if (mode !== "theme") return
+        setTheme(themeName)
+    }
+
     const themeGroup = (
         <Command.Group heading="Theme" className={styles.CommandPalette__Group}>
             {themes.map((theme) => (
@@ -302,19 +307,23 @@ export default function CommandPalette({
                     key={theme.name}
                     value={theme.name}
                     className={styles.CommandPalette__Item}
+                    onMouseEnter={() =>
+                        handleThemePreview(theme.name as ThemeName)
+                    }
+                    onFocus={() => handleThemePreview(theme.name as ThemeName)}
                     onSelect={() => handleThemeSelect(theme.name as ThemeName)}
                 >
-                    {theme.name === originalThemeRef.current && (
-                        <span className={styles.CommandPalette__Check}>
-                            <IconCheck {...ICON_PROPS_NORMAL} />
-                        </span>
-                    )}
                     <div className={styles.CommandPalette__ItemContent}>
                         <span className={styles.CommandPalette__LabelLine}>
                             {theme.name.charAt(0).toUpperCase() +
                                 theme.name.slice(1)}
                         </span>
                     </div>
+                    {theme.name === originalThemeRef.current && (
+                        <span className={styles.CommandPalette__Check}>
+                            <IconCheck {...ICON_PROPS_NORMAL} />
+                        </span>
+                    )}
                 </Command.Item>
             ))}
         </Command.Group>
