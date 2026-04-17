@@ -123,6 +123,9 @@ export default function CommandPalette({
                         onSelect={() =>
                             handleThemeSelect(theme.name as ThemeName)
                         }
+                        onFocus={() =>
+                            handleThemeHover(theme.name as ThemeName)
+                        }
                         onMouseEnter={() =>
                             handleThemeHover(theme.name as ThemeName)
                         }
