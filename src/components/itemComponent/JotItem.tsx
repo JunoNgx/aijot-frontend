@@ -90,7 +90,7 @@ export default function JotItem({ item, isSelected, itemIndex }: Props) {
                   href: item.content,
                   target: "_blank",
                   rel: "noopener noreferrer",
-                  tabindex: "-1",
+                  tabIndex: -1,
                   onClick: (e: MouseEvent) => {
                       triggerPrimaryAction(item, e)
                   },
