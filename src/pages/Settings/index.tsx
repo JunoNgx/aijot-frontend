@@ -6,6 +6,7 @@ import { useSyncFn } from "@/hooks/useSync"
 import { useNavigateRoutes } from "@/hooks/useNavigateRoutes"
 import { useLocalAppData } from "@/store/localAppData"
 import { useLocalUserSettings } from "@/store/localUserSettings"
+import { useCommandPaletteStore } from "@/store/commandPaletteStore"
 import { useProfileSettings } from "@/store/profileSettings"
 import { useCoreCollectionSettings } from "@/store/coreCollectionSettings"
 import { useLocalSyncData } from "@/store/localSyncData"
@@ -34,7 +35,6 @@ export default function Settings() {
     const [isDebugMode, setIsDebugMode] = useState(false)
 
     const theme = useLocalUserSettings((s) => s.theme)
-    const setTheme = useLocalUserSettings((s) => s.setTheme)
 
     const is24HourClock = useProfileSettings((s) => s.is24HourClock)
     const setIs24HourClock = useProfileSettings((s) => s.setIs24HourClock)
@@ -228,24 +228,19 @@ export default function Settings() {
                 </div>
                 <div className={styles.Settings__Field}>
                     <label className={styles.Settings__Label}>Theme</label>
-                    <div className={styles.Settings__RadioGroup}>
-                        {(["light", "dark"] as const).map((mode) => (
-                            <label
-                                key={mode}
-                                className={styles.Settings__Radio}
-                            >
-                                <input
-                                    type="radio"
-                                    name="themeMode"
-                                    value={mode}
-                                    checked={theme === mode}
-                                    onChange={() => {
-                                        setTheme(mode)
-                                    }}
-                                />
-                                {mode.charAt(0).toUpperCase() + mode.slice(1)}
-                            </label>
-                        ))}
+                    <div className="FlexRow">
+                        <span className={styles.Settings__CurrentTheme}>
+                            {theme}
+                        </span>
+                        <button
+                            type="button"
+                            className={styles.Settings__BtnAction}
+                            onClick={() => {
+                                useCommandPaletteStore.getState().open("theme")
+                            }}
+                        >
+                            Change Theme
+                        </button>
                     </div>
                 </div>
                 <div className={styles.Settings__Field}>

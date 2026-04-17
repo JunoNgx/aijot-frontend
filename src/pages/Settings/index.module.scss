@@ -79,6 +79,11 @@
         cursor: pointer;
     }
 
+    &__CurrentTheme {
+        color: var(--colSub);
+        font-size: var(--fontSizeMd);
+    }
+
     &__Checkbox {
         display: flex;
         align-items: center;
