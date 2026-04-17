@@ -2,16 +2,16 @@ import { useState, useRef, useLayoutEffect, useEffect } from "react"
 import { Command } from "cmdk"
 import * as Dialog from "@radix-ui/react-dialog"
 import { useHotkeys } from "react-hotkeys-hook"
+import { useParams } from "react-router-dom"
 import { useLocalUserSettings } from "@/store/localUserSettings"
 import { useNavigateRoutes } from "@/hooks/useNavigateRoutes"
-import { useLocation } from "react-router-dom"
 import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
 import { useProfileSettings } from "@/store/profileSettings"
 import { openCollectionDialog } from "@/utils/openCollectionDialog"
 import { themes } from "@/utils/themes"
 import type { ThemeName } from "@/utils/themes"
 import styles from "./CommandPalette.module.scss"
-import { ICON_PROPS_NORMAL, ROUTE_JOT } from "@/utils/constants"
+import { ICON_PROPS_NORMAL } from "@/utils/constants"
 import {
     IconWritingSign,
     IconStack2,
@@ -47,12 +47,8 @@ export default function CommandPalette({
         navigateToHelp,
     } = useNavigateRoutes()
 
-    // TODO: CommandPalette is rendered at root level so useParams() won't work
-    // Using path parsing as workaround - could be simplified with route context in future
-    const location = useLocation()
-    const pathParts = location.pathname.split("/")
-    const isInJot = location.pathname.startsWith(ROUTE_JOT)
-    const currentSlug = isInJot && pathParts[2] ? pathParts[2] : null
+    const { slug } = useParams<{ slug: string }>()
+    const currentSlug = slug ?? null
     const defaultCollectionSlug = useProfileSettings(
         (s) => s.defaultCollectionSlug,
     )
@@ -67,7 +63,7 @@ export default function CommandPalette({
     const searchPlaceholder = isThemeMode ? "Search theme..." : "Search..."
     const shouldFilter = isMainMode
 
-    const isInCollection = isInJot && currentSlug
+    const isInCollection = !!currentSlug
     const shouldIncludeSetDefaultAction =
         isInCollection && defaultCollectionSlug !== currentSlug
 

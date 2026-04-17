@@ -1,7 +1,52 @@
-import AppRoutes from "@/routes"
+import { Routes, Route, Navigate, Outlet } from "react-router-dom"
+import { Toaster } from "sonner"
+import Landing from "@/pages/Landing"
+import Jot from "@/pages/Jot"
+import Collections from "@/pages/Collections"
+import Settings from "@/pages/Settings"
+import Help from "@/pages/Help"
+import Privacy from "@/pages/Privacy"
+import Terms from "@/pages/Terms"
+import Header from "@/components/Header"
+import CommandPaletteManager from "@/components/CommandPaletteManager"
+import DialogManager from "@/components/DialogManager"
+import ThemeManager from "@/components/ThemeManager"
 import PurgeManager from "@/components/PurgeManager"
 import SyncManager from "@/components/SyncManager"
-import ThemeManager from "@/components/ThemeManager"
+import { useProfileSettings } from "@/store/profileSettings"
+import {
+    ROUTE_JOT,
+    ROUTE_COLLECTION,
+    ROUTE_COLLECTIONS,
+    ROUTE_SETTINGS,
+    ROUTE_HELP,
+    ROUTE_PRIVACY,
+    ROUTE_TERMS,
+} from "@/utils/constants"
+import layoutStyles from "./App.module.scss"
+
+function JotRedirect() {
+    const defaultCollectionSlug = useProfileSettings(
+        (s) => s.defaultCollectionSlug,
+    )
+    return <Navigate to={`${ROUTE_JOT}/${defaultCollectionSlug}`} replace />
+}
+
+function LayoutShell() {
+    return (
+        <>
+            <div className={layoutStyles.AppLayout}>
+                <Header />
+                <div className={layoutStyles.AppLayout__OutletWrapper}>
+                    <Outlet />
+                </div>
+            </div>
+
+            {/* Kept inside Routes to allow use of `useParams` */}
+            <CommandPaletteManager />
+        </>
+    )
+}
 
 export default function App() {
     return (
@@ -9,7 +54,20 @@ export default function App() {
             <ThemeManager />
             <PurgeManager />
             <SyncManager />
-            <AppRoutes />
+            <DialogManager />
+            <Toaster position="bottom-right" />
+            <Routes>
+                <Route path="/" element={<Landing />} />
+                <Route element={<LayoutShell />}>
+                    <Route path={ROUTE_JOT} element={<JotRedirect />} />
+                    <Route path={ROUTE_COLLECTION} element={<Jot />} />
+                    <Route path={ROUTE_COLLECTIONS} element={<Collections />} />
+                    <Route path={ROUTE_SETTINGS} element={<Settings />} />
+                    <Route path={ROUTE_HELP} element={<Help />} />
+                    <Route path={ROUTE_PRIVACY} element={<Privacy />} />
+                    <Route path={ROUTE_TERMS} element={<Terms />} />
+                </Route>
+            </Routes>
         </>
     )
 }
