@@ -6,7 +6,12 @@ import { useNavigateRoutes } from "@/hooks/useNavigateRoutes"
 import { themes } from "@/utils/themes"
 import type { ThemeName } from "@/utils/themes"
 import styles from "./CommandPalette.module.scss"
-import { ICON_PROPS_NORMAL } from "@/utils/constants"
+import {
+    ICON_PROPS_NORMAL,
+    SHORTCUT_NAV_UP,
+    SHORTCUT_NAV_DOWN,
+    SHORTCUT_NAV_SUBMIT,
+} from "@/utils/constants"
 import { getHotkeyHandler } from "@/utils/hotkeyHandler"
 import {
     IconWritingSign,
@@ -142,37 +147,34 @@ export default function CommandPalette({
         onClose()
     })
 
+    const handleArrowUp = () => {
+        if (filteredItems.length === 0) return
+        setSelectedIndex((prev) =>
+            prev > 0 ? prev - 1 : filteredItems.length - 1,
+        )
+    }
+
+    const handleArrowDown = () => {
+        if (filteredItems.length === 0) return
+        setSelectedIndex((prev) =>
+            prev < filteredItems.length - 1 ? prev + 1 : 0,
+        )
+    }
+
+    const handleEnter = () => {
+        const item = filteredItems[selectedIndex]
+        if (item) {
+            if (mode === "theme") {
+                startThemePreview(item.id as ThemeName)
+            }
+            item.action()
+        }
+    }
+
     const handleKeyDown = getHotkeyHandler([
-        [
-            "ArrowUp",
-            () => {
-                if (filteredItems.length === 0) return
-                setSelectedIndex((prev) =>
-                    prev > 0 ? prev - 1 : filteredItems.length - 1,
-                )
-            },
-        ],
-        [
-            "ArrowDown",
-            () => {
-                if (filteredItems.length === 0) return
-                setSelectedIndex((prev) =>
-                    prev < filteredItems.length - 1 ? prev + 1 : 0,
-                )
-            },
-        ],
-        [
-            "Enter",
-            () => {
-                const item = filteredItems[selectedIndex]
-                if (item) {
-                    if (mode === "theme") {
-                        startThemePreview(item.id as ThemeName)
-                    }
-                    item.action()
-                }
-            },
-        ],
+        [SHORTCUT_NAV_UP, handleArrowUp],
+        [SHORTCUT_NAV_DOWN, handleArrowDown],
+        [SHORTCUT_NAV_SUBMIT, handleEnter],
     ])
 
     const handleThemeHover = (themeName: ThemeName) => {
