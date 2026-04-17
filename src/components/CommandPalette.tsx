@@ -118,7 +118,6 @@ export default function CommandPalette({
     const themeItems: NavItem[] = themes.map((theme) => ({
         id: theme.name,
         label: theme.name.charAt(0).toUpperCase() + theme.name.slice(1),
-        subLabel: undefined,
         icon: null,
         action: () => {
             setTheme(theme.name as ThemeName)
@@ -147,20 +146,20 @@ export default function CommandPalette({
         category: "Collections",
     }))
 
-    const allItems =
-        mode === "main"
-            ? [...collectionNavItems, ...navItems, ...actionItems]
-            : themeItems
+    const getMainModeItems = () => [
+        ...collectionNavItems,
+        ...navItems,
+        ...actionItems,
+    ]
 
-    const filteredItems = search
-        ? allItems.filter(
-              (item) =>
-                  String(item.label)
-                      .toLowerCase()
-                      .includes(search.toLowerCase()) ||
-                  item.subLabel?.toLowerCase().includes(search.toLowerCase()),
-          )
-        : allItems
+    const allItems = mode === "main" ? getMainModeItems() : themeItems
+
+    const searchLower = search.toLowerCase()
+    const matchesSearch = (item: NavItem) =>
+        String(item.label).toLowerCase().includes(searchLower) ||
+        item.subLabel?.toLowerCase().includes(searchLower)
+
+    const filteredItems = search ? allItems.filter(matchesSearch) : allItems
 
     useEffect(() => {
         setSelectedIndex(0)
