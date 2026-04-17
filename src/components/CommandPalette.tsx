@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react"
+import { useState, useRef, useLayoutEffect } from "react"
 import { Command } from "cmdk"
 import * as Dialog from "@radix-ui/react-dialog"
 import { useHotkeys } from "react-hotkeys-hook"
@@ -42,11 +42,11 @@ export default function CommandPalette({
         setTheme(originalThemeRef.current)
     }
 
-    useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useLayoutEffect(() => {
         if (mode !== "theme") return
         originalThemeRef.current = currentTheme
-        setTheme(currentTheme)
-    }, [mode, currentTheme, setTheme])
+    }, [])
 
     const handleThemeSelect = (themeName: ThemeName) => {
         setTheme(themeName)
