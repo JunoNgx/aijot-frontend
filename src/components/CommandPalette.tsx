@@ -7,6 +7,8 @@ import { useNavigateRoutes } from "@/hooks/useNavigateRoutes"
 import { themes } from "@/utils/themes"
 import type { ThemeName } from "@/utils/themes"
 import styles from "./CommandPalette.module.scss"
+import { ICON_PROPS_NORMAL } from "@/utils/constants"
+import { IconCheck } from "@tabler/icons-react"
 
 export type CommandPaletteMode = "main" | "theme"
 
@@ -132,7 +134,7 @@ export default function CommandPalette({
                         </span>
                         {theme.name === currentTheme && (
                             <span className={styles.CommandPalette__Check}>
-                                ✓
+                                <IconCheck {...ICON_PROPS_NORMAL} />
                             </span>
                         )}
                     </Command.Item>
