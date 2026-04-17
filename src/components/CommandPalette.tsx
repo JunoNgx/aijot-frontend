@@ -162,54 +162,46 @@ export default function CommandPalette({
     }))
 
     const isInCollection = isInJot && currentSlug
-    // TODO: CommandPalette is rendered at root level so useParams() won't work
-    // Using path parsing as workaround - could be simplified with route context in future
-    const isAlreadyDefault =
-        currentSlug !== null && defaultCollectionSlug === currentSlug
-
-    const createCollectionAction: NavItem = {
-        id: "create-collection",
-        label: "Create new collection",
-        icon: <IconPlus {...ICON_PROPS_NORMAL} />,
-        action: () => {
-            openCollectionDialog()
-            onClose()
-        },
-        category: "Collection Actions",
-    }
-
-    const setAsDefaultAction: NavItem = {
-        id: "set-default-collection",
-        label: `Set "${currentSlug}" as default`,
-        icon: <IconCheck {...ICON_PROPS_NORMAL} />,
-        action: () => {
-            if (currentSlug) {
-                setDefaultCollectionSlug(currentSlug)
-            }
-            onClose()
-        },
-        category: "Collection Actions",
-    }
-
-    const editCollectionAction: NavItem = {
-        id: "edit-collection",
-        label: "Edit current collection",
-        icon: <IconSettings {...ICON_PROPS_NORMAL} />,
-        action: () => {
-            const collection = collections.find((c) => c.slug === currentSlug)
-            if (collection) {
-                openCollectionDialog(collection)
-            }
-            onClose()
-        },
-        category: "Collection Actions",
-    }
+    const shouldIncludeSetDefaultAction = isInCollection
+        && defaultCollectionSlug !== currentSlug
 
     const collectionActionItems: NavItem[] = [
-        createCollectionAction,
-        ...(isInCollection && !isAlreadyDefault ? [setAsDefaultAction] : []),
-        ...(isInCollection ? [editCollectionAction] : []),
-    ]
+        {
+            id: "create-collection",
+            label: "Create new collection",
+            icon: <IconPlus {...ICON_PROPS_NORMAL} />,
+            action: () => {
+                openCollectionDialog()
+                onClose()
+            },
+            category: "Collection Actions",
+        },
+        shouldIncludeSetDefaultAction && {
+                id: "set-default-collection",
+                label: `Set "${currentSlug}" as default`,
+                icon: <IconCheck {...ICON_PROPS_NORMAL} />,
+                action: () => {
+                    setDefaultCollectionSlug(currentSlug!)
+                    onClose()
+                },
+                category: "Collection Actions",
+            },
+        isInCollection && {
+            id: "edit-collection",
+            label: "Edit current collection",
+            icon: <IconSettings {...ICON_PROPS_NORMAL} />,
+            action: () => {
+                const collection = collections.find(
+                    (c) => c.slug === currentSlug,
+                )
+                if (collection) {
+                    openCollectionDialog(collection)
+                }
+                onClose()
+            },
+            category: "Collection Actions",
+        },
+    ].filter(Boolean) as NavItem[]
 
     const getMainModeItems = () => [
         ...collectionNavItems,
