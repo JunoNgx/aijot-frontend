@@ -64,7 +64,8 @@ export function parseShortcut(shortcut: string): string[] {
         if (lower === "mod") return isMac ? "Cmd" : "Ctrl"
         if (lower === "shift") return "Shift"
         if (lower === "alt") return "Alt"
-        // Capitalize single letter keys
+        // Keep "n" lowercase for collection jump hint, capitalize other single letters
+        if (part === "n") return "n"
         if (part.length === 1) return part.toUpperCase()
         // Handle special keys - use symbols for arrows and enter
         if (lower === "arrowup") return "↑"
