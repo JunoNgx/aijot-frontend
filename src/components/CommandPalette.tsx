@@ -190,13 +190,39 @@ export default function CommandPalette({
         [SHORTCUT_NAV_SUBMIT, handleEnter],
     ])
 
+    const placeholder = mode === "theme" ? "Search theme..." : "Search..."
+    const isThemeMode = mode === "theme"
+
+    const renderItem = (item: NavItem, index: number) => (
+        <li
+            key={item.id}
+            className={styles.CommandPalette__Item}
+            role="option"
+            aria-selected={index === selectedIndex}
+            onClick={() => {
+                handleThemePreview(item.id as ThemeName)
+                item.action()
+            }}
+            onMouseEnter={() => {
+                setSelectedIndex(index)
+                handleThemePreview(item.id as ThemeName)
+            }}
+        >
+            {item.icon}
+            <span>{item.label}</span>
+            {isThemeMode && item.id === originalThemeRef.current && (
+                <span className={styles.CommandPalette__Check}>
+                    <IconCheck {...ICON_PROPS_NORMAL} />
+                </span>
+            )}
+        </li>
+    )
+
     return (
         <Dialog.Content
             className={styles.CommandPalette__Content}
             aria-describedby={undefined}
-            onInteractOutside={() => {
-                handleThemeRevert()
-            }}
+            onInteractOutside={handleThemeRevert}
         >
             <Dialog.Title className="VisuallyHidden">
                 Command Palette
@@ -205,7 +231,7 @@ export default function CommandPalette({
                 ref={inputRef}
                 type="text"
                 className={styles.CommandPalette__Input}
-                placeholder={mode === "theme" ? "Search theme..." : "Search..."}
+                placeholder={placeholder}
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 onKeyDown={handleKeyDown}
@@ -221,33 +247,7 @@ export default function CommandPalette({
                         No results found.
                     </li>
                 ) : (
-                    filteredItems.map((item, index) => (
-                        <li
-                            key={item.id}
-                            className={styles.CommandPalette__Item}
-                            role="option"
-                            aria-selected={index === selectedIndex}
-                            onClick={() => {
-                                handleThemePreview(item.id as ThemeName)
-                                item.action()
-                            }}
-                            onMouseEnter={() => {
-                                setSelectedIndex(index)
-                                handleThemePreview(item.id as ThemeName)
-                            }}
-                        >
-                            {item.icon}
-                            <span>{item.label}</span>
-                            {mode === "theme" &&
-                                item.id === originalThemeRef.current && (
-                                    <span
-                                        className={styles.CommandPalette__Check}
-                                    >
-                                        <IconCheck {...ICON_PROPS_NORMAL} />
-                                    </span>
-                                )}
-                        </li>
-                    ))
+                    filteredItems.map((item, index) => renderItem(item, index))
                 )}
             </ul>
         </Dialog.Content>
