@@ -25,18 +25,18 @@
         color: var(--colText);
     }
 
-    $iconSize: 16px;
+    --iconSize: 24px;
 
     &__Favicon {
-        width: $iconSize;
-        height: $iconSize;
+        width: var(--iconSize);
+        height: var(--iconSize);
         object-fit: contain;
     }
 
     &__ColourBlock {
         display: inline-block;
-        width: $iconSize;
-        height: $iconSize;
+        width: var(--iconSize);
+        height: var(--iconSize);
         border-radius: 50%;
     }
 

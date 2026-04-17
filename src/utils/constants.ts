@@ -41,7 +41,7 @@ export const ICON_PROPS_BUTTON = {
 }
 
 export const ICON_PROPS_ITEM_ICON = {
-    size: 20,
+    size: 24,
     strokeWidth: 2,
 }
 
