@@ -47,6 +47,11 @@
         margin-left: 0.5rem;
     }
 
+    &__BtnTheme {
+        composes: Btn Btn--Icon from global;
+        padding: 0.5rem !important;
+    }
+
     @media (width <= $breakpointMobile) {
         top: auto;
         bottom: 0;
