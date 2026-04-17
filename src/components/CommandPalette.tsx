@@ -45,7 +45,7 @@ export default function CommandPalette({
     onModeChange,
     onClose,
 }: CommandPaletteProps) {
-    const [search, setSearch] = useState("")
+    const [searchText, setSearchText] = useState("")
     const [selectedIndex, setSelectedIndex] = useState(0)
     const currentTheme = useLocalUserSettings((s) => s.theme)
     const setTheme = useLocalUserSettings((s) => s.setTheme)
@@ -154,16 +154,16 @@ export default function CommandPalette({
 
     const allItems = mode === "main" ? getMainModeItems() : themeItems
 
-    const searchLower = search.toLowerCase()
+    const searchLower = searchText.toLowerCase()
     const matchesSearch = (item: NavItem) =>
         String(item.label).toLowerCase().includes(searchLower) ||
         item.subLabel?.toLowerCase().includes(searchLower)
 
-    const filteredItems = search ? allItems.filter(matchesSearch) : allItems
+    const filteredItems = searchText ? allItems.filter(matchesSearch) : allItems
 
     useEffect(() => {
         setSelectedIndex(0)
-    }, [mode, search])
+    }, [mode, searchText])
 
     const startThemePreview = (themeName: ThemeName) => {
         setTheme(themeName)
@@ -308,8 +308,8 @@ export default function CommandPalette({
                 type="text"
                 className={styles.CommandPalette__Input}
                 placeholder={placeholder}
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
                 onKeyDown={handleKeyDown}
                 autoFocus
             />
