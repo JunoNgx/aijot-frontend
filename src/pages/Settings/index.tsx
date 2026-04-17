@@ -229,7 +229,7 @@ export default function Settings() {
                 <div className={styles.Settings__Field}>
                     <label className={styles.Settings__Label}>Theme</label>
                     <div className={styles.Settings__RadioGroup}>
-                        {(["light", "dark", "system"] as const).map((mode) => (
+                        {(["light", "dark"] as const).map((mode) => (
                             <label
                                 key={mode}
                                 className={styles.Settings__Radio}
