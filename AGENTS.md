@@ -24,6 +24,7 @@ ai\*jot is a remake of JustJot. Most of JustJot specifications are applicable to
 - Do not use the deprecated `FormEvent` and `React.FormEventHandler`
 - Do not use em dash
 - Avoid nesting by breaking down component templates to variables
+- Commit messages should use conventional commit, spec, starting with lowercase
 - Avoid regex for implementation and usage when possible. Only use when absolutely necessary or the benefit is significant.
 - Do not add redundant comments that explain what the code does. Variable names should be self-explanatory. Comments should only be used for non-obvious intent, gotchas, or design decisions.
 - Implement reusable utility CSS classes in `global.scss` as needed rather than repeating inline styles
