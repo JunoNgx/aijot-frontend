@@ -39,7 +39,7 @@ export default function CommandPalette({
         [setTheme],
     )
 
-    const { startPreview, commitPreview, revertPreview } = useThemePreview(
+    const { startPreview, revertPreview } = useThemePreview(
         currentTheme,
         handleApplyTheme,
     )
@@ -51,7 +51,6 @@ export default function CommandPalette({
     }, [mode, revertPreview])
 
     const handleThemeSelect = (themeName: ThemeName) => {
-        commitPreview()
         setTheme(themeName)
         onClose()
     }
