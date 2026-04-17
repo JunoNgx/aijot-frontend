@@ -147,18 +147,29 @@ export default function CommandPalette({
         onClose()
     })
 
+    const getNextIndex = (current: number, direction: "up" | "down") => {
+        if (direction === "up") {
+            return current > 0 ? current - 1 : filteredItems.length - 1
+        }
+        return current < filteredItems.length - 1 ? current + 1 : 0
+    }
+
     const handleArrowUp = () => {
         if (filteredItems.length === 0) return
-        setSelectedIndex((prev) =>
-            prev > 0 ? prev - 1 : filteredItems.length - 1,
-        )
+        const newIndex = getNextIndex(selectedIndex, "up")
+        setSelectedIndex(newIndex)
+        if (mode === "theme") {
+            startThemePreview(filteredItems[newIndex].id as ThemeName)
+        }
     }
 
     const handleArrowDown = () => {
         if (filteredItems.length === 0) return
-        setSelectedIndex((prev) =>
-            prev < filteredItems.length - 1 ? prev + 1 : 0,
-        )
+        const newIndex = getNextIndex(selectedIndex, "down")
+        setSelectedIndex(newIndex)
+        if (mode === "theme") {
+            startThemePreview(filteredItems[newIndex].id as ThemeName)
+        }
     }
 
     const handleEnter = () => {
