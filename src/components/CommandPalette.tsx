@@ -50,8 +50,9 @@ export default function CommandPalette({
         }
     }, [mode, revertPreview])
 
-    const handleThemeSelect = () => {
+    const handleThemeSelect = (themeName: ThemeName) => {
         commitPreview()
+        setTheme(themeName)
         onClose()
     }
 
@@ -126,7 +127,9 @@ export default function CommandPalette({
                     <Command.Item
                         key={theme.name}
                         className={styles.CommandPalette__Item}
-                        onSelect={handleThemeSelect}
+                        onSelect={() =>
+                            handleThemeSelect(theme.name as ThemeName)
+                        }
                         onMouseEnter={() =>
                             handleThemeHover(theme.name as ThemeName)
                         }
