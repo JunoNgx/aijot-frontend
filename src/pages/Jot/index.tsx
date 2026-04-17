@@ -122,6 +122,7 @@ export default function Jot() {
                 selectedItem={selectedItem}
                 visibleItemCount={visibleItems.length}
                 onSelectedIndexChange={setSelectedIndex}
+                isTrash={isTrash}
             />
             <div className={styles.Jot__List}>{itemList}</div>
         </div>

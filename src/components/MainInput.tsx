@@ -13,6 +13,10 @@ import {
     SHORTCUT_ITEM_EDIT,
     SHORTCUT_ITEM_COPY,
     SHORTCUT_ITEM_TRASH,
+    SHORTCUT_ITEM_RESTORE,
+    SHORTCUT_ITEM_TOGGLE_COPY_ON_CLICK,
+    SHORTCUT_ITEM_REFETCH,
+    SHORTCUT_ITEM_CONVERT_TO_TODO,
 } from "@/utils/constants"
 import styles from "./MainInput.module.scss"
 import type { MainInputSearchData, Item } from "@/types"
@@ -24,6 +28,7 @@ interface Props {
     selectedItem: Item | undefined
     visibleItemCount: number
     onSelectedIndexChange: (index: number) => void
+    isTrash: boolean
 }
 
 export default function MainInput({
@@ -33,9 +38,19 @@ export default function MainInput({
     selectedItem,
     visibleItemCount,
     onSelectedIndexChange,
+    isTrash,
 }: Props) {
     const [inputValue, setInputValue] = useState("")
-    const { createItem, copyContent, editItem, trashItem } = useItemActions()
+    const {
+        createItem,
+        copyContent,
+        editItem,
+        trashItem,
+        restoreItem,
+        toggleCopyOnClick,
+        refetchLinkMeta,
+        convertToTodo,
+    } = useItemActions()
     const searchData = useMainInputParser(inputValue)
 
     useEffect(() => {
@@ -114,6 +129,32 @@ export default function MainInput({
             SHORTCUT_ITEM_TRASH,
             () => {
                 if (selectedItem) trashItem(selectedItem)
+            },
+        ],
+        [
+            SHORTCUT_ITEM_RESTORE,
+            () => {
+                if (selectedItem && isTrash) restoreItem(selectedItem)
+            },
+        ],
+        [
+            SHORTCUT_ITEM_TOGGLE_COPY_ON_CLICK,
+            () => {
+                if (selectedItem) toggleCopyOnClick(selectedItem)
+            },
+        ],
+        [
+            SHORTCUT_ITEM_REFETCH,
+            () => {
+                if (selectedItem && selectedItem.type === "link")
+                    refetchLinkMeta(selectedItem)
+            },
+        ],
+        [
+            SHORTCUT_ITEM_CONVERT_TO_TODO,
+            () => {
+                if (selectedItem && selectedItem.type === "text")
+                    convertToTodo(selectedItem)
             },
         ],
     ])
