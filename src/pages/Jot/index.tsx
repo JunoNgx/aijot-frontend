@@ -71,10 +71,6 @@ export default function Jot() {
     const currCollection = collections.find((c) => c.slug === slug)
     const allSlug = useCoreCollectionSettings((s) => s.all.slug)
 
-    if (!collectionsQuery.isPending && !currCollection) {
-        return <Navigate to={`${ROUTE_JOT}/${allSlug}`} replace />
-    }
-
     const isTrash = currCollection?.coreType === "trash"
     const baseItems = isTrash
         ? (trashedItemsQuery.data ?? [])
@@ -100,6 +96,10 @@ export default function Jot() {
         enableOnFormTags: true,
         preventDefault: true,
     })
+
+    if (!collectionsQuery.isPending && !currCollection) {
+        return <Navigate to={`${ROUTE_JOT}/${allSlug}`} replace />
+    }
 
     const itemList = visibleItems.map((item, index) => (
         <JotItem

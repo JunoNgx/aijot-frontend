@@ -149,14 +149,20 @@ export default function ItemDialog({ item, onClose }: Props) {
         hasUnsavedChangesRef.current = false
     }, [buildUpdatedItem])
 
-    const handleSaveAndClose = () => {
+    const handleSaveAndClose = useCallback(() => {
         handleSave()
         closeAllDialogs()
-    }
+    }, [handleSave, closeAllDialogs])
 
-    const saveHotkeyHandler = getHotkeyHandler([
-        [SHORTCUT_SAVE_AND_CLOSE, handleSaveAndClose],
-    ])
+    const saveHotkeyHandler = useCallback(
+        (e: React.KeyboardEvent) => {
+            const handler = getHotkeyHandler([
+                [SHORTCUT_SAVE_AND_CLOSE, handleSaveAndClose],
+            ])
+            handler(e)
+        },
+        [handleSaveAndClose],
+    )
 
     const debouncedSave = useDebounced(handleSave, AUTOSAVE_DEBOUNCE_MS)
 
