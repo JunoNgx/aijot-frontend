@@ -162,8 +162,10 @@ export default function CommandPalette({
     }))
 
     const isInCollection = isInJot && currentSlug
-    const shouldIncludeSetDefaultAction = isInCollection
-        && defaultCollectionSlug !== currentSlug
+    // TODO: CommandPalette is rendered at root level so useParams() won't work
+    // Using path parsing as workaround - could be simplified with route context in future
+    const shouldIncludeSetDefaultAction =
+        isInCollection && defaultCollectionSlug !== currentSlug
 
     const collectionActionItems: NavItem[] = [
         {
@@ -177,15 +179,15 @@ export default function CommandPalette({
             category: "Collection Actions",
         },
         shouldIncludeSetDefaultAction && {
-                id: "set-default-collection",
-                label: `Set "${currentSlug}" as default`,
-                icon: <IconCheck {...ICON_PROPS_NORMAL} />,
-                action: () => {
-                    setDefaultCollectionSlug(currentSlug!)
-                    onClose()
-                },
-                category: "Collection Actions",
+            id: "set-default-collection",
+            label: `Set "${currentSlug}" as default`,
+            icon: <IconCheck {...ICON_PROPS_NORMAL} />,
+            action: () => {
+                setDefaultCollectionSlug(currentSlug!)
+                onClose()
             },
+            category: "Collection Actions",
+        },
         isInCollection && {
             id: "edit-collection",
             label: "Edit current collection",
