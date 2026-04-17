@@ -369,51 +369,51 @@ Remove all Mantine packages: `@mantine/core`, `@mantine/dates`, `@mantine/hooks`
 
 ### 34a — Storage layer
 
-- [ ] Add `clearAllData()` to `src/db/dexie.adapter.ts` — clears `items` and `collections` tables
-- [ ] Export `forceDeleteDb()` from `src/db/index.ts` — closes Dexie, calls `indexedDB.deleteDatabase("aijot")`
+- [x] Add `clearAllData()` to `src/db/dexie.adapter.ts` — clears `items` and `collections` tables
+- [x] Export `forceDeleteDb()` from `src/db/index.ts` — closes Dexie, calls `indexedDB.deleteDatabase("aijot")`
 
 ### 34b — Clear data utility
 
-- [ ] Create `src/utils/clearData.ts`
-- [ ] `clearAllData()` — clears IndexedDB tables (items + collections)
-- [ ] `forceDeleteDb()` — deletes entire IndexedDB by name
-- [ ] `clearAllCaches()` — clears PWA service worker caches via `caches.keys()` + `caches.delete()`
-- [ ] `resetZustandStores()` — calls `persist.clearStorage()` on all 5 stores (localUserSettings, localAppData, localSyncData, profileSettings, coreCollectionSettings)
+- [x] Create `src/utils/clearData.ts`
+- [x] `clearAllData()` — clears IndexedDB tables (items + collections)
+- [x] `forceDeleteDb()` — deletes entire IndexedDB by name
+- [x] `clearAllCaches()` — clears PWA service worker caches via `caches.keys()` + `caches.delete()`
+- [x] `resetZustandStores()` — calls `persist.clearStorage()` on all 5 stores (localUserSettings, localAppData, localSyncData, profileSettings, coreCollectionSettings)
 
 ### 34c — Settings UI: Danger Zone section
 
-- [ ] Add "Danger Zone" section to Settings page below Sync section
-- [ ] Section heading with danger styling
-- [ ] Description: "Removes all items and collections. Your data on Google Drive will remain intact."
-- [ ] "Clear all data" button (danger variant)
+- [x] Add "Danger Zone" section to Settings page below Sync section
+- [x] Section heading with danger styling
+- [x] Description: "Removes all items and collections. Your data on Google Drive will remain intact."
+- [x] "Clear all data" button (danger variant)
 
 ### 34d — Settings UI: Clear data confirmation
 
-- [ ] Add `isClearDataDialogOpen` state to Settings
-- [ ] Confirmation dialog via `useDialogStore.openDialog()`:
+- [x] Add `isClearDataDialogOpen` state to Settings
+- [x] Confirmation dialog via `useDialogStore.openDialog()`:
     - Title: "Clear all data?"
     - Body: "This cannot be undone."
     - Footer: Cancel (light) + Clear (danger, with loading state)
-- [ ] On confirm: disconnect Drive → `clearAllData()` → set `shouldShowDemoDataBanner(true)` → reload page
+- [x] On confirm: disconnect Drive → `clearAllData()` → set `shouldShowDemoDataBanner(true)` → reload page
 
 ### 34e — Settings UI: Reset App (debug mode)
 
-- [ ] Add `isDebugMode` state to Settings (hidden by default)
-- [ ] Enable debug mode: tap Settings heading 5 times (show indicator)
-- [ ] "Reset" section visible only when `isDebugMode` is true
-- [ ] Description: "Wipes local database and all local app data. Cannot be undone."
-- [ ] "Reset app" button (danger variant)
+- [x] Add `isDebugMode` state to Settings (hidden by default)
+- [x] Enable debug mode: tap Settings heading 5 times (show indicator)
+- [x] "Reset" section visible only when `isDebugMode` is true
+- [x] Description: "Wipes local database and all local app data. Cannot be undone."
+- [x] "Reset app" button (danger variant)
 
 ### 34f — Settings UI: Reset app confirmation
 
-- [ ] Add `isResetAppDialogOpen` state to Settings
-- [ ] Confirmation dialog via `useDialogStore.openDialog()`:
+- [x] Add `isResetAppDialogOpen` state to Settings
+- [x] Confirmation dialog via `useDialogStore.openDialog()`:
     - Title: "Confirm resetting app?"
     - Body: "This cannot be undone."
     - Footer: Cancel (light) + Reset (danger, with loading state)
-- [ ] On confirm: `localStorage.clear()` → `sessionStorage.clear()` → `forceDeleteDb()` → `clearAllCaches()` → redirect to `/`
+- [x] On confirm: `localStorage.clear()` → `sessionStorage.clear()` → `forceDeleteDb()` → `clearAllCaches()` → redirect to `/`
 
 ### 34g — Styling
 
-- [ ] Add `Settings__BtnDanger` class to `Settings/index.module.scss` using `Btn--Danger`
-- [ ] Add danger zone section styling
+- [x] Add `Settings__BtnDanger` class to `Settings/index.module.scss` using `Btn--Danger`
+- [x] Add danger zone section styling
