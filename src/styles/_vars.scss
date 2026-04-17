@@ -1,25 +1,14 @@
 // Theme CSS variables
-// Toggle via data-color-scheme="dark|light" on <html>
-
-[data-color-scheme="light"] {
+// Theme is set in ThemeManager programmatically
+// Fallback defaults for SSR/no-JS (light theme)
+:root {
     --colBg: #e0e0e0;
     --colMain: #0098a9;
     --colSub: #777777;
     --colBgSub: #cfcfcf;
     --colText: #121212;
     --colDanger: #fa5252;
-}
 
-[data-color-scheme="dark"] {
-    --colBg: #121212;
-    --colMain: #0098a9;
-    --colSub: #777777;
-    --colBgSub: #333;
-    --colText: #e0e0e0;
-    --colDanger: #fa5252;
-}
-
-:root {
     --fontFamily: "Space Grotesk", sans-serif;
     --fontFamilyMono: "Space Mono", monospace;
 
