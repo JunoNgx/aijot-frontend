@@ -1,32 +1,25 @@
 import { useEffect } from "react"
 import { useLocalUserSettings } from "@/store/localUserSettings"
-import type { ThemeMode } from "@/types"
+import { themes } from "@/utils/themes"
 
-function resolveColorScheme(theme: ThemeMode): "light" | "dark" {
-    if (theme !== "system") return theme
-    return window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light"
+function applyThemeColors(colors: (typeof themes)[number]) {
+    const root = document.documentElement
+    root.style.setProperty("--colBg", colors.colBg)
+    root.style.setProperty("--colMain", colors.colMain)
+    root.style.setProperty("--colSub", colors.colSub)
+    root.style.setProperty("--colBgSub", colors.colBgSub)
+    root.style.setProperty("--colText", colors.colText)
+    root.style.setProperty("--colDanger", colors.colDanger)
 }
 
 export default function ThemeManager() {
     const theme = useLocalUserSettings((s) => s.theme)
 
     useEffect(() => {
-        const applyColorScheme = () => {
-            const colorScheme = resolveColorScheme(theme)
-            document.documentElement.setAttribute(
-                "data-color-scheme",
-                colorScheme,
-            )
+        const foundTheme = themes.find((t) => t.name === theme)
+        if (foundTheme) {
+            applyThemeColors(foundTheme)
         }
-
-        applyColorScheme()
-
-        if (theme !== "system") return
-        const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)")
-        mediaQuery.addEventListener("change", applyColorScheme)
-        return () => mediaQuery.removeEventListener("change", applyColorScheme)
     }, [theme])
 
     return null
