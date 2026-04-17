@@ -84,17 +84,17 @@ export default function CommandPalette({
         setTheme(originalThemeRef.current)
     }
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     useLayoutEffect(() => {
         if (!isThemeMode) return
         originalThemeRef.current = currentTheme
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
         if (isThemeMode) {
             revertThemePreview()
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [mode])
 
     useHotkeys("Escape", () => {
@@ -302,7 +302,6 @@ export default function CommandPalette({
         setTheme(themeName)
     }
 
-    // eslint-disable-next-line react-hooks/refs
     const themeGroup = (
         <Command.Group heading="Theme" className={styles.CommandPalette__Group}>
             {themes.map((theme) => (
