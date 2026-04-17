@@ -31,6 +31,7 @@ ai\*jot is a remake of JustJot. Most of JustJot specifications are applicable to
 - Use CSS variables when possible, especially for common patterns (e.g. `var(--lineThickness)` instead of `1px`). Variables are defined in `src/styles/_vars.scss`
 - Run `yarn format` after every set of changes before handing back
 - Use plain HTML + SCSS for all UI. Use Radix UI primitives where accessibility behaviour is non-trivial (e.g. dialogs, accordions, context menus, dropdowns)
+- Use quartered rem values (e.g. 0.25rem; 0.5rem; 0.75rem) unless absolutely necessary
 
 ## Patterns from JustJot
 
@@ -73,5 +74,3 @@ Two-layer split for all data operations:
 - Global hotkeys: `useHotkeys` with `{ enableOnFormTags: true }`
 - Inline `onKeyDown` hotkeys: `getHotkeyHandler(tuples)` from `src/utils/hotkeyHandler.ts`
 - Shortcut format: `"mod+key"`, `"shift+key"`, `"mod+shift+key"` — `mod` = Ctrl on Windows/Linux, Cmd on Mac
-
-
