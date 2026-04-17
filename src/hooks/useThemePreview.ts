@@ -1,7 +1,7 @@
 import { useState, useCallback, useRef, useEffect } from "react"
 import type { ThemeName } from "@/utils/themes"
 
-const PREVIEW_DELAY_MS = 1000
+const PREVIEW_DEBOUNCE_DURATION_MS = 150
 
 interface UseThemePreviewReturn {
     previewTheme: ThemeName | null
@@ -36,7 +36,7 @@ export function useThemePreview(
 
             timeoutRef.current = setTimeout(() => {
                 onApplyTheme(themeName)
-            }, PREVIEW_DELAY_MS)
+            }, PREVIEW_DEBOUNCE_DURATION_MS)
         },
         [onApplyTheme, clearTimeout],
     )
