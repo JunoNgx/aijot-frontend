@@ -1,4 +1,5 @@
 import { useState, useRef, useLayoutEffect, useEffect } from "react"
+import { Command } from "cmdk"
 import * as Dialog from "@radix-ui/react-dialog"
 import { useHotkeys } from "react-hotkeys-hook"
 import { useLocalUserSettings } from "@/store/localUserSettings"
@@ -10,14 +11,7 @@ import { openCollectionDialog } from "@/utils/openCollectionDialog"
 import { themes } from "@/utils/themes"
 import type { ThemeName } from "@/utils/themes"
 import styles from "./CommandPalette.module.scss"
-import {
-    ICON_PROPS_NORMAL,
-    SHORTCUT_NAV_UP,
-    SHORTCUT_NAV_DOWN,
-    SHORTCUT_NAV_SUBMIT,
-    ROUTE_JOT,
-} from "@/utils/constants"
-import { getHotkeyHandler } from "@/utils/hotkeyHandler"
+import { ICON_PROPS_NORMAL, ROUTE_JOT } from "@/utils/constants"
 import {
     IconWritingSign,
     IconStack2,
@@ -36,26 +30,15 @@ interface CommandPaletteProps {
     onClose: () => void
 }
 
-interface NavItem {
-    id: string
-    label: string | React.ReactNode
-    subLabel?: string
-    icon: React.ReactNode
-    action: () => void
-    category?: string
-}
-
 export default function CommandPalette({
     mode,
     onModeChange,
     onClose,
 }: CommandPaletteProps) {
     const [searchText, setSearchText] = useState("")
-    const [selectedIndex, setSelectedIndex] = useState(0)
     const currentTheme = useLocalUserSettings((s) => s.theme)
     const setTheme = useLocalUserSettings((s) => s.setTheme)
     const originalThemeRef = useRef(currentTheme)
-    const inputRef = useRef<HTMLInputElement>(null)
     const {
         navigateToJot,
         navigateToCollection,
@@ -77,315 +60,411 @@ export default function CommandPalette({
     const { collectionsQuery } = useCollectionsQuery()
     const collections = collectionsQuery.data ?? []
 
-    const navItems: NavItem[] = [
-        {
-            id: "jot",
-            label: "Go to Jot",
-            icon: <IconWritingSign {...ICON_PROPS_NORMAL} />,
-            action: () => {
-                navigateToJot()
-                onClose()
-            },
-            category: "Navigation",
-        },
-        {
-            id: "collections",
-            label: "Go to Collections",
-            icon: <IconStack2 {...ICON_PROPS_NORMAL} />,
-            action: () => {
-                navigateToCollections()
-                onClose()
-            },
-            category: "Navigation",
-        },
-        {
-            id: "settings",
-            label: "Go to Settings",
-            icon: <IconSettings {...ICON_PROPS_NORMAL} />,
-            action: () => {
-                navigateToSettings()
-                onClose()
-            },
-            category: "Navigation",
-        },
-        {
-            id: "help",
-            label: "Help Guide",
-            icon: <IconHelp {...ICON_PROPS_NORMAL} />,
-            action: () => {
-                navigateToHelp()
-                onClose()
-            },
-            category: "Navigation",
-        },
-    ]
+    const handleNavigation = (action: () => void) => {
+        action()
+        onClose()
+    }
 
-    const actionItems: NavItem[] = [
-        {
-            id: "change-theme",
-            label: "Change Theme...",
-            icon: <IconPalette {...ICON_PROPS_NORMAL} />,
-            action: () => onModeChange("theme"),
-            category: "Actions",
-        },
-    ]
-
-    const themeItems: NavItem[] = themes.map((theme) => ({
-        id: theme.name,
-        label: theme.name.charAt(0).toUpperCase() + theme.name.slice(1),
-        icon: null,
-        action: () => {
-            setTheme(theme.name as ThemeName)
-            onClose()
-        },
-        category: "Theme",
-    }))
-
-    const collectionNavItems: NavItem[] = collections.map((collection) => ({
-        id: collection.slug,
-        label: (
-            <>
-                <span
-                    className={styles.CommandPalette__ColourBlock}
-                    style={{ backgroundColor: collection.colour }}
-                />
-                {collection.name}
-            </>
-        ),
-        subLabel: `/${collection.slug}`,
-        icon: <span>{collection.icon}</span>,
-        action: () => {
-            navigateToCollection(collection.slug)
-            onClose()
-        },
-        category: "Collections",
-    }))
-
-    const isInCollection = isInJot && currentSlug
-    // TODO: CommandPalette is rendered at root level so useParams() won't work
-    // Using path parsing as workaround - could be simplified with route context in future
-    const shouldIncludeSetDefaultAction =
-        isInCollection && defaultCollectionSlug !== currentSlug
-
-    const collectionActionItems: NavItem[] = [
-        {
-            id: "create-collection",
-            label: "Create new collection",
-            icon: <IconPlus {...ICON_PROPS_NORMAL} />,
-            action: () => {
-                openCollectionDialog()
-                onClose()
-            },
-            category: "Collection Actions",
-        },
-        shouldIncludeSetDefaultAction && {
-            id: "set-default-collection",
-            label: `Set "${currentSlug}" as default`,
-            icon: <IconCheck {...ICON_PROPS_NORMAL} />,
-            action: () => {
-                setDefaultCollectionSlug(currentSlug!)
-                onClose()
-            },
-            category: "Collection Actions",
-        },
-        isInCollection && {
-            id: "edit-collection",
-            label: "Edit current collection",
-            icon: <IconSettings {...ICON_PROPS_NORMAL} />,
-            action: () => {
-                const collection = collections.find(
-                    (c) => c.slug === currentSlug,
-                )
-                if (collection) {
-                    openCollectionDialog(collection)
-                }
-                onClose()
-            },
-            category: "Collection Actions",
-        },
-    ].filter(Boolean) as NavItem[]
-
-    const getMainModeItems = () => [
-        ...collectionNavItems,
-        ...collectionActionItems,
-        ...navItems,
-        ...actionItems,
-    ]
-
-    const allItems = mode === "main" ? getMainModeItems() : themeItems
-
-    const searchLower = searchText.toLowerCase()
-    const matchesSearch = (item: NavItem) =>
-        String(item.label).toLowerCase().includes(searchLower) ||
-        item.subLabel?.toLowerCase().includes(searchLower)
-
-    const filteredItems = searchText ? allItems.filter(matchesSearch) : allItems
-
-    useEffect(() => {
-        setSelectedIndex(0)
-    }, [mode, searchText])
-
-    const startThemePreview = (themeName: ThemeName) => {
+    const handleThemeSelect = (themeName: ThemeName) => {
         setTheme(themeName)
+        onClose()
     }
 
     const revertThemePreview = () => {
+        if (mode !== "theme") return
         setTheme(originalThemeRef.current)
     }
 
-    const handleThemePreview = (themeName: ThemeName) => {
-        if (mode !== "theme") return
-        startThemePreview(themeName)
-    }
-
-    const handleThemeRevert = () => {
-        if (mode !== "theme") return
-        revertThemePreview()
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     useLayoutEffect(() => {
         if (mode !== "theme") return
         originalThemeRef.current = currentTheme
     }, [])
 
+    useEffect(() => {
+        if (mode === "theme") {
+            revertThemePreview()
+        }
+    }, [mode])
+
     useHotkeys("Escape", () => {
-        handleThemeRevert()
+        revertThemePreview()
         onClose()
     })
 
-    const getNextIndex = (current: number, direction: "up" | "down") => {
-        if (direction === "up") {
-            return current > 0 ? current - 1 : filteredItems.length - 1
-        }
-        return current < filteredItems.length - 1 ? current + 1 : 0
-    }
+    const isInCollection = isInJot && currentSlug
+    const shouldIncludeSetDefaultAction =
+        isInCollection && defaultCollectionSlug !== currentSlug
 
-    const handleArrowUp = () => {
-        if (filteredItems.length === 0) return
-        const newIndex = getNextIndex(selectedIndex, "up")
-        setSelectedIndex(newIndex)
-        handleThemePreview(filteredItems[newIndex].id as ThemeName)
-    }
-
-    const handleArrowDown = () => {
-        if (filteredItems.length === 0) return
-        const newIndex = getNextIndex(selectedIndex, "down")
-        setSelectedIndex(newIndex)
-        handleThemePreview(filteredItems[newIndex].id as ThemeName)
-    }
-
-    const handleEnter = () => {
-        const item = filteredItems[selectedIndex]
-        if (item) {
-            handleThemePreview(item.id as ThemeName)
-            item.action()
-        }
-    }
-
-    const handleKeyDown = getHotkeyHandler([
-        [SHORTCUT_NAV_UP, handleArrowUp],
-        [SHORTCUT_NAV_DOWN, handleArrowDown],
-        [SHORTCUT_NAV_SUBMIT, handleEnter],
-    ])
-
-    const placeholder = mode === "theme" ? "Search theme..." : "Search..."
-    const isThemeMode = mode === "theme"
-
-    const renderItem = (item: NavItem) => {
-        const index = filteredItems.findIndex((i) => i.id === item.id)
-        const isSelected = index === selectedIndex
-
-        return (
-            <li
-                key={item.id}
-                className={styles.CommandPalette__Item}
-                role="option"
-                aria-selected={isSelected}
-                onClick={() => {
-                    handleThemePreview(item.id as ThemeName)
-                    item.action()
-                }}
-                onMouseEnter={() => {
-                    setSelectedIndex(index)
-                    handleThemePreview(item.id as ThemeName)
-                }}
-            >
-                {item.icon}
-                <div className={styles.CommandPalette__ItemContent}>
-                    <span className={styles.CommandPalette__LabelLine}>
-                        {item.label}
-                    </span>
-                    {item.subLabel && (
-                        <span className={styles.CommandPalette__SubLabel}>
-                            {item.subLabel}
-                        </span>
-                    )}
-                </div>
-                {isThemeMode && item.id === originalThemeRef.current && (
-                    <span className={styles.CommandPalette__Check}>
-                        <IconCheck {...ICON_PROPS_NORMAL} />
-                    </span>
-                )}
-            </li>
-        )
-    }
-
-    const renderGroup = (category: string, items: NavItem[]) => (
-        <div key={category}>
-            <p className={styles.CommandPalette__SectionLabel}>{category}</p>
-            {items.map(renderItem)}
-        </div>
-    )
-
-    const renderGroupedItems = () => {
-        const groupedItems = filteredItems.reduce(
-            (acc, item) => {
-                const category = item.category || "Other"
-                if (!acc[category]) acc[category] = []
-                acc[category].push(item)
-                return acc
-            },
-            {} as Record<string, NavItem[]>,
-        )
-
-        return Object.entries(groupedItems).map(([category, items]) =>
-            renderGroup(category, items),
-        )
+    const renderIcon = (icon: React.ReactNode) => {
+        return icon
     }
 
     return (
         <Dialog.Content
             className={styles.CommandPalette__Content}
             aria-describedby={undefined}
-            onInteractOutside={handleThemeRevert}
+            onInteractOutside={revertThemePreview}
         >
             <Dialog.Title className="VisuallyHidden">
                 Command Palette
             </Dialog.Title>
-            <input
-                ref={inputRef}
-                type="text"
-                className={styles.CommandPalette__Input}
-                placeholder={placeholder}
+            <Command
+                label="Command palette"
+                shouldFilter={mode === "main"}
                 value={searchText}
-                onChange={(e) => setSearchText(e.target.value)}
-                onKeyDown={handleKeyDown}
-                autoFocus
-            />
-            <ul
-                className={styles.CommandPalette__List}
-                role="listbox"
-                aria-label="Command palette options"
+                onValueChange={(value) => setSearchText(value)}
             >
-                {filteredItems.length === 0 ? (
-                    <li className={styles.CommandPalette__Empty}>
+                <Command.Input
+                    className={styles.CommandPalette__Input}
+                    placeholder={
+                        mode === "theme" ? "Search theme..." : "Search..."
+                    }
+                    autoFocus
+                />
+                <Command.List className={styles.CommandPalette__List}>
+                    <Command.Empty className={styles.CommandPalette__Empty}>
                         No results found.
-                    </li>
-                ) : (
-                    renderGroupedItems()
-                )}
-            </ul>
+                    </Command.Empty>
+
+                    {mode === "main" ? (
+                        <>
+                            <Command.Group
+                                heading="Collections"
+                                className={styles.CommandPalette__Group}
+                            >
+                                {collections.map((collection) => (
+                                    <Command.Item
+                                        key={collection.slug}
+                                        value={`${collection.name} ${collection.slug}`}
+                                        className={styles.CommandPalette__Item}
+                                        onSelect={() =>
+                                            handleNavigation(() =>
+                                                navigateToCollection(
+                                                    collection.slug,
+                                                ),
+                                            )
+                                        }
+                                    >
+                                        {renderIcon(
+                                            <span>{collection.icon}</span>,
+                                        )}
+                                        <div
+                                            className={
+                                                styles.CommandPalette__ItemContent
+                                            }
+                                        >
+                                            <span
+                                                className={
+                                                    styles.CommandPalette__LabelLine
+                                                }
+                                            >
+                                                <span
+                                                    className={
+                                                        styles.CommandPalette__ColourBlock
+                                                    }
+                                                    style={{
+                                                        backgroundColor:
+                                                            collection.colour,
+                                                    }}
+                                                />
+                                                {collection.name}
+                                            </span>
+                                            <span
+                                                className={
+                                                    styles.CommandPalette__SubLabel
+                                                }
+                                            >
+                                                /{collection.slug}
+                                            </span>
+                                        </div>
+                                    </Command.Item>
+                                ))}
+                            </Command.Group>
+
+                            <Command.Group
+                                heading="Collection Actions"
+                                className={styles.CommandPalette__Group}
+                            >
+                                <Command.Item
+                                    value="create collection"
+                                    className={styles.CommandPalette__Item}
+                                    onSelect={() =>
+                                        handleNavigation(() =>
+                                            openCollectionDialog(),
+                                        )
+                                    }
+                                >
+                                    {renderIcon(
+                                        <IconPlus {...ICON_PROPS_NORMAL} />,
+                                    )}
+                                    <div
+                                        className={
+                                            styles.CommandPalette__ItemContent
+                                        }
+                                    >
+                                        <span
+                                            className={
+                                                styles.CommandPalette__LabelLine
+                                            }
+                                        >
+                                            Create new collection
+                                        </span>
+                                    </div>
+                                </Command.Item>
+
+                                {shouldIncludeSetDefaultAction && (
+                                    <Command.Item
+                                        value={`set ${currentSlug} as default`}
+                                        className={styles.CommandPalette__Item}
+                                        onSelect={() =>
+                                            handleNavigation(() =>
+                                                setDefaultCollectionSlug(
+                                                    currentSlug!,
+                                                ),
+                                            )
+                                        }
+                                    >
+                                        {renderIcon(
+                                            <IconCheck
+                                                {...ICON_PROPS_NORMAL}
+                                            />,
+                                        )}
+                                        <div
+                                            className={
+                                                styles.CommandPalette__ItemContent
+                                            }
+                                        >
+                                            <span
+                                                className={
+                                                    styles.CommandPalette__LabelLine
+                                                }
+                                            >
+                                                Set &quot;{currentSlug}&quot; as
+                                                default
+                                            </span>
+                                        </div>
+                                    </Command.Item>
+                                )}
+
+                                {isInCollection && (
+                                    <Command.Item
+                                        value="edit current collection"
+                                        className={styles.CommandPalette__Item}
+                                        onSelect={() => {
+                                            const collection = collections.find(
+                                                (c) => c.slug === currentSlug,
+                                            )
+                                            if (collection) {
+                                                handleNavigation(() =>
+                                                    openCollectionDialog(
+                                                        collection,
+                                                    ),
+                                                )
+                                            }
+                                        }}
+                                    >
+                                        {renderIcon(
+                                            <IconSettings
+                                                {...ICON_PROPS_NORMAL}
+                                            />,
+                                        )}
+                                        <div
+                                            className={
+                                                styles.CommandPalette__ItemContent
+                                            }
+                                        >
+                                            <span
+                                                className={
+                                                    styles.CommandPalette__LabelLine
+                                                }
+                                            >
+                                                Edit current collection
+                                            </span>
+                                        </div>
+                                    </Command.Item>
+                                )}
+                            </Command.Group>
+
+                            <Command.Group
+                                heading="Navigation"
+                                className={styles.CommandPalette__Group}
+                            >
+                                <Command.Item
+                                    value="go to jot"
+                                    className={styles.CommandPalette__Item}
+                                    onSelect={() =>
+                                        handleNavigation(navigateToJot)
+                                    }
+                                >
+                                    {renderIcon(
+                                        <IconWritingSign
+                                            {...ICON_PROPS_NORMAL}
+                                        />,
+                                    )}
+                                    <div
+                                        className={
+                                            styles.CommandPalette__ItemContent
+                                        }
+                                    >
+                                        <span
+                                            className={
+                                                styles.CommandPalette__LabelLine
+                                            }
+                                        >
+                                            Go to Jot
+                                        </span>
+                                    </div>
+                                </Command.Item>
+                                <Command.Item
+                                    value="go to collections"
+                                    className={styles.CommandPalette__Item}
+                                    onSelect={() =>
+                                        handleNavigation(navigateToCollections)
+                                    }
+                                >
+                                    {renderIcon(
+                                        <IconStack2 {...ICON_PROPS_NORMAL} />,
+                                    )}
+                                    <div
+                                        className={
+                                            styles.CommandPalette__ItemContent
+                                        }
+                                    >
+                                        <span
+                                            className={
+                                                styles.CommandPalette__LabelLine
+                                            }
+                                        >
+                                            Go to Collections
+                                        </span>
+                                    </div>
+                                </Command.Item>
+                                <Command.Item
+                                    value="go to settings"
+                                    className={styles.CommandPalette__Item}
+                                    onSelect={() =>
+                                        handleNavigation(navigateToSettings)
+                                    }
+                                >
+                                    {renderIcon(
+                                        <IconSettings {...ICON_PROPS_NORMAL} />,
+                                    )}
+                                    <div
+                                        className={
+                                            styles.CommandPalette__ItemContent
+                                        }
+                                    >
+                                        <span
+                                            className={
+                                                styles.CommandPalette__LabelLine
+                                            }
+                                        >
+                                            Go to Settings
+                                        </span>
+                                    </div>
+                                </Command.Item>
+                                <Command.Item
+                                    value="help guide"
+                                    className={styles.CommandPalette__Item}
+                                    onSelect={() =>
+                                        handleNavigation(navigateToHelp)
+                                    }
+                                >
+                                    {renderIcon(
+                                        <IconHelp {...ICON_PROPS_NORMAL} />,
+                                    )}
+                                    <div
+                                        className={
+                                            styles.CommandPalette__ItemContent
+                                        }
+                                    >
+                                        <span
+                                            className={
+                                                styles.CommandPalette__LabelLine
+                                            }
+                                        >
+                                            Help Guide
+                                        </span>
+                                    </div>
+                                </Command.Item>
+                            </Command.Group>
+
+                            <Command.Group
+                                heading="Actions"
+                                className={styles.CommandPalette__Group}
+                            >
+                                <Command.Item
+                                    value="change theme"
+                                    className={styles.CommandPalette__Item}
+                                    onSelect={() => onModeChange("theme")}
+                                >
+                                    {renderIcon(
+                                        <IconPalette {...ICON_PROPS_NORMAL} />,
+                                    )}
+                                    <div
+                                        className={
+                                            styles.CommandPalette__ItemContent
+                                        }
+                                    >
+                                        <span
+                                            className={
+                                                styles.CommandPalette__LabelLine
+                                            }
+                                        >
+                                            Change Theme...
+                                        </span>
+                                    </div>
+                                </Command.Item>
+                            </Command.Group>
+                        </>
+                    ) : (
+                        <Command.Group
+                            heading="Theme"
+                            className={styles.CommandPalette__Group}
+                        >
+                            {themes.map((theme) => (
+                                <Command.Item
+                                    key={theme.name}
+                                    value={theme.name}
+                                    className={styles.CommandPalette__Item}
+                                    onSelect={() =>
+                                        handleThemeSelect(
+                                            theme.name as ThemeName,
+                                        )
+                                    }
+                                >
+                                    {theme.name ===
+                                        originalThemeRef.current && (
+                                        <span
+                                            className={
+                                                styles.CommandPalette__Check
+                                            }
+                                        >
+                                            <IconCheck {...ICON_PROPS_NORMAL} />
+                                        </span>
+                                    )}
+                                    <div
+                                        className={
+                                            styles.CommandPalette__ItemContent
+                                        }
+                                    >
+                                        <span
+                                            className={
+                                                styles.CommandPalette__LabelLine
+                                            }
+                                        >
+                                            {theme.name
+                                                .charAt(0)
+                                                .toUpperCase() +
+                                                theme.name.slice(1)}
+                                        </span>
+                                    </div>
+                                </Command.Item>
+                            ))}
+                        </Command.Group>
+                    )}
+                </Command.List>
+            </Command>
         </Dialog.Content>
     )
 }

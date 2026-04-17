@@ -79,6 +79,7 @@
         color: var(--colText);
 
         &:hover,
+        &[data-selected="true"],
         &[aria-selected="true"] {
             background-color: var(--colBgSub);
         }
@@ -86,6 +87,14 @@
         &[data-disabled="true"] {
             color: var(--colSub);
             pointer-events: none;
+        }
+    }
+
+    &__Group {
+        margin-bottom: 0.5rem;
+
+        &:last-child {
+            margin-bottom: 0;
         }
     }
 
