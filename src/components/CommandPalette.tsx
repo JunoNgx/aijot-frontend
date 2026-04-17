@@ -8,7 +8,14 @@ import { themes } from "@/utils/themes"
 import type { ThemeName } from "@/utils/themes"
 import styles from "./CommandPalette.module.scss"
 import { ICON_PROPS_NORMAL } from "@/utils/constants"
-import { IconCheck } from "@tabler/icons-react"
+import {
+    IconWritingSign,
+    IconStack2,
+    IconSettings,
+    IconHelp,
+    IconPalette,
+    IconCheck,
+} from "@tabler/icons-react"
 
 export type CommandPaletteMode = "main" | "theme"
 
@@ -75,25 +82,29 @@ export default function CommandPalette({
                     className={styles.CommandPalette__Item}
                     onSelect={() => handleNavigate(navigateToJot)}
                 >
-                    Go to Jot
+                    <IconWritingSign {...ICON_PROPS_NORMAL} />
+                    <span>Go to Jot</span>
                 </Command.Item>
                 <Command.Item
                     className={styles.CommandPalette__Item}
                     onSelect={() => handleNavigate(navigateToCollections)}
                 >
-                    Go to Collections
+                    <IconStack2 {...ICON_PROPS_NORMAL} />
+                    <span>Go to Collections</span>
                 </Command.Item>
                 <Command.Item
                     className={styles.CommandPalette__Item}
                     onSelect={() => handleNavigate(navigateToSettings)}
                 >
-                    Go to Settings
+                    <IconSettings {...ICON_PROPS_NORMAL} />
+                    <span>Go to Settings</span>
                 </Command.Item>
                 <Command.Item
                     className={styles.CommandPalette__Item}
                     onSelect={() => handleNavigate(navigateToHelp)}
                 >
-                    Help Guide
+                    <IconHelp {...ICON_PROPS_NORMAL} />
+                    <span>Help Guide</span>
                 </Command.Item>
             </div>
             <div className={styles.CommandPalette__Section}>
@@ -102,7 +113,8 @@ export default function CommandPalette({
                     className={styles.CommandPalette__Item}
                     onSelect={() => onModeChange("theme")}
                 >
-                    Change Theme...
+                    <IconPalette {...ICON_PROPS_NORMAL} />
+                    <span>Change Theme...</span>
                 </Command.Item>
             </div>
         </>
