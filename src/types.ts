@@ -96,10 +96,12 @@ export interface ProfileSettingsStore {
     shouldApplyTagsOfCurrCollection: boolean
     defaultCollectionSlug: string
     is24HourClock: boolean
+    shouldCustomSortCollections: boolean
     setUserDisplayName: (name: string) => void
     setShouldApplyTagsOfCurrCollection: (value: boolean) => void
     setDefaultCollectionSlug: (slug: string) => void
     setIs24HourClock: (value: boolean) => void
+    setShouldCustomSortCollections: (value: boolean) => void
 }
 
 export interface CoreCollectionConfig {

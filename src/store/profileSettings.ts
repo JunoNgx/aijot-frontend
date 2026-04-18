@@ -17,12 +17,15 @@ export const useProfileSettings = create<ProfileSettingsStore>()(
             shouldApplyTagsOfCurrCollection: true,
             defaultCollectionSlug: "all",
             is24HourClock: detectUse24HourClock(),
+            shouldCustomSortCollections: true,
             setUserDisplayName: (userDisplayName) => set({ userDisplayName }),
             setShouldApplyTagsOfCurrCollection: (value) =>
                 set({ shouldApplyTagsOfCurrCollection: value }),
             setDefaultCollectionSlug: (slug) =>
                 set({ defaultCollectionSlug: slug }),
             setIs24HourClock: (value) => set({ is24HourClock: value }),
+            setShouldCustomSortCollections: (value) =>
+                set({ shouldCustomSortCollections: value }),
         }),
         { name: "profileSettings" },
     ),

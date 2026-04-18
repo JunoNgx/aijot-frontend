@@ -47,6 +47,12 @@ export default function Settings() {
     const setShouldApplyTagsOfCurrCollection = useProfileSettings(
         (s) => s.setShouldApplyTagsOfCurrCollection,
     )
+    const shouldCustomSortCollections = useProfileSettings(
+        (s) => s.shouldCustomSortCollections,
+    )
+    const setShouldCustomSortCollections = useProfileSettings(
+        (s) => s.setShouldCustomSortCollections,
+    )
 
     const allCollection = useCoreCollectionSettings((s) => s.all)
     const setAll = useCoreCollectionSettings((s) => s.setAll)
@@ -288,6 +294,18 @@ export default function Settings() {
                             }
                         />
                         Auto-apply collection tags when creating items
+                    </label>
+                </div>
+                <div className={styles.Settings__Field}>
+                    <label className={styles.Settings__Checkbox}>
+                        <input
+                            type="checkbox"
+                            checked={shouldCustomSortCollections}
+                            onChange={(e) =>
+                                setShouldCustomSortCollections(e.target.checked)
+                            }
+                        />
+                        Use custom sort order
                     </label>
                 </div>
             </section>
