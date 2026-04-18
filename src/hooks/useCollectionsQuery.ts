@@ -13,7 +13,7 @@ export function useCollectionsQuery() {
     )
 
     const collectionsQuery = useQuery({
-        queryKey: queryKeys.collections,
+        queryKey: [...queryKeys.collections, shouldCustomSortCollections],
         queryFn: async () => {
             const userCollections = await storage.getCollections()
             const coreCollections: Collection[] = [
