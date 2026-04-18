@@ -130,30 +130,22 @@ export default function Collections() {
                 <h1 className={styles.Collections__Title}>Collections</h1>
             </div>
             <div className="FlexRow FlexRow--Right">
-                <div className={styles.Collections__SortToggle}>
-                    <label>
-                        <input
-                            type="radio"
-                            name="sortOrder"
-                            checked={shouldCustomSortCollections}
-                            onChange={() =>
-                                setShouldCustomSortCollections(true)
-                            }
-                        />
-                        Custom
-                    </label>
-                    <label>
-                        <input
-                            type="radio"
-                            name="sortOrder"
-                            checked={!shouldCustomSortCollections}
-                            onChange={() =>
-                                setShouldCustomSortCollections(false)
-                            }
-                        />
-                        A-Z
-                    </label>
-                </div>
+                <label className={styles.Collections__SortToggle}>
+                    <input
+                        type="radio"
+                        name="sortOrder"
+                        checked={shouldCustomSortCollections}
+                        onChange={() => setShouldCustomSortCollections(true)}
+                    />
+                    Custom
+                    <input
+                        type="radio"
+                        name="sortOrder"
+                        checked={!shouldCustomSortCollections}
+                        onChange={() => setShouldCustomSortCollections(false)}
+                    />
+                    A-Z
+                </label>
                 <button
                     className={styles.Collections__BtnNew}
                     onClick={() => openCollectionDialog()}
