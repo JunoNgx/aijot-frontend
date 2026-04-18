@@ -33,3 +33,11 @@
     background-color: color-mix(in srgb, var(--colBg), transparent 90%);
     backdrop-filter: blur(0.75rem);
 }
+
+@function colBgAlt() {
+    @return color-mix(in srgb, var(--colBg), var(--colText) 10%);
+}
+
+@function colDangerAlt() {
+    @return color-mix(in srgb, var(--colDanger), transparent 80%);
+}
