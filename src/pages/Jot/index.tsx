@@ -105,9 +105,13 @@ export default function Jot() {
         return <Navigate to={`${ROUTE_JOT}/${allSlug}`} replace />
     }
 
+    const listboxId = "jot-items-listbox"
+    const activeDescendantId =
+        selectedIndex >= 0 ? `jot-item-${selectedIndex}` : undefined
     const itemList = visibleItems.map((item, index) => (
         <JotItem
             key={item.id}
+            id={`jot-item-${index}`}
             item={item}
             isSelected={index === selectedIndex}
             itemIndex={index}
@@ -133,8 +137,17 @@ export default function Jot() {
                 visibleItemCount={visibleItems.length}
                 onSelectedIndexChange={setSelectedIndex}
                 isTrash={isTrash}
+                listboxId={listboxId}
+                activeDescendantId={activeDescendantId}
             />
-            <div className={styles.Jot__List}>{itemList}</div>
+            <div
+                id={listboxId}
+                className={styles.Jot__List}
+                role="listbox"
+                aria-orientation="vertical"
+            >
+                {itemList}
+            </div>
         </div>
     )
 }

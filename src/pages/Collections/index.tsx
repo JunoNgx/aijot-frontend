@@ -1,5 +1,5 @@
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd"
-import { IconGripVertical, IconPlus, IconArrowsSort } from "@tabler/icons-react"
+import { IconGripVertical, IconPlus } from "@tabler/icons-react"
 import { DateTime } from "luxon"
 import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
 import { useCollectionsMutations } from "@/hooks/useCollectionsMutations"

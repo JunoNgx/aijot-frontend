@@ -29,6 +29,8 @@ interface Props {
     visibleItemCount: number
     onSelectedIndexChange: (index: number) => void
     isTrash: boolean
+    listboxId?: string
+    activeDescendantId?: string
 }
 
 export default function MainInput({
@@ -39,6 +41,8 @@ export default function MainInput({
     visibleItemCount,
     onSelectedIndexChange,
     isTrash,
+    listboxId,
+    activeDescendantId,
 }: Props) {
     const [inputValue, setInputValue] = useState("")
     const {
@@ -167,6 +171,11 @@ export default function MainInput({
                 value={inputValue}
                 onChange={handleInputChange}
                 onKeyDown={hotkeyHandler}
+                role="combobox"
+                aria-controls={listboxId}
+                aria-expanded={visibleItemCount > 0}
+                aria-activedescendant={activeDescendantId}
+                aria-autocomplete="list"
             />
         </div>
     )

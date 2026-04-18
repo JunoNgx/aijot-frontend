@@ -25,6 +25,7 @@ interface Props {
     item: Item
     isSelected: boolean
     itemIndex: number
+    id?: string
 }
 
 function FaviconIcon({ url }: { url: string }) {
@@ -64,7 +65,7 @@ function ItemIcon({ item }: { item: Item }) {
     return <IconNote {...ICON_PROPS_ITEM_ICON} />
 }
 
-export default function JotItem({ item, isSelected, itemIndex }: Props) {
+export default function JotItem({ item, isSelected, itemIndex, id }: Props) {
     const { triggerPrimaryAction } = useItemActions()
     const is24HourClock = useProfileSettings((s) => s.is24HourClock)
 
@@ -147,6 +148,8 @@ export default function JotItem({ item, isSelected, itemIndex }: Props) {
                 <Tag
                     className={rootClassName}
                     data-item-index={itemIndex}
+                    id={id}
+                    role="option"
                     {...rest}
                 >
                     {itemIcon}
