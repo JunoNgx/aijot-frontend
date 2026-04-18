@@ -167,7 +167,6 @@ export default function MainInput({
                 value={inputValue}
                 onChange={handleInputChange}
                 onKeyDown={hotkeyHandler}
-                placeholder="Jot something..."
             />
         </div>
     )

@@ -61,7 +61,7 @@ export default function CommandPalette({
 
     const isMainMode = mode === "main"
     const isThemeMode = mode === "theme"
-    const searchPlaceholder = isThemeMode ? "Search theme..." : "Search..."
+    const searchPlaceholder = isThemeMode ? "Search theme" : "Search action"
     const shouldFilter = isMainMode
 
     const isInCollection = !!currentSlug
