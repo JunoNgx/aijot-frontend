@@ -228,14 +228,10 @@ export default function JotItem({
         </div>
     )
 
-    const expandedRow2 = secondaryTextEl ? (
-        <div className={styles.JotItem__ExpandedRow2}>{secondaryTextEl}</div>
-    ) : null
-
-    const expandedRow3 = (
-        <div className={styles.JotItem__ExpandedRow3}>
+    const expandedRow2 = (
+        <div className={styles.JotItem__ExpandedRow2}>
             {tagsEl}
-            <span className={styles.JotItem__ExpandedRow3Right}>
+            <span className={styles.JotItem__ExpandedRow2Right}>
                 {expandedDatetimeEl}
             </span>
         </div>
@@ -245,7 +241,6 @@ export default function JotItem({
         <>
             {expandedRow1}
             {expandedRow2}
-            {expandedRow3}
         </>
     )
 

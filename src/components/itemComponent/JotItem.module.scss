@@ -105,13 +105,6 @@
     }
 
     &__ExpandedRow2 {
-        @include Ellipsified;
-        font-size: var(--fontSizeSm);
-        color: var(--colSub);
-        width: 100%;
-    }
-
-    &__ExpandedRow3 {
         display: flex;
         align-items: center;
         gap: 0.25rem;
@@ -119,7 +112,7 @@
         width: 100%;
     }
 
-    &__ExpandedRow3Right {
+    &__ExpandedRow2Right {
         margin-left: auto;
     }
 
