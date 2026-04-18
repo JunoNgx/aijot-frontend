@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { toast } from "sonner"
 import { storage } from "@/db"
 import { queryKeys } from "@/db/queryKeys"
 import type { Collection } from "@/types"
@@ -85,6 +86,9 @@ export function useCollectionsMutations() {
                 queryKeys.collections,
                 context?.previousCollections,
             )
+        },
+        onSuccess: () => {
+            toast.success("Collection deleted")
         },
         onSettled: () => {
             invalidateCollectionQueries()
