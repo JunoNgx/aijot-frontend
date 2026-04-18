@@ -103,13 +103,13 @@ export default function CommandPalette({
     const collectionsGroup = (
         <Command.Group
             heading="Collections"
-            className={styles.CommandPalette__Group}
+            className={styles.CommandPaletteGroup__Group}
         >
             {collections.map((collection) => (
                 <Command.Item
                     key={collection.slug}
                     value={`${collection.name} ${collection.slug}`}
-                    className={styles.CommandPalette__Item}
+                    className={styles.CommandPaletteItem__Item}
                     onSelect={() =>
                         handleNavigation(() =>
                             navigateToCollection(collection.slug),
@@ -117,15 +117,17 @@ export default function CommandPalette({
                     }
                 >
                     <span>{collection.icon}</span>
-                    <div className={styles.CommandPalette__ItemContent}>
-                        <span className={styles.CommandPalette__LabelLine}>
+                    <div className={styles.CommandPaletteItem__ItemContent}>
+                        <span className={styles.CommandPaletteItem__LabelLine}>
                             <span
-                                className={styles.CommandPalette__ColourBlock}
+                                className={
+                                    styles.CommandPaletteItem__ColourBlock
+                                }
                                 style={{ backgroundColor: collection.colour }}
                             />
                             {collection.name}
                         </span>
-                        <span className={styles.CommandPalette__SubLabel}>
+                        <span className={styles.CommandPaletteItem__SubLabel}>
                             /{collection.slug}
                         </span>
                     </div>
@@ -137,12 +139,12 @@ export default function CommandPalette({
     const createCollectionItem = (
         <Command.Item
             value="create collection"
-            className={styles.CommandPalette__Item}
+            className={styles.CommandPaletteItem__Item}
             onSelect={() => handleNavigation(() => openCollectionDialog())}
         >
             <IconPlus {...ICON_PROPS_NORMAL} />
-            <div className={styles.CommandPalette__ItemContent}>
-                <span className={styles.CommandPalette__LabelLine}>
+            <div className={styles.CommandPaletteItem__ItemContent}>
+                <span className={styles.CommandPaletteItem__LabelLine}>
                     Create new collection
                 </span>
             </div>
@@ -152,14 +154,14 @@ export default function CommandPalette({
     const setDefaultItem = shouldIncludeSetDefaultAction && (
         <Command.Item
             value={`set ${currentSlug} as default`}
-            className={styles.CommandPalette__Item}
+            className={styles.CommandPaletteItem__Item}
             onSelect={() =>
                 handleNavigation(() => setDefaultCollectionSlug(currentSlug!))
             }
         >
             <IconCheck {...ICON_PROPS_NORMAL} />
-            <div className={styles.CommandPalette__ItemContent}>
-                <span className={styles.CommandPalette__LabelLine}>
+            <div className={styles.CommandPaletteItem__ItemContent}>
+                <span className={styles.CommandPaletteItem__LabelLine}>
                     Set "{currentSlug}" as default
                 </span>
             </div>
@@ -169,7 +171,7 @@ export default function CommandPalette({
     const editCollectionItem = isInCollection && (
         <Command.Item
             value="edit current collection"
-            className={styles.CommandPalette__Item}
+            className={styles.CommandPaletteItem__Item}
             onSelect={() => {
                 const collection = collections.find(
                     (c) => c.slug === currentSlug,
@@ -180,8 +182,8 @@ export default function CommandPalette({
             }}
         >
             <IconSettings {...ICON_PROPS_NORMAL} />
-            <div className={styles.CommandPalette__ItemContent}>
-                <span className={styles.CommandPalette__LabelLine}>
+            <div className={styles.CommandPaletteItem__ItemContent}>
+                <span className={styles.CommandPaletteItem__LabelLine}>
                     Edit current collection
                 </span>
             </div>
@@ -191,7 +193,7 @@ export default function CommandPalette({
     const collectionActionsGroup = (
         <Command.Group
             heading="Collection Actions"
-            className={styles.CommandPalette__Group}
+            className={styles.CommandPaletteGroup__Group}
         >
             {createCollectionItem}
             {setDefaultItem}
@@ -202,12 +204,12 @@ export default function CommandPalette({
     const goToJotItem = (
         <Command.Item
             value="go to jot"
-            className={styles.CommandPalette__Item}
+            className={styles.CommandPaletteItem__Item}
             onSelect={() => handleNavigation(navigateToJot)}
         >
             <IconWritingSign {...ICON_PROPS_NORMAL} />
-            <div className={styles.CommandPalette__ItemContent}>
-                <span className={styles.CommandPalette__LabelLine}>
+            <div className={styles.CommandPaletteItem__ItemContent}>
+                <span className={styles.CommandPaletteItem__LabelLine}>
                     Go to Jot
                 </span>
             </div>
@@ -217,12 +219,12 @@ export default function CommandPalette({
     const goToCollectionsItem = (
         <Command.Item
             value="go to collections"
-            className={styles.CommandPalette__Item}
+            className={styles.CommandPaletteItem__Item}
             onSelect={() => handleNavigation(navigateToCollections)}
         >
             <IconStack2 {...ICON_PROPS_NORMAL} />
-            <div className={styles.CommandPalette__ItemContent}>
-                <span className={styles.CommandPalette__LabelLine}>
+            <div className={styles.CommandPaletteItem__ItemContent}>
+                <span className={styles.CommandPaletteItem__LabelLine}>
                     Go to Collections
                 </span>
             </div>
@@ -232,12 +234,12 @@ export default function CommandPalette({
     const goToSettingsItem = (
         <Command.Item
             value="go to settings"
-            className={styles.CommandPalette__Item}
+            className={styles.CommandPaletteItem__Item}
             onSelect={() => handleNavigation(navigateToSettings)}
         >
             <IconSettings {...ICON_PROPS_NORMAL} />
-            <div className={styles.CommandPalette__ItemContent}>
-                <span className={styles.CommandPalette__LabelLine}>
+            <div className={styles.CommandPaletteItem__ItemContent}>
+                <span className={styles.CommandPaletteItem__LabelLine}>
                     Go to Settings
                 </span>
             </div>
@@ -247,12 +249,12 @@ export default function CommandPalette({
     const helpGuideItem = (
         <Command.Item
             value="help guide"
-            className={styles.CommandPalette__Item}
+            className={styles.CommandPaletteItem__Item}
             onSelect={() => handleNavigation(navigateToHelp)}
         >
             <IconHelp {...ICON_PROPS_NORMAL} />
-            <div className={styles.CommandPalette__ItemContent}>
-                <span className={styles.CommandPalette__LabelLine}>
+            <div className={styles.CommandPaletteItem__ItemContent}>
+                <span className={styles.CommandPaletteItem__LabelLine}>
                     Help Guide
                 </span>
             </div>
@@ -262,7 +264,7 @@ export default function CommandPalette({
     const navigationGroup = (
         <Command.Group
             heading="Navigation"
-            className={styles.CommandPalette__Group}
+            className={styles.CommandPaletteGroup__Group}
         >
             {goToJotItem}
             {goToCollectionsItem}
@@ -274,12 +276,12 @@ export default function CommandPalette({
     const changeThemeItem = (
         <Command.Item
             value="change theme"
-            className={styles.CommandPalette__Item}
+            className={styles.CommandPaletteItem__Item}
             onSelect={() => onModeChange("theme")}
         >
             <IconPalette {...ICON_PROPS_NORMAL} />
-            <div className={styles.CommandPalette__ItemContent}>
-                <span className={styles.CommandPalette__LabelLine}>
+            <div className={styles.CommandPaletteItem__ItemContent}>
+                <span className={styles.CommandPaletteItem__LabelLine}>
                     Change Theme...
                 </span>
             </div>
@@ -289,7 +291,7 @@ export default function CommandPalette({
     const actionsGroup = (
         <Command.Group
             heading="Actions"
-            className={styles.CommandPalette__Group}
+            className={styles.CommandPaletteGroup__Group}
         >
             {changeThemeItem}
         </Command.Group>
@@ -301,26 +303,29 @@ export default function CommandPalette({
     }
 
     const themeGroup = (
-        <Command.Group heading="Theme" className={styles.CommandPalette__Group}>
+        <Command.Group
+            heading="Theme"
+            className={styles.CommandPaletteGroup__Group}
+        >
             {themes.map((theme) => (
                 <Command.Item
                     key={theme.name}
                     value={theme.name}
-                    className={styles.CommandPalette__Item}
+                    className={styles.CommandPaletteItem__Item}
                     onMouseEnter={() =>
                         handleThemePreview(theme.name as ThemeName)
                     }
                     onFocus={() => handleThemePreview(theme.name as ThemeName)}
                     onSelect={() => handleThemeSelect(theme.name as ThemeName)}
                 >
-                    <div className={styles.CommandPalette__ItemContent}>
-                        <span className={styles.CommandPalette__LabelLine}>
+                    <div className={styles.CommandPaletteItem__ItemContent}>
+                        <span className={styles.CommandPaletteItem__LabelLine}>
                             {theme.name.charAt(0).toUpperCase() +
                                 theme.name.slice(1)}
                         </span>
                     </div>
                     {theme.name === originalThemeRef.current && (
-                        <span className={styles.CommandPalette__Check}>
+                        <span className={styles.CommandPaletteItem__Check}>
                             <IconCheck {...ICON_PROPS_NORMAL} />
                         </span>
                     )}
@@ -349,8 +354,8 @@ export default function CommandPalette({
                     placeholder={searchPlaceholder}
                     autoFocus
                 />
-                <Command.List className={styles.CommandPalette__List}>
-                    <Command.Empty className={styles.CommandPalette__Empty}>
+                <Command.List className={styles.CommandPaletteList__List}>
+                    <Command.Empty className={styles.CommandPaletteList__Empty}>
                         No results found.
                     </Command.Empty>
 
