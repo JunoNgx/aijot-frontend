@@ -311,7 +311,6 @@ export default function CommandPalette({
                     onMouseEnter={() =>
                         handleThemePreview(theme.name as ThemeName)
                     }
-                    onFocus={() => handleThemePreview(theme.name as ThemeName)}
                     onSelect={() => handleThemeSelect(theme.name as ThemeName)}
                 >
                     <div className={styles.CommandPaletteItem__ItemContent}>
@@ -343,7 +342,12 @@ export default function CommandPalette({
                 label="Command palette"
                 shouldFilter={shouldFilter}
                 value={searchText}
-                onValueChange={(value) => setSearchText(value)}
+                onValueChange={(value) => {
+                    if (isThemeMode && value) {
+                        handleThemePreview(value as ThemeName)
+                    }
+                    setSearchText(value)
+                }}
             >
                 <Command.Input
                     className={styles.CommandPalette__Input}
