@@ -28,16 +28,13 @@ export default function Collections() {
         (s) => s.setShouldCustomSortCollections,
     )
 
-    const sortedCollections = (collectionsQuery.data ?? [])
-        .map((c) => {
-            if (c.coreType === "all") return { ...c, sortOrder: all.sortOrder }
-            if (c.coreType === "untagged")
-                return { ...c, sortOrder: untagged.sortOrder }
-            if (c.coreType === "trash")
-                return { ...c, sortOrder: trash.sortOrder }
-            return c
-        })
-        .sort((a, b) => a.sortOrder - b.sortOrder)
+    const sortedCollections = (collectionsQuery.data ?? []).map((c) => {
+        if (c.coreType === "all") return { ...c, sortOrder: all.sortOrder }
+        if (c.coreType === "untagged")
+            return { ...c, sortOrder: untagged.sortOrder }
+        if (c.coreType === "trash") return { ...c, sortOrder: trash.sortOrder }
+        return c
+    })
 
     const handleDragEnd = (result: DropResult) => {
         if (!result.destination) return
@@ -123,6 +120,20 @@ export default function Collections() {
         </Draggable>
     ))
 
+    const staticRows = sortedCollections.map((collection) => (
+        <div key={collection.id} className={styles.CollectionItem}>
+            <button
+                className={styles.CollectionItem__TriggerBtn}
+                onClick={() => openCollectionDialog(collection)}
+            >
+                <CollectionRow
+                    collection={collection}
+                    isDefault={collection.slug === defaultCollectionSlug}
+                />
+            </button>
+        </div>
+    ))
+
     return (
         <div className={styles.Collections}>
             <BackBtn />
@@ -132,20 +143,28 @@ export default function Collections() {
             <label className={styles.Collections__SortLabel}>
                 Sort mode
                 <span className={styles.Collections__SortToggle}>
-                    <input
-                        type="radio"
-                        name="sortOrder"
-                        checked={shouldCustomSortCollections}
-                        onChange={() => setShouldCustomSortCollections(true)}
-                    />
-                    Custom
-                    <input
-                        type="radio"
-                        name="sortOrder"
-                        checked={!shouldCustomSortCollections}
-                        onChange={() => setShouldCustomSortCollections(false)}
-                    />
-                    A-Z
+                    <label className={styles.Collections__SortOption}>
+                        <input
+                            type="radio"
+                            name="sortOrder"
+                            checked={shouldCustomSortCollections}
+                            onChange={() =>
+                                setShouldCustomSortCollections(true)
+                            }
+                        />
+                        Custom
+                    </label>
+                    <label className={styles.Collections__SortOption}>
+                        <input
+                            type="radio"
+                            name="sortOrder"
+                            checked={!shouldCustomSortCollections}
+                            onChange={() =>
+                                setShouldCustomSortCollections(false)
+                            }
+                        />
+                        A-Z
+                    </label>
                 </span>
             </label>
             <div className="FlexRow FlexRow--Right">
@@ -157,20 +176,24 @@ export default function Collections() {
                     New
                 </button>
             </div>
-            <DragDropContext onDragEnd={handleDragEnd}>
-                <Droppable droppableId="collections">
-                    {(provided) => (
-                        <div
-                            className={styles.Collections__List}
-                            ref={provided.innerRef}
-                            {...provided.droppableProps}
-                        >
-                            {draggableRows}
-                            {provided.placeholder}
-                        </div>
-                    )}
-                </Droppable>
-            </DragDropContext>
+            {shouldCustomSortCollections ? (
+                <DragDropContext onDragEnd={handleDragEnd}>
+                    <Droppable droppableId="collections">
+                        {(provided) => (
+                            <div
+                                className={styles.Collections__List}
+                                ref={provided.innerRef}
+                                {...provided.droppableProps}
+                            >
+                                {draggableRows}
+                                {provided.placeholder}
+                            </div>
+                        )}
+                    </Droppable>
+                </DragDropContext>
+            ) : (
+                <div className={styles.Collections__List}>{staticRows}</div>
+            )}
         </div>
     )
 }

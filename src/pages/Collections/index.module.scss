@@ -30,11 +30,13 @@
         align-items: center;
         font-size: var(--fontSizeMd);
         font-weight: 400;
-        cursor: pointer;
+    }
 
-        input {
-            margin-right: 0.25rem;
-        }
+    &__SortOption {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        cursor: pointer;
     }
 
     &__List {
