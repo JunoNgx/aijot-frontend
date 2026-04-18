@@ -53,6 +53,12 @@ export default function Settings() {
     const setShouldCustomSortCollections = useProfileSettings(
         (s) => s.setShouldCustomSortCollections,
     )
+    const shouldShowJotItemExtraInfo = useProfileSettings(
+        (s) => s.shouldShowJotItemExtraInfo,
+    )
+    const setShouldShowJotItemExtraInfo = useProfileSettings(
+        (s) => s.setShouldShowJotItemExtraInfo,
+    )
 
     const allCollection = useCoreCollectionSettings((s) => s.all)
     const setAll = useCoreCollectionSettings((s) => s.setAll)
@@ -259,6 +265,18 @@ export default function Settings() {
                             }}
                         />
                         Use 24-hour clock
+                    </label>
+                </div>
+                <div className={styles.Settings__Field}>
+                    <label className={styles.Settings__Checkbox}>
+                        <input
+                            type="checkbox"
+                            checked={shouldShowJotItemExtraInfo}
+                            onChange={(e) => {
+                                setShouldShowJotItemExtraInfo(e.target.checked)
+                            }}
+                        />
+                        Show extra information in jot list
                     </label>
                 </div>
             </section>

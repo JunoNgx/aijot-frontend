@@ -18,6 +18,7 @@ export const useProfileSettings = create<ProfileSettingsStore>()(
             defaultCollectionSlug: "all",
             is24HourClock: detectUse24HourClock(),
             shouldCustomSortCollections: true,
+            shouldShowJotItemExtraInfo: false,
             setUserDisplayName: (userDisplayName) => set({ userDisplayName }),
             setShouldApplyTagsOfCurrCollection: (value) =>
                 set({ shouldApplyTagsOfCurrCollection: value }),
@@ -26,6 +27,8 @@ export const useProfileSettings = create<ProfileSettingsStore>()(
             setIs24HourClock: (value) => set({ is24HourClock: value }),
             setShouldCustomSortCollections: (value) =>
                 set({ shouldCustomSortCollections: value }),
+            setShouldShowJotItemExtraInfo: (value) =>
+                set({ shouldShowJotItemExtraInfo: value }),
         }),
         { name: "profileSettings" },
     ),
