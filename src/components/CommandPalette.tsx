@@ -206,7 +206,7 @@ export default function CommandPalette({
             <IconWritingSign {...ICON_PROPS_NORMAL} />
             <div className={styles.CommandPaletteItem__ItemContent}>
                 <span className={styles.CommandPaletteItem__LabelLine}>
-                    Go to Jot
+                    Go to Jot Items
                 </span>
             </div>
         </Command.Item>
@@ -221,7 +221,7 @@ export default function CommandPalette({
             <IconStack2 {...ICON_PROPS_NORMAL} />
             <div className={styles.CommandPaletteItem__ItemContent}>
                 <span className={styles.CommandPaletteItem__LabelLine}>
-                    Go to Collections
+                    Go to Manage Collections
                 </span>
             </div>
         </Command.Item>
