@@ -38,6 +38,11 @@ input {
     color: var(--colText);
     background-color: var(--colBg);
     box-shadow: none;
+
+    &:focus {
+        outline: none;
+        border-color: var(--colMain);
+    }
 }
 
 input[type="radio"] {
