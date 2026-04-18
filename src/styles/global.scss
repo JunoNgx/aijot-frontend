@@ -159,11 +159,7 @@ kbd {
         color: var(--colDanger);
 
         &:hover {
-            background-color: color-mix(
-                in srgb,
-                var(--colDanger),
-                transparent 80%
-            );
+            background-color: colDangerAlt();
         }
     }
 
@@ -173,7 +169,7 @@ kbd {
         color: var(--colText);
 
         &:hover {
-            background-color: var(--colBgSub);
+            background-color: colBgAlt();
         }
     }
 }
@@ -262,7 +258,7 @@ kbd {
         color: var(--colText);
 
         &:hover {
-            background-color: var(--colBgSub);
+            background-color: colBgAlt();
         }
     }
 

@@ -7,7 +7,6 @@ function applyThemeColors(colors: (typeof themes)[number]) {
     root.style.setProperty("--colBg", colors.colBg)
     root.style.setProperty("--colMain", colors.colMain)
     root.style.setProperty("--colSub", colors.colSub)
-    root.style.setProperty("--colBgSub", colors.colBgSub)
     root.style.setProperty("--colText", colors.colText)
     root.style.setProperty("--colDanger", colors.colDanger)
 }

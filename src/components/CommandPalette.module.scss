@@ -91,7 +91,7 @@
         &:hover,
         &[data-selected="true"],
         &[aria-selected="true"] {
-            background-color: var(--colBgSub);
+            background-color: colBgAlt();
         }
 
         &[data-disabled="true"] {

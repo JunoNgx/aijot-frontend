@@ -108,7 +108,7 @@
         margin-top: 0.75rem;
         padding: 0.5rem 0.625rem;
         font-size: var(--fontSizeMd);
-        background-color: var(--colBgSub);
+        background-color: colBgAlt();
         @include StandardBorder;
 
         &Actions {
