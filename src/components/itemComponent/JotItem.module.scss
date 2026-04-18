@@ -63,9 +63,9 @@
             color: var(--colSub);
         }
 
-        &--Title {
-            color: var(--colMain);
-        }
+        // &--Title {
+        //     color: var(--colMain);
+        // }
     }
 
     &__SecondaryText {
@@ -85,7 +85,7 @@
     &__StatusIcon {
         display: grid;
         place-items: center;
-        color: var(--colSub);
+        color: var(--colMain);
     }
 
     &__Datetime {
@@ -101,6 +101,10 @@
         padding: 0.75rem 0.5rem;
         border-left: var(--lineWidth) solid var(--colSub);
         border-bottom: var(--lineWidth) solid var(--colSub);
+
+        .JotItem__Datetime {
+            color: var(--colSub);
+        }
     }
 
     &__ExpandedRow1 {
