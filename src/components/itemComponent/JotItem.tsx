@@ -10,6 +10,7 @@ import {
     IconClipboard,
 } from "@tabler/icons-react"
 import { isValidHexColourCode, formatDatetime } from "@/utils/helpers"
+import { DateTime } from "luxon"
 import {
     ICON_PROPS_ITEM_ICON,
     ICON_PROPS_ITEM_STATUS,
@@ -66,6 +67,11 @@ function ItemIcon({ item }: { item: Item }) {
     return <IconNote {...ICON_PROPS_ITEM_ICON} />
 }
 
+function formatDetailedDatetime(isoString: string, is24HourClock = true) {
+    const date = DateTime.fromISO(isoString)
+    return date.toFormat(is24HourClock ? "MMM d, yyyy HH:mm" : "MMM d, yyyy h:mm a")
+}
+
 export default function JotItem({
     item,
     isSelected,
@@ -89,6 +95,7 @@ export default function JotItem({
     const rootClassName = [
         styles.JotItem,
         isSelected ? styles["JotItem--Selected"] : "",
+        isExpandedInfoMode ? styles["JotItem--Expanded"] : "",
     ].join(" ")
 
     const getAccessibleLabel = () => {
