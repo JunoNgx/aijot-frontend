@@ -3,7 +3,7 @@
         position: fixed;
         inset: 0;
         background-color: rgba(0, 0, 0, 0.5);
-        z-index: 199;
+        z-index: var(--zIndexCommandPaletteOverlay);
     }
 
     &__Content {
@@ -17,7 +17,7 @@
         background-color: var(--colBg);
         border-radius: 0.5rem;
         padding: 0.75rem;
-        z-index: 200;
+        z-index: var(--zIndexCommandPaletteContent);
         box-shadow: 0 16px 70px rgba(0, 0, 0, 0.5);
     }
 

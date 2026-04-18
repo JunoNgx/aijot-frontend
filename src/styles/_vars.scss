@@ -29,6 +29,12 @@
     --routeWidth: 720px;
 
     --lineWidth: 2px;
+
+    --zIndexBackdrop: 100;
+    --zIndexDialog: 110;
+    --zIndexPicker: 120;
+    --zIndexCommandPaletteOverlay: 200;
+    --zIndexCommandPaletteContent: 210;
 }
 
 $breakpointMobile: 768px;

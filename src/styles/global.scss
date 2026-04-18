@@ -245,7 +245,7 @@ kbd {
         @include GlassBlur;
         padding: 0.25rem;
         box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-        z-index: 100;
+        z-index: var(--zIndexBackdrop);
     }
 
     &__Item {
