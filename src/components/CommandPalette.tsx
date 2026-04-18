@@ -21,6 +21,7 @@ import {
     IconCheck,
     IconPlus,
 } from "@tabler/icons-react"
+import CollectionColourBlock from "./CollectionColourBlock"
 
 export type CommandPaletteMode = "main" | "theme"
 
@@ -119,12 +120,7 @@ export default function CommandPalette({
                     <span>{collection.icon}</span>
                     <div className={styles.CommandPaletteItem__ItemContent}>
                         <span className={styles.CommandPaletteItem__LabelLine}>
-                            <span
-                                className={
-                                    styles.CommandPaletteItem__ColourBlock
-                                }
-                                style={{ backgroundColor: collection.colour }}
-                            />
+                            <CollectionColourBlock colour={collection.colour} />
                             {collection.name}
                         </span>
                         <span className={styles.CommandPaletteItem__SubLabel}>

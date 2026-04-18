@@ -10,6 +10,7 @@ import {
     ICON_PROPS_NORMAL,
 } from "@/utils/constants"
 import styles from "./CollectionDropdown.module.scss"
+import CollectionColourBlock from "./CollectionColourBlock"
 
 const HOTKEYS = Array.from(
     { length: COLLECTION_HOTKEY_COUNT },
@@ -34,10 +35,7 @@ export default function CollectionDropdown() {
 
     const trigger = currCollection ? (
         <>
-            <span
-                className={styles.CollectionDropdown__ColourDot}
-                style={{ backgroundColor: currCollection.colour }}
-            />
+            <CollectionColourBlock colour={currCollection.colour} />
             <span>{currCollection.icon}</span>
             <span className={styles.CollectionDropdown__TriggerLabel}>
                 {currCollection.name}
@@ -62,10 +60,7 @@ export default function CollectionDropdown() {
                     className={itemClassName}
                     onSelect={() => navigateToCollection(collection.slug)}
                 >
-                    <span
-                        className={styles.CollectionDropdown__ColourDot}
-                        style={{ backgroundColor: collection.colour }}
-                    />
+                    <CollectionColourBlock colour={collection.colour} />
                     <span>{collection.icon}</span>
                     <span className={styles.CollectionDropdown__ItemLabel}>
                         {collection.name}

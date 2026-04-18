@@ -31,13 +31,6 @@
         composes: Dropdown__Item from global;
     }
 
-    &__ColourDot {
-        width: 0.5rem;
-        height: 0.5rem;
-        border-radius: 50%;
-        flex-shrink: 0;
-    }
-
     &__ItemLabel {
         display: -webkit-box;
         -webkit-line-clamp: 4;
