@@ -1,6 +1,6 @@
 export const themes = [
     {
-        name: "light",
+        name: "JustJot Light",
         colBg: "#e0e0e0",
         colMain: "#0098a9",
         colSub: "#777777",
@@ -9,7 +9,7 @@ export const themes = [
         colDanger: "#fa5252",
     },
     {
-        name: "dark",
+        name: "JustJot Dark",
         colBg: "#121212",
         colMain: "#0098a9",
         colSub: "#777777",

@@ -5,7 +5,7 @@ import type { LocalUserSettingsStore } from "@/types"
 export const useLocalUserSettings = create<LocalUserSettingsStore>()(
     persist(
         (set) => ({
-            theme: "light",
+            theme: "JustJot Light",
             setTheme: (theme) => set({ theme }),
         }),
         { name: "localUserSettings" },
