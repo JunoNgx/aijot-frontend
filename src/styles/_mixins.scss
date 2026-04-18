@@ -30,6 +30,6 @@
 }
 
 @mixin GlassBlur {
-    background-color: rgba(var(--colBg), 0.1);
+    background-color: color-mix(in srgb, var(--colBg), transparent 90%);
     backdrop-filter: blur(0.75rem);
 }
