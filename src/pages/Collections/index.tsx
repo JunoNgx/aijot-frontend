@@ -177,20 +177,25 @@ export default function Collections() {
                 </button>
             </div>
             {shouldCustomSortCollections ? (
-                <DragDropContext onDragEnd={handleDragEnd}>
-                    <Droppable droppableId="collections">
-                        {(provided) => (
-                            <div
-                                className={styles.Collections__List}
-                                ref={provided.innerRef}
-                                {...provided.droppableProps}
-                            >
-                                {draggableRows}
-                                {provided.placeholder}
-                            </div>
-                        )}
-                    </Droppable>
-                </DragDropContext>
+                <>
+                    <p className={styles.Collections__SortHint}>
+                        Drag and drop to custom sort the list
+                    </p>
+                    <DragDropContext onDragEnd={handleDragEnd}>
+                        <Droppable droppableId="collections">
+                            {(provided) => (
+                                <div
+                                    className={styles.Collections__List}
+                                    ref={provided.innerRef}
+                                    {...provided.droppableProps}
+                                >
+                                    {draggableRows}
+                                    {provided.placeholder}
+                                </div>
+                            )}
+                        </Droppable>
+                    </DragDropContext>
+                </>
             ) : (
                 <div className={styles.Collections__List}>{staticRows}</div>
             )}

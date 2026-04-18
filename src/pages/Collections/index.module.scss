@@ -39,6 +39,12 @@
         cursor: pointer;
     }
 
+    &__SortHint {
+        font-size: var(--fontSizeSm);
+        color: var(--colSub);
+        margin: 0 0 0.5rem;
+    }
+
     &__List {
         display: flex;
         flex-direction: column;
