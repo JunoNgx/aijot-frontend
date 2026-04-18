@@ -512,23 +512,23 @@ Add the ability to toggle between compact and expanded view modes in the jot lis
 
 ### 36a — Add setting to ProfileSettingsStore
 
-- [ ] Modify `src/types.ts`: add `shouldShowJotItemExtraInfo: boolean` to `ProfileSettingsStore` interface
-- [ ] Modify `src/store/profileSettings.ts`: add default value (`false`) and setter `setShouldShowJotItemExtraInfo`
+- [x] Modify `src/types.ts`: add `shouldShowJotItemExtraInfo: boolean` to `ProfileSettingsStore` interface
+- [x] Modify `src/store/profileSettings.ts`: add default value (`false`) and setter `setShouldShowJotItemExtraInfo`
 
 ### 36b — Add setting UI in Settings page
 
-- [ ] Modify `src/pages/Settings/index.tsx`: add getter + setter for `shouldShowJotItemExtraInfo`
-- [ ] Add checkbox in Appearance section: "Show extra information in jot list"
+- [x] Modify `src/pages/Settings/index.tsx`: add getter + setter for `shouldShowJotItemExtraInfo`
+- [x] Add checkbox in Appearance section: "Show extra information in jot list"
 
 ### 36c — Add shortcut constant
 
-- [ ] Modify `src/utils/constants.ts`: add `SHORTCUT_TOGGLE_JOT_LIST_VIEW = "mod+backslash"`
+- [x] Modify `src/utils/constants.ts`: add `SHORTCUT_TOGGLE_JOT_LIST_VIEW = "mod+backslash"`
 
 ### 36d — Jot page: local view mode state
 
-- [ ] Modify `src/pages/Jot/index.tsx`: add local state `isShowingJotItemExtraInfo`, initialize from profile setting via `useEffect`
-- [ ] Add hotkey handler for Cmd+\ to toggle the local state
-- [ ] Pass `shouldShowJotItemExtraInfo` prop to each `JotItem` component
+- [x] Modify `src/pages/Jot/index.tsx`: add local state `isShowingJotItemExtraInfo`, initialize from profile setting via `useEffect`
+- [x] Add hotkey handler for Cmd+\ to toggle the local state
+- [x] Pass `shouldShowJotItemExtraInfo` prop to each `JotItem` component
 
 ### 36e — JotItem component changes
 
