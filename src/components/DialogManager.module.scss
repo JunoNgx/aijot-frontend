@@ -20,7 +20,7 @@
         padding: 1.5rem;
         width: 90vw;
         max-width: var(--dialogWidth);
-        max-height: 85vh;
+        max-height: var(--dialogHeight);
         overflow-y: auto;
     }
 

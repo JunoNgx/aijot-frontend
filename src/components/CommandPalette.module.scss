@@ -14,8 +14,8 @@
         left: 50%;
         transform: translate(-50%, -50%);
         width: 100%;
-        max-width: 560px;
-        max-height: 85vh;
+        max-width: var(--dialogWidth);
+        max-height: var(--dialogHeight);
         background-color: var(--colBg);
         border-radius: 0.5rem;
         padding: 0.75rem;
