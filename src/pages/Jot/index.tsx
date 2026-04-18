@@ -5,7 +5,11 @@ import { useItemsQuery } from "@/hooks/useItemsQuery"
 import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
 import { useCoreCollectionSettings } from "@/store/coreCollectionSettings"
 import { useLocalAppData } from "@/store/localAppData"
-import { SHORTCUT_FOCUS_MAIN_INPUT, ROUTE_JOT } from "@/utils/constants"
+import {
+    SHORTCUT_FOCUS_MAIN_INPUT,
+    ROUTE_JOT,
+    TRASH_PURGE_DURATION_DAY,
+} from "@/utils/constants"
 import MainInput from "@/components/MainInput"
 import JotItem from "@/components/itemComponent/JotItem"
 import DemoDataBanner from "./DemoDataBanner"
@@ -114,6 +118,12 @@ export default function Jot() {
         <div className={styles.Jot}>
             <div className={styles.Jot__NoticeWrapper}>
                 {shouldShowDemoDataBanner && <DemoDataBanner />}
+                {isTrash && (
+                    <p className={styles.Jot__CollectionNotice}>
+                        Items in trash are automatically deleted after{" "}
+                        {TRASH_PURGE_DURATION_DAY} days
+                    </p>
+                )}
             </div>
             <MainInput
                 inputRef={mainInputRef}

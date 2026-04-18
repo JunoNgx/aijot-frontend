@@ -10,6 +10,13 @@
         padding: 40px 0;
     }
 
+    &__CollectionNotice {
+        text-align: center;
+        font-size: var(--fontSizeMd);
+        font-style: italic;
+        color: var(--colSub);
+    }
+
     &__List {
         display: flex;
         flex-direction: column;
