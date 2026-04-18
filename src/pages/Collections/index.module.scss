@@ -15,11 +15,21 @@
         composes: Btn Btn--Pri from global;
     }
 
+    &__SortLabel {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+        font-size: var(--fontSizeMd);
+        font-weight: 600;
+    }
+
     &__SortToggle {
         display: flex;
         gap: 1rem;
         align-items: center;
         font-size: var(--fontSizeMd);
+        font-weight: 400;
         cursor: pointer;
 
         input {

@@ -129,8 +129,9 @@ export default function Collections() {
             <div className={styles.Collections__Header}>
                 <h1 className={styles.Collections__Title}>Collections</h1>
             </div>
-            <div className="FlexRow FlexRow--Right">
-                <label className={styles.Collections__SortToggle}>
+            <label className={styles.Collections__SortLabel}>
+                Sort mode
+                <span className={styles.Collections__SortToggle}>
                     <input
                         type="radio"
                         name="sortOrder"
@@ -145,7 +146,9 @@ export default function Collections() {
                         onChange={() => setShouldCustomSortCollections(false)}
                     />
                     A-Z
-                </label>
+                </span>
+            </label>
+            <div className="FlexRow FlexRow--Right">
                 <button
                     className={styles.Collections__BtnNew}
                     onClick={() => openCollectionDialog()}
