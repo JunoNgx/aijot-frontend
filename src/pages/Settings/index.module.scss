@@ -117,6 +117,10 @@
         }
     }
 
+    &__Btn {
+        composes: Btn Btn--Sec from global;
+    }
+
     &__BtnAction {
         composes: Btn Btn--Sec from global;
     }

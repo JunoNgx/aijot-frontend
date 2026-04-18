@@ -532,6 +532,17 @@ export default function Settings() {
                     <div className={styles.Settings__SectionHeader}>
                         <h2 className={styles.Settings__SectionTitle}>Debug</h2>
                     </div>
+                    <button
+                        className={styles.Settings__Btn}
+                        type="button"
+                        onClick={() =>
+                            toast("Debug toast message with slightly long content", {
+                                duration: Infinity,
+                            })
+                        }
+                    >
+                        Trigger test toast
+                    </button>
                     <p className={styles.Settings__SectionDescription}>
                         Wipes local database and all local app data. Cannot be
                         undone.
