@@ -31,12 +31,6 @@
         @include StandardBorder;
     }
 
-    &__EmojiPicker {
-        position: fixed;
-        transform: translateX(-100%);
-        z-index: var(--zIndexPicker);
-    }
-
     &__ColourField {
         position: relative;
         min-width: 0;
@@ -124,5 +118,87 @@
     &__Error {
         margin: 0;
         color: var(--colDanger);
+    }
+}
+
+.EmojiPicker {
+    position: absolute;
+    top: calc(100% + 0.75rem);
+    right: 0;
+    width: 16rem;
+    @include StandardBorder;
+    font-family: var(--fontFamily);
+    border-radius: 0;
+    background-color: var(--colBg);
+    z-index: var(--zIndexPicker);
+
+    [frimousse-root] {
+        display: flex;
+        flex-direction: column;
+        height: 18rem;
+        padding: 0.75rem;
+    }
+
+    [frimousse-search] {
+        color: var(--colText);
+        font-size: var(--fontSizeMd);
+        // margin: 0 0.5rem;
+        padding: 0.25rem 0;
+        border: none;
+        border-bottom: var(--lineWidth) solid var(--colSub);
+
+        &:placeholder {
+            color: var(--colSub);
+        }
+
+        &:focus {
+            border-bottom-color: var(--colMain);
+        }
+    }
+
+    [frimousse-viewport] {
+        min-height: 80%;
+        overflow-y: auto;
+    }
+
+    [frimousse-list] {
+        padding: 0;
+    }
+
+    [frimousse-category-header] {
+        background: var(--colBg);
+        color: var(--colText);
+        font-size: var(--colTextSm);
+        padding: 0.5rem 0;
+    }
+
+    [frimousse-row] {
+        padding: 0;
+    }
+
+    [frimousse-emoji] {
+        appearance: none;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: var(--fontSizeMd);
+        height: 2rem;
+        padding: 0;
+        width: 2rem;
+
+        &:hover,
+        &[data-active] {
+            background: colBgAlt();
+        }
+    }
+
+    [frimousse-loading],
+    [frimousse-empty] {
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+        padding-top: 2rem;
+        color: var(--colText);
+        font-size: var(--fontSizeMd);
     }
 }

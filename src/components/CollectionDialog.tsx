@@ -1,8 +1,6 @@
 import { useState, useRef, useEffect } from "react"
-import { createPortal } from "react-dom"
 import { DateTime } from "luxon"
-import Picker from "@emoji-mart/react"
-import data from "@emoji-mart/data"
+import { EmojiPicker } from "frimousse"
 import { HexColorPicker } from "react-colorful"
 import { IconArrowsShuffle } from "@tabler/icons-react"
 import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
@@ -89,21 +87,13 @@ export default function CollectionDialog({ collection }: Props) {
 
     const isSlugManuallyEditedRef = useRef(isEditing)
     const emojiBtnRef = useRef<HTMLButtonElement>(null)
-    const emojiPortalRef = useRef<HTMLDivElement>(null)
+    const emojiFieldRef = useRef<HTMLDivElement>(null)
     const colourPickerRef = useRef<HTMLDivElement>(null)
-    const [emojiPickerPos, setEmojiPickerPos] = useState<{
-        top: number
-        left: number
-    } | null>(null)
 
     useEffect(() => {
         if (!isEmojiPickerOpen) return
         const handleClickOutside = (e: MouseEvent) => {
-            const target = e.target as Node
-            if (
-                !emojiBtnRef.current?.contains(target) &&
-                !emojiPortalRef.current?.contains(target)
-            ) {
+            if (!emojiFieldRef.current?.contains(e.target as Node)) {
                 setIsEmojiPickerOpen(false)
             }
         }
@@ -141,23 +131,13 @@ export default function CollectionDialog({ collection }: Props) {
         setTagStr(collapsed)
     }
 
-    const handleEmojiSelect = (emoji: { native: string }) => {
-        setIconVal(emoji.native)
+    const handleEmojiSelect = ({ emoji }: { emoji: string }) => {
+        setIconVal(emoji)
         setIsEmojiPickerOpen(false)
-        setEmojiPickerPos(null)
     }
 
     const handleEmojiBtnClick = () => {
-        if (isEmojiPickerOpen) {
-            setIsEmojiPickerOpen(false)
-            setEmojiPickerPos(null)
-            return
-        }
-        const rect = emojiBtnRef.current?.getBoundingClientRect()
-        if (rect) {
-            setEmojiPickerPos({ top: rect.bottom + 4, left: rect.right })
-        }
-        setIsEmojiPickerOpen(true)
+        setIsEmojiPickerOpen((prev) => !prev)
     }
 
     const handleTypeToggle = (type: ItemType) => {
@@ -265,26 +245,18 @@ export default function CollectionDialog({ collection }: Props) {
         </label>
     ))
 
-    const emojiPickerPortal =
-        isEmojiPickerOpen &&
-        emojiPickerPos &&
-        createPortal(
-            <div
-                ref={emojiPortalRef}
-                className={styles.CollectionDialog__EmojiPicker}
-                style={{
-                    top: emojiPickerPos.top,
-                    left: emojiPickerPos.left,
-                }}
-            >
-                <Picker
-                    data={data}
-                    onEmojiSelect={handleEmojiSelect}
-                    theme="auto"
-                />
-            </div>,
-            document.body,
-        )
+    const emojiPickerPortal = isEmojiPickerOpen && (
+        <div className={styles.EmojiPicker}>
+            <EmojiPicker.Root onEmojiSelect={handleEmojiSelect}>
+                <EmojiPicker.Search />
+                <EmojiPicker.Viewport>
+                    <EmojiPicker.Loading>Loading</EmojiPicker.Loading>
+                    <EmojiPicker.Empty>No emoji found.</EmojiPicker.Empty>
+                    <EmojiPicker.List />
+                </EmojiPicker.Viewport>
+            </EmojiPicker.Root>
+        </div>
+    )
 
     const colourPickerPanel = isColourPickerOpen && (
         <div className={styles.CollectionDialog__ColourPicker}>
@@ -349,7 +321,10 @@ export default function CollectionDialog({ collection }: Props) {
                     <label className={styles.CollectionDialog__Label}>
                         Icon
                     </label>
-                    <div className={styles.CollectionDialog__EmojiField}>
+                    <div
+                        ref={emojiFieldRef}
+                        className={styles.CollectionDialog__EmojiField}
+                    >
                         <button
                             ref={emojiBtnRef}
                             type="button"
