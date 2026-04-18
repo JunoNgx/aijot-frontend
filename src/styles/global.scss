@@ -354,8 +354,8 @@ kbd {
     padding: 0.5rem 0.75rem;
     box-shadow: 0 1rem 1rem var(--colShadow);
 
-    &[data-type=error] {
-        &> div[data-icon] {
+    &[data-type="error"] {
+        & > div[data-icon] {
             color: var(--colDanger);
         }
     }

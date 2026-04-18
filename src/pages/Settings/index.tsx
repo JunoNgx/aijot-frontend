@@ -536,9 +536,12 @@ export default function Settings() {
                         className={styles.Settings__Btn}
                         type="button"
                         onClick={() =>
-                            toast("Debug toast message with slightly long content", {
-                                duration: Infinity,
-                            })
+                            toast(
+                                "Debug toast message with slightly long content",
+                                {
+                                    duration: Infinity,
+                                },
+                            )
                         }
                     >
                         Trigger test toast
