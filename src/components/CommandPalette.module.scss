@@ -31,7 +31,8 @@
             color: var(--colSub);
         }
 
-        &:focus {
+        &:focus,
+        &:focus-visible {
             outline: none;
             border-bottom-color: var(--colMain);
         }
