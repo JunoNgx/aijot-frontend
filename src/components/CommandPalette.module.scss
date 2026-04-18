@@ -8,14 +8,8 @@
 
     &__Content {
         composes: DialogWrapper__Content from global;
-        width: 100%;
-        max-width: var(--dialogWidth);
-        max-height: var(--dialogHeight);
-        @include StandardBorder;
-        padding: 1.5rem;
         z-index: var(--zIndexCommandPaletteContent);
         box-shadow: 0 1rem 4rem var(--colShadow);
-        overflow-y: auto;
     }
 
     &__Command {

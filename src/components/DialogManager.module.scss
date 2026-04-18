@@ -7,12 +7,6 @@
 
     &__Content {
         composes: DialogWrapper__Content from global;
-        @include StandardBorder;
-        width: 90vw;
-        max-width: var(--dialogWidth);
-        max-height: 85vh;
-        padding: 1.5rem;
-        overflow-y: auto;
     }
 
     &__Title {
