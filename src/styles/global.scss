@@ -337,3 +337,26 @@ kbd {
     white-space: nowrap;
     border: 0;
 }
+
+// ============================================================
+// Sonner Toast
+// ============================================================
+
+.SonnerToast {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--colBg);
+    color: var(--colText);
+    border: var(--lineWidth) solid var(--colText);
+    border-radius: 0;
+    font-family: var(--fontFamily);
+    padding: 0.5rem 0.75rem;
+    box-shadow: 0 1rem 1rem var(--colShadow);
+
+    &[data-type=error] {
+        &> div[data-icon] {
+            color: var(--colDanger);
+        }
+    }
+}

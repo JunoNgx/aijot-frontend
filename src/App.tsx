@@ -55,7 +55,15 @@ export default function App() {
             <PurgeManager />
             <SyncManager />
             <DialogManager />
-            <Toaster position="bottom-right" />
+            <Toaster
+                position="bottom-right"
+                toastOptions={{
+                    unstyled: true,
+                    classNames: {
+                        toast: "SonnerToast",
+                    },
+                }}
+            />
             <Routes>
                 <Route path="/" element={<Landing />} />
                 <Route element={<LayoutShell />}>
