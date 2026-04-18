@@ -27,11 +27,19 @@
         overflow-y: auto;
     }
 
-    &__Item {
-        composes: Dropdown__Item from global;
+    &__Separator {
+        composes: Dropdown__Separator from global;
+    }
+}
+
+.CollectionItem {
+    composes: Dropdown__Item from global;
+
+    &--Active {
+        color: var(--colBg);
     }
 
-    &__ItemLabel {
+    &__Label {
         display: -webkit-box;
         -webkit-line-clamp: 4;
         -webkit-box-orient: vertical;
@@ -40,9 +48,5 @@
 
     &__Hotkey {
         margin-left: auto;
-    }
-
-    &__Separator {
-        composes: Dropdown__Separator from global;
     }
 }

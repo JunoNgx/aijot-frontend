@@ -50,8 +50,8 @@ export default function CollectionDropdown() {
         const isActive = collection.slug === currentSlug
 
         const itemClassName = [
-            styles.CollectionDropdown__Item,
-            isActive ? styles["CollectionDropdown__Item--Active"] : "",
+            styles.CollectionItem,
+            isActive ? styles["CollectionItem--Active"] : "",
         ].join(" ")
 
         return (
@@ -62,11 +62,11 @@ export default function CollectionDropdown() {
                 >
                     <CollectionColourBlock colour={collection.colour} />
                     <span>{collection.icon}</span>
-                    <span className={styles.CollectionDropdown__ItemLabel}>
+                    <span className={styles.CollectionItem__Label}>
                         {collection.name}
                     </span>
                     {hotkeyNum !== null && (
-                        <kbd className={styles.CollectionDropdown__Hotkey}>
+                        <kbd className={styles.CollectionItem__Hotkey}>
                             {hotkeyNum}
                         </kbd>
                     )}
