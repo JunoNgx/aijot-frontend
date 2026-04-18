@@ -48,14 +48,20 @@
     &__List {
         display: flex;
         flex-direction: column;
+        gap: 0.5rem;
+        margin-top: 1rem;
     }
 }
 
 .CollectionItem {
     display: flex;
     align-items: center;
-    border-bottom: var(--lineWidth) solid var(--colText);
-    padding: 0 0.5rem 0 0;
+    border: var(--lineWidth) solid var(--colSub);
+    padding: 0.25rem 0.5rem;
+
+    &:hover {
+        background-color: var(--colBgSub);
+    }
 
     &__TriggerBtn {
         @include ClearBtn;
