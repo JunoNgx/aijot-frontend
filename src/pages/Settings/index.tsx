@@ -297,16 +297,33 @@ export default function Settings() {
                     </label>
                 </div>
                 <div className={styles.Settings__Field}>
-                    <label className={styles.Settings__Checkbox}>
-                        <input
-                            type="checkbox"
-                            checked={shouldCustomSortCollections}
-                            onChange={(e) =>
-                                setShouldCustomSortCollections(e.target.checked)
-                            }
-                        />
-                        Use custom sort order
+                    <label className={styles.Settings__Label}>
+                        Collection sort order
                     </label>
+                    <div className={styles.Settings__RadioGroup}>
+                        <label className={styles.Settings__Radio}>
+                            <input
+                                type="radio"
+                                name="collectionSortOrder"
+                                checked={shouldCustomSortCollections}
+                                onChange={() =>
+                                    setShouldCustomSortCollections(true)
+                                }
+                            />
+                            Custom
+                        </label>
+                        <label className={styles.Settings__Radio}>
+                            <input
+                                type="radio"
+                                name="collectionSortOrder"
+                                checked={!shouldCustomSortCollections}
+                                onChange={() =>
+                                    setShouldCustomSortCollections(false)
+                                }
+                            />
+                            Alphabetically
+                        </label>
+                    </div>
                 </div>
             </section>
 
