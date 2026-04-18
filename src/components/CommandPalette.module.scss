@@ -1,8 +1,10 @@
+@use "styles/mixins" as *;
+
 .CommandPalette {
     &__Overlay {
+        @include GlassBlur;
         position: fixed;
         inset: 0;
-        background-color: rgba(0, 0, 0, 0.5);
         z-index: var(--zIndexCommandPaletteOverlay);
     }
 
