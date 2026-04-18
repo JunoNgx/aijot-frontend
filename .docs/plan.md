@@ -544,3 +544,15 @@ Add the ability to toggle between compact and expanded view modes in the jot lis
 ### 36f — Styling
 
 - [x] Modify `src/components/itemComponent/JotItem.module.scss`: add `.JotItem--Expanded` modifier for multi-line expanded layout
+
+### 36g — Rework expanded mode to two rows
+
+- [x] Modify `src/components/itemComponent/JotItem.tsx`:
+  - Remove `expandedRow2` variable
+  - Update `expandedContent` to use only row1 and row2
+- [x] Modify `src/components/itemComponent/JotItem.module.scss`:
+  - Remove `.JotItem__ExpandedRow3` styles, update `.JotItem__ExpandedRow2`
+
+**New 2-row layout:**
+- Row 1: icon + primary text + status icons
+- Row 2: tags + full jottedAt (bottom right)
