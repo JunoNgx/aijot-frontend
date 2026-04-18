@@ -173,7 +173,8 @@
     }
 
     [frimousse-row] {
-        padding: 0;
+        display: flex;
+        justify-content: space-between;
     }
 
     [frimousse-emoji] {
@@ -181,9 +182,9 @@
         background-color: transparent;
         border: none;
         cursor: pointer;
-        font-size: var(--fontSizeMd);
+        font-size: var(--fontSizeLg);
         height: 2rem;
-        padding: 0;
+        padding: 0.25rem;
         width: 2rem;
 
         &:hover,

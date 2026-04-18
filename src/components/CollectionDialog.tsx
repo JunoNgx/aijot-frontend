@@ -247,7 +247,7 @@ export default function CollectionDialog({ collection }: Props) {
 
     const emojiPickerPortal = isEmojiPickerOpen && (
         <div className={styles.EmojiPicker}>
-            <EmojiPicker.Root onEmojiSelect={handleEmojiSelect}>
+            <EmojiPicker.Root onEmojiSelect={handleEmojiSelect} columns={6}>
                 <EmojiPicker.Search />
                 <EmojiPicker.Viewport>
                     <EmojiPicker.Loading>Loading</EmojiPicker.Loading>
