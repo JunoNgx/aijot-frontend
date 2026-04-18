@@ -83,11 +83,9 @@ export default function JotItem({
 }: Props) {
     const { triggerPrimaryAction } = useItemActions()
     const is24HourClock = useProfileSettings((s) => s.is24HourClock)
-
-    const primaryText =
-        item.type === "todo" ? item.content : (item.title ?? item.content)
-    const secondaryText =
-        item.type !== "todo" && item.title ? item.content : null
+    const isPrimaryTextTitle = item.type !== "todo" && item.title !== undefined
+    const primaryText = isPrimaryTextTitle ? item.title! : item.content
+    const secondaryText = isPrimaryTextTitle ? item.content : null
     const datetime = formatDatetime(item.jottedAt, is24HourClock)
     const detailedDatetime = formatDetailedDatetime(
         item.jottedAt,
@@ -171,6 +169,9 @@ export default function JotItem({
                 className={[
                     styles.JotItem__PrimaryText,
                     item.isDone ? styles["JotItem__PrimaryText--TodoDone"] : "",
+                    isPrimaryTextTitle
+                        ? styles["JotItem__PrimaryText--Title"]
+                        : "",
                 ].join(" ")}
             >
                 {primaryText}
@@ -215,6 +216,9 @@ export default function JotItem({
                 className={[
                     styles.JotItem__PrimaryText,
                     item.isDone ? styles["JotItem__PrimaryText--TodoDone"] : "",
+                    isPrimaryTextTitle
+                        ? styles["JotItem__PrimaryText--Title"]
+                        : "",
                 ].join(" ")}
             >
                 {primaryText}

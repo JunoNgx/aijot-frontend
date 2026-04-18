@@ -62,6 +62,10 @@
             text-decoration: line-through;
             color: var(--colSub);
         }
+
+        &--Title {
+            color: var(--colMain);
+        }
     }
 
     &__SecondaryText {
