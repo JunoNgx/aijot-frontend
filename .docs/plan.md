@@ -501,3 +501,46 @@ Refactor theme selection to use cmdk command palette with nested modes. Remove "
 - [x] Manages preview state (original theme, previewed theme)
 - [x] Debounced apply preview (1s)
 - [x] Revert function for when dialog closes without commit
+
+---
+
+## Task 36 — Jot Item Expanded Mode
+
+Github issue #2
+
+Add the ability to toggle between compact and expanded view modes in the jot list. Users can set a default mode in Settings, and toggle between modes in the jot view via keyboard shortcut.
+
+### 36a — Add setting to ProfileSettingsStore
+
+- [ ] Modify `src/types.ts`: add `shouldShowJotItemExtraInfo: boolean` to `ProfileSettingsStore` interface
+- [ ] Modify `src/store/profileSettings.ts`: add default value (`false`) and setter `setShouldShowJotItemExtraInfo`
+
+### 36b — Add setting UI in Settings page
+
+- [ ] Modify `src/pages/Settings/index.tsx`: add getter + setter for `shouldShowJotItemExtraInfo`
+- [ ] Add checkbox in Appearance section: "Show extra information in jot list"
+
+### 36c — Add shortcut constant
+
+- [ ] Modify `src/utils/constants.ts`: add `SHORTCUT_TOGGLE_JOT_LIST_VIEW = "mod+backslash"`
+
+### 36d — Jot page: local view mode state
+
+- [ ] Modify `src/pages/Jot/index.tsx`: add local state `isShowingJotItemExtraInfo`, initialize from profile setting via `useEffect`
+- [ ] Add hotkey handler for Cmd+\ to toggle the local state
+- [ ] Pass `shouldShowJotItemExtraInfo` prop to each `JotItem` component
+
+### 36e — JotItem component changes
+
+- [ ] Modify `src/components/itemComponent/JotItem.tsx`: add `shouldShowJotItemExtraInfo: boolean` prop
+- [ ] Create helper function for detailed datetime format (full format "MMM d, yyyy HH:mm")
+- [ ] Conditional rendering:
+  - **false (compact)**: current single-row layout
+  - **true (expanded)**: 3-row layout:
+    - Row 1: icon + primary text + status icons
+    - Row 2: secondary text (if exists)
+    - Row 3: tags (if exists) + detailed datetime
+
+### 36f — Styling
+
+- [ ] Modify `src/components/itemComponent/JotItem.module.scss`: add `.JotItem--Expanded` modifier for multi-line expanded layout
