@@ -8,7 +8,10 @@ export function useCollectionsMutations() {
     const queryClient = useQueryClient()
 
     const invalidateCollectionQueries = () => {
-        queryClient.invalidateQueries({ queryKey: queryKeys.collections })
+        queryClient.invalidateQueries({
+            queryKey: queryKeys.collections,
+            exact: false,
+        })
     }
 
     const createCollectionMutation = useMutation({
