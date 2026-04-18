@@ -7,9 +7,11 @@ import { useCoreCollectionSettings } from "@/store/coreCollectionSettings"
 import { useLocalAppData } from "@/store/localAppData"
 import {
     SHORTCUT_FOCUS_MAIN_INPUT,
+    SHORTCUT_TOGGLE_JOT_LIST_VIEW,
     ROUTE_JOT,
     TRASH_PURGE_DURATION_DAY,
 } from "@/utils/constants"
+import { useProfileSettings } from "@/store/profileSettings"
 import MainInput from "@/components/MainInput"
 import JotItem from "@/components/itemComponent/JotItem"
 import DemoDataBanner from "./DemoDataBanner"
@@ -71,6 +73,12 @@ export default function Jot() {
     const { shouldShowDemoDataBanner } = useLocalAppData()
     const mainInputRef = useRef<HTMLInputElement>(null)
 
+    const defaultShouldShowJotItemExtraInfo = useProfileSettings(
+        (s) => s.shouldShowJotItemExtraInfo,
+    )
+    const [isShowingJotItemExtraInfo, setIsShowingJotItemExtraInfo] =
+        useState(defaultShouldShowJotItemExtraInfo)
+
     const collections = collectionsQuery.data ?? []
     const currCollection = collections.find((c) => c.slug === slug)
     const allSlug = useCoreCollectionSettings((s) => s.all.slug)
@@ -101,6 +109,14 @@ export default function Jot() {
         preventDefault: true,
     })
 
+    useHotkeys(
+        SHORTCUT_TOGGLE_JOT_LIST_VIEW,
+        () => {
+            setIsShowingJotItemExtraInfo((prev) => !prev)
+        },
+        { enableOnFormTags: true },
+    )
+
     if (!collectionsQuery.isPending && !currCollection) {
         return <Navigate to={`${ROUTE_JOT}/${allSlug}`} replace />
     }
@@ -115,6 +131,7 @@ export default function Jot() {
             item={item}
             isSelected={index === selectedIndex}
             itemIndex={index}
+            isExpandedInfoMode={isShowingJotItemExtraInfo}
         />
     ))
 

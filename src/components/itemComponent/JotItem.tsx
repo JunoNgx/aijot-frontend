@@ -25,6 +25,7 @@ interface Props {
     item: Item
     isSelected: boolean
     itemIndex: number
+    isExpandedInfoMode: boolean
     id?: string
 }
 
@@ -65,7 +66,13 @@ function ItemIcon({ item }: { item: Item }) {
     return <IconNote {...ICON_PROPS_ITEM_ICON} />
 }
 
-export default function JotItem({ item, isSelected, itemIndex, id }: Props) {
+export default function JotItem({
+    item,
+    isSelected,
+    itemIndex,
+    isExpandedInfoMode,
+    id,
+}: Props) {
     const { triggerPrimaryAction } = useItemActions()
     const is24HourClock = useProfileSettings((s) => s.is24HourClock)
 
