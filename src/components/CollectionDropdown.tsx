@@ -35,8 +35,8 @@ export default function CollectionDropdown() {
 
     const trigger = currCollection ? (
         <>
-            <CollectionColourBlock colour={currCollection.colour} />
             <span>{currCollection.icon}</span>
+            <CollectionColourBlock colour={currCollection.colour} />
             <span className={styles.CollectionDropdown__TriggerLabel}>
                 {currCollection.name}
             </span>
@@ -60,8 +60,8 @@ export default function CollectionDropdown() {
                     className={itemClassName}
                     onSelect={() => navigateToCollection(collection.slug)}
                 >
-                    <CollectionColourBlock colour={collection.colour} />
                     <span>{collection.icon}</span>
+                    <CollectionColourBlock colour={collection.colour} />
                     <span className={styles.CollectionItem__Label}>
                         {collection.name}
                     </span>
