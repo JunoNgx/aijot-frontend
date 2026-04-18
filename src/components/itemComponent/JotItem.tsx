@@ -185,16 +185,11 @@ export default function JotItem({
         </span>
     )
 
-    const tagsEl =
-        item.tags.length > 0 ? (
-            <span className={styles.JotItem__Tags}>
-                {item.tags.map((tag) => (
-                    <span key={tag} className={styles.JotItem__Tag}>
-                        {tag}
-                    </span>
-                ))}
-            </span>
-        ) : null
+    const tagsEl = (
+        <span className={styles.JotItem__Tags}>
+            {item.tags.length > 0 ? item.tags.join(" ") : "[untagged]"}
+        </span>
+    )
 
     const compactDatetimeEl = (
         <span className={styles.JotItem__Datetime}>{datetime}</span>
