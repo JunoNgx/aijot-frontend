@@ -2,22 +2,16 @@
 
 .CommandPalette {
     &__Overlay {
-        @include GlassBlur;
-        position: fixed;
-        inset: 0;
+        composes: DialogWrapper__Overlay from global;
         z-index: var(--zIndexCommandPaletteOverlay);
     }
 
     &__Content {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        composes: DialogWrapper__Content from global;
         width: 100%;
         max-width: var(--dialogWidth);
         max-height: var(--dialogHeight);
         @include StandardBorder;
-        background-color: var(--colBg);
         padding: 1.5rem;
         z-index: var(--zIndexCommandPaletteContent);
         box-shadow: 0 1rem 4rem var(--colShadow);
