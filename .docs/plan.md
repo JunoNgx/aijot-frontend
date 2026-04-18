@@ -526,21 +526,21 @@ Add the ability to toggle between compact and expanded view modes in the jot lis
 
 ### 36d — Jot page: local view mode state
 
-- [x] Modify `src/pages/Jot/index.tsx`: add local state `isShowingJotItemExtraInfo`, initialize from profile setting via `useEffect`
+- [x] Modify `src/pages/Jot/index.tsx`: add local state `isShowingJotItemExtraInfo`, initialize from profile setting
 - [x] Add hotkey handler for Cmd+\ to toggle the local state
-- [x] Pass `shouldShowJotItemExtraInfo` prop to each `JotItem` component
+- [x] Pass `isExpandedInfoMode` prop to each `JotItem` component
 
 ### 36e — JotItem component changes
 
-- [ ] Modify `src/components/itemComponent/JotItem.tsx`: add `shouldShowJotItemExtraInfo: boolean` prop
-- [ ] Create helper function for detailed datetime format (full format "MMM d, yyyy HH:mm")
-- [ ] Conditional rendering:
-  - **false (compact)**: current single-row layout
-  - **true (expanded)**: 3-row layout:
-    - Row 1: icon + primary text + status icons
-    - Row 2: secondary text (if exists)
-    - Row 3: tags (if exists) + detailed datetime
+- [x] Modify `src/components/itemComponent/JotItem.tsx`: add `isExpandedInfoMode: boolean` prop
+- [x] Create helper function for detailed datetime format (full format "MMM d, yyyy HH:mm")
+- [x] Conditional rendering:
+    - **false (compact)**: current single-row layout
+    - **true (expanded)**: 3-row layout:
+        - Row 1: icon + primary text + status icons
+        - Row 2: secondary text (if exists)
+        - Row 3: tags (if exists) + detailed datetime
 
 ### 36f — Styling
 
-- [ ] Modify `src/components/itemComponent/JotItem.module.scss`: add `.JotItem--Expanded` modifier for multi-line expanded layout
+- [x] Modify `src/components/itemComponent/JotItem.module.scss`: add `.JotItem--Expanded` modifier for multi-line expanded layout
