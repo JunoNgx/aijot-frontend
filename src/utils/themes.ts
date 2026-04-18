@@ -13,7 +13,7 @@ export const themes = [
         colBg: "#121212",
         colMain: "#0098a9",
         colSub: "#777777",
-        colBgSub: "#333333",
+        colBgSub: "#222222",
         colText: "#e0e0e0",
         colDanger: "#fa5252",
     },
