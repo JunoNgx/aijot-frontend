@@ -1,5 +1,5 @@
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd"
-import { IconGripVertical, IconPlus } from "@tabler/icons-react"
+import { IconGripVertical, IconPlus, IconArrowsSort } from "@tabler/icons-react"
 import { DateTime } from "luxon"
 import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
 import { useCollectionsMutations } from "@/hooks/useCollectionsMutations"
@@ -20,6 +20,12 @@ export default function Collections() {
         useCoreCollectionSettings()
     const defaultCollectionSlug = useProfileSettings(
         (s) => s.defaultCollectionSlug,
+    )
+    const shouldCustomSortCollections = useProfileSettings(
+        (s) => s.shouldCustomSortCollections,
+    )
+    const setShouldCustomSortCollections = useProfileSettings(
+        (s) => s.setShouldCustomSortCollections,
     )
 
     const sortedCollections = (collectionsQuery.data ?? [])
@@ -124,6 +130,22 @@ export default function Collections() {
                 <h1 className={styles.Collections__Title}>Collections</h1>
             </div>
             <div className="FlexRow FlexRow--Right">
+                <button
+                    className={styles.Collections__BtnNew}
+                    onClick={() =>
+                        setShouldCustomSortCollections(
+                            !shouldCustomSortCollections,
+                        )
+                    }
+                    title={
+                        shouldCustomSortCollections
+                            ? "Switch to alphabetical"
+                            : "Switch to custom order"
+                    }
+                >
+                    <IconArrowsSort {...ICON_PROPS_BUTTON} />
+                    {shouldCustomSortCollections ? "Custom" : "A-Z"}
+                </button>
                 <button
                     className={styles.Collections__BtnNew}
                     onClick={() => openCollectionDialog()}
