@@ -66,10 +66,16 @@ export async function runFullDriveSync(
         )
 
     if (shouldUpload) {
-        await upsertFile(token, folderId, DATA_FILE, {
-            items: mergedItems,
-            collections: mergedCollections,
-        })
+        await upsertFile(
+            token,
+            folderId,
+            DATA_FILE,
+            {
+                items: mergedItems,
+                collections: mergedCollections,
+            },
+            remoteFile?.id,
+        )
     }
 
     return syncStartTime

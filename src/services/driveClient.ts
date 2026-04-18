@@ -154,7 +154,12 @@ export async function upsertFile(
     folderId: string,
     name: string,
     data: unknown,
+    knownFileId?: string,
 ): Promise<void> {
+    if (knownFileId) {
+        await updateFile(token, knownFileId, data)
+        return
+    }
     const existingFile = await findFile(token, folderId, name)
     if (existingFile) {
         await updateFile(token, existingFile.id, data)
