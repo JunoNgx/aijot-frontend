@@ -84,6 +84,26 @@ export default function JotItem({ item, isSelected, itemIndex, id }: Props) {
         isSelected ? styles["JotItem--Selected"] : "",
     ].join(" ")
 
+    const getAccessibleLabel = () => {
+        const truncateText = (text: string, maxLength: number) => {
+            if (text.length <= maxLength) return text
+            return text.slice(0, maxLength).trim() + "..."
+        }
+
+        const typeLabel =
+            item.type === "todo"
+                ? item.isDone
+                    ? "Completed todo"
+                    : "Todo"
+                : item.type === "link"
+                  ? "Link"
+                  : "Text"
+
+        return [typeLabel, truncateText(primaryText, 100)]
+            .filter(Boolean)
+            .join(": ")
+    }
+
     const wrapperProps =
         item.type === "link"
             ? {
@@ -107,12 +127,18 @@ export default function JotItem({ item, isSelected, itemIndex, id }: Props) {
     const itemIndicators = (
         <div className={styles.JotItem__StatusWrapper}>
             {item.shouldCopyOnClick && (
-                <span className={styles.JotItem__StatusIcon}>
+                <span
+                    className={styles.JotItem__StatusIcon}
+                    aria-label="Auto-copy on click"
+                >
                     <IconClipboard {...ICON_PROPS_ITEM_STATUS} />
                 </span>
             )}
             {item.isPinned && (
-                <span className={styles.JotItem__StatusIcon}>
+                <span
+                    className={styles.JotItem__StatusIcon}
+                    aria-label="Pinned"
+                >
                     <IconPin {...ICON_PROPS_ITEM_STATUS} />
                 </span>
             )}
@@ -150,6 +176,8 @@ export default function JotItem({ item, isSelected, itemIndex, id }: Props) {
                     data-item-index={itemIndex}
                     id={id}
                     role="option"
+                    aria-selected={isSelected}
+                    aria-label={getAccessibleLabel()}
                     {...rest}
                 >
                     {itemIcon}
