@@ -12,7 +12,7 @@
     }
 
     &__BtnNew {
-        composes: Router__BtnNew from global;
+        composes: Btn Btn--Pri from global;
     }
 
     &__List {

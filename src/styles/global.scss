@@ -324,10 +324,6 @@ kbd {
         font-weight: 600;
         margin: 0;
     }
-
-    &__BtnNew {
-        composes: Btn Btn--Pri from global;
-    }
 }
 
 // ============================================================
