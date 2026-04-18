@@ -69,7 +69,9 @@ function ItemIcon({ item }: { item: Item }) {
 
 function formatDetailedDatetime(isoString: string, is24HourClock = true) {
     const date = DateTime.fromISO(isoString)
-    return date.toFormat(is24HourClock ? "MMM d, yyyy HH:mm" : "MMM d, yyyy h:mm a")
+    return date.toFormat(
+        is24HourClock ? "MMM d, yyyy HH:mm" : "MMM d, yyyy h:mm a",
+    )
 }
 
 export default function JotItem({
@@ -87,6 +89,10 @@ export default function JotItem({
     const secondaryText =
         item.type !== "todo" && item.title ? item.content : null
     const datetime = formatDatetime(item.jottedAt, is24HourClock)
+    const detailedDatetime = formatDetailedDatetime(
+        item.jottedAt,
+        is24HourClock,
+    )
 
     const secondaryTextEl = secondaryText && (
         <span className={styles.JotItem__SecondaryText}>{secondaryText}</span>
@@ -178,8 +184,63 @@ export default function JotItem({
             <ItemIcon item={item} />
         </span>
     )
-    const itemDatetime = (
+
+    const tagsEl =
+        item.tags.length > 0 ? (
+            <span className={styles.JotItem__Tags}>
+                {item.tags.map((tag) => (
+                    <span key={tag} className={styles.JotItem__Tag}>
+                        {tag}
+                    </span>
+                ))}
+            </span>
+        ) : null
+
+    const compactDatetimeEl = (
         <span className={styles.JotItem__Datetime}>{datetime}</span>
+    )
+
+    const expandedDatetimeEl = (
+        <span className={styles.JotItem__Datetime}>{detailedDatetime}</span>
+    )
+
+    const compactContent = (
+        <>
+            {itemIcon}
+            {itemBody}
+            {itemIndicators}
+            {compactDatetimeEl}
+        </>
+    )
+
+    const expandedContent = (
+        <>
+            <div className={styles.JotItem__ExpandedRow1}>
+                {itemIcon}
+                <span
+                    className={[
+                        styles.JotItem__PrimaryText,
+                        item.isDone
+                            ? styles["JotItem__PrimaryText--TodoDone"]
+                            : "",
+                    ].join(" ")}
+                >
+                    {primaryText}
+                </span>
+                {itemIndicators}
+            </div>
+            {secondaryTextEl && (
+                <div className={styles.JotItem__ExpandedRow2}>
+                    {secondaryTextEl}
+                </div>
+            )}
+            <div className={styles.JotItem__ExpandedRow3}>
+                {tagsEl}
+                <span className={styles.JotItem__ExpandedRow3Right}>
+                    {expandedDatetimeEl}
+                </span>
+            </div>
+        </>
     )
 
     return (
@@ -194,10 +255,7 @@ export default function JotItem({
                     aria-label={getAccessibleLabel()}
                     {...rest}
                 >
-                    {itemIcon}
-                    {itemBody}
-                    {itemIndicators}
-                    {itemDatetime}
+                    {isExpandedInfoMode ? expandedContent : compactContent}
                 </Tag>
             </ContextMenu.Trigger>
             <JotItemContextMenu item={item} />

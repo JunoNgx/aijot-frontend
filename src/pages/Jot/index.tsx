@@ -76,8 +76,9 @@ export default function Jot() {
     const defaultShouldShowJotItemExtraInfo = useProfileSettings(
         (s) => s.shouldShowJotItemExtraInfo,
     )
-    const [isShowingJotItemExtraInfo, setIsShowingJotItemExtraInfo] =
-        useState(defaultShouldShowJotItemExtraInfo)
+    const [isShowingJotItemExtraInfo, setIsShowingJotItemExtraInfo] = useState(
+        defaultShouldShowJotItemExtraInfo,
+    )
 
     const collections = collectionsQuery.data ?? []
     const currCollection = collections.find((c) => c.slug === slug)
