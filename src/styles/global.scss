@@ -234,6 +234,7 @@ kbd {
         transform: translate(-50%, -50%);
         background-color: var(--colBg);
         z-index: var(--zIndexDialog);
+        box-shadow: 0 1rem 4rem var(--colShadow);
         width: 90vw;
         max-width: var(--dialogWidth);
         max-height: var(--dialogHeight);
