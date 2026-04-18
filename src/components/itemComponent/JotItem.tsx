@@ -213,33 +213,39 @@ export default function JotItem({
         </>
     )
 
+    const expandedRow1 = (
+        <div className={styles.JotItem__ExpandedRow1}>
+            {itemIcon}
+            <span
+                className={[
+                    styles.JotItem__PrimaryText,
+                    item.isDone ? styles["JotItem__PrimaryText--TodoDone"] : "",
+                ].join(" ")}
+            >
+                {primaryText}
+            </span>
+            {itemIndicators}
+        </div>
+    )
+
+    const expandedRow2 = secondaryTextEl ? (
+        <div className={styles.JotItem__ExpandedRow2}>{secondaryTextEl}</div>
+    ) : null
+
+    const expandedRow3 = (
+        <div className={styles.JotItem__ExpandedRow3}>
+            {tagsEl}
+            <span className={styles.JotItem__ExpandedRow3Right}>
+                {expandedDatetimeEl}
+            </span>
+        </div>
+    )
+
     const expandedContent = (
         <>
-            <div className={styles.JotItem__ExpandedRow1}>
-                {itemIcon}
-                <span
-                    className={[
-                        styles.JotItem__PrimaryText,
-                        item.isDone
-                            ? styles["JotItem__PrimaryText--TodoDone"]
-                            : "",
-                    ].join(" ")}
-                >
-                    {primaryText}
-                </span>
-                {itemIndicators}
-            </div>
-            {secondaryTextEl && (
-                <div className={styles.JotItem__ExpandedRow2}>
-                    {secondaryTextEl}
-                </div>
-            )}
-            <div className={styles.JotItem__ExpandedRow3}>
-                {tagsEl}
-                <span className={styles.JotItem__ExpandedRow3Right}>
-                    {expandedDatetimeEl}
-                </span>
-            </div>
+            {expandedRow1}
+            {expandedRow2}
+            {expandedRow3}
         </>
     )
 
