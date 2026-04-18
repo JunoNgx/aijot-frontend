@@ -160,7 +160,7 @@ export default function Jot() {
             />
             <div
                 id={listboxId}
-                className={styles.Jot__List}
+                className={`${styles.Jot__List} ${isShowingJotItemExtraInfo ? styles["Jot__List--Expanded"] : ""}`}
                 role="listbox"
                 aria-orientation="vertical"
             >
