@@ -101,7 +101,11 @@ export default function CommandPalette({
 
     const collectionsGroup = (
         <Command.Group
-            heading="Collections"
+            heading={
+                <span className={styles.CommandPaletteGroup__Heading}>
+                    Collections
+                </span>
+            }
             className={styles.CommandPaletteGroup__Group}
         >
             {collections.map((collection) => (
@@ -186,7 +190,11 @@ export default function CommandPalette({
 
     const collectionActionsGroup = (
         <Command.Group
-            heading="Collection Actions"
+            heading={
+                <span className={styles.CommandPaletteGroup__Heading}>
+                    Collection Actions
+                </span>
+            }
             className={styles.CommandPaletteGroup__Group}
         >
             {createCollectionItem}
@@ -257,7 +265,11 @@ export default function CommandPalette({
 
     const navigationGroup = (
         <Command.Group
-            heading="Navigation"
+            heading={
+                <span className={styles.CommandPaletteGroup__Heading}>
+                    Navigation
+                </span>
+            }
             className={styles.CommandPaletteGroup__Group}
         >
             {goToJotItem}
@@ -284,7 +296,11 @@ export default function CommandPalette({
 
     const actionsGroup = (
         <Command.Group
-            heading="Actions"
+            heading={
+                <span className={styles.CommandPaletteGroup__Heading}>
+                    Actions
+                </span>
+            }
             className={styles.CommandPaletteGroup__Group}
         >
             {changeThemeItem}
@@ -298,7 +314,11 @@ export default function CommandPalette({
 
     const themeGroup = (
         <Command.Group
-            heading="Theme"
+            heading={
+                <span className={styles.CommandPaletteGroup__Heading}>
+                    Theme
+                </span>
+            }
             className={styles.CommandPaletteGroup__Group}
         >
             {themes.map((theme) => (

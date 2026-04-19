@@ -61,20 +61,17 @@
         }
     }
 
-    // &__SectionLabel {
-    //     padding: 0.25rem 0.75rem;
-    //     font-size: 0.75rem;
-    //     color: var(--colTextAlt);
-    //     text-transform: uppercase;
-    //     letter-spacing: 0.05em;
-    // }
-
     &__Group {
         margin-bottom: 0.5rem;
 
         &:last-child {
             margin-bottom: 0;
         }
+    }
+
+    &__Heading {
+        font-size: var(--fontSizeSm);
+        color: var(--colSub);
     }
 }
 
