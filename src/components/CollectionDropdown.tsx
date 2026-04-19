@@ -1,7 +1,12 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu"
 import { useParams } from "react-router-dom"
 import { useHotkeys } from "react-hotkeys-hook"
-import { IconChevronDown, IconPencil, IconPlus } from "@tabler/icons-react"
+import {
+    IconCheck,
+    IconChevronDown,
+    IconPencil,
+    IconPlus,
+} from "@tabler/icons-react"
 import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
 import { useNavigateRoutes } from "@/hooks/useNavigateRoutes"
 import { openCollectionDialog } from "@/utils/openCollectionDialog"
@@ -55,6 +60,14 @@ export default function CollectionDropdown() {
             isActive ? styles["CollectionItem--Active"] : "",
         ].join(" ")
 
+        const rightContent = isActive ? (
+            <IconCheck {...ICON_PROPS_NORMAL} />
+        ) : (
+            hotkeyNum !== null && (
+                <kbd className={styles.CollectionItem__Hotkey}>{hotkeyNum}</kbd>
+            )
+        )
+
         return (
             <div key={collection.id}>
                 <DropdownMenu.Item
@@ -66,11 +79,7 @@ export default function CollectionDropdown() {
                     <span className={styles.CollectionItem__Label}>
                         {collection.name}
                     </span>
-                    {hotkeyNum !== null && (
-                        <kbd className={styles.CollectionItem__Hotkey}>
-                            {hotkeyNum}
-                        </kbd>
-                    )}
+                    {rightContent}
                 </DropdownMenu.Item>
             </div>
         )
