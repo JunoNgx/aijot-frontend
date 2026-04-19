@@ -63,7 +63,7 @@ export function parseShortcut(shortcut: string): string[] {
         const lower = part.toLowerCase().trim()
         if (lower === "mod") return isMac ? "Cmd" : "Ctrl"
         if (lower === "shift") return "Shift"
-        if (lower === "alt") return "Alt"
+        if (lower === "alt") return isMac ? "Opt" : "Alt"
         // Keep "n" lowercase for collection jump hint, capitalize other single letters
         if (part === "n") return "n"
         if (part.length === 1) return part.toUpperCase()
