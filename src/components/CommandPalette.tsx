@@ -101,10 +101,13 @@ export default function CommandPalette({
 
         setTimeout(() => {
             const selectedItemEl = listRef.current?.querySelector(
-                '[data-selected="true"]',
+                "[data-selected='true']",
             )
             if (selectedItemEl) {
-                selectedItemEl.scrollIntoView({ block: "center" })
+                selectedItemEl.scrollIntoView({
+                    block: "center",
+                    behavior: "smooth",
+                })
             }
         }, 0)
     }, [mode, isThemeMode])
