@@ -48,5 +48,7 @@
 
     &__RightContent {
         margin-left: auto;
+        display: grid;
+        place-items: center;
     }
 }
