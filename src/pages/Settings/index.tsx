@@ -233,9 +233,7 @@ export default function Settings() {
             </h1>
 
             <section className={styles.Section}>
-                <div className={styles.Section__Header}>
-                    <h2 className={styles.Section__Title}>Appearance</h2>
-                </div>
+                <h2 className={styles.Section__Title}>Appearance</h2>
                 <div className={styles.Field}>
                     <label className={styles.Field__Label}>Theme</label>
                     <div className="FlexRow">
@@ -280,9 +278,7 @@ export default function Settings() {
             </section>
 
             <section className={styles.Section}>
-                <div className={styles.Section__Header}>
-                    <h2 className={styles.Section__Title}>Profile</h2>
-                </div>
+                <h2 className={styles.Section__Title}>Profile</h2>
                 <div className={styles.Field}>
                     <label
                         className={styles.Field__Label}
@@ -344,9 +340,7 @@ export default function Settings() {
             </section>
 
             <section className={styles.Section}>
-                <div className={styles.Section__Header}>
-                    <h2 className={styles.Section__Title}>Data</h2>
-                </div>
+                <h2 className={styles.Section__Title}>Data</h2>
                 <p className={styles.Section__Description}>
                     Export or import your items, collections, and settings
                 </p>
@@ -408,9 +402,7 @@ export default function Settings() {
             </section>
 
             <section className={styles.Section}>
-                <div className={styles.Section__Header}>
-                    <h2 className={styles.Section__Title}>Sync</h2>
-                </div>
+                <h2 className={styles.Section__Title}>Sync</h2>
                 <p className={styles.Section__Description}>
                     Back up your data to Google Drive
                 </p>
@@ -467,9 +459,7 @@ export default function Settings() {
             </section>
 
             <section className={styles.Section}>
-                <div className={styles.Section__Header}>
-                    <h2 className={styles.Section__Title}>Help</h2>
-                </div>
+                <h2 className={styles.Section__Title}>Help</h2>
                 <button
                     className={styles.Settings__BtnAction}
                     type="button"
@@ -480,9 +470,7 @@ export default function Settings() {
             </section>
 
             <section className={styles.Section}>
-                <div className={styles.Section__Header}>
-                    <h2 className={styles.Section__Title}>About</h2>
-                </div>
+                <h2 className={styles.Section__Title}>About</h2>
                 <p className={styles.Settings__Version}>Version 0.0.1</p>
                 <div className="FlexRow">
                     <button
@@ -505,13 +493,11 @@ export default function Settings() {
             <section
                 className={`${styles.Section} ${styles["Section--Spaced"]}`}
             >
-                <div className={styles.Section__Header}>
-                    <h2
-                        className={`${styles.Section__Title} ${styles["Section__Title--Danger"]}`}
-                    >
-                        Danger Zone
-                    </h2>
-                </div>
+                <h2
+                    className={`${styles.Section__Title} ${styles["Section__Title--Danger"]}`}
+                >
+                    Danger Zone
+                </h2>
                 <p className={styles.Section__Description}>
                     Removes all items and collections. Your data on Google Drive
                     will remain intact.
@@ -527,9 +513,7 @@ export default function Settings() {
 
             {isDebugMode && (
                 <section className={styles.Section}>
-                    <div className={styles.Section__Header}>
-                        <h2 className={styles.Section__Title}>Debug</h2>
-                    </div>
+                    <h2 className={styles.Section__Title}>Debug</h2>
                     <button
                         className={styles.Settings__Btn}
                         type="button"
