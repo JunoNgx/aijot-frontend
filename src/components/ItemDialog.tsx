@@ -172,7 +172,7 @@ export default function ItemDialog({ item, onClose }: Props) {
     const handleRefetchMeta = useCallback(() => {
         refetchLinkMetaMutation.mutate(item)
         closeAllDialogs()
-    }, [refetchLinkMetaMutation, closeAllDialogs])
+    }, [item, refetchLinkMetaMutation, closeAllDialogs])
 
     const handleSave = useCallback(() => {
         mutateRef.current(buildUpdatedItem())
