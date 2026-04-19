@@ -11,7 +11,7 @@ ai\*jot is a remake of JustJot. Most of JustJot specifications are applicable to
 
 - Use 4 space indentation
 - Variable names for boolean type must always have the appropriate prefix (e.g. is-, should-, does-, has-). There is no exception.
-- Do not name variables with a bare adjective (e.g. `existing`, `filtered`, `updated`). Use a noun-based name that reflects what the variable holds (e.g. `storedCategory`, `filteredTransactions`, `updatedToken`).
+- Do not name variables with a bare adjective. `existing`, `filtered`, `updated`, `prev`, `next` are unacceptable. Use a noun-based name that reflects what the variable holds (e.g. `storedCategory`, `filteredTransactions`, `updatedToken`).
 - Prioritise using guard clause and early termination. Avoid `else` and deeply nested codes.
 - Use leading operators style for multi-line logical/binary expressions: place the operator at the start of the continuation line, not the end of the preceding one. (Not yet supported by Biome - it will reformat to trailing operators.)
 - Use only `yarn` to manage packages
