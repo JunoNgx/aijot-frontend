@@ -15,29 +15,29 @@
         &--Spaced {
             margin-top: 8rem;
         }
+    }
 
-        &Header {
-            display: flex;
-            align-items: baseline;
-            gap: 0.75rem;
-            margin-bottom: 0.5rem;
+    &__SectionHeader {
+        display: flex;
+        align-items: baseline;
+        gap: 0.75rem;
+        margin-bottom: 0.5rem;
+    }
+
+    &__SectionTitle {
+        font-size: var(--fontSizeMd);
+        font-weight: 600;
+        margin: 0;
+
+        &--Danger {
+            color: var(--colDanger);
         }
+    }
 
-        &Title {
-            font-size: var(--fontSizeMd);
-            font-weight: 600;
-            margin: 0;
-
-            &--Danger {
-                color: var(--colDanger);
-            }
-        }
-
-        &Description {
-            font-size: var(--fontSizeSm);
-            color: var(--colTextAlt);
-            margin: 0;
-        }
+    &__SectionDescription {
+        font-size: var(--fontSizeSm);
+        color: var(--colTextAlt);
+        margin: 0;
     }
 
     &__Field {
@@ -110,11 +110,11 @@
         font-size: var(--fontSizeMd);
         background-color: var(--colBgAlt);
         @include StandardBorder;
+    }
 
-        &Actions {
-            display: flex;
-            gap: 0.5rem;
-        }
+    &__ImportPreviewActions {
+        display: flex;
+        gap: 0.5rem;
     }
 
     &__Btn {
