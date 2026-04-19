@@ -11,6 +11,10 @@
         composes: Dialog__Label from global;
     }
 
+    &__Checkbox {
+        composes: Dialog__Checkbox from global;
+    }
+
     &__Description {
         composes: Dialog__Description from global;
     }

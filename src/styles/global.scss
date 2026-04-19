@@ -251,6 +251,14 @@ kbd {
         font-weight: 500;
     }
 
+    &__Checkbox {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+        font-size: var(--fontSizeMd);
+    }
+
     &__Description {
         font-size: var(--fontSizeSm);
         color: var(--colTextAlt);

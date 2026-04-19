@@ -104,6 +104,10 @@ export default function ItemDialog({ item, onClose }: Props) {
     const [tagStr, setTagStr] = useState(item.tags.join(" "))
     const [jottedAtVal, setJottedAtVal] = useState<string | null>(item.jottedAt)
     const [faviconUrlVal, setFaviconUrlVal] = useState(item.faviconUrl ?? "")
+    const [shouldCopyOnClickVal, setShouldCopyOnClickVal] = useState(
+        item.shouldCopyOnClick ?? false,
+    )
+    const [isPinnedVal, setIsPinnedVal] = useState(item.isPinned ?? false)
     const [saveStatusText, setSaveStatusText] = useState(
         `Saved ${formatDatetime(item.updatedAt)}`,
     )
@@ -113,6 +117,8 @@ export default function ItemDialog({ item, onClose }: Props) {
     const tagStrRef = useRef(tagStr)
     const jottedAtRef = useRef(jottedAtVal)
     const faviconUrlRef = useRef(faviconUrlVal)
+    const shouldCopyOnClickRef = useRef(shouldCopyOnClickVal)
+    const isPinnedRef = useRef(isPinnedVal)
     const hasUnsavedChangesRef = useRef(false)
     const mutateRef = useRef(updateItemMutation.mutate)
     useLayoutEffect(() => {
@@ -134,6 +140,12 @@ export default function ItemDialog({ item, onClose }: Props) {
     useEffect(() => {
         faviconUrlRef.current = faviconUrlVal
     }, [faviconUrlVal])
+    useEffect(() => {
+        shouldCopyOnClickRef.current = shouldCopyOnClickVal
+    }, [shouldCopyOnClickVal])
+    useEffect(() => {
+        isPinnedRef.current = isPinnedVal
+    }, [isPinnedVal])
 
     const isLinkItem = item.type === "link"
 
@@ -150,6 +162,8 @@ export default function ItemDialog({ item, onClose }: Props) {
             faviconUrl: isLinkItem
                 ? faviconUrlRef.current.trim() || undefined
                 : undefined,
+            shouldCopyOnClick: shouldCopyOnClickRef.current || undefined,
+            isPinned: isPinnedRef.current || undefined,
             updatedAt: DateTime.now().toISO(),
         }),
         [item, isLinkItem],
@@ -309,6 +323,32 @@ export default function ItemDialog({ item, onClose }: Props) {
                         />
                     </div>
                 )}
+                <div className={styles.ItemDialog__Field}>
+                    <label className={styles.ItemDialog__Checkbox}>
+                        <input
+                            type="checkbox"
+                            checked={shouldCopyOnClickVal}
+                            onChange={(e) => {
+                                setShouldCopyOnClickVal(e.target.checked)
+                                markChanged()
+                            }}
+                        />
+                        Copy content on click as primary action
+                    </label>
+                </div>
+                <div className={styles.ItemDialog__Field}>
+                    <label className={styles.ItemDialog__Checkbox}>
+                        <input
+                            type="checkbox"
+                            checked={isPinnedVal}
+                            onChange={(e) => {
+                                setIsPinnedVal(e.target.checked)
+                                markChanged()
+                            }}
+                        />
+                        Pin this item
+                    </label>
+                </div>
                 <div className={styles.ItemDialog__Field}>
                     <label className={styles.ItemDialog__Label}>
                         Jotted at

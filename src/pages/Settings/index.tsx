@@ -407,7 +407,9 @@ export default function Settings() {
                 </div>
 
                 <div className={`${styles.Field} ${styles["Field--FlexRow"]}`}>
-                    <label className={styles.Field__Label}>Current theme:</label>
+                    <label className={styles.Field__Label}>
+                        Current theme:
+                    </label>
                     <span className={styles.Settings__CurrentTheme}>
                         {theme}
                     </span>
