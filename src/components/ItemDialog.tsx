@@ -10,6 +10,8 @@ import { DateTime } from "luxon"
 import { EditorView, keymap, drawSelection } from "@codemirror/view"
 import { EditorState } from "@codemirror/state"
 import { defaultKeymap, history, historyKeymap } from "@codemirror/commands"
+import { IconX } from "@tabler/icons-react"
+import { ICON_PROPS_ACTION } from "@/utils/constants"
 import { useItemsMutations } from "@/hooks/useItemsMutations"
 import { useItemActions } from "@/hooks/useItemActions"
 import { useDebounced } from "@/hooks/useDebounced"
@@ -390,6 +392,13 @@ export default function ItemDialog({ item, onClose }: Props) {
 
     return (
         <div className={styles.ItemDialog}>
+            <button
+                className={styles.ItemDialog__CloseBtn}
+                onClick={closeAllDialogs}
+                aria-label="Close"
+            >
+                <IconX {...ICON_PROPS_ACTION} />
+            </button>
             <div className={styles.ItemDialog__Field}>
                 <label className={styles.ItemDialog__Label}>Title</label>
                 <input

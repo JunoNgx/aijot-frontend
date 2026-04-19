@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react"
 import { DateTime } from "luxon"
 import { EmojiPicker } from "frimousse"
 import { HexColorPicker } from "react-colorful"
-import { IconArrowsShuffle } from "@tabler/icons-react"
+import { IconArrowsShuffle, IconX } from "@tabler/icons-react"
 import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
 import { useCollectionsMutations } from "@/hooks/useCollectionsMutations"
 import { useCoreCollectionSettings } from "@/store/coreCollectionSettings"
@@ -305,6 +305,13 @@ export default function CollectionDialog({ collection }: Props) {
 
     return (
         <div className={styles.CollectionDialog}>
+            <button
+                className={styles.CollectionDialog__CloseBtn}
+                onClick={closeAllDialogs}
+                aria-label="Close"
+            >
+                <IconX {...ICON_PROPS_ACTION} />
+            </button>
             <div className="FlexRow">
                 <div className={styles.CollectionDialog__Field}>
                     <label className={styles.CollectionDialog__Label}>

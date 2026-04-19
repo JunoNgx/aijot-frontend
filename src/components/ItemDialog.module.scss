@@ -113,4 +113,9 @@
         font-size: var(--fontSizeSm);
         color: var(--colText);
     }
+
+    &__CloseBtn {
+        composes: Btn Btn--Icon from global;
+        composes: Dialog__CloseBtn from global;
+    }
 }

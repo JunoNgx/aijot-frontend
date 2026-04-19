@@ -119,6 +119,11 @@
         margin: 0;
         color: var(--colDanger);
     }
+
+    &__CloseBtn {
+        composes: Btn Btn--Icon from global;
+        composes: Dialog__CloseBtn from global;
+    }
 }
 
 .EmojiPicker {

@@ -198,10 +198,17 @@ kbd {
 // ============================================================
 
 .Dialog {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.5rem 0;
+
+    &__CloseBtn {
+        position: absolute;
+        top: -0.75rem;
+        right: -0.5rem;
+    }
 
     &__Field {
         display: flex;
