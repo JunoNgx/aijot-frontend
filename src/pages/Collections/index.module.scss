@@ -60,7 +60,7 @@
     padding: 0.25rem 0.5rem;
 
     &:hover {
-        background-color: colBgAlt();
+        background-color: var(--colBgAlt);
     }
 
     &__TriggerBtn {
@@ -74,7 +74,7 @@
     }
 
     &--Dragging {
-        background-color: colBgAlt();
+        background-color: var(--colBgAlt);
         border-width: 0;
     }
 

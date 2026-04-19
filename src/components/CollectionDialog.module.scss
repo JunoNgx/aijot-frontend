@@ -194,7 +194,7 @@
 
         &:hover,
         &[data-active] {
-            background: colBgAlt();
+            background: var(--colBgAlt);
         }
     }
 

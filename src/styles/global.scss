@@ -141,7 +141,7 @@ kbd {
     &--Sec {
         border: none;
         color: var(--colText);
-        background-color: colBgAlt();
+        background-color: var(--colBgAlt);
 
         &:hover {
             color: var(--colBg);
@@ -156,7 +156,7 @@ kbd {
         padding: 0;
 
         &:hover {
-            background-color: colBgAlt();
+            background-color: var(--colBgAlt);
         }
     }
 
@@ -183,7 +183,7 @@ kbd {
         color: var(--colText);
 
         &:hover {
-            background-color: colBgAlt();
+            background-color: var(--colBgAlt);
         }
     }
 }
@@ -279,7 +279,7 @@ kbd {
         color: var(--colText);
 
         &:hover {
-            background-color: colBgAlt();
+            background-color: var(--colBgAlt);
         }
     }
 

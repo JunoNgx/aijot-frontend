@@ -1,12 +1,14 @@
 // Theme CSS variables
 // Theme is set in ThemeManager programmatically
-// Fallback defaults for SSR/no-JS (light theme)
 :root {
+    // Fallback defaults for SSR/no-JS (light theme)
     --colBg: #e0e0e0;
     --colMain: #0098a9;
     --colSub: #777777;
     --colText: #121212;
     --colDanger: #fa5252;
+
+    --colBgAlt: color-mix(in srgb, var(--colBg), var(--colText) 10%);
 
     --fontFamily: "Space Grotesk", sans-serif;
     --fontFamilyMono: "Space Mono", monospace;

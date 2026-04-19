@@ -9,7 +9,7 @@
     cursor: pointer;
 
     &:hover {
-        background-color: colBgAlt();
+        background-color: var(--colBgAlt);
     }
 
     &--Selected {
