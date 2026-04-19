@@ -1,9 +1,10 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu"
 import { useParams } from "react-router-dom"
 import { useHotkeys } from "react-hotkeys-hook"
-import { IconChevronDown } from "@tabler/icons-react"
+import { IconChevronDown, IconPencil, IconPlus } from "@tabler/icons-react"
 import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
 import { useNavigateRoutes } from "@/hooks/useNavigateRoutes"
+import { openCollectionDialog } from "@/utils/openCollectionDialog"
 import {
     COLLECTION_HOTKEY_COUNT,
     DROPDOWN_OFFSET,
@@ -94,6 +95,31 @@ export default function CollectionDropdown() {
                         sideOffset={DROPDOWN_OFFSET}
                     >
                         {menuItems}
+                        <DropdownMenu.Separator
+                            className={styles.CollectionDropdown__Separator}
+                        />
+                        {currCollection && (
+                            <DropdownMenu.Item
+                                className={styles.CollectionItem}
+                                onSelect={() =>
+                                    openCollectionDialog(currCollection)
+                                }
+                            >
+                                <IconPencil {...ICON_PROPS_NORMAL} />
+                                <span className={styles.CollectionItem__Label}>
+                                    Edit this collection
+                                </span>
+                            </DropdownMenu.Item>
+                        )}
+                        <DropdownMenu.Item
+                            className={styles.CollectionItem}
+                            onSelect={() => openCollectionDialog()}
+                        >
+                            <IconPlus {...ICON_PROPS_NORMAL} />
+                            <span className={styles.CollectionItem__Label}>
+                                New collection
+                            </span>
+                        </DropdownMenu.Item>
                     </DropdownMenu.Content>
                 </DropdownMenu.Portal>
             </DropdownMenu.Root>
