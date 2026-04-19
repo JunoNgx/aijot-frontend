@@ -83,7 +83,7 @@ export function parseShortcut(shortcut: string): string[] {
     })
 }
 
-export function hexToHSL(hex: string): { h: number; s: number; l: number } {
+export function hexToHsl(hex: string): { h: number; s: number; l: number } {
     let r: number
     let g: number
     let b: number
@@ -131,5 +131,5 @@ export function hexToHSL(hex: string): { h: number; s: number; l: number } {
 }
 
 export function getLightness(hex: string): number {
-    return hexToHSL(hex).l
+    return hexToHsl(hex).l
 }
