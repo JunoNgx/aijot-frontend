@@ -341,6 +341,19 @@ export default function CommandPalette({
                             <IconCheck {...ICON_PROPS_NORMAL} />
                         </span>
                     )}
+                    <div className={styles.ThemeColourPreview}
+                        style={{ backgroundColor: theme.colBg }}
+                    >
+                        <div className={styles.ThemeColourPreview__Block}
+                            style={{ backgroundColor: theme.colMain }}
+                        />
+                        <div className={styles.ThemeColourPreview__Block}
+                            style={{ backgroundColor: theme.colSub }}
+                        />
+                        <div className={styles.ThemeColourPreview__Block}
+                            style={{ backgroundColor: theme.colText }}
+                        />
+                    </div>
                 </Command.Item>
             ))}
         </Command.Group>

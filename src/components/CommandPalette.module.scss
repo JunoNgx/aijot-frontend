@@ -118,3 +118,17 @@
         color: var(--colMain);
     }
 }
+
+.ThemeColourPreview {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    height: 1.5rem;
+    padding: 0.5rem;
+    margin-left: auto;
+
+    &__Block {
+        width: 0.5rem;
+        height: 0.5rem;
+    }
+}
