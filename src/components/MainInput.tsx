@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { getHotkeyHandler } from "@/utils/hotkeyHandler"
 import { useItemActions } from "@/hooks/useItemActions"
 import { useMainInputParser } from "@/hooks/useMainInputParser"
+import MainInputExtendedMenu from "./MainInputExtendedMenu"
 import {
     SHORTCUT_NAV_UP,
     SHORTCUT_NAV_DOWN,
@@ -176,6 +177,12 @@ export default function MainInput({
                 aria-expanded={visibleItemCount > 0}
                 aria-activedescendant={activeDescendantId}
                 aria-autocomplete="list"
+            />
+            <MainInputExtendedMenu
+                inputValue={inputValue}
+                setInputValue={setInputValue}
+                inputRef={inputRef}
+                onSubmit={handleSubmit}
             />
         </div>
     )

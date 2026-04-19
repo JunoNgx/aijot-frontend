@@ -1,15 +1,26 @@
 @use "styles/mixins" as *;
 
 .MainInput {
+    @include StandardBorder;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding-right: 0.25rem;
+
+    &:focus-within {
+        border-color: var(--colMain);
+    }
+
     &__Input {
-        width: 100%;
-        padding: 0.5rem;
         font-size: var(--fontSizeMd);
+        font-family: var(--fontFamily);
+        border: none;
+        flex: 1;
+        padding: 0.5rem;
 
         &:focus,
         &:focus-visible {
-            outline-style: none;
-            border-color: var(--colMain);
+            outline: none;
         }
     }
 }

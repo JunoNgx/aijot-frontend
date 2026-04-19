@@ -71,6 +71,7 @@ export default function MainInputExtendedMenu({
                 <DropdownMenu.Content
                     className={styles.MainInputExtendedMenu__Content}
                     align="end"
+                    alignOffset={-7}
                     sideOffset={DROPDOWN_OFFSET}
                 >
                     <DropdownMenu.Label
