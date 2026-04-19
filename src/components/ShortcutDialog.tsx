@@ -176,7 +176,7 @@ export default function ShortcutDialog() {
                         />
                         <ShortcutItem
                             shortcut={SHORTCUT_CMD_PAL_THEME}
-                            description="Theme palette"
+                            description="Theme switch palette"
                         />
                         <ShortcutItem
                             shortcut={SHORTCUT_SAVE_AND_CLOSE}
