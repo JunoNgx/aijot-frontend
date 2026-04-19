@@ -27,11 +27,6 @@ export interface Item {
     previousContentRecordedAt?: string
 }
 
-// Client-only flag used during optimistic creates
-export interface PendingItem extends Item {
-    isPending: true
-}
-
 // ============================================================
 // Collection
 // ============================================================

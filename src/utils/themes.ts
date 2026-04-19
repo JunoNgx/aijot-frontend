@@ -26,5 +26,3 @@ export const themes = [
 ] as const
 
 export type ThemeName = (typeof themes)[number]["name"]
-
-export type ThemeColors = Omit<(typeof themes)[number], "name">
