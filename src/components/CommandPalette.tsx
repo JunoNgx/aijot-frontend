@@ -39,6 +39,7 @@ export default function CommandPalette({
     const currentTheme = useLocalUserSettings((s) => s.theme)
     const setTheme = useLocalUserSettings((s) => s.setTheme)
     const originalThemeRef = useRef(currentTheme)
+    const listRef = useRef<HTMLDivElement>(null)
     const {
         navigateToJot,
         navigateToCollection,
@@ -98,6 +99,19 @@ export default function CommandPalette({
         revertThemePreview()
         onClose()
     })
+
+    useEffect(() => {
+        if (!isThemeMode || !listRef.current) return
+
+        setTimeout(() => {
+            const selectedItemEl = listRef.current?.querySelector(
+                '[data-selected="true"]',
+            )
+            if (selectedItemEl) {
+                selectedItemEl.scrollIntoView({ behavior: "smooth", block: "center" })
+            }
+        }, 0)
+    }, [mode, isThemeMode])
 
     const collectionsGroup = (
         <Command.Group
@@ -341,16 +355,20 @@ export default function CommandPalette({
                             <IconCheck {...ICON_PROPS_NORMAL} />
                         </span>
                     )}
-                    <div className={styles.ThemeColourPreview}
+                    <div
+                        className={styles.ThemeColourPreview}
                         style={{ backgroundColor: theme.colBg }}
                     >
-                        <div className={styles.ThemeColourPreview__Block}
+                        <div
+                            className={styles.ThemeColourPreview__Block}
                             style={{ backgroundColor: theme.colMain }}
                         />
-                        <div className={styles.ThemeColourPreview__Block}
+                        <div
+                            className={styles.ThemeColourPreview__Block}
                             style={{ backgroundColor: theme.colSub }}
                         />
-                        <div className={styles.ThemeColourPreview__Block}
+                        <div
+                            className={styles.ThemeColourPreview__Block}
                             style={{ backgroundColor: theme.colText }}
                         />
                     </div>
@@ -385,7 +403,10 @@ export default function CommandPalette({
                     placeholder={searchPlaceholder}
                     autoFocus
                 />
-                <Command.List className={styles.CommandPaletteList__List}>
+                <Command.List
+                    ref={listRef}
+                    className={styles.CommandPaletteList__List}
+                >
                     <Command.Empty className={styles.CommandPaletteList__Empty}>
                         No results found.
                     </Command.Empty>
