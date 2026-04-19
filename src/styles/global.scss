@@ -169,7 +169,7 @@ kbd {
     &--Danger {
         padding: 0.5rem 1rem;
         color: var(--colDanger);
-        background-color: colDangerAlt();
+        background-color: var(--colDangerAlt);
 
         &:hover {
             color: var(--colBg);
