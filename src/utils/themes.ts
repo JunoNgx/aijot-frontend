@@ -169,6 +169,14 @@ const monkeyTypeThemes = [
         colDanger: "#ca4754",
     },
     {
+        name: "Hammerhead",
+        colBg: "#030613",
+        colMain: "#4fcdb9",
+        colSub: "#213c53",
+        colText: "#e2f1f5",
+        colDaner: "#e32b2b",
+    },
+    {
         name: "Horizon",
         colBg: "#1c1e26",
         colMain: "#c4a88a",
@@ -418,9 +426,6 @@ const monkeyTypeThemes = [
     },
 ] as const
 
-export const themes = [
-    ...originalThemes,
-    ...monkeyTypeThemes,
-] as const
+export const themes = [...originalThemes, ...monkeyTypeThemes] as const
 
 export type ThemeName = (typeof themes)[number]["name"]
