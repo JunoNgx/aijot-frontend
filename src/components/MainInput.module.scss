@@ -1,13 +1,16 @@
 @use "styles/mixins" as *;
 
 .MainInput {
-    @include StandardBorder;
+    border-width: 3px;
+    border-style: solid;
+    border-color: var(--colText);
     display: flex;
     align-items: center;
     gap: 0.25rem;
     padding-right: 0.25rem;
 
     &:focus-within {
+        border-width: 3px;
         border-color: var(--colMain);
     }
 
