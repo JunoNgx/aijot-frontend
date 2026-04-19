@@ -232,14 +232,12 @@ export default function Settings() {
                 Settings
             </h1>
 
-            <section className={styles.Settings__Section}>
-                <div className={styles.Settings__SectionHeader}>
-                    <h2 className={styles.Settings__SectionTitle}>
-                        Appearance
-                    </h2>
+            <section className={styles.Section}>
+                <div className={styles.Section__Header}>
+                    <h2 className={styles.Section__Title}>Appearance</h2>
                 </div>
-                <div className={styles.Settings__Field}>
-                    <label className={styles.Settings__Label}>Theme</label>
+                <div className={styles.Field}>
+                    <label className={styles.Field__Label}>Theme</label>
                     <div className="FlexRow">
                         <span className={styles.Settings__CurrentTheme}>
                             {theme}
@@ -255,8 +253,8 @@ export default function Settings() {
                         </button>
                     </div>
                 </div>
-                <div className={styles.Settings__Field}>
-                    <label className={styles.Settings__Checkbox}>
+                <div className={styles.Field}>
+                    <label className={styles.Field__Checkbox}>
                         <input
                             type="checkbox"
                             checked={is24HourClock}
@@ -267,8 +265,8 @@ export default function Settings() {
                         Use 24-hour clock
                     </label>
                 </div>
-                <div className={styles.Settings__Field}>
-                    <label className={styles.Settings__Checkbox}>
+                <div className={styles.Field}>
+                    <label className={styles.Field__Checkbox}>
                         <input
                             type="checkbox"
                             checked={shouldShowJotItemExtraInfo}
@@ -281,13 +279,13 @@ export default function Settings() {
                 </div>
             </section>
 
-            <section className={styles.Settings__Section}>
-                <div className={styles.Settings__SectionHeader}>
-                    <h2 className={styles.Settings__SectionTitle}>Profile</h2>
+            <section className={styles.Section}>
+                <div className={styles.Section__Header}>
+                    <h2 className={styles.Section__Title}>Profile</h2>
                 </div>
-                <div className={styles.Settings__Field}>
+                <div className={styles.Field}>
                     <label
-                        className={styles.Settings__Label}
+                        className={styles.Field__Label}
                         htmlFor="displayName"
                     >
                         Display name
@@ -295,13 +293,13 @@ export default function Settings() {
                     <input
                         id="displayName"
                         type="text"
-                        className={styles.Settings__Input}
+                        className={styles.Field__Input}
                         value={userDisplayName}
                         onChange={(e) => setUserDisplayName(e.target.value)}
                     />
                 </div>
-                <div className={styles.Settings__Field}>
-                    <label className={styles.Settings__Checkbox}>
+                <div className={styles.Field}>
+                    <label className={styles.Field__Checkbox}>
                         <input
                             type="checkbox"
                             checked={shouldApplyTagsOfCurrCollection}
@@ -314,12 +312,12 @@ export default function Settings() {
                         Auto-apply collection tags when creating items
                     </label>
                 </div>
-                <div className={styles.Settings__Field}>
-                    <label className={styles.Settings__Label}>
+                <div className={styles.Field}>
+                    <label className={styles.Field__Label}>
                         Collection sort order
                     </label>
-                    <div className={styles.Settings__RadioGroup}>
-                        <label className={styles.Settings__Radio}>
+                    <div className={styles.Field__RadioGroup}>
+                        <label className={styles.Field__Radio}>
                             <input
                                 type="radio"
                                 name="collectionSortOrder"
@@ -330,7 +328,7 @@ export default function Settings() {
                             />
                             Custom
                         </label>
-                        <label className={styles.Settings__Radio}>
+                        <label className={styles.Field__Radio}>
                             <input
                                 type="radio"
                                 name="collectionSortOrder"
@@ -345,11 +343,11 @@ export default function Settings() {
                 </div>
             </section>
 
-            <section className={styles.Settings__Section}>
-                <div className={styles.Settings__SectionHeader}>
-                    <h2 className={styles.Settings__SectionTitle}>Data</h2>
+            <section className={styles.Section}>
+                <div className={styles.Section__Header}>
+                    <h2 className={styles.Section__Title}>Data</h2>
                 </div>
-                <p className={styles.Settings__SectionDescription}>
+                <p className={styles.Section__Description}>
                     Export or import your items, collections, and settings
                 </p>
                 <div className="FlexRow">
@@ -409,15 +407,15 @@ export default function Settings() {
                 )}
             </section>
 
-            <section className={styles.Settings__Section}>
-                <div className={styles.Settings__SectionHeader}>
-                    <h2 className={styles.Settings__SectionTitle}>Sync</h2>
+            <section className={styles.Section}>
+                <div className={styles.Section__Header}>
+                    <h2 className={styles.Section__Title}>Sync</h2>
                 </div>
-                <p className={styles.Settings__SectionDescription}>
+                <p className={styles.Section__Description}>
                     Back up your data to Google Drive
                 </p>
                 {isConnected && authToken && (
-                    <div className={styles.Settings__SyncStatus}>
+                    <div className={styles.Field__SyncStatus}>
                         <span>Connected as {authToken.email}</span>
                         {lastSyncTime && (
                             <span>
@@ -432,7 +430,7 @@ export default function Settings() {
                     </div>
                 )}
                 {connectError && (
-                    <div className={styles.Settings__SyncStatus}>
+                    <div className={styles.Field__SyncStatus}>
                         {connectError}
                     </div>
                 )}
@@ -468,9 +466,9 @@ export default function Settings() {
                 </div>
             </section>
 
-            <section className={styles.Settings__Section}>
-                <div className={styles.Settings__SectionHeader}>
-                    <h2 className={styles.Settings__SectionTitle}>Help</h2>
+            <section className={styles.Section}>
+                <div className={styles.Section__Header}>
+                    <h2 className={styles.Section__Title}>Help</h2>
                 </div>
                 <button
                     className={styles.Settings__BtnAction}
@@ -481,9 +479,9 @@ export default function Settings() {
                 </button>
             </section>
 
-            <section className={styles.Settings__Section}>
-                <div className={styles.Settings__SectionHeader}>
-                    <h2 className={styles.Settings__SectionTitle}>About</h2>
+            <section className={styles.Section}>
+                <div className={styles.Section__Header}>
+                    <h2 className={styles.Section__Title}>About</h2>
                 </div>
                 <p className={styles.Settings__Version}>Version 0.0.1</p>
                 <div className="FlexRow">
@@ -505,16 +503,16 @@ export default function Settings() {
             </section>
 
             <section
-                className={`${styles.Settings__Section} ${styles["Settings__Section--Spaced"]}`}
+                className={`${styles.Section} ${styles["Section--Spaced"]}`}
             >
-                <div className={styles.Settings__SectionHeader}>
+                <div className={styles.Section__Header}>
                     <h2
-                        className={`${styles.Settings__SectionTitle} ${styles["Settings__SectionTitle--Danger"]}`}
+                        className={`${styles.Section__Title} ${styles["Section__Title--Danger"]}`}
                     >
                         Danger Zone
                     </h2>
                 </div>
-                <p className={styles.Settings__SectionDescription}>
+                <p className={styles.Section__Description}>
                     Removes all items and collections. Your data on Google Drive
                     will remain intact.
                 </p>
@@ -528,9 +526,9 @@ export default function Settings() {
             </section>
 
             {isDebugMode && (
-                <section className={styles.Settings__Section}>
-                    <div className={styles.Settings__SectionHeader}>
-                        <h2 className={styles.Settings__SectionTitle}>Debug</h2>
+                <section className={styles.Section}>
+                    <div className={styles.Section__Header}>
+                        <h2 className={styles.Section__Title}>Debug</h2>
                     </div>
                     <button
                         className={styles.Settings__Btn}
@@ -546,7 +544,7 @@ export default function Settings() {
                     >
                         Trigger test toast
                     </button>
-                    <p className={styles.Settings__SectionDescription}>
+                    <p className={styles.Section__Description}>
                         Wipes local database and all local app data. Cannot be
                         undone.
                     </p>
