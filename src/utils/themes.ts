@@ -1,3 +1,5 @@
+import { getLightness } from "./helpers"
+
 const originalThemes = [
     {
         name: "JustJot Light",
@@ -426,6 +428,13 @@ const monkeyTypeThemes = [
     },
 ] as const
 
-export const themes = [...originalThemes, ...monkeyTypeThemes] as const
+type Theme = (typeof originalThemes)[number]
 
-export type ThemeName = (typeof themes)[number]["name"]
+const allThemes: Theme[] = [
+    ...originalThemes,
+    ...(monkeyTypeThemes as unknown as Theme[]),
+].sort((a, b) => getLightness(b.colBg) - getLightness(a.colBg))
+
+export const themes = allThemes as readonly Theme[]
+
+export type ThemeName = Theme["name"]

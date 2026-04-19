@@ -1,7 +1,6 @@
 import { useRef, useLayoutEffect, useEffect } from "react"
 import { Command } from "cmdk"
 import * as Dialog from "@radix-ui/react-dialog"
-import { useHotkeys } from "react-hotkeys-hook"
 import { useParams } from "react-router-dom"
 import { useLocalUserSettings } from "@/store/localUserSettings"
 import { useNavigateRoutes } from "@/hooks/useNavigateRoutes"
