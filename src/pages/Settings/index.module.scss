@@ -136,11 +136,7 @@
     }
 
     &__Checkbox {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        cursor: pointer;
-        font-size: var(--fontSizeMd);
+        composes: Checkbox from global;
     }
 
     &__SyncStatus {

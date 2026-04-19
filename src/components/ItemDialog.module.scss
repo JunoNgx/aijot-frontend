@@ -12,7 +12,7 @@
     }
 
     &__Checkbox {
-        composes: Dialog__Checkbox from global;
+        composes: Checkbox from global;
     }
 
     &__Description {

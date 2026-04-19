@@ -224,6 +224,18 @@ kbd {
 }
 
 // ============================================================
+// Checkbox
+// ============================================================
+
+.Checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-size: var(--fontSizeMd);
+}
+
+// ============================================================
 // Dialog
 // ============================================================
 
@@ -249,14 +261,6 @@ kbd {
     &__Label {
         font-size: var(--fontSizeMd);
         font-weight: 500;
-    }
-
-    &__Checkbox {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        cursor: pointer;
-        font-size: var(--fontSizeMd);
     }
 
     &__Description {
