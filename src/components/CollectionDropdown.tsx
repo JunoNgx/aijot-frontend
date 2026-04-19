@@ -61,10 +61,14 @@ export default function CollectionDropdown() {
         ].join(" ")
 
         const rightContent = isActive ? (
-            <IconCheck {...ICON_PROPS_NORMAL} />
+            <span className={styles.CollectionItem__RightContent}>
+                <IconCheck {...ICON_PROPS_NORMAL} />
+            </span>
         ) : (
             hotkeyNum !== null && (
-                <kbd className={styles.CollectionItem__Hotkey}>{hotkeyNum}</kbd>
+                <kbd className={styles.CollectionItem__RightContent}>
+                    {hotkeyNum}
+                </kbd>
             )
         )
 
