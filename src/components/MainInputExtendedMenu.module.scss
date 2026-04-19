@@ -1,0 +1,26 @@
+@use "styles/mixins" as *;
+
+.MainInputExtendedMenu {
+    &__Trigger {
+        composes: Dropdown__Trigger from global;
+        @include ClearBtn;
+    }
+
+    &__Content {
+        composes: Dropdown__Content from global;
+    }
+
+    &__GroupLabel {
+        padding: 0.5rem;
+        font-size: var(--fontSizeSm);
+        color: var(--colSub);
+    }
+
+    &__Item {
+        composes: Dropdown__Item from global;
+    }
+
+    &__Separator {
+        composes: Dropdown__Separator from global;
+    }
+}
