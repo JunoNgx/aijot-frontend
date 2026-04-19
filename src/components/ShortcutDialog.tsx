@@ -5,6 +5,7 @@ import {
     SHORTCUT_FOCUS_MAIN_INPUT,
     SHORTCUT_CMD_PAL,
     SHORTCUT_CMD_PAL_ALT,
+    SHORTCUT_CMD_PAL_THEME,
     SHORTCUT_NAV_UP,
     SHORTCUT_NAV_DOWN,
     SHORTCUT_NAV_UP_SKIP,
@@ -172,6 +173,10 @@ export default function ShortcutDialog() {
                             shortcut={SHORTCUT_CMD_PAL}
                             shortcutAlt={SHORTCUT_CMD_PAL_ALT}
                             description="Command palette"
+                        />
+                        <ShortcutItem
+                            shortcut={SHORTCUT_CMD_PAL_THEME}
+                            description="Theme switch palette"
                         />
                         <ShortcutItem
                             shortcut={SHORTCUT_SAVE_AND_CLOSE}

@@ -1,7 +1,11 @@
 import * as Dialog from "@radix-ui/react-dialog"
 import { useHotkeys } from "react-hotkeys-hook"
 import { useCommandPaletteStore } from "@/store/commandPaletteStore"
-import { SHORTCUT_CMD_PAL, SHORTCUT_CMD_PAL_ALT } from "@/utils/constants"
+import {
+    SHORTCUT_CMD_PAL,
+    SHORTCUT_CMD_PAL_ALT,
+    SHORTCUT_CMD_PAL_THEME,
+} from "@/utils/constants"
 import CommandPalette from "./CommandPalette"
 import styles from "./CommandPalette.module.scss"
 
@@ -17,6 +21,10 @@ export default function CommandPaletteManager() {
         preventDefault: true,
     })
     useHotkeys(SHORTCUT_CMD_PAL_ALT, () => open("main"), {
+        enableOnFormTags: true,
+        preventDefault: true,
+    })
+    useHotkeys(SHORTCUT_CMD_PAL_THEME, () => open("theme"), {
         enableOnFormTags: true,
         preventDefault: true,
     })

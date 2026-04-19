@@ -1,7 +1,6 @@
-import { useState, useRef, useLayoutEffect, useEffect } from "react"
+import { useRef, useLayoutEffect, useEffect } from "react"
 import { Command } from "cmdk"
 import * as Dialog from "@radix-ui/react-dialog"
-import { useHotkeys } from "react-hotkeys-hook"
 import { useParams } from "react-router-dom"
 import { useLocalUserSettings } from "@/store/localUserSettings"
 import { useNavigateRoutes } from "@/hooks/useNavigateRoutes"
@@ -39,6 +38,8 @@ export default function CommandPalette({
     const currentTheme = useLocalUserSettings((s) => s.theme)
     const setTheme = useLocalUserSettings((s) => s.setTheme)
     const originalThemeRef = useRef(currentTheme)
+    const listRef = useRef<HTMLDivElement>(null)
+    const didCommitThemeSelection = useRef(false)
     const {
         navigateToJot,
         navigateToCollection,
@@ -72,6 +73,7 @@ export default function CommandPalette({
     }
 
     const handleThemeSelect = (themeName: ThemeName) => {
+        didCommitThemeSelection.current = true
         setTheme(themeName)
         onClose()
     }
@@ -94,14 +96,26 @@ export default function CommandPalette({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [mode])
 
-    useHotkeys("Escape", () => {
-        revertThemePreview()
-        onClose()
-    })
+    useEffect(() => {
+        if (!isThemeMode || !listRef.current) return
+
+        setTimeout(() => {
+            const selectedItemEl = listRef.current?.querySelector(
+                '[data-selected="true"]',
+            )
+            if (selectedItemEl) {
+                selectedItemEl.scrollIntoView({ block: "center" })
+            }
+        }, 0)
+    }, [mode, isThemeMode])
 
     const collectionsGroup = (
         <Command.Group
-            heading="Collections"
+            heading={
+                <span className={styles.CommandPaletteGroup__Heading}>
+                    Collections
+                </span>
+            }
             className={styles.CommandPaletteGroup__Group}
         >
             {collections.map((collection) => (
@@ -186,7 +200,11 @@ export default function CommandPalette({
 
     const collectionActionsGroup = (
         <Command.Group
-            heading="Collection Actions"
+            heading={
+                <span className={styles.CommandPaletteGroup__Heading}>
+                    Collection Actions
+                </span>
+            }
             className={styles.CommandPaletteGroup__Group}
         >
             {createCollectionItem}
@@ -257,7 +275,11 @@ export default function CommandPalette({
 
     const navigationGroup = (
         <Command.Group
-            heading="Navigation"
+            heading={
+                <span className={styles.CommandPaletteGroup__Heading}>
+                    Navigation
+                </span>
+            }
             className={styles.CommandPaletteGroup__Group}
         >
             {goToJotItem}
@@ -284,7 +306,11 @@ export default function CommandPalette({
 
     const actionsGroup = (
         <Command.Group
-            heading="Actions"
+            heading={
+                <span className={styles.CommandPaletteGroup__Heading}>
+                    Actions
+                </span>
+            }
             className={styles.CommandPaletteGroup__Group}
         >
             {changeThemeItem}
@@ -298,7 +324,11 @@ export default function CommandPalette({
 
     const themeGroup = (
         <Command.Group
-            heading="Theme"
+            heading={
+                <span className={styles.CommandPaletteGroup__Heading}>
+                    Theme
+                </span>
+            }
             className={styles.CommandPaletteGroup__Group}
         >
             {themes.map((theme) => (
@@ -313,8 +343,7 @@ export default function CommandPalette({
                 >
                     <div className={styles.CommandPaletteItem__ItemContent}>
                         <span className={styles.CommandPaletteItem__LabelLine}>
-                            {theme.name.charAt(0).toUpperCase() +
-                                theme.name.slice(1)}
+                            {theme.name}
                         </span>
                     </div>
                     {theme.name === originalThemeRef.current && (
@@ -322,6 +351,23 @@ export default function CommandPalette({
                             <IconCheck {...ICON_PROPS_NORMAL} />
                         </span>
                     )}
+                    <div
+                        className={styles.ThemeColourPreview}
+                        style={{ backgroundColor: theme.colBg }}
+                    >
+                        <div
+                            className={styles.ThemeColourPreview__Block}
+                            style={{ backgroundColor: theme.colMain }}
+                        />
+                        <div
+                            className={styles.ThemeColourPreview__Block}
+                            style={{ backgroundColor: theme.colSub }}
+                        />
+                        <div
+                            className={styles.ThemeColourPreview__Block}
+                            style={{ backgroundColor: theme.colText }}
+                        />
+                    </div>
                 </Command.Item>
             ))}
         </Command.Group>
@@ -332,6 +378,12 @@ export default function CommandPalette({
             className={styles.CommandPalette__Content}
             aria-describedby={undefined}
             onInteractOutside={revertThemePreview}
+            onCloseAutoFocus={() => {
+                if (isThemeMode && !didCommitThemeSelection.current) {
+                    revertThemePreview()
+                }
+                didCommitThemeSelection.current = false
+            }}
         >
             <Dialog.Title className="VisuallyHidden">
                 Command Palette
@@ -353,7 +405,10 @@ export default function CommandPalette({
                     placeholder={searchPlaceholder}
                     autoFocus
                 />
-                <Command.List className={styles.CommandPaletteList__List}>
+                <Command.List
+                    ref={listRef}
+                    className={styles.CommandPaletteList__List}
+                >
                     <Command.Empty className={styles.CommandPaletteList__Empty}>
                         No results found.
                     </Command.Empty>

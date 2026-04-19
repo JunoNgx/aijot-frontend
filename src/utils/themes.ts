@@ -1,3 +1,5 @@
+import { getLightness } from "./helpers"
+
 const originalThemes = [
     {
         name: "JustJot Light",
@@ -424,8 +426,63 @@ const monkeyTypeThemes = [
         colText: "#f5e6f0",
         colDanger: "#ff9ebd",
     },
+    {
+        name: "Aurora",
+        colBg: "#011926",
+        colMain: "#00e980",
+        colSub: "#245c69",
+        colText: "#fff",
+        colDanger: "#b94da1",
+    },
+    {
+        name: "Botanical",
+        colBg: "#7b9c98",
+        colMain: "#eaf1f3",
+        colSub: "#495755",
+        colText: "#eaf1f3",
+        colDanger: "#f6c9b4",
+    },
+    {
+        name: "Cafe",
+        colBg: "#ceb18d",
+        colMain: "#14120f",
+        colSub: "#d4d2d1",
+        colText: "#14120f",
+        colDanger: "#c82931",
+    },
+    {
+        name: "Honey",
+        colBg: "#f2aa00",
+        colMain: "#fff546",
+        colSub: "#a66b00",
+        colText: "#f3eecb",
+        colDanger: "#df3333",
+    },
+    {
+        name: "Menthol",
+        colBg: "#00c18c",
+        colMain: "#ffffff",
+        colSub: "#186544",
+        colText: "#ffffff",
+        colDanger: "#e03c3c",
+    },
+    {
+        name: "Retrocast",
+        colBg: "#07737a",
+        colMain: "#88dbdf",
+        colSub: "#f3e03b",
+        colText: "#ffffff",
+        colDanger: "#ff585d",
+    },
 ] as const
 
-export const themes = [...originalThemes, ...monkeyTypeThemes] as const
+type Theme = (typeof originalThemes)[number]
 
-export type ThemeName = (typeof themes)[number]["name"]
+const allThemes: Theme[] = [
+    ...originalThemes,
+    ...(monkeyTypeThemes as unknown as Theme[]),
+].sort((a, b) => getLightness(b.colBg) - getLightness(a.colBg))
+
+export const themes = allThemes as readonly Theme[]
+
+export type ThemeName = Theme["name"]
