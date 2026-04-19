@@ -53,6 +53,7 @@ For bug reporting, issues, and design suggestions, please open new issues on Git
 ## Third-Party Licenses
 
 This project includes theme definitions from Monkey Type.
+
 - **Source**: https://github.com/monkeytypegame/monkeytype
 - **License**: GNU General Public License v3 (GPLv3)
 - **Copyright**: Monkey Type contributors

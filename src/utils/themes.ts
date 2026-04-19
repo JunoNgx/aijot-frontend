@@ -42,9 +42,6 @@ const adaptedThemes = [
     },
 ] as const
 
-export const themes = [
-    ...originalThemes,
-    ...adaptedThemes,
-] as const
+export const themes = [...originalThemes, ...adaptedThemes] as const
 
 export type ThemeName = (typeof themes)[number]["name"]
