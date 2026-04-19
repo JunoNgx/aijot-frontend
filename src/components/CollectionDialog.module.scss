@@ -25,10 +25,9 @@
     }
 
     &__EmojiBtn {
-        composes: Btn Btn--Sec from global;
+        composes: Btn Btn--Outline from global;
         font-size: var(--fontSizeLg);
         padding: 0.25rem 0.5rem;
-        @include StandardBorder;
     }
 
     &__ColourField {
@@ -73,7 +72,7 @@
     }
 
     &__BtnRandomise {
-        composes: Btn Btn--Sec from global;
+        composes: Btn Btn--Outline from global;
         flex-shrink: 0;
         padding: 0.5rem !important;
     }
@@ -172,7 +171,7 @@
 
     [frimousse-category-header] {
         background: var(--colBg);
-        color: var(--colText);
+        color: var(--colSub);
         font-size: var(--colTextSm);
         padding: 0.5rem 0;
     }

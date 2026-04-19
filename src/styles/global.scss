@@ -149,6 +149,17 @@ kbd {
         }
     }
 
+    &--Outline {
+        @include StandardBorder;
+        color: var(--colText);
+        background-color: transparent;
+
+        &:hover {
+            color: var(--colBg);
+            background-color: var(--colText);
+        }
+    }
+
     &--Tert {
         background-color: transparent;
         color: var(--colText);
