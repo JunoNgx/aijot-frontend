@@ -313,8 +313,7 @@ export default function CommandPalette({
                 >
                     <div className={styles.CommandPaletteItem__ItemContent}>
                         <span className={styles.CommandPaletteItem__LabelLine}>
-                            {theme.name.charAt(0).toUpperCase() +
-                                theme.name.slice(1)}
+                            {theme.name}
                         </span>
                     </div>
                     {theme.name === originalThemeRef.current && (
