@@ -482,6 +482,14 @@ const monkeyTypeThemes = [
         colText: "#fcfcf8",
         colDanger: "#fcd23f",
     },
+    {
+        name: "Night Runner",
+        colBg: "#212121",
+        colMain: "#feff04",
+        colSub: "#5c4a9c",
+        colText: "#e8e8e8",
+        colDanger: "#da3333",
+    },
 ] as const
 
 type Theme = (typeof originalThemes)[number]
