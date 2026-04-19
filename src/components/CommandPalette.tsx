@@ -338,6 +338,7 @@ export default function CommandPalette({
             </Dialog.Title>
             <Command
                 label="Command palette"
+                value={isThemeMode ? currentTheme : undefined}
                 // Hacky implementation: force clearing search query upon mode switch
                 // cmdk unfortunately doesn't expose the search state for external control
                 key={mode}
