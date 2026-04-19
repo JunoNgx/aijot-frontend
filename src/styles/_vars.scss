@@ -8,6 +8,8 @@
     --colText: #121212;
     --colDanger: #fa5252;
 
+    // Important extra variables derived from data, not fallback
+    --colTextAlt: color-mix(in srgb, var(--colText), var(--colBg) 50%);
     --colBgAlt: color-mix(in srgb, var(--colBg), var(--colText) 10%);
     --colDangerAlt: color-mix(in srgb, var(--colDanger), transparent 80%);
 
