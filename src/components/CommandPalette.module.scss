@@ -116,6 +116,8 @@
 
     &__Check {
         color: var(--colMain);
+        display: grid;
+        place-items: center;
     }
 }
 
