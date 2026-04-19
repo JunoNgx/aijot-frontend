@@ -365,27 +365,6 @@ export default function Settings() {
                 <div className={styles.Field}>
                     <label className={styles.Field__Checkbox}>
                         <input
-                            aria-describedby={itemDisplayDescId}
-                            type="checkbox"
-                            checked={shouldShowJotItemExtraInfo}
-                            onChange={(e) => {
-                                setShouldShowJotItemExtraInfo(e.target.checked)
-                            }}
-                        />
-                        Show extra information in jot list
-                    </label>
-                    <small
-                        id={itemDisplayDescId}
-                        className={styles.Field__Description}
-                    >
-                        Default initial state for item display mode. Can be
-                        toggled mid-session.
-                    </small>
-                </div>
-
-                <div className={styles.Field}>
-                    <label className={styles.Field__Checkbox}>
-                        <input
                             aria-describedby={autoApplyTagsDescId}
                             type="checkbox"
                             checked={shouldApplyTagsOfCurrCollection}
@@ -403,6 +382,27 @@ export default function Settings() {
                     >
                         The tags of the current collection will also be applied,
                         in addition to syntax specification.
+                    </small>
+                </div>
+
+                <div className={styles.Field}>
+                    <label className={styles.Field__Checkbox}>
+                        <input
+                            aria-describedby={itemDisplayDescId}
+                            type="checkbox"
+                            checked={shouldShowJotItemExtraInfo}
+                            onChange={(e) => {
+                                setShouldShowJotItemExtraInfo(e.target.checked)
+                            }}
+                        />
+                        Display jot items with extra info by default
+                    </label>
+                    <small
+                        id={itemDisplayDescId}
+                        className={styles.Field__Description}
+                    >
+                        Default initial state for item display mode. Can be
+                        toggled mid-session.
                     </small>
                 </div>
 
