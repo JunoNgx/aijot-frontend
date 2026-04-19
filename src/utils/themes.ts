@@ -474,6 +474,14 @@ const monkeyTypeThemes = [
         colText: "#ffffff",
         colDanger: "#ff585d",
     },
+    {
+        name: "Strawberry",
+        colBg: "#f37f83",
+        colMain: "#fcfcf8",
+        colSub: "#e53c58",
+        colText: "#fcfcf8",
+        colDanger: "#fcd23f",
+    },
 ] as const
 
 type Theme = (typeof originalThemes)[number]
