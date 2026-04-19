@@ -225,6 +225,10 @@ export default function Settings() {
         }
     }
 
+    const itemDisplayDescId = "SettingDescDisplayMode"
+    const hourModeDescId = "SettingDescHourMode"
+    const autoApplyTagsDescId = "SettingDesAutoApplyTag"
+
     return (
         <div className={styles.Settings}>
             <BackBtn />
@@ -290,7 +294,76 @@ export default function Settings() {
             </section>
 
             <section className={styles.Section}>
-                <h2 className={styles.Section__Title}>Appearance</h2>
+                <h2 className={styles.Section__Title}>Preferences</h2>
+
+                <div className={styles.Field}>
+                    <label className={styles.Field__Checkbox}>
+                        <input
+                            aria-describedby={hourModeDescId}
+                            type="checkbox"
+                            checked={is24HourClock}
+                            onChange={(e) => {
+                                setIs24HourClock(e.target.checked)
+                            }}
+                        />
+                        Use 24-hour clock
+                    </label>
+                    <small
+                        id={hourModeDescId}
+                        className={styles.Field__Description}
+                    >
+                        16:35 vs 04:35 pm
+                    </small>
+                </div>
+
+                <div className={styles.Field}>
+                    <label className={styles.Field__Checkbox}>
+                        <input
+                            aria-describedby={itemDisplayDescId}
+                            type="checkbox"
+                            checked={shouldShowJotItemExtraInfo}
+                            onChange={(e) => {
+                                setShouldShowJotItemExtraInfo(e.target.checked)
+                            }}
+                        />
+                        Show extra information in jot list
+                    </label>
+                    <small
+                        id={itemDisplayDescId}
+                        className={styles.Field__Description}
+                    >
+                        Default initial state for item display mode. Can be
+                        toggled mid-session.
+                    </small>
+                </div>
+
+                <div className={styles.Field}>
+                    <label className={styles.Field__Checkbox}>
+                        <input
+                            aria-describedby={autoApplyTagsDescId}
+                            type="checkbox"
+                            checked={shouldApplyTagsOfCurrCollection}
+                            onChange={(e) =>
+                                setShouldApplyTagsOfCurrCollection(
+                                    e.target.checked,
+                                )
+                            }
+                        />
+                        Auto-apply collection tags when creating items
+                    </label>
+                    <small
+                        id={autoApplyTagsDescId}
+                        className={styles.Field__Description}
+                    >
+                        The tags of the current collection will also be applied,
+                        in addition to syntax specification.
+                    </small>
+                </div>
+            </section>
+
+            <section className={styles.Section}>
+                <h2 className={styles.Section__Title}>Profile</h2>
+
                 <div className={styles.Field}>
                     <label className={styles.Field__Label}>Theme</label>
                     <div className="FlexRow">
@@ -308,34 +381,7 @@ export default function Settings() {
                         </button>
                     </div>
                 </div>
-                <div className={styles.Field}>
-                    <label className={styles.Field__Checkbox}>
-                        <input
-                            type="checkbox"
-                            checked={is24HourClock}
-                            onChange={(e) => {
-                                setIs24HourClock(e.target.checked)
-                            }}
-                        />
-                        Use 24-hour clock
-                    </label>
-                </div>
-                <div className={styles.Field}>
-                    <label className={styles.Field__Checkbox}>
-                        <input
-                            type="checkbox"
-                            checked={shouldShowJotItemExtraInfo}
-                            onChange={(e) => {
-                                setShouldShowJotItemExtraInfo(e.target.checked)
-                            }}
-                        />
-                        Show extra information in jot list
-                    </label>
-                </div>
-            </section>
 
-            <section className={styles.Section}>
-                <h2 className={styles.Section__Title}>Profile</h2>
                 <div className={styles.Field}>
                     <label
                         className={styles.Field__Label}
@@ -350,20 +396,6 @@ export default function Settings() {
                         value={userDisplayName}
                         onChange={(e) => setUserDisplayName(e.target.value)}
                     />
-                </div>
-                <div className={styles.Field}>
-                    <label className={styles.Field__Checkbox}>
-                        <input
-                            type="checkbox"
-                            checked={shouldApplyTagsOfCurrCollection}
-                            onChange={(e) =>
-                                setShouldApplyTagsOfCurrCollection(
-                                    e.target.checked,
-                                )
-                            }
-                        />
-                        Auto-apply collection tags when creating items
-                    </label>
                 </div>
                 <div className={styles.Field}>
                     <label className={styles.Field__Label}>

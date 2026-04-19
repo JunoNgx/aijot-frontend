@@ -89,14 +89,11 @@
 }
 
 .Field {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.5rem 0;
-
-    & + & {
-        border-top: var(--lineWidth) solid var(--colText);
-    }
+    // display: flex;
+    // align-items: center;
+    // gap: 0.75rem;
+    // padding: 0.5rem 0;
+    margin-bottom: 1rem;
 
     &__Label {
         flex: 1;
@@ -111,6 +108,12 @@
         composes: Dialog__Input from global;
         width: 160px;
         font-size: var(--fontSizeMd);
+    }
+
+    &__Description {
+        color: var(--colTextAlt);
+        font-size: var(--fontSizeSm);
+        margin: 0;
     }
 
     &__RadioGroup {
