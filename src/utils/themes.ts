@@ -1,4 +1,4 @@
-export const themes = [
+const originalThemes = [
     {
         name: "JustJot Light",
         colBg: "#e0e0e0",
@@ -23,6 +23,10 @@ export const themes = [
         colText: "#232042",
         colDanger: "#bb474f",
     },
+] as const
+
+export const themes = [
+    ...originalThemes,
 ] as const
 
 export type ThemeName = (typeof themes)[number]["name"]
