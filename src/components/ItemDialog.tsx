@@ -93,7 +93,7 @@ interface Props {
 }
 
 export default function ItemDialog({ item, onClose }: Props) {
-    const { updateItemMutation } = useItemsMutations()
+    const { updateItemMutation, refetchLinkMetaMutation } = useItemsMutations()
     const { trashItem } = useItemActions()
     const closeAllDialogs = useDialogStore((s) => s.closeAllDialogs)
 
@@ -142,6 +142,13 @@ export default function ItemDialog({ item, onClose }: Props) {
         }),
         [item],
     )
+
+    const isLinkItem = item.type === "link"
+
+    const handleRefetchMeta = useCallback(() => {
+        refetchLinkMetaMutation.mutate(item)
+        closeAllDialogs()
+    }, [refetchLinkMetaMutation, closeAllDialogs])
 
     const handleSave = useCallback(() => {
         mutateRef.current(buildUpdatedItem())
@@ -297,6 +304,15 @@ export default function ItemDialog({ item, onClose }: Props) {
         </button>
     )
 
+    const refetchButton = isLinkItem && (
+        <button
+            className={styles.ItemDialog__BtnAction}
+            onClick={handleRefetchMeta}
+        >
+            Refetch
+        </button>
+    )
+
     const saveButton = (
         <button
             className={styles.ItemDialog__BtnSave}
@@ -384,7 +400,10 @@ export default function ItemDialog({ item, onClose }: Props) {
             </Accordion.Root>
             <div className={styles.ItemDialog__Footer}>
                 {deleteButton}
-                {saveButton}
+                <div className={styles.ItemDialog__FooterRight}>
+                    {refetchButton}
+                    {saveButton}
+                </div>
             </div>
         </div>
     )

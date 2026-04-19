@@ -86,6 +86,11 @@
         composes: FlexRow FlexRow--Apart from global;
     }
 
+    &__FooterRight {
+        display: flex;
+        gap: 0.5rem;
+    }
+
     &__BtnAction {
         composes: Btn Btn--Sec from global;
     }
