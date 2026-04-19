@@ -8,6 +8,7 @@ import {
     IconCheckbox,
     IconPin,
     IconClipboard,
+    IconHourglassLow,
 } from "@tabler/icons-react"
 import { isValidHexColourCode, formatDatetime } from "@/utils/helpers"
 import { DateTime } from "luxon"
@@ -44,6 +45,10 @@ function FaviconIcon({ url }: { url: string }) {
 }
 
 function ItemIcon({ item }: { item: Item }) {
+    if (item.isFetchingLinkMeta) {
+        return <IconHourglassLow {...ICON_PROPS_ITEM_ICON} />
+    }
+
     if (item.type === "todo") {
         return item.isDone ? (
             <IconCheckbox {...ICON_PROPS_ITEM_ICON} />
