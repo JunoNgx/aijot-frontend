@@ -5,6 +5,14 @@
     position: fixed;
     top: 0;
     width: 100%;
+
+    body[data-scroll-locked] & {
+        // Handle content shift caused by fat scrollbar
+        // The variable is handled `react-remove-scroll-bar`
+        // (which is also used by radix)
+        width: calc(100% - var(--removed-body-scroll-bar-size));
+    }
+
     @include GlassBlur;
 
     &__Wrapper {
