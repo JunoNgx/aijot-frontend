@@ -101,6 +101,7 @@ export default function ItemDialog({ item, onClose }: Props) {
     const [contentVal, setContentVal] = useState(item.content)
     const [tagStr, setTagStr] = useState(item.tags.join(" "))
     const [jottedAtVal, setJottedAtVal] = useState<string | null>(item.jottedAt)
+    const [faviconUrlVal, setFaviconUrlVal] = useState(item.faviconUrl ?? "")
     const [saveStatusText, setSaveStatusText] = useState(
         `Saved ${formatDatetime(item.updatedAt)}`,
     )
@@ -109,6 +110,7 @@ export default function ItemDialog({ item, onClose }: Props) {
     const contentRef = useRef(contentVal)
     const tagStrRef = useRef(tagStr)
     const jottedAtRef = useRef(jottedAtVal)
+    const faviconUrlRef = useRef(faviconUrlVal)
     const hasUnsavedChangesRef = useRef(false)
     const mutateRef = useRef(updateItemMutation.mutate)
     useLayoutEffect(() => {
@@ -127,6 +129,11 @@ export default function ItemDialog({ item, onClose }: Props) {
     useEffect(() => {
         jottedAtRef.current = jottedAtVal
     }, [jottedAtVal])
+    useEffect(() => {
+        faviconUrlRef.current = faviconUrlVal
+    }, [faviconUrlVal])
+
+    const isLinkItem = item.type === "link"
 
     const buildUpdatedItem = useCallback(
         (): Item => ({
@@ -138,12 +145,13 @@ export default function ItemDialog({ item, onClose }: Props) {
                 .split(" ")
                 .filter((t) => t.length > 0),
             jottedAt: jottedAtRef.current ?? item.jottedAt,
+            faviconUrl: isLinkItem
+                ? faviconUrlRef.current.trim() || undefined
+                : undefined,
             updatedAt: DateTime.now().toISO(),
         }),
-        [item],
+        [item, isLinkItem],
     )
-
-    const isLinkItem = item.type === "link"
 
     const handleRefetchMeta = useCallback(() => {
         refetchLinkMetaMutation.mutate(item)
@@ -207,6 +215,11 @@ export default function ItemDialog({ item, onClose }: Props) {
         const isoValue = DateTime.fromISO(e.target.value).toISO()
         if (!isoValue) return
         setJottedAtVal(isoValue)
+        markChanged()
+    }
+
+    const handleFaviconUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setFaviconUrlVal(e.target.value)
         markChanged()
     }
 
@@ -280,6 +293,20 @@ export default function ItemDialog({ item, onClose }: Props) {
                 </Accordion.Trigger>
             </Accordion.Header>
             <Accordion.Content className={styles.ItemDialog__AccordionContent}>
+                {isLinkItem && (
+                    <div className={styles.ItemDialog__Field}>
+                        <label className={styles.ItemDialog__Label}>
+                            Favicon
+                        </label>
+                        <input
+                            className="Dialog__Input"
+                            value={faviconUrlVal}
+                            onChange={handleFaviconUrlChange}
+                            onKeyDown={saveHotkeyHandler}
+                            placeholder="https://..."
+                        />
+                    </div>
+                )}
                 <div className={styles.ItemDialog__Field}>
                     <label className={styles.ItemDialog__Label}>
                         Jotted at
