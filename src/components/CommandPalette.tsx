@@ -40,6 +40,7 @@ export default function CommandPalette({
     const setTheme = useLocalUserSettings((s) => s.setTheme)
     const originalThemeRef = useRef(currentTheme)
     const listRef = useRef<HTMLDivElement>(null)
+    const didCommitThemeSelection = useRef(false)
     const {
         navigateToJot,
         navigateToCollection,
@@ -73,6 +74,7 @@ export default function CommandPalette({
     }
 
     const handleThemeSelect = (themeName: ThemeName) => {
+        didCommitThemeSelection.current = true
         setTheme(themeName)
         onClose()
     }
@@ -94,11 +96,6 @@ export default function CommandPalette({
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [mode])
-
-    useHotkeys("Escape", () => {
-        revertThemePreview()
-        onClose()
-    })
 
     useEffect(() => {
         if (!isThemeMode || !listRef.current) return
@@ -382,6 +379,12 @@ export default function CommandPalette({
             className={styles.CommandPalette__Content}
             aria-describedby={undefined}
             onInteractOutside={revertThemePreview}
+            onCloseAutoFocus={() => {
+                if (isThemeMode && !didCommitThemeSelection.current) {
+                    revertThemePreview()
+                }
+                didCommitThemeSelection.current = false
+            }}
         >
             <Dialog.Title className="VisuallyHidden">
                 Command Palette
