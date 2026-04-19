@@ -5,7 +5,6 @@
 
     &__Title {
         font-size: var(--fontSizeXl);
-        font-weight: 600;
         margin: 0 0 2rem;
     }
 
@@ -73,12 +72,9 @@
     }
 
     &__Title {
-        display: flex;
-        align-items: baseline;
-        gap: 0.75rem;
-        font-size: var(--fontSizeMd);
+        font-size: var(--fontSizeLg);
+        color: var(--colSub);
         font-weight: 600;
-        margin: 0 0 0.5rem;
 
         &--Danger {
             color: var(--colDanger);
