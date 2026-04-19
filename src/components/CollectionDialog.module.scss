@@ -91,7 +91,7 @@
     }
 
     &__DefaultIndicator {
-        color: var(--colSub);
+        color: var(--colTextAlt);
     }
 
     &__BtnSetDefault {
@@ -150,10 +150,10 @@
         // margin: 0 0.5rem;
         padding: 0.25rem 0;
         border: none;
-        border-bottom: var(--lineWidth) solid var(--colSub);
+        border-bottom: var(--lineWidth) solid var(--colText);
 
-        &:placeholder {
-            color: var(--colSub);
+        &::placeholder {
+            color: var(--colTextAlt);
         }
 
         &:focus {

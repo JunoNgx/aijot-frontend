@@ -409,7 +409,7 @@ export default function ItemDialog({ item, onClose }: Props) {
                 />
             </div>
             {contentEditor}
-            <div className={styles.ItemDialog__EditBottomWrapper}>
+            <div className={styles.ItemDialog__SaveStatusWrapper}>
                 <span className={styles.ItemDialog__SaveStatus}>
                     {saveStatusText}
                 </span>

@@ -44,10 +44,11 @@
         }
     }
 
-    &__EditBottomWrapper {
+    &__SaveStatusWrapper {
         composes: FlexRow FlexRow--Right from global;
         margin-top: 0 !important;
-        color: var(--colSub);
+        color: var(--colTextAlt);
+        font-size: var(--fontSizeSm);
     }
 
     &__Accordion {

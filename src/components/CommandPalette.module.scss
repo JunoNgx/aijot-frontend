@@ -23,12 +23,12 @@
         font-family: inherit;
         background: transparent;
         border: none;
-        border-bottom: var(--lineWidth) solid var(--colSub);
+        border-bottom: var(--lineWidth) solid var(--colText);
         color: var(--colText);
         outline: none;
 
         &::placeholder {
-            color: var(--colSub);
+            color: var(--colTextAlt);
         }
 
         &:focus,
@@ -47,7 +47,7 @@
 
     &__Empty {
         padding: 1rem 0.75rem;
-        color: var(--colSub);
+        color: var(--colTextAlt);
         text-align: center;
     }
 }
@@ -61,13 +61,13 @@
         }
     }
 
-    &__SectionLabel {
-        padding: 0.25rem 0.75rem;
-        font-size: 0.75rem;
-        color: var(--colSub);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-    }
+    // &__SectionLabel {
+    //     padding: 0.25rem 0.75rem;
+    //     font-size: 0.75rem;
+    //     color: var(--colTextAlt);
+    //     text-transform: uppercase;
+    //     letter-spacing: 0.05em;
+    // }
 
     &__Group {
         margin-bottom: 0.5rem;
@@ -95,7 +95,7 @@
         }
 
         &[data-disabled="true"] {
-            color: var(--colSub);
+            color: var(--colTextAlt);
             pointer-events: none;
         }
     }
@@ -114,7 +114,7 @@
 
     &__SubLabel {
         font-size: var(--fontSizeSm);
-        color: var(--colSub);
+        color: var(--colTextAlt);
     }
 
     &__Check {

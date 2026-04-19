@@ -35,7 +35,7 @@
 
         &Description {
             font-size: var(--fontSizeSm);
-            color: var(--colSub);
+            color: var(--colTextAlt);
             margin: 0;
         }
     }
@@ -147,7 +147,7 @@
 
     &__Version {
         font-size: var(--fontSizeSm);
-        color: var(--colSub);
+        color: var(--colTextAlt);
         margin: 0.5rem 0 0;
     }
 }

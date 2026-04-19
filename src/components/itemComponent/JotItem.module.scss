@@ -60,7 +60,7 @@
 
         &--TodoDone {
             text-decoration: line-through;
-            color: var(--colSub);
+            color: var(--colTextAlt);
         }
 
         // &--Title {
@@ -70,7 +70,7 @@
 
     &__SecondaryText {
         font-size: var(--fontSizeSm);
-        color: var(--colSub);
+        color: var(--colTextAlt);
         flex-shrink: 10;
     }
 
@@ -99,11 +99,11 @@
         align-items: flex-start;
         gap: 0.25rem;
         padding: 0.75rem 0.5rem;
-        border-left: var(--lineWidth) solid var(--colSub);
-        border-bottom: var(--lineWidth) solid var(--colSub);
+        border-left: var(--lineWidth) solid var(--colTextAlt);
+        border-bottom: var(--lineWidth) solid var(--colTextAlt);
 
         .JotItem__Datetime {
-            color: var(--colSub);
+            color: var(--colTextAlt);
         }
     }
 

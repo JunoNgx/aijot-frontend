@@ -41,7 +41,7 @@
 
     &__SortHint {
         font-size: var(--fontSizeSm);
-        color: var(--colSub);
+        color: var(--colTextAlt);
         margin: 0 0 0.5rem;
     }
 
@@ -56,7 +56,7 @@
 .CollectionItem {
     display: flex;
     align-items: center;
-    border: var(--lineWidth) solid var(--colSub);
+    border: var(--lineWidth) solid var(--colTextAlt);
     padding: 0.25rem 0.5rem;
 
     &:hover {
@@ -129,7 +129,7 @@
     &__DefaultBadge,
     &__CoreBadge {
         font-size: var(--fontSizeSm);
-        color: var(--colSub);
+        color: var(--colTextAlt);
         @include Ellipsified;
     }
 }
