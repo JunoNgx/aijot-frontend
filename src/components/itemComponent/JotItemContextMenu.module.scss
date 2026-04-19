@@ -8,6 +8,10 @@
 
         &--Destructive {
             color: var(--colDanger) !important;
+
+            &:hover {
+                color: var(--colBg) !important;
+            }
         }
     }
 
