@@ -9,6 +9,7 @@
     &__Content {
         composes: DialogWrapper__Content from global;
         z-index: var(--zIndexCommandPaletteContent);
+        overflow-y: hidden !important;
     }
 
     &__Command {
@@ -41,8 +42,9 @@
 
 .CommandPaletteList {
     &__List {
-        overflow-y: auto;
+        max-height: min(600px, 60vh);
         padding: 1rem 0;
+        overflow-y: auto;
     }
 
     &__Empty {
