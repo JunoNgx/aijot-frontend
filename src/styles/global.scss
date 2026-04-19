@@ -99,11 +99,11 @@ input[type="checkbox"] {
 }
 
 kbd {
-    color: var(--colPri);
+    color: var(--colMain);
     border-style: solid;
     border-width: var(--lineWidth);
     border-bottom-width: 4px;
-    border-color: var(--colPri);
+    border-color: var(--colMain);
     padding: 0 0.2rem;
     font-family: var(--fontFamilyMono);
     font-size: var(--fontSizeSm);
