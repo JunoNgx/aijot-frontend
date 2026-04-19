@@ -62,7 +62,6 @@ export default function CommandPalette({
     const isMainMode = mode === "main"
     const isThemeMode = mode === "theme"
     const searchPlaceholder = isThemeMode ? "Search theme" : "Search action"
-    const shouldFilter = isMainMode
 
     const isInCollection = !!currentSlug
     const shouldIncludeSetDefaultAction =
@@ -340,7 +339,6 @@ export default function CommandPalette({
             </Dialog.Title>
             <Command
                 label="Command palette"
-                shouldFilter={shouldFilter}
                 value={searchText}
                 onValueChange={(value) => {
                     if (isThemeMode && value) {
