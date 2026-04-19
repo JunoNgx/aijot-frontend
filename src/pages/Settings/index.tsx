@@ -39,6 +39,13 @@ export default function Settings() {
     const is24HourClock = useProfileSettings((s) => s.is24HourClock)
     const setIs24HourClock = useProfileSettings((s) => s.setIs24HourClock)
 
+    const defaultCollectionSlug = useProfileSettings(
+        (s) => s.defaultCollectionSlug,
+    )
+    const setDefaultCollectionSlug = useProfileSettings(
+        (s) => s.setDefaultCollectionSlug,
+    )
+
     const userDisplayName = useProfileSettings((s) => s.userDisplayName)
     const setUserDisplayName = useProfileSettings((s) => s.setUserDisplayName)
     const shouldApplyTagsOfCurrCollection = useProfileSettings(
@@ -90,7 +97,13 @@ export default function Settings() {
 
     const handleExport = async () => {
         await exportData({
-            profile: { userDisplayName, shouldApplyTagsOfCurrCollection },
+            profile: {
+                userDisplayName,
+                shouldApplyTagsOfCurrCollection,
+                defaultCollectionSlug,
+                shouldCustomSortCollections,
+                shouldShowJotItemExtraInfo,
+            },
             coreCollections: {
                 all: allCollection,
                 untagged: untaggedCollection,
@@ -121,6 +134,13 @@ export default function Settings() {
             setUserDisplayName(settings.profile.userDisplayName)
             setShouldApplyTagsOfCurrCollection(
                 settings.profile.shouldApplyTagsOfCurrCollection,
+            )
+            setDefaultCollectionSlug(settings.profile.defaultCollectionSlug)
+            setShouldCustomSortCollections(
+                settings.profile.shouldCustomSortCollections,
+            )
+            setShouldShowJotItemExtraInfo(
+                settings.profile.shouldShowJotItemExtraInfo,
             )
             setAll(settings.coreCollections.all)
             setUntagged(settings.coreCollections.untagged)

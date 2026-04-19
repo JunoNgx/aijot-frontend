@@ -165,6 +165,9 @@ export interface ExportSettings {
     profile: {
         userDisplayName: string
         shouldApplyTagsOfCurrCollection: boolean
+        defaultCollectionSlug: string
+        shouldCustomSortCollections: boolean
+        shouldShowJotItemExtraInfo: boolean
     }
     coreCollections: {
         all: CoreCollectionConfig

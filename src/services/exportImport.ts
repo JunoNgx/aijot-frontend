@@ -1,5 +1,6 @@
 import { storage } from "@/db"
 import { DateTime } from "luxon"
+import { useProfileSettings } from "@/store/profileSettings"
 import type { ExportData, ExportSettings, ImportSummary } from "@/types"
 
 export const EXPORT_VERSION = 1
