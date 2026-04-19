@@ -233,6 +233,63 @@ export default function Settings() {
             </h1>
 
             <section className={styles.Section}>
+                <h2 className={styles.Section__Title}>Sync</h2>
+                <p className={styles.Section__Description}>
+                    Back up your data to Google Drive
+                </p>
+                {isConnected && authToken && (
+                    <div className={styles.Field__SyncStatus}>
+                        <span>Connected as {authToken.email}</span>
+                        {lastSyncTime && (
+                            <span>
+                                Last sync:{" "}
+                                {new Date(lastSyncTime).toLocaleString()}
+                            </span>
+                        )}
+                        {syncStatus === "syncing" && <span>Syncing...</span>}
+                        {syncStatus === "error" && syncError && (
+                            <span>Error: {syncError}</span>
+                        )}
+                    </div>
+                )}
+                {connectError && (
+                    <div className={styles.Field__SyncStatus}>
+                        {connectError}
+                    </div>
+                )}
+                <div className="FlexRow">
+                    {isConnected ? (
+                        <>
+                            <button
+                                className={styles.Settings__BtnAction}
+                                type="button"
+                                disabled={syncStatus === "syncing"}
+                                onClick={() => sync()}
+                            >
+                                Sync now
+                            </button>
+                            <button
+                                className={styles.Settings__BtnAction}
+                                type="button"
+                                onClick={disconnect}
+                            >
+                                Disconnect
+                            </button>
+                        </>
+                    ) : (
+                        <button
+                            className={styles.Settings__BtnConnect}
+                            type="button"
+                            disabled={isConnecting}
+                            onClick={connect}
+                        >
+                            {isConnecting ? "Connecting..." : "Connect"}
+                        </button>
+                    )}
+                </div>
+            </section>
+
+            <section className={styles.Section}>
                 <h2 className={styles.Section__Title}>Appearance</h2>
                 <div className={styles.Field}>
                     <label className={styles.Field__Label}>Theme</label>
@@ -399,63 +456,6 @@ export default function Settings() {
                         </div>
                     </div>
                 )}
-            </section>
-
-            <section className={styles.Section}>
-                <h2 className={styles.Section__Title}>Sync</h2>
-                <p className={styles.Section__Description}>
-                    Back up your data to Google Drive
-                </p>
-                {isConnected && authToken && (
-                    <div className={styles.Field__SyncStatus}>
-                        <span>Connected as {authToken.email}</span>
-                        {lastSyncTime && (
-                            <span>
-                                Last sync:{" "}
-                                {new Date(lastSyncTime).toLocaleString()}
-                            </span>
-                        )}
-                        {syncStatus === "syncing" && <span>Syncing...</span>}
-                        {syncStatus === "error" && syncError && (
-                            <span>Error: {syncError}</span>
-                        )}
-                    </div>
-                )}
-                {connectError && (
-                    <div className={styles.Field__SyncStatus}>
-                        {connectError}
-                    </div>
-                )}
-                <div className="FlexRow">
-                    {isConnected ? (
-                        <>
-                            <button
-                                className={styles.Settings__BtnAction}
-                                type="button"
-                                disabled={syncStatus === "syncing"}
-                                onClick={() => sync()}
-                            >
-                                Sync now
-                            </button>
-                            <button
-                                className={styles.Settings__BtnAction}
-                                type="button"
-                                onClick={disconnect}
-                            >
-                                Disconnect
-                            </button>
-                        </>
-                    ) : (
-                        <button
-                            className={styles.Settings__BtnConnect}
-                            type="button"
-                            disabled={isConnecting}
-                            onClick={connect}
-                        >
-                            {isConnecting ? "Connecting..." : "Connect"}
-                        </button>
-                    )}
-                </div>
             </section>
 
             <section className={styles.Section}>
