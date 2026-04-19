@@ -297,6 +297,22 @@ export default function Settings() {
                 <h2 className={styles.Section__Title}>Preferences</h2>
 
                 <div className={`${styles.Field} ${styles["Field--FlexRow"]}`}>
+                    <label
+                        className={styles.Field__Label}
+                        htmlFor="displayName"
+                    >
+                        Display name
+                    </label>
+                    <input
+                        id="displayName"
+                        type="text"
+                        className={styles.Field__Input}
+                        value={userDisplayName}
+                        onChange={(e) => setUserDisplayName(e.target.value)}
+                    />
+                </div>
+
+                <div className={`${styles.Field} ${styles["Field--FlexRow"]}`}>
                     <label className={styles.Field__Label}>
                         Collection sort order:
                     </label>
@@ -389,43 +405,21 @@ export default function Settings() {
                         in addition to syntax specification.
                     </small>
                 </div>
-            </section>
 
-            <section className={styles.Section}>
-                <h2 className={styles.Section__Title}>Profile</h2>
-
-                <div className={styles.Field}>
-                    <label className={styles.Field__Label}>Theme</label>
-                    <div className="FlexRow">
-                        <span className={styles.Settings__CurrentTheme}>
-                            {theme}
-                        </span>
-                        <button
-                            type="button"
-                            className={styles.Settings__BtnAction}
-                            onClick={() => {
-                                useCommandPaletteStore.getState().open("theme")
-                            }}
-                        >
-                            Change Theme
-                        </button>
-                    </div>
-                </div>
-
-                <div className={styles.Field}>
-                    <label
-                        className={styles.Field__Label}
-                        htmlFor="displayName"
+                <div className={`${styles.Field} ${styles["Field--FlexRow"]}`}>
+                    <label className={styles.Field__Label}>Current theme:</label>
+                    <span className={styles.Settings__CurrentTheme}>
+                        {theme}
+                    </span>
+                    <button
+                        type="button"
+                        className={styles.Settings__BtnAction}
+                        onClick={() => {
+                            useCommandPaletteStore.getState().open("theme")
+                        }}
                     >
-                        Display name
-                    </label>
-                    <input
-                        id="displayName"
-                        type="text"
-                        className={styles.Field__Input}
-                        value={userDisplayName}
-                        onChange={(e) => setUserDisplayName(e.target.value)}
-                    />
+                        Change Theme
+                    </button>
                 </div>
             </section>
 
