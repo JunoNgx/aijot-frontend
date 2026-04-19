@@ -108,10 +108,7 @@ export default function CommandPalette({
                 '[data-selected="true"]',
             )
             if (selectedItemEl) {
-                selectedItemEl.scrollIntoView({
-                    behavior: "smooth",
-                    block: "center",
-                })
+                selectedItemEl.scrollIntoView({ block: "center" })
             }
         }, 0)
     }, [mode, isThemeMode])
