@@ -1,4 +1,4 @@
-import { useState, useRef, useLayoutEffect, useEffect } from "react"
+import { useRef, useLayoutEffect, useEffect } from "react"
 import { Command } from "cmdk"
 import * as Dialog from "@radix-ui/react-dialog"
 import { useHotkeys } from "react-hotkeys-hook"
@@ -36,7 +36,6 @@ export default function CommandPalette({
     onModeChange,
     onClose,
 }: CommandPaletteProps) {
-    const [searchText, setSearchText] = useState("")
     const currentTheme = useLocalUserSettings((s) => s.theme)
     const setTheme = useLocalUserSettings((s) => s.setTheme)
     const originalThemeRef = useRef(currentTheme)
@@ -339,12 +338,13 @@ export default function CommandPalette({
             </Dialog.Title>
             <Command
                 label="Command palette"
-                value={searchText}
+                // Hacky implementation: force clearing search query upon mode switch
+                // cmdk unfortunately doesn't expose the search state for external control
+                key={mode}
                 onValueChange={(value) => {
                     if (isThemeMode && value) {
                         handleThemePreview(value as ThemeName)
                     }
-                    setSearchText(value)
                 }}
             >
                 <Command.Input
