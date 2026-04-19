@@ -6,9 +6,9 @@ import {
     IconWorld,
     IconSquare,
     IconCheckbox,
-    IconPin,
     IconClipboard,
     IconHourglassLow,
+    IconPinFilled,
 } from "@tabler/icons-react"
 import { isValidHexColourCode, formatDatetime } from "@/utils/helpers"
 import { DateTime } from "luxon"
@@ -159,10 +159,13 @@ export default function JotItem({
             )}
             {item.isPinned && (
                 <span
-                    className={styles.JotItem__StatusIcon}
+                    className={`
+                        ${styles.JotItem__StatusIcon}
+                        ${styles["JotItem__StatusIcon--Pin"]}
+                    `}
                     aria-label="Pinned"
                 >
-                    <IconPin {...ICON_PROPS_ITEM_STATUS} />
+                    <IconPinFilled {...ICON_PROPS_ITEM_STATUS} />
                 </span>
             )}
         </div>

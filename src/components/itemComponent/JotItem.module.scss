@@ -87,6 +87,10 @@
         display: grid;
         place-items: center;
         color: var(--colSub);
+
+        &--Pin {
+            color: var(--colMain);
+        }
     }
 
     &__Datetime {
