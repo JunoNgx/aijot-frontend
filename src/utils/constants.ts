@@ -111,6 +111,7 @@ export const DEFAULT_TRASH_COLLECTION: CoreCollectionConfig = {
 
 export const SHORTCUT_CMD_PAL = "mod+k"
 export const SHORTCUT_CMD_PAL_ALT = "mod+p"
+export const SHORTCUT_CMD_PAL_THEME = "alt+t"
 export const SHORTCUT_FOCUS_MAIN_INPUT = "mod+f"
 
 export const SHORTCUT_ITEM_EDIT = "mod+e"
