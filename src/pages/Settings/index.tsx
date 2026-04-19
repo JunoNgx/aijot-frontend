@@ -296,6 +296,36 @@ export default function Settings() {
             <section className={styles.Section}>
                 <h2 className={styles.Section__Title}>Preferences</h2>
 
+                <div className={`${styles.Field} ${styles["Field--FlexRow"]}`}>
+                    <label className={styles.Field__Label}>
+                        Collection sort order:
+                    </label>
+                    <div className={styles.Field__RadioGroup}>
+                        <label className={styles.Field__Radio}>
+                            <input
+                                type="radio"
+                                name="collectionSortOrder"
+                                checked={shouldCustomSortCollections}
+                                onChange={() =>
+                                    setShouldCustomSortCollections(true)
+                                }
+                            />
+                            Custom
+                        </label>
+                        <label className={styles.Field__Radio}>
+                            <input
+                                type="radio"
+                                name="collectionSortOrder"
+                                checked={!shouldCustomSortCollections}
+                                onChange={() =>
+                                    setShouldCustomSortCollections(false)
+                                }
+                            />
+                            Alphabetically
+                        </label>
+                    </div>
+                </div>
+
                 <div className={styles.Field}>
                     <label className={styles.Field__Checkbox}>
                         <input
@@ -396,35 +426,6 @@ export default function Settings() {
                         value={userDisplayName}
                         onChange={(e) => setUserDisplayName(e.target.value)}
                     />
-                </div>
-                <div className={styles.Field}>
-                    <label className={styles.Field__Label}>
-                        Collection sort order
-                    </label>
-                    <div className={styles.Field__RadioGroup}>
-                        <label className={styles.Field__Radio}>
-                            <input
-                                type="radio"
-                                name="collectionSortOrder"
-                                checked={shouldCustomSortCollections}
-                                onChange={() =>
-                                    setShouldCustomSortCollections(true)
-                                }
-                            />
-                            Custom
-                        </label>
-                        <label className={styles.Field__Radio}>
-                            <input
-                                type="radio"
-                                name="collectionSortOrder"
-                                checked={!shouldCustomSortCollections}
-                                onChange={() =>
-                                    setShouldCustomSortCollections(false)
-                                }
-                            />
-                            Alphabetically
-                        </label>
-                    </div>
                 </div>
             </section>
 

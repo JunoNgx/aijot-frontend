@@ -89,14 +89,20 @@
 }
 
 .Field {
-    // display: flex;
-    // align-items: center;
-    // gap: 0.75rem;
-    // padding: 0.5rem 0;
     margin-bottom: 1rem;
 
+    &--FlexRow {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.5rem 0;
+
+        .Field__Label {
+            color: var(--colTextAlt);
+        }
+    }
+
     &__Label {
-        flex: 1;
         font-size: var(--fontSizeMd);
         min-width: 0;
         overflow: hidden;
