@@ -260,13 +260,14 @@ kbd {
     }
 
     &__Label {
-        font-size: var(--fontSizeMd);
+        color: var(--colSub);
+        font-size: var(--fontSizeSm);
         font-weight: 500;
     }
 
     &__Description {
-        font-size: var(--fontSizeSm);
         color: var(--colTextAlt);
+        font-size: var(--fontSizeXs);
     }
 }
 
@@ -334,6 +335,7 @@ kbd {
         outline: none;
         user-select: none;
         max-width: min(90vw, 500px);
+        font-size: var(--fontSizeSm);
 
         &:hover,
         &:focus {

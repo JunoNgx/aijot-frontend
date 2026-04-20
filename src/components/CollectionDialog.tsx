@@ -346,6 +346,9 @@ export default function CollectionDialog({ collection }: Props) {
             </div>
             <div className={styles.CollectionDialog__Field}>
                 <label className={styles.CollectionDialog__Label}>Slug</label>
+                <span className={styles.CollectionDialog__Description}>
+                    For url route and searching from cmdPalette
+                </span>
                 <input
                     className="Dialog__Input"
                     value={slugVal}

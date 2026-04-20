@@ -90,7 +90,8 @@
     }
 
     &__DefaultIndicator {
-        color: var(--colTextAlt);
+        font-size: var(--fontSizeMd);
+        color: var(--colSub);
     }
 
     &__BtnSetDefault {
