@@ -408,9 +408,9 @@ export default function ItemDialog({ item, onClose }: Props) {
                     {item.previousContentRecordedAt && (
                         <span className={styles.ItemDialog__LastVersionDate}>
                             Recorded{" "}
-                            {DateTime.fromISO(
-                                item.previousContentRecordedAt,
-                            ).toLocaleString(DateTime.DATETIME_MED)}
+                            {DateTime.fromISO(item.previousContentRecordedAt)
+                                .toLocal()
+                                .toLocaleString(DateTime.DATETIME_MED)}
                         </span>
                     )}
                     <CodeMirrorEditor

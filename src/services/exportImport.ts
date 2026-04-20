@@ -12,7 +12,7 @@ export async function exportData(settings: ExportSettings): Promise<void> {
 
     const data: ExportData = {
         version: EXPORT_VERSION,
-        exportedAt: DateTime.now().toISO(),
+        exportedAt: DateTime.now().toUTC().toISO(),
         items,
         collections,
         settings,

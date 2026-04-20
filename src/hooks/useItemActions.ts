@@ -41,7 +41,7 @@ export function useItemActions() {
         updateItemMutation.mutate({
             ...item,
             isDone: !item.isDone,
-            updatedAt: DateTime.now().toISO(),
+            updatedAt: DateTime.now().toUTC().toISO(),
         })
     }
 
@@ -49,7 +49,7 @@ export function useItemActions() {
         updateItemMutation.mutate({
             ...item,
             isPinned: true,
-            updatedAt: DateTime.now().toISO(),
+            updatedAt: DateTime.now().toUTC().toISO(),
         })
     }
 
@@ -57,7 +57,7 @@ export function useItemActions() {
         updateItemMutation.mutate({
             ...item,
             isPinned: undefined,
-            updatedAt: DateTime.now().toISO(),
+            updatedAt: DateTime.now().toUTC().toISO(),
         })
     }
 
@@ -66,7 +66,7 @@ export function useItemActions() {
             ...item,
             type: "todo",
             title: undefined,
-            updatedAt: DateTime.now().toISO(),
+            updatedAt: DateTime.now().toUTC().toISO(),
         })
     }
 
@@ -74,7 +74,7 @@ export function useItemActions() {
         updateItemMutation.mutate({
             ...item,
             shouldCopyOnClick: item.shouldCopyOnClick ? undefined : true,
-            updatedAt: DateTime.now().toISO(),
+            updatedAt: DateTime.now().toUTC().toISO(),
         })
     }
 

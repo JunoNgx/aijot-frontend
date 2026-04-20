@@ -12,9 +12,11 @@ export const storage: StorageAdapter = dexieAdapter
 export async function purgeExpiredItems(): Promise<void> {
     const trashCutoff = DateTime.now()
         .minus({ days: TRASH_PURGE_DURATION_DAY })
+        .toUTC()
         .toISO()
     const tombstoneCutoff = DateTime.now()
         .minus({ days: SOFT_DELETE_PURGE_DURATION_DAY })
+        .toUTC()
         .toISO()
     await storage.purgeTrashedItems(trashCutoff)
     await storage.purgeSoftDeletedItems(tombstoneCutoff)

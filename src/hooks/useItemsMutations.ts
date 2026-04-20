@@ -56,7 +56,7 @@ export function useItemsMutations() {
                 ? {
                       ...updatedItem,
                       previousContent: existingItem!.content,
-                      previousContentRecordedAt: DateTime.now().toISO(),
+                      previousContentRecordedAt: DateTime.now().toUTC().toISO(),
                   }
                 : updatedItem
 
@@ -84,7 +84,7 @@ export function useItemsMutations() {
 
     const trashItemMutation = useMutation({
         mutationFn: async (item: Item) => {
-            const now = DateTime.now().toISO()
+            const now = DateTime.now().toUTC().toISO()
             await storage.putItem({ ...item, trashedAt: now, updatedAt: now })
         },
         onMutate: async (item) => {
@@ -120,7 +120,7 @@ export function useItemsMutations() {
             const { trashedAt: _trashedAt, ...restoredItem } = item
             await storage.putItem({
                 ...restoredItem,
-                updatedAt: DateTime.now().toISO(),
+                updatedAt: DateTime.now().toUTC().toISO(),
             })
         },
         onMutate: async (item) => {
@@ -148,7 +148,7 @@ export function useItemsMutations() {
 
     const softDeleteItemMutation = useMutation({
         mutationFn: async (item: Item) => {
-            const now = DateTime.now().toISO()
+            const now = DateTime.now().toUTC().toISO()
             await storage.putItem({ ...item, deletedAt: now, updatedAt: now })
         },
         onMutate: async (item) => {
@@ -184,7 +184,7 @@ export function useItemsMutations() {
             const { deletedAt: _deletedAt, ...restoredItem } = item
             await storage.putItem({
                 ...restoredItem,
-                updatedAt: DateTime.now().toISO(),
+                updatedAt: DateTime.now().toUTC().toISO(),
             })
         },
         onMutate: async () => {
@@ -212,7 +212,7 @@ export function useItemsMutations() {
                 ...item,
                 title: meta.title,
                 faviconUrl: meta.faviconUrl,
-                updatedAt: DateTime.now().toISO(),
+                updatedAt: DateTime.now().toUTC().toISO(),
             }
             await storage.putItem(updatedItem)
             return updatedItem

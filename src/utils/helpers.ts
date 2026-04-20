@@ -14,7 +14,7 @@ export function formatDatetime(
     isoString: string,
     is24HourClock = true,
 ): string {
-    const date = DateTime.fromISO(isoString)
+    const date = DateTime.fromISO(isoString).toLocal()
     const now = DateTime.now()
     if (now.diff(date, "hours").hours < 24) {
         return date.toFormat(is24HourClock ? "HH:mm" : "h:mm a")

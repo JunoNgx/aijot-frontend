@@ -73,7 +73,7 @@ function ItemIcon({ item }: { item: Item }) {
 }
 
 function formatDetailedDatetime(isoString: string, is24HourClock = true) {
-    const date = DateTime.fromISO(isoString)
+    const date = DateTime.fromISO(isoString).toLocal()
     return date.toFormat(
         is24HourClock ? "MMM d, yyyy HH:mm" : "MMM d, yyyy h:mm a",
     )

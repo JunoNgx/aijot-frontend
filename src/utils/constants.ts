@@ -1,7 +1,7 @@
 import { DateTime } from "luxon"
 import type { CoreCollectionConfig } from "@/types"
 
-const CORE_COLLECTION_INIT_TIME = DateTime.now().toISO()
+const CORE_COLLECTION_INIT_TIME = DateTime.now().toUTC().toISO()
 
 // ============================================================
 // App

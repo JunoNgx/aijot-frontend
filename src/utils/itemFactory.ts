@@ -5,7 +5,7 @@ import type { Collection, Item, ItemType, MainInputCreationData } from "@/types"
 export function buildDemoItems(): Item[] {
     const base = DateTime.now()
     const at = (minutesAgo: number) =>
-        base.minus({ minutes: minutesAgo }).toISO()
+        base.minus({ minutes: minutesAgo }).toUTC().toISO()
     return [
         {
             id: uuidv4(),
@@ -151,7 +151,7 @@ ARC 9`,
 }
 
 export function buildDemoCollections(): Collection[] {
-    const now = DateTime.now().toISO()
+    const now = DateTime.now().toUTC().toISO()
     const allTypes: ItemType[] = ["text", "todo", "link"]
 
     return [
@@ -195,7 +195,7 @@ export function buildDemoCollections(): Collection[] {
 }
 
 export function buildItem(creationData: MainInputCreationData): Item {
-    const now = DateTime.now().toISO()
+    const now = DateTime.now().toUTC().toISO()
     return {
         id: uuidv4(),
         createdAt: now,
