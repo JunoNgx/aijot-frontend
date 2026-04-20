@@ -55,6 +55,8 @@ function CodeMirrorEditor({
                     drawSelection(),
                     EditorView.editable.of(!isReadOnly),
                     EditorState.readOnly.of(isReadOnly),
+                    // Element is outside of react tree,
+                    // this must be declared here
                     EditorView.theme({
                         ".cm-cursor, .cm-dropCursor": {
                             borderLeftColor: "var(--colText)",
