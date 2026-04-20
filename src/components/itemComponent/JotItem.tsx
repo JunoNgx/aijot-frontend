@@ -165,7 +165,11 @@ export default function JotItem({
     const isCopied = copiedItemIds.includes(item.id)
     const itemBody = isCopied ? (
         <div className={styles.JotItem__Body}>
-            <span className={styles.JotItem__PrimaryText}>Copied</span>
+            <span
+                className={`${styles.JotItem__PrimaryText} ${styles.JotItem__Copied}`}
+            >
+                Copied
+            </span>
         </div>
     ) : (
         <div className={styles.JotItem__Body}>
