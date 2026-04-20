@@ -378,7 +378,7 @@ export default function ItemDialog({ item, onClose }: Props) {
             className={styles.ItemDialog__BtnAction}
             onClick={handleRefetchMeta}
         >
-            Refetch
+            Refetch meta
         </button>
     )
 

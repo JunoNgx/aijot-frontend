@@ -90,7 +90,7 @@ export default function JotItemContextMenu({ item }: Props) {
                     }}
                 >
                     <IconRefresh {...ICON_PROPS_NORMAL} />
-                    Refetch
+                    Refetch meta
                 </ContextMenu.Item>
             )}
         </>
