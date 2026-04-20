@@ -45,7 +45,7 @@ function CodeMirrorEditor({
         onSaveAndCloseRef.current = onSaveAndClose
     })
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (!containerRef.current) return
         const view = new EditorView({
             state: EditorState.create({
@@ -81,6 +81,12 @@ function CodeMirrorEditor({
             }),
             parent: containerRef.current,
         })
+        if (!isReadOnly) {
+            // TODO: hacky, find better solution
+            setTimeout(() => {
+                view.focus()
+            }, 0)
+        }
         return () => view.destroy()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
