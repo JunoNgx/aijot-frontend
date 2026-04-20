@@ -81,7 +81,6 @@ function CodeMirrorEditor({
             }),
             parent: containerRef.current,
         })
-        if (!isReadOnly) view.focus()
         return () => view.destroy()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -208,13 +207,6 @@ export default function ItemDialog({ item, onClose }: Props) {
         markChanged()
     }
 
-    const handleContentTextareaChange = (
-        e: React.ChangeEvent<HTMLTextAreaElement>,
-    ) => {
-        setContentVal(e.target.value)
-        markChanged()
-    }
-
     const handleCodeMirrorChange = (value: string) => {
         contentRef.current = value
         markChanged()
@@ -270,30 +262,16 @@ export default function ItemDialog({ item, onClose }: Props) {
         }
     }, [onClose])
 
-    const isTextItem = item.type === "text"
-
     const jottedAtInputVal = jottedAtVal
         ? DateTime.fromISO(jottedAtVal).toLocal().toFormat("yyyy-MM-dd'T'HH:mm")
         : ""
 
-    const contentEditor = isTextItem ? (
+    const contentEditor = (
         <CodeMirrorEditor
             initialValue={contentVal}
             onChange={handleCodeMirrorChange}
             onSaveAndClose={handleSaveAndClose}
         />
-    ) : (
-        <div className={styles.ItemDialog__Field}>
-            <label className={styles.ItemDialog__Label}>Content</label>
-            <textarea
-                autoFocus
-                className={styles.ItemDialog__Textarea}
-                value={contentVal}
-                onChange={handleContentTextareaChange}
-                onKeyDown={saveHotkeyHandler}
-                rows={4}
-            />
-        </div>
     )
 
     const moreOptionsAccordion = (
@@ -391,7 +369,7 @@ export default function ItemDialog({ item, onClose }: Props) {
         </button>
     )
 
-    const lastVersionSection = isTextItem && item.previousContent && (
+    const lastVersionSection = item.previousContent && (
         <Accordion.Item
             value="last-version"
             className={styles.ItemDialog__AccordionItem}
