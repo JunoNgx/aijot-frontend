@@ -267,6 +267,37 @@ kbd {
         padding: 0.25rem;
         box-shadow: 0 4px 16px var(--colShadow);
         z-index: var(--zIndexBackdrop);
+
+        $dropDistance: -0.25rem;
+        @keyframes dropdownSlideDown {
+            from {
+                opacity: 0;
+                transform: translateY($dropDistance);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes dropdownSlideUp {
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateY($dropDistance);
+            }
+        }
+
+        &[data-state="open"] {
+            animation: dropdownSlideDown var(--transTime) ease-in-out;
+        }
+
+        &[data-state="closed"] {
+            animation: dropdownSlideUp var(--transTime) ease-in-out;
+        }
     }
 
     &__Item {
