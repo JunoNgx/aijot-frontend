@@ -448,7 +448,7 @@ export default function ItemDialog({ item, onClose }: Props) {
                     value={tagStr}
                     onChange={handleTagStrChange}
                     onKeyDown={saveHotkeyHandler}
-                    placeholder="tag1 tag2 tag3"
+                    placeholder=""
                 />
             </div>
             <Accordion.Root
