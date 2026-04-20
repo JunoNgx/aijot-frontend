@@ -6,6 +6,7 @@ import { buildItem } from "@/utils/itemFactory"
 import { parseCreationData } from "@/hooks/useMainInputParser"
 import { SYNTAX_PREFIX_LONG_TEXT } from "@/utils/constants"
 import { useProfileSettings } from "@/store/profileSettings"
+import { useTransientUiState } from "@/store/transientUiState"
 import { type MouseEvent } from "react"
 import type { Item } from "@/types"
 
@@ -47,6 +48,11 @@ export function useItemActions() {
 
     const copyContent = (item: Item) => {
         navigator.clipboard.writeText(item.content)
+        useTransientUiState.getState().addCopiedItemId(item.id)
+        setTimeout(
+            () => useTransientUiState.getState().removeCopiedItemId(item.id),
+            1500,
+        )
         toast("Item content copied")
     }
 

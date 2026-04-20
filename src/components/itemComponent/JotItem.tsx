@@ -18,6 +18,7 @@ import {
     ICON_PROPS_NORMAL,
 } from "@/utils/constants"
 import { useProfileSettings } from "@/store/profileSettings"
+import { useTransientUiState } from "@/store/transientUiState"
 import { useItemActions } from "@/hooks/useItemActions"
 import JotItemContextMenu from "./JotItemContextMenu"
 import type { Item } from "@/types"
@@ -88,6 +89,7 @@ export default function JotItem({
 }: Props) {
     const { triggerPrimaryAction } = useItemActions()
     const is24HourClock = useProfileSettings((s) => s.is24HourClock)
+    const copiedItemIds = useTransientUiState((s) => s.copiedItemIds)
     const isPrimaryTextTitle = item.type !== "todo" && item.title !== undefined
     const primaryText = isPrimaryTextTitle ? item.title! : item.content
     const secondaryText = isPrimaryTextTitle ? item.content : null
@@ -151,7 +153,12 @@ export default function JotItem({
         </div>
     )
 
-    const itemBody = (
+    const isCopied = copiedItemIds.includes(item.id)
+    const itemBody = isCopied ? (
+        <div className={styles.JotItem__Body}>
+            <span className={styles.JotItem__PrimaryText}>Copied</span>
+        </div>
+    ) : (
         <div className={styles.JotItem__Body}>
             <span
                 className={[
