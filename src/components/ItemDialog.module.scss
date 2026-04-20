@@ -104,16 +104,15 @@
 
 
 .CodeMirror {
-    @include StandardBorder;
-    overflow: hidden;
-
     :global(.cm-editor) {
+        @include StandardBorder;
+        overflow: hidden;
         min-height: 200px;
     }
 
     :global(.cm-editor.cm-focused) {
-        outline: 2px solid var(--colText);
-        outline-offset: -2px;
+        outline: none;
+        border-color: var(--colMain);
     }
 
     :global(.cm-content) {
