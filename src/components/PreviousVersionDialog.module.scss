@@ -1,0 +1,51 @@
+@use "styles/mixins" as *;
+
+.PreviousVersionDialog {
+    composes: Dialog from global;
+
+    &__Header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.5rem;
+    }
+
+    &__Title {
+        font-size: var(--fontSizeLg);
+        color: var(--colSub);
+        margin: 0;
+    }
+
+    &__CloseBtn {
+        composes: Btn Btn--Icon from global;
+        composes: Dialog__CloseBtn from global;
+    }
+
+    &__Timestamp {
+        display: block;
+        font-size: var(--fontSizeSm);
+        color: var(--colTextAlt);
+        margin-bottom: 0.5rem;
+    }
+
+    &__Textarea {
+        resize: none;
+        font-family: inherit;
+        padding: 0.375rem 0.5rem;
+    }
+
+    &__Footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 0.5rem;
+        margin-top: 0.75rem;
+    }
+
+    &__BtnBack {
+        composes: Btn Btn--Sec from global;
+    }
+
+    &__BtnRestore {
+        composes: Btn Btn--Pri from global;
+    }
+}

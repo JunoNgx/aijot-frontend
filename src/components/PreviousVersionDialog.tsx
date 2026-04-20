@@ -1,0 +1,86 @@
+import { DateTime } from "luxon"
+import { IconX } from "@tabler/icons-react"
+import { ICON_PROPS_ACTION } from "@/utils/constants"
+import { useItemsMutations } from "@/hooks/useItemsMutations"
+import { useDialogStore } from "@/store/dialogStore"
+import { openItemDialog } from "@/utils/openItemDialog"
+import styles from "./PreviousVersionDialog.module.scss"
+import type { Item } from "@/types"
+
+interface Props {
+    item: Item
+}
+
+export default function PreviousVersionDialog({ item }: Props) {
+    const { updateItemMutation } = useItemsMutations()
+    const closeAllDialogs = useDialogStore((s) => s.closeAllDialogs)
+
+    const isTextItem = item.type === "text"
+
+    const handleBack = () => {
+        closeAllDialogs()
+        openItemDialog(item)
+    }
+
+    const handleRestore = () => {
+        if (!item.previousContent) return
+        updateItemMutation.mutate({
+            ...item,
+            content: item.previousContent,
+            previousContent: undefined,
+            previousContentRecordedAt: undefined,
+            updatedAt: DateTime.now().toISO(),
+        })
+        closeAllDialogs()
+    }
+
+    const timestampDisplay = item.previousContentRecordedAt && (
+        <span className={styles.PreviousVersionDialog__Timestamp}>
+            Recorded{" "}
+            {DateTime.fromISO(item.previousContentRecordedAt)
+                .toLocal()
+                .toLocaleString(DateTime.DATETIME_MED)}
+        </span>
+    )
+
+    return (
+        <div className={styles.PreviousVersionDialog}>
+            <div className={styles.PreviousVersionDialog__Header}>
+                <h2 className={styles.PreviousVersionDialog__Title}>
+                    Previous Version
+                </h2>
+                <button
+                    className={styles.PreviousVersionDialog__CloseBtn}
+                    onClick={handleBack}
+                    aria-label="Close"
+                >
+                    <IconX {...ICON_PROPS_ACTION} />
+                </button>
+            </div>
+
+            {timestampDisplay}
+
+            <textarea
+                className={`Dialog__Input ${styles.PreviousVersionDialog__Textarea}`}
+                rows={isTextItem ? 24 : 4}
+                value={item.previousContent}
+                readOnly
+            />
+
+            <div className={styles.PreviousVersionDialog__Footer}>
+                <button
+                    className={styles.PreviousVersionDialog__BtnBack}
+                    onClick={handleBack}
+                >
+                    Back
+                </button>
+                <button
+                    className={styles.PreviousVersionDialog__BtnRestore}
+                    onClick={handleRestore}
+                >
+                    Restore
+                </button>
+            </div>
+        </div>
+    )
+}

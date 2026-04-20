@@ -19,6 +19,7 @@ import { useDialogStore } from "@/store/dialogStore"
 import { getHotkeyHandler } from "@/utils/hotkeyHandler"
 import { SHORTCUT_SAVE_AND_CLOSE } from "@/utils/constants"
 import { formatDatetime } from "@/utils/helpers"
+import { openPreviousVersionDialog } from "@/utils/openPreviousVersionDialog"
 import styles from "./ItemDialog.module.scss"
 import type { Item } from "@/types"
 
@@ -163,6 +164,7 @@ export default function ItemDialog({ item, onClose }: Props) {
 
     const isLinkItem = item.type === "link"
     const isTextItem = item.type === "text"
+    const isTodoItem = item.type === "todo"
 
     const buildUpdatedItem = useCallback(
         (): Item => ({
@@ -249,18 +251,6 @@ export default function ItemDialog({ item, onClose }: Props) {
 
     const handleDeleteClick = () => {
         trashItem(item)
-        closeAllDialogs()
-    }
-
-    const handleRestoreLastVersion = () => {
-        if (!item.previousContent) return
-        updateItemMutation.mutate({
-            ...item,
-            content: item.previousContent,
-            previousContent: undefined,
-            previousContentRecordedAt: undefined,
-            updatedAt: DateTime.now().toISO(),
-        })
         closeAllDialogs()
     }
 
@@ -360,6 +350,14 @@ export default function ItemDialog({ item, onClose }: Props) {
                         onChange={handleJottedAtChange}
                     />
                 </div>
+                {item.previousContent && (
+                    <button
+                        className={styles.ItemDialog__BtnAction}
+                        onClick={() => openPreviousVersionDialog(item)}
+                    >
+                        View previous version
+                    </button>
+                )}
             </Accordion.Content>
         </Accordion.Item>
     )
@@ -391,45 +389,6 @@ export default function ItemDialog({ item, onClose }: Props) {
         </button>
     )
 
-    const lastVersionSection = item.previousContent && (
-        <Accordion.Item
-            value="last-version"
-            className={styles.ItemDialog__AccordionItem}
-        >
-            <Accordion.Header>
-                <Accordion.Trigger
-                    className={styles.ItemDialog__AccordionTrigger}
-                >
-                    Last version
-                </Accordion.Trigger>
-            </Accordion.Header>
-            <Accordion.Content className={styles.ItemDialog__AccordionContent}>
-                <div className={styles.ItemDialog__LastVersion}>
-                    {item.previousContentRecordedAt && (
-                        <span className={styles.ItemDialog__LastVersionDate}>
-                            Recorded{" "}
-                            {DateTime.fromISO(item.previousContentRecordedAt)
-                                .toLocal()
-                                .toLocaleString(DateTime.DATETIME_MED)}
-                        </span>
-                    )}
-                    <CodeMirrorEditor
-                        initialValue={item.previousContent}
-                        onChange={() => {}}
-                        onSaveAndClose={() => {}}
-                        isReadOnly
-                    />
-                    <button
-                        className={styles.ItemDialog__BtnAction}
-                        onClick={handleRestoreLastVersion}
-                    >
-                        Restore this version
-                    </button>
-                </div>
-            </Accordion.Content>
-        </Accordion.Item>
-    )
-
     return (
         <div className={styles.ItemDialog}>
             <button
@@ -439,15 +398,17 @@ export default function ItemDialog({ item, onClose }: Props) {
             >
                 <IconX {...ICON_PROPS_ACTION} />
             </button>
-            <div className={styles.ItemDialog__Field}>
-                <label className={styles.ItemDialog__Label}>Title</label>
-                <input
-                    className="Dialog__Input"
-                    value={titleVal}
-                    onChange={handleTitleInputChange}
-                    onKeyDown={saveHotkeyHandler}
-                />
-            </div>
+            {!isTodoItem && (
+                <div className={styles.ItemDialog__Field}>
+                    <label className={styles.ItemDialog__Label}>Title</label>
+                    <input
+                        className="Dialog__Input"
+                        value={titleVal}
+                        onChange={handleTitleInputChange}
+                        onKeyDown={saveHotkeyHandler}
+                    />
+                </div>
+            )}
             {contentEditor}
             <div className={styles.ItemDialog__SaveStatusWrapper}>
                 <span className={styles.ItemDialog__SaveStatus}>
@@ -472,7 +433,6 @@ export default function ItemDialog({ item, onClose }: Props) {
                 className={styles.ItemDialog__Accordion}
             >
                 {moreOptionsAccordion}
-                {lastVersionSection}
             </Accordion.Root>
             <div className={styles.ItemDialog__Footer}>
                 {deleteButton}
