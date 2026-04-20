@@ -100,7 +100,7 @@
     }
 
     &__Footer {
-        composes: FlexRow FlexRow--Apart from global;
+        composes: Dialog__Footer from global;
     }
 
     &__Actions {

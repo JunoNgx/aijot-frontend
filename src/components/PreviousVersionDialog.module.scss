@@ -11,9 +11,7 @@
     }
 
     &__Title {
-        font-size: var(--fontSizeLg);
-        color: var(--colSub);
-        margin: 0;
+        composes: Dialog__Title from global;
     }
 
     &__CloseBtn {
@@ -29,15 +27,11 @@
     }
 
     &__Textarea {
-        resize: none;
-        font-family: inherit;
-        padding: 0.375rem 0.5rem;
+        composes: Dialog__Textarea from global;
     }
 
     &__Footer {
-        display: flex;
-        justify-content: space-between;
-        gap: 0.5rem;
+        composes: Dialog__Footer from global;
         margin-top: 0.75rem;
     }
 

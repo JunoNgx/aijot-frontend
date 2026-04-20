@@ -192,6 +192,12 @@ kbd {
     gap: 1rem;
     padding-bottom: 0.5rem 0;
 
+    &__Title {
+        font-size: var(--fontSizeLg);
+        color: var(--colSub);
+        margin: 0;
+    }
+
     &__CloseBtn {
         position: absolute;
         top: -0.75rem;
@@ -213,6 +219,18 @@ kbd {
     &__Description {
         color: var(--colTextAlt);
         font-size: var(--fontSizeXs);
+    }
+
+    &__Textarea {
+        resize: none;
+        font-family: inherit;
+        padding: 0.375rem 0.5rem;
+    }
+
+    &__Footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 0.5rem;
     }
 }
 
