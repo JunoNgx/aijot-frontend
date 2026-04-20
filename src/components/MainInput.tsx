@@ -30,6 +30,7 @@ interface Props {
     visibleItemCount: number
     onSelectedIndexChange: (index: number) => void
     isTrash: boolean
+    currCollectionTags: string[]
     listboxId?: string
     activeDescendantId?: string
 }
@@ -42,6 +43,7 @@ export default function MainInput({
     visibleItemCount,
     onSelectedIndexChange,
     isTrash,
+    currCollectionTags,
     listboxId,
     activeDescendantId,
 }: Props) {
@@ -72,7 +74,7 @@ export default function MainInput({
         if (!inputValue.trim()) return
         if (searchData.filterType !== undefined || searchData.tags.length > 0)
             return
-        createItem(inputValue)
+        createItem(inputValue, currCollectionTags)
         setInputValue("")
     }
 

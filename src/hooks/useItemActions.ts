@@ -5,6 +5,7 @@ import { openItemDialog } from "@/utils/openItemDialog"
 import { buildItem } from "@/utils/itemFactory"
 import { parseCreationData } from "@/hooks/useMainInputParser"
 import { SYNTAX_PREFIX_LONG_TEXT } from "@/utils/constants"
+import { useProfileSettings } from "@/store/profileSettings"
 import { type MouseEvent } from "react"
 import type { Item } from "@/types"
 
@@ -18,11 +19,25 @@ export function useItemActions() {
         refetchLinkMetaMutation,
     } = useItemsMutations()
 
-    const createItem = (inputValue: string) => {
+    const shouldApplyTagsOfCurrCollection = useProfileSettings(
+        (s) => s.shouldApplyTagsOfCurrCollection,
+    )
+
+    const createItem = (
+        inputValue: string,
+        currCollectionTags: string[] = [],
+    ) => {
         const creationData = parseCreationData(inputValue)
         const isLongText = inputValue
             .trimStart()
             .startsWith(SYNTAX_PREFIX_LONG_TEXT)
+
+        if (shouldApplyTagsOfCurrCollection && currCollectionTags.length > 0) {
+            const combinedTags = new Set(creationData.tags)
+            currCollectionTags.forEach((tag) => combinedTags.add(tag))
+            creationData.tags = Array.from(combinedTags)
+        }
+
         createItemMutation.mutate(buildItem(creationData), {
             onSuccess: (item) => {
                 if (isLongText) openItemDialog(item)

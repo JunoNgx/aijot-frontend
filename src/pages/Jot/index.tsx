@@ -159,6 +159,7 @@ export default function Jot() {
                 visibleItemCount={visibleItems.length}
                 onSelectedIndexChange={setSelectedIndex}
                 isTrash={isTrash}
+                currCollectionTags={currCollection?.tags ?? []}
                 listboxId={listboxId}
                 activeDescendantId={activeDescendantId}
             />
