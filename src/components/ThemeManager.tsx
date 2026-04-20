@@ -9,6 +9,18 @@ function applyThemeColors(colors: (typeof themes)[number]) {
     root.style.setProperty("--colSub", colors.colSub)
     root.style.setProperty("--colText", colors.colText)
     root.style.setProperty("--colDanger", colors.colDanger)
+
+    const themeColorMeta = document.querySelector("meta[name='theme-color']")
+    if (themeColorMeta) {
+        themeColorMeta.setAttribute("content", colors.colBg)
+    }
+
+    const appleStatusBarMeta = document.querySelector(
+        "meta[name='apple-mobile-web-app-status-bar-style']",
+    )
+    if (appleStatusBarMeta) {
+        appleStatusBarMeta.setAttribute("content", "black-translucent")
+    }
 }
 
 export default function ThemeManager() {
