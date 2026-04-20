@@ -221,6 +221,19 @@ kbd {
         position: fixed;
         inset: 0;
         z-index: var(--zIndexBackdrop);
+
+        @keyframes dialogFadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        &[data-state="open"] {
+            animation: dialogFadeIn var(--transTime) ease-in-out;
+        }
     }
 
     &__Content {
@@ -237,6 +250,21 @@ kbd {
         @include StandardBorder;
         padding: 1.5rem;
         overflow-y: auto;
+
+        @keyframes dialogSlideUp {
+            from {
+                opacity: 0;
+                transform: translate(-50%, calc(-50% + 0.5rem));
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        &[data-state="open"] {
+            animation: dialogSlideUp var(--transTime) ease-in-out;
+        }
     }
 }
 
