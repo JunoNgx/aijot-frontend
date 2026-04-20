@@ -105,7 +105,7 @@ export default function ItemDialog({ item, onClose }: Props) {
     const closeAllDialogs = useDialogStore((s) => s.closeAllDialogs)
 
     const [titleVal, setTitleVal] = useState(item.title ?? "")
-    const [contentVal, setContentVal] = useState(item.content)
+    const [contentVal, _setContentVal] = useState(item.content)
     const [tagStr, setTagStr] = useState(item.tags.join(" "))
     const [jottedAtVal, setJottedAtVal] = useState<string | null>(item.jottedAt)
     const [faviconUrlVal, setFaviconUrlVal] = useState(item.faviconUrl ?? "")
