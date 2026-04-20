@@ -2,10 +2,6 @@
     border: var(--lineWidth) solid var(--colText);
 }
 
-@mixin StandardOutline {
-    outline: var(--lineWidth) solid var(--colText);
-}
-
 @mixin ClearBtn {
     appearance: none;
     background: none;
