@@ -1,6 +1,10 @@
 @use "styles/mixins" as *;
 
 .JotItem {
+    appearance: none;
+    background-color: transparent;
+    font-weight: normal;
+    font-family: var(--fontFamily);
     display: flex;
     align-items: center;
     gap: 0.5rem;

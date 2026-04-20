@@ -127,26 +127,6 @@ export default function JotItem({
             .join(": ")
     }
 
-    const wrapperProps =
-        item.type === "link"
-            ? {
-                  as: "a" as const,
-                  href: item.content,
-                  target: "_blank",
-                  rel: "noopener noreferrer",
-                  tabIndex: -1,
-                  onClick: (e: MouseEvent) => {
-                      triggerPrimaryAction(item, e)
-                  },
-              }
-            : {
-                  as: "div" as const,
-                  onClick: (e: MouseEvent) => {
-                      triggerPrimaryAction(item, e)
-                  },
-              }
-    const { as: Tag, ...rest } = wrapperProps
-
     const itemIndicators = (
         <div className={styles.JotItem__StatusWrapper}>
             {item.shouldCopyOnClick && (
@@ -251,6 +231,25 @@ export default function JotItem({
         </>
     )
 
+    const wrapperProps =
+        item.type === "link"
+            ? {
+                  as: "a" as const,
+                  href: item.content,
+                  target: "_blank",
+                  rel: "noopener noreferrer",
+                  onClick: (e: MouseEvent) => {
+                      triggerPrimaryAction(item, e)
+                  },
+              }
+            : {
+                  as: "button" as const,
+                  onClick: (e: MouseEvent) => {
+                      triggerPrimaryAction(item, e)
+                  },
+              }
+    const { as: Tag, ...rest } = wrapperProps
+
     return (
         <ContextMenu.Root>
             <ContextMenu.Trigger asChild>
@@ -261,6 +260,7 @@ export default function JotItem({
                     role="option"
                     aria-selected={isSelected}
                     aria-label={getAccessibleLabel()}
+                    tabIndex={-1}
                     {...rest}
                 >
                     {isExpandedInfoMode ? expandedContent : compactContent}
