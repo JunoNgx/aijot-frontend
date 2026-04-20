@@ -12,7 +12,6 @@ import { useCommandPaletteStore } from "@/store/commandPaletteStore"
 import {
     SYNTAX_PREFIX_TODO,
     SYNTAX_PREFIX_LONG_TEXT,
-    DROPDOWN_OFFSET,
     ICON_PROPS_NORMAL,
 } from "@/utils/constants"
 import styles from "./MainInputExtendedMenu.module.scss"
