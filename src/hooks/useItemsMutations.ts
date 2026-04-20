@@ -4,6 +4,7 @@ import { toast } from "sonner"
 import { storage } from "@/db"
 import { queryKeys } from "@/db/queryKeys"
 import { fetchLinkMeta } from "@/services/linkFetch"
+import { useTransientUiState } from "@/store/transientUiState"
 import type { Item } from "@/types"
 import { sortItems } from "@/utils/helpers"
 
@@ -207,6 +208,7 @@ export function useItemsMutations() {
             if (item.type !== "link") {
                 throw new Error("Item is not a link")
             }
+            useTransientUiState.getState().addFetchingLinkMetaItemId(item.id)
             const meta = await fetchLinkMeta(item.content)
             const updatedItem = {
                 ...item,
@@ -217,40 +219,12 @@ export function useItemsMutations() {
             await storage.putItem(updatedItem)
             return updatedItem
         },
-        onMutate: async (item) => {
-            const updateQuery = (previousItems: Item[] | undefined) => {
-                if (!previousItems) return previousItems
-                const index = previousItems.findIndex(
-                    (itx) => itx.id === item.id,
-                )
-                if (index === -1) return previousItems
-                const itemList = [...previousItems]
-                itemList[index] = {
-                    ...itemList[index],
-                    isFetchingLinkMeta: true,
-                }
-                return itemList
+        onSettled: (_data, _error, item) => {
+            if (item) {
+                useTransientUiState
+                    .getState()
+                    .removeFetchingLinkMetaItemId(item.id)
             }
-            queryClient.setQueryData<Item[]>(queryKeys.items, updateQuery)
-            queryClient.setQueryData<Item[]>(
-                queryKeys.trashedItems,
-                updateQuery,
-            )
-        },
-        onSettled: () => {
-            const clearQuery = (previousItems: Item[] | undefined) => {
-                if (!previousItems) return previousItems
-                return previousItems.map((itx) => {
-                    if (!itx.isFetchingLinkMeta) return itx
-                    const {
-                        isFetchingLinkMeta: _fetchingFlag,
-                        ...itemWithoutFetchFlag
-                    } = itx
-                    return itemWithoutFetchFlag as Item
-                })
-            }
-            queryClient.setQueryData<Item[]>(queryKeys.items, clearQuery)
-            queryClient.setQueryData<Item[]>(queryKeys.trashedItems, clearQuery)
             invalidateItemQueries()
         },
     })

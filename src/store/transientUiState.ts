@@ -4,6 +4,9 @@ export const useTransientUiState = create<{
     copiedItemIds: string[]
     addCopiedItemId: (id: string) => void
     removeCopiedItemId: (id: string) => void
+    fetchingLinkMetaItemIds: string[]
+    addFetchingLinkMetaItemId: (id: string) => void
+    removeFetchingLinkMetaItemId: (id: string) => void
 }>((set) => ({
     copiedItemIds: [],
     addCopiedItemId: (id) =>
@@ -18,6 +21,22 @@ export const useTransientUiState = create<{
     removeCopiedItemId: (id) =>
         set((state) => ({
             copiedItemIds: state.copiedItemIds.filter(
+                (existingId) => existingId !== id,
+            ),
+        })),
+    fetchingLinkMetaItemIds: [],
+    addFetchingLinkMetaItemId: (id) =>
+        set((state) => ({
+            fetchingLinkMetaItemIds: [
+                ...state.fetchingLinkMetaItemIds.filter(
+                    (existingId) => existingId !== id,
+                ),
+                id,
+            ],
+        })),
+    removeFetchingLinkMetaItemId: (id) =>
+        set((state) => ({
+            fetchingLinkMetaItemIds: state.fetchingLinkMetaItemIds.filter(
                 (existingId) => existingId !== id,
             ),
         })),

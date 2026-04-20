@@ -45,8 +45,14 @@ function FaviconIcon({ url }: { url: string }) {
     )
 }
 
-function ItemIcon({ item }: { item: Item }) {
-    if (item.isFetchingLinkMeta) {
+function ItemIcon({
+    item,
+    fetchingItemIds,
+}: {
+    item: Item
+    fetchingItemIds: string[]
+}) {
+    if (fetchingItemIds.includes(item.id)) {
         return <IconHourglassLow {...ICON_PROPS_ITEM_ICON} />
     }
 
@@ -90,6 +96,9 @@ export default function JotItem({
     const { triggerPrimaryAction } = useItemActions()
     const is24HourClock = useProfileSettings((s) => s.is24HourClock)
     const copiedItemIds = useTransientUiState((s) => s.copiedItemIds)
+    const fetchingLinkMetaItemIds = useTransientUiState(
+        (s) => s.fetchingLinkMetaItemIds,
+    )
     const isPrimaryTextTitle = item.type !== "todo" && item.title !== undefined
     const primaryText = isPrimaryTextTitle ? item.title! : item.content
     const secondaryText = isPrimaryTextTitle ? item.content : null
@@ -177,7 +186,7 @@ export default function JotItem({
 
     const itemIcon = (
         <span className={styles.JotItem__Icon}>
-            <ItemIcon item={item} />
+            <ItemIcon item={item} fetchingItemIds={fetchingLinkMetaItemIds} />
         </span>
     )
 

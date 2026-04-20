@@ -25,8 +25,6 @@ export interface Item {
     tags: string[]
     previousContent?: string
     previousContentRecordedAt?: string
-    // Temporary states, not part of persisted data
-    isFetchingLinkMeta?: boolean
 }
 
 // ============================================================
