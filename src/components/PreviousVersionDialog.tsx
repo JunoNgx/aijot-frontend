@@ -45,18 +45,16 @@ export default function PreviousVersionDialog({ item }: Props) {
 
     return (
         <div className={styles.PreviousVersionDialog}>
-            <div className={styles.PreviousVersionDialog__Header}>
-                <h2 className={styles.PreviousVersionDialog__Title}>
-                    Previous Version
-                </h2>
-                <button
-                    className={styles.PreviousVersionDialog__CloseBtn}
-                    onClick={handleBack}
-                    aria-label="Close"
-                >
-                    <IconX {...ICON_PROPS_ACTION} />
-                </button>
-            </div>
+            <button
+                className={styles.PreviousVersionDialog__CloseBtn}
+                onClick={handleBack}
+                aria-label="Close"
+            >
+                <IconX {...ICON_PROPS_ACTION} />
+            </button>
+            <h2 className={styles.PreviousVersionDialog__Title}>
+                Previous Version
+            </h2>
 
             {timestampDisplay}
 

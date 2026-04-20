@@ -3,15 +3,9 @@
 .PreviousVersionDialog {
     composes: Dialog from global;
 
-    &__Header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 0.5rem;
-    }
-
     &__Title {
         composes: Dialog__Title from global;
+        margin-bottom: 0.5rem;
     }
 
     &__CloseBtn {
