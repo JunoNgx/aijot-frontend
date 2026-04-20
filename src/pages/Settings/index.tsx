@@ -272,12 +272,18 @@ export default function Settings() {
                         )}
                         {syncStatus === "syncing" && <span>Syncing...</span>}
                         {syncStatus === "error" && syncError && (
-                            <span>Error: {syncError}</span>
+                            <span
+                                className={styles["Field__SyncStatus--Error"]}
+                            >
+                                Error: {syncError}
+                            </span>
                         )}
                     </div>
                 )}
                 {connectError && (
-                    <div className={styles.Field__SyncStatus}>
+                    <div
+                        className={`${styles.Field__SyncStatus} ${styles["Field__SyncStatus--Error"]}`}
+                    >
                         {connectError}
                     </div>
                 )}

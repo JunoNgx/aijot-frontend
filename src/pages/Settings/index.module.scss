@@ -146,5 +146,9 @@
         font-size: var(--fontSizeMd);
         color: var(--colSub);
         margin-bottom: 0.75rem;
+
+        &--Error {
+            color: var(--colDanger);
+        }
     }
 }
