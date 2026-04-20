@@ -61,6 +61,7 @@ export default function App() {
                     unstyled: true,
                     classNames: {
                         toast: "SonnerToast",
+                        actionButton: "SonnerToast__ActionBtn",
                     },
                 }}
             />

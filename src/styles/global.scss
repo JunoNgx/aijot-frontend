@@ -355,4 +355,17 @@ kbd {
             color: var(--colDanger);
         }
     }
+
+    &[data-sonner-toast][data-expanded="true"]::after {
+        display: none;
+    }
+
+    &[data-sonner-toast][data-mounted="true"][data-expanded="true"] {
+        height: auto;
+    }
+
+    &__ActionBtn {
+        @include BtnSec;
+        flex-shrink: 0;
+    }
 }

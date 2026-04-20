@@ -578,6 +578,10 @@ export default function Settings() {
                             toast(
                                 "Debug toast message with slightly long content",
                                 {
+                                    action: {
+                                        label: "Btn",
+                                        onClick: () => {},
+                                    },
                                     duration: Infinity,
                                 },
                             )
