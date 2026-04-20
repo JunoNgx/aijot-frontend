@@ -91,7 +91,7 @@ function CodeMirrorEditor({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    return <div ref={containerRef} className={styles.ItemDialog__CodeMirror} />
+    return <div ref={containerRef} className={styles.CodeMirror} />
 }
 
 interface Props {
