@@ -24,6 +24,10 @@ const DEFAULT_SEARCH_DATA: MainInputSearchData = {
 
 function filterByCollection(items: Item[], collection: Collection): Item[] {
     if (collection.coreType === "all") return items
+    if (collection.coreType === "trash") {
+        // Trash has its own query - baseItems uses trashedItemsQuery when trash
+        return items
+    }
     if (collection.coreType === "untagged") {
         return items.filter((item) => item.tags.length === 0)
     }
