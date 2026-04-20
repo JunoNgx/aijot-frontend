@@ -26,7 +26,7 @@
     }
 
     &__SaveStatusWrapper {
-        composes: FlexRow FlexRow--Right from global;
+        composes: FlexRow FlexRow--FlexEnd from global;
         margin-top: 0 !important;
         color: var(--colTextAlt);
         font-size: var(--fontSizeSm);
@@ -101,7 +101,6 @@
         composes: Dialog__CloseBtn from global;
     }
 }
-
 
 .CodeMirror {
     :global(.cm-editor) {

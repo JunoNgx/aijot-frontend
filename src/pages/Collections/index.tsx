@@ -167,7 +167,7 @@ export default function Collections() {
                     </label>
                 </span>
             </label>
-            <div className="FlexRow FlexRow--Right">
+            <div className="FlexRow FlexRow--FlexEnd">
                 <button
                     className={styles.Collections__BtnNew}
                     onClick={() => openCollectionDialog()}

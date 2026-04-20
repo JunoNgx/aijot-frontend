@@ -35,7 +35,7 @@ export default function Header() {
                     )}
                 </div>
                 <div
-                    className={`${styles.Header__Block} ${styles["Header__Block--Right"]}`}
+                    className={`${styles.Header__Block} ${styles["Header__Block--FlexEnd"]}`}
                 >
                     <button
                         className={styles.Header__BtnTheme}
