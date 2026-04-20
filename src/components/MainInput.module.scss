@@ -4,15 +4,21 @@
     border-width: var(--lineWidth);
     border-style: solid;
     border-color: var(--colText);
+    outline-offset: 0px;
+    outline-width: 1px;
+    outline-style: solid;
+    outline-color: transparent;
     display: flex;
     align-items: center;
     gap: 0.25rem;
     padding-right: 0.5rem;
+    transition:
+        border-color var(--transTime) ease-in-out,
+        outline-color var(--transTime) ease-in-out;
 
     &:focus-within {
         border-color: var(--colMain);
-        outline-offset: 0px;
-        outline: 1px solid var(--colMain);
+        outline-color: var(--colMain);
     }
 
     &__Input {
