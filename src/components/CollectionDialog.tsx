@@ -369,43 +369,39 @@ export default function CollectionDialog({ collection }: Props) {
                         </div>
                     </div>
                 )}
-                <div className={styles.CollectionDialog__Field}>
-                    <label className={styles.CollectionDialog__Label}>
-                        Colour
-                    </label>
-                    <div
-                        className={styles.CollectionDialog__ColourField}
-                        ref={colourPickerRef}
-                    >
-                        <div className={styles.CollectionDialog__ColourRow}>
-                            <input
-                                className={`Dialog__Input ${styles.CollectionDialog__ColourInput}`}
-                                value={colourVal}
-                                onChange={(e) => setColourVal(e.target.value)}
-                                placeholder="#rrggbb"
-                            />
-                            <button
-                                type="button"
-                                className={
-                                    styles.CollectionDialog__ColourPreviewBlock
-                                }
-                                style={{ backgroundColor: swatchColour }}
-                                onClick={() =>
-                                    setIsColourPickerOpen((prev) => !prev)
-                                }
-                            />
-                            <button
-                                type="button"
-                                className={
-                                    styles.CollectionDialog__BtnRandomise
-                                }
-                                onClick={() => setColourVal(getRandomColour())}
-                            >
-                                <IconArrowsShuffle {...ICON_PROPS_ACTION} />
-                            </button>
-                        </div>
-                        {colourPickerPanel}
+            </div>
+            <div className={styles.CollectionDialog__Field}>
+                <label className={styles.CollectionDialog__Label}>Colour</label>
+                <div
+                    className={styles.CollectionDialog__ColourField}
+                    ref={colourPickerRef}
+                >
+                    <div className={styles.CollectionDialog__ColourRow}>
+                        <input
+                            className={`Dialog__Input ${styles.CollectionDialog__ColourInput}`}
+                            value={colourVal}
+                            onChange={(e) => setColourVal(e.target.value)}
+                            placeholder="#rrggbb"
+                        />
+                        <button
+                            type="button"
+                            className={
+                                styles.CollectionDialog__ColourPreviewBlock
+                            }
+                            style={{ backgroundColor: swatchColour }}
+                            onClick={() =>
+                                setIsColourPickerOpen((prev) => !prev)
+                            }
+                        />
+                        <button
+                            type="button"
+                            className={styles.CollectionDialog__BtnRandomise}
+                            onClick={() => setColourVal(getRandomColour())}
+                        >
+                            <IconArrowsShuffle {...ICON_PROPS_ACTION} />
+                        </button>
                     </div>
+                    {colourPickerPanel}
                 </div>
             </div>
             <div className={styles.CollectionDialog__Field}>
