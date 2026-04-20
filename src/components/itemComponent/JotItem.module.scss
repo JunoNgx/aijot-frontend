@@ -109,11 +109,15 @@
         align-items: flex-start;
         gap: 0.25rem;
         padding: 0.75rem 0.5rem;
-        border-left: var(--lineWidth) solid var(--colTextAlt);
-        border-bottom: var(--lineWidth) solid var(--colTextAlt);
+        border-left: 1px solid var(--colTextAlt);
+        border-bottom: 1px solid var(--colTextAlt);
 
         .JotItem__Datetime {
             color: var(--colTextAlt);
+        }
+
+        &.JotItem--Selected {
+            border: 1px solid var(--colMain);
         }
     }
 
