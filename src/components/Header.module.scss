@@ -5,6 +5,8 @@
     position: fixed;
     top: 0;
     width: 100%;
+    user-select: none;
+    @include GlassBlur;
 
     body[data-scroll-locked] & {
         // Handle content shift caused by fat scrollbar
@@ -12,8 +14,6 @@
         // (which is also used by radix)
         width: calc(100% - var(--removed-body-scroll-bar-size));
     }
-
-    @include GlassBlur;
 
     &__Wrapper {
         max-width: var(--fullWidth);
