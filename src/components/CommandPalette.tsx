@@ -332,14 +332,7 @@ export default function CommandPalette({
     }
 
     const themeGroup = (
-        <Command.Group
-            heading={
-                <span className={styles.CommandPaletteGroup__Heading}>
-                    Theme
-                </span>
-            }
-            className={styles.CommandPaletteGroup__Group}
-        >
+        <Command.Group className={styles.CommandPaletteGroup__Group}>
             {themes.map((theme) => (
                 <Command.Item
                     key={theme.name}
