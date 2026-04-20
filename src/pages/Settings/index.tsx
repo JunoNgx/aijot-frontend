@@ -365,26 +365,6 @@ export default function Settings() {
                 <div className={styles.Field}>
                     <label className={styles.Field__Checkbox}>
                         <input
-                            aria-describedby={hourModeDescId}
-                            type="checkbox"
-                            checked={is24HourClock}
-                            onChange={(e) => {
-                                setIs24HourClock(e.target.checked)
-                            }}
-                        />
-                        Use 24-hour clock
-                    </label>
-                    <small
-                        id={hourModeDescId}
-                        className={styles.Field__Description}
-                    >
-                        16:35 vs 04:35 pm
-                    </small>
-                </div>
-
-                <div className={styles.Field}>
-                    <label className={styles.Field__Checkbox}>
-                        <input
                             aria-describedby={autoApplyTagsDescId}
                             type="checkbox"
                             checked={shouldApplyTagsOfCurrCollection}
@@ -423,6 +403,34 @@ export default function Settings() {
                     >
                         Default initial state for item display mode. Can be
                         toggled mid-session.
+                    </small>
+                </div>
+            </section>
+
+            <section className={styles.Section}>
+                <h2 className={styles.Section__Title}>Local device config</h2>
+                <p className={styles.Section__Description}>
+                    The following settings are not synchronised to your cloud
+                    data
+                </p>
+
+                <div className={styles.Field}>
+                    <label className={styles.Field__Checkbox}>
+                        <input
+                            aria-describedby={hourModeDescId}
+                            type="checkbox"
+                            checked={is24HourClock}
+                            onChange={(e) => {
+                                setIs24HourClock(e.target.checked)
+                            }}
+                        />
+                        Use 24-hour clock
+                    </label>
+                    <small
+                        id={hourModeDescId}
+                        className={styles.Field__Description}
+                    >
+                        16:35 vs 04:35 pm
                     </small>
                 </div>
 
