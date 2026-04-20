@@ -71,8 +71,8 @@ export default function MainInputExtendedMenu({
                 <DropdownMenu.Content
                     className={styles.MainInputExtendedMenu__Content}
                     align="end"
-                    alignOffset={-7}
-                    sideOffset={DROPDOWN_OFFSET}
+                    alignOffset={-10}
+                    sideOffset={16}
                 >
                     <DropdownMenu.Label
                         className={styles.MainInputExtendedMenu__GroupLabel}
