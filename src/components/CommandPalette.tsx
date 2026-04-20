@@ -1,4 +1,4 @@
-import { useRef, useLayoutEffect, useEffect } from "react"
+import { useRef, useLayoutEffect, useEffect, useState } from "react"
 import { Command } from "cmdk"
 import * as Dialog from "@radix-ui/react-dialog"
 import { useParams } from "react-router-dom"
@@ -40,6 +40,12 @@ export default function CommandPalette({
     const originalThemeRef = useRef(currentTheme)
     const listRef = useRef<HTMLDivElement>(null)
     const didCommitThemeSelection = useRef(false)
+    const [isTouchDevice, setIsTouchDevice] = useState(false)
+
+    useLayoutEffect(() => {
+        setIsTouchDevice(navigator.maxTouchPoints > 0)
+    }, [])
+
     const {
         navigateToJot,
         navigateToCollection,
@@ -406,7 +412,7 @@ export default function CommandPalette({
                 <Command.Input
                     className={styles.CommandPalette__Input}
                     placeholder={searchPlaceholder}
-                    autoFocus
+                    autoFocus={!isTouchDevice}
                 />
                 <Command.List
                     ref={listRef}
