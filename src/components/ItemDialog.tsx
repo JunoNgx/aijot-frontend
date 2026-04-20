@@ -121,6 +121,7 @@ export default function ItemDialog({ item, onClose }: Props) {
 
     const titleRef = useRef(titleVal)
     const contentRef = useRef(contentVal)
+    const contentTextareaRef = useRef<HTMLTextAreaElement>(null)
     const tagStrRef = useRef(tagStr)
     const jottedAtRef = useRef(jottedAtVal)
     const faviconUrlRef = useRef(faviconUrlVal)
@@ -130,6 +131,12 @@ export default function ItemDialog({ item, onClose }: Props) {
     const mutateRef = useRef(updateItemMutation.mutate)
     useLayoutEffect(() => {
         mutateRef.current = updateItemMutation.mutate
+    })
+
+    useLayoutEffect(() => {
+        setTimeout(() => {
+            contentTextareaRef.current?.focus()
+        }, 0)
     })
 
     useEffect(() => {
@@ -277,6 +284,7 @@ export default function ItemDialog({ item, onClose }: Props) {
 
     const contentEditor = (
         <textarea
+            ref={contentTextareaRef}
             className={`Dialog__Input ${styles.ItemDialog__Textarea}`}
             rows={isTextItem ? 24 : 4}
             value={contentVal}
@@ -285,7 +293,6 @@ export default function ItemDialog({ item, onClose }: Props) {
                 markChanged()
             }}
             onKeyDown={saveHotkeyHandler}
-            autoFocus
         />
     )
 
