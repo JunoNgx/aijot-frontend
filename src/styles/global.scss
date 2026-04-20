@@ -30,7 +30,8 @@ body {
     outline-offset: 2px;
 }
 
-input {
+input,
+textarea {
     font-family: var(--fontFamilyMono);
     font-size: inherit;
     box-sizing: border-box;

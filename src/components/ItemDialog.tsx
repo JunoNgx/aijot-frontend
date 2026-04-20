@@ -7,9 +7,9 @@ import {
 } from "react"
 import * as Accordion from "@radix-ui/react-accordion"
 import { DateTime } from "luxon"
-import { EditorView, keymap, drawSelection } from "@codemirror/view"
-import { EditorState } from "@codemirror/state"
-import { defaultKeymap, history, historyKeymap } from "@codemirror/commands"
+// import { EditorView, keymap, drawSelection } from "@codemirror/view"
+// import { EditorState } from "@codemirror/state"
+// import { defaultKeymap, history, historyKeymap } from "@codemirror/commands"
 import { IconX } from "@tabler/icons-react"
 import { ICON_PROPS_ACTION } from "@/utils/constants"
 import { useItemsMutations } from "@/hooks/useItemsMutations"
@@ -24,77 +24,77 @@ import type { Item } from "@/types"
 
 const AUTOSAVE_DEBOUNCE_MS = 5000
 
-interface CodeMirrorEditorProps {
-    initialValue: string
-    onChange: (value: string) => void
-    onSaveAndClose: () => void
-    isReadOnly?: boolean
-}
+// interface CodeMirrorEditorProps {
+//     initialValue: string
+//     onChange: (value: string) => void
+//     onSaveAndClose: () => void
+//     isReadOnly?: boolean
+// }
 
-function CodeMirrorEditor({
-    initialValue,
-    onChange,
-    onSaveAndClose,
-    isReadOnly = false,
-}: CodeMirrorEditorProps) {
-    const containerRef = useRef<HTMLDivElement>(null)
-    const onChangeRef = useRef(onChange)
-    const onSaveAndCloseRef = useRef(onSaveAndClose)
-    useLayoutEffect(() => {
-        onChangeRef.current = onChange
-        onSaveAndCloseRef.current = onSaveAndClose
-    })
+// function CodeMirrorEditor({
+//     initialValue,
+//     onChange,
+//     onSaveAndClose,
+//     isReadOnly = false,
+// }: CodeMirrorEditorProps) {
+//     const containerRef = useRef<HTMLDivElement>(null)
+//     const onChangeRef = useRef(onChange)
+//     const onSaveAndCloseRef = useRef(onSaveAndClose)
+//     useLayoutEffect(() => {
+//         onChangeRef.current = onChange
+//         onSaveAndCloseRef.current = onSaveAndClose
+//     })
 
-    useLayoutEffect(() => {
-        if (!containerRef.current) return
-        const view = new EditorView({
-            state: EditorState.create({
-                doc: initialValue,
-                extensions: [
-                    history(),
-                    drawSelection(),
-                    EditorView.editable.of(!isReadOnly),
-                    EditorState.readOnly.of(isReadOnly),
-                    // Element is outside of react tree,
-                    // this must be declared here
-                    EditorView.theme({
-                        ".cm-cursor, .cm-dropCursor": {
-                            borderLeftColor: "var(--colText)",
-                        },
-                    }),
-                    keymap.of([
-                        {
-                            key: "Mod-s",
-                            run: () => {
-                                onSaveAndCloseRef.current()
-                                return true
-                            },
-                        },
-                        ...defaultKeymap,
-                        ...historyKeymap,
-                    ]),
-                    EditorView.lineWrapping,
-                    EditorView.updateListener.of((update) => {
-                        if (update.docChanged) {
-                            onChangeRef.current(update.state.doc.toString())
-                        }
-                    }),
-                ],
-            }),
-            parent: containerRef.current,
-        })
-        if (!isReadOnly) {
-            // TODO: hacky, find better solution
-            setTimeout(() => {
-                view.focus()
-            }, 0)
-        }
-        return () => view.destroy()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+//     useLayoutEffect(() => {
+//         if (!containerRef.current) return
+//         const view = new EditorView({
+//             state: EditorState.create({
+//                 doc: initialValue,
+//                 extensions: [
+//                     history(),
+//                     drawSelection(),
+//                     EditorView.editable.of(!isReadOnly),
+//                     EditorState.readOnly.of(isReadOnly),
+//                     // Element is outside of react tree,
+//                     // this must be declared here
+//                     EditorView.theme({
+//                         ".cm-cursor, .cm-dropCursor": {
+//                             borderLeftColor: "var(--colText)",
+//                         },
+//                     }),
+//                     keymap.of([
+//                         {
+//                             key: "Mod-s",
+//                             run: () => {
+//                                 onSaveAndCloseRef.current()
+//                                 return true
+//                             },
+//                         },
+//                         ...defaultKeymap,
+//                         ...historyKeymap,
+//                     ]),
+//                     EditorView.lineWrapping,
+//                     EditorView.updateListener.of((update) => {
+//                         if (update.docChanged) {
+//                             onChangeRef.current(update.state.doc.toString())
+//                         }
+//                     }),
+//                 ],
+//             }),
+//             parent: containerRef.current,
+//         })
+//         if (!isReadOnly) {
+//             // TODO: hacky, find better solution
+//             setTimeout(() => {
+//                 view.focus()
+//             }, 0)
+//         }
+//         return () => view.destroy()
+//         // eslint-disable-next-line react-hooks/exhaustive-deps
+//     }, [])
 
-    return <div ref={containerRef} className={styles.CodeMirror} />
-}
+//     return <div ref={containerRef} className={styles.CodeMirror} />
+// }
 
 interface Props {
     item: Item
@@ -107,7 +107,7 @@ export default function ItemDialog({ item, onClose }: Props) {
     const closeAllDialogs = useDialogStore((s) => s.closeAllDialogs)
 
     const [titleVal, setTitleVal] = useState(item.title ?? "")
-    const [contentVal, _setContentVal] = useState(item.content)
+    const [contentVal, setContentVal] = useState(item.content)
     const [tagStr, setTagStr] = useState(item.tags.join(" "))
     const [jottedAtVal, setJottedAtVal] = useState<string | null>(item.jottedAt)
     const [faviconUrlVal, setFaviconUrlVal] = useState(item.faviconUrl ?? "")
@@ -155,6 +155,7 @@ export default function ItemDialog({ item, onClose }: Props) {
     }, [isPinnedVal])
 
     const isLinkItem = item.type === "link"
+    const isTextItem = item.type === "text"
 
     const buildUpdatedItem = useCallback(
         (): Item => ({
@@ -215,10 +216,10 @@ export default function ItemDialog({ item, onClose }: Props) {
         markChanged()
     }
 
-    const handleCodeMirrorChange = (value: string) => {
-        contentRef.current = value
-        markChanged()
-    }
+    // const handleCodeMirrorChange = (value: string) => {
+    //     contentRef.current = value
+    //     markChanged()
+    // }
 
     const handleTagStrChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const collapsed = e.target.value.replace(/  +/g, " ")
@@ -275,10 +276,16 @@ export default function ItemDialog({ item, onClose }: Props) {
         : ""
 
     const contentEditor = (
-        <CodeMirrorEditor
-            initialValue={contentVal}
-            onChange={handleCodeMirrorChange}
-            onSaveAndClose={handleSaveAndClose}
+        <textarea
+            className={`Dialog__Input ${styles.ItemDialog__Textarea}`}
+            rows={isTextItem ? 24 : 4}
+            value={contentVal}
+            onChange={(e) => {
+                setContentVal(e.target.value)
+                markChanged()
+            }}
+            onKeyDown={saveHotkeyHandler}
+            autoFocus
         />
     )
 

@@ -102,24 +102,24 @@
     }
 }
 
-.CodeMirror {
-    :global(.cm-editor) {
-        @include StandardBorder;
-        overflow: hidden;
-        min-height: 200px;
-    }
+// .CodeMirror {
+//     :global(.cm-editor) {
+//         @include StandardBorder;
+//         overflow: hidden;
+//         min-height: 200px;
+//     }
 
-    :global(.cm-editor.cm-focused) {
-        outline: none;
-        border-color: var(--colMain);
-    }
+//     :global(.cm-editor.cm-focused) {
+//         outline: none;
+//         border-color: var(--colMain);
+//     }
 
-    :global(.cm-content) {
-        padding: 0.5rem;
-        font-family: var(--fontFamilyMono);
-    }
+//     :global(.cm-content) {
+//         padding: 0.5rem;
+//         font-family: var(--fontFamilyMono);
+//     }
 
-    :global(.cm-scroller) {
-        overflow: auto;
-    }
-}
+//     :global(.cm-scroller) {
+//         overflow: auto;
+//     }
+// }
