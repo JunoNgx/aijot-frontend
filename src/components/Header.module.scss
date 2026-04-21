@@ -65,6 +65,10 @@
         top: auto;
         bottom: 0;
 
+        &__Wrapper {
+            padding-bottom: 2rem;
+        }
+
         &__Block {
             gap: 0.25rem;
 
