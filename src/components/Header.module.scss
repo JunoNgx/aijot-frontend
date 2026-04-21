@@ -6,6 +6,7 @@
     top: 0;
     width: 100%;
     user-select: none;
+    z-index: var(--zIndexHeader);
     @include GlassBlur;
 
     body[data-scroll-locked] & {
