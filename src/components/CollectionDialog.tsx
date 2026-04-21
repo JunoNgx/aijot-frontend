@@ -407,13 +407,14 @@ export default function CollectionDialog({ collection }: Props) {
             <div className={styles.CollectionDialog__Field}>
                 <label className={styles.CollectionDialog__Label}>Tags</label>
                 <span className={styles.CollectionDialog__Description}>
-                    Separated by spaces
+                    Collection will shows item with the following tags
+                    (separated by spaces)
                 </span>
                 <input
                     className="Dialog__Input"
                     value={tagStr}
                     onChange={handleTagStrChange}
-                    placeholder="tag1 tag2 tag3"
+                    placeholder=""
                 />
             </div>
             {defaultSection}
