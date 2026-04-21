@@ -53,7 +53,6 @@ export function useItemActions() {
             () => useTransientUiState.getState().removeCopiedItemId(item.id),
             1500,
         )
-        toast("Item content copied")
     }
 
     const editItem = (item: Item) => openItemDialog(item)
