@@ -12,9 +12,9 @@ import {
     TRASH_PURGE_DURATION_DAY,
 } from "@/utils/constants"
 import { useProfileSettings } from "@/store/profileSettings"
-import MainInput from "@/components/MainInput"
+import MainInput from "@/pages/Jot/MainInput"
 import JotItem from "@/components/itemComponent/JotItem"
-import DemoDataBanner from "./DemoDataBanner"
+import DemoDataBanner from "@/pages/Jot/DemoDataBanner"
 import styles from "./index.module.scss"
 import type { Collection, MainInputSearchData, Item } from "@/types"
 
