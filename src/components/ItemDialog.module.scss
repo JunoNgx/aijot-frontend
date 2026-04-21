@@ -69,8 +69,7 @@
 }
 
 .Accordion {
-    background-color: var(--colBgAlt);
-    padding: 0.5rem;
+    @include StandardBorder;
 
     &__Item {
         & + & {
@@ -90,6 +89,7 @@
         width: 100%;
         font-size: var(--fontSizeMd);
         cursor: pointer;
+        padding: 0.5rem 0.75rem;
         box-sizing: border-box;
     }
 
@@ -106,7 +106,7 @@
     }
 
     &__ContentInner {
-        padding: 0.75rem;
+        padding: 0.25rem 0.75rem 1rem;
     }
 
     &__Content[data-state="open"] {
