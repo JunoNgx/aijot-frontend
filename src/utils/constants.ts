@@ -7,6 +7,9 @@ const CORE_COLLECTION_INIT_TIME = DateTime.now().toUTC().toISO()
 // App
 // ============================================================
 
+export const APP_VERSION = "0.0.1"
+export const COMMIT_SHA = import.meta.env.VERCEL_GIT_COMMIT_SHA
+
 export const DB_VERSION = 1
 
 export const TRASH_PURGE_DURATION_DAY = 7

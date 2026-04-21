@@ -18,6 +18,7 @@ import {
     commitImport,
 } from "@/services/exportImport"
 import { clearAllData, resetApp } from "@/utils/clearData"
+import { APP_VERSION, COMMIT_SHA } from "@/utils/constants"
 import type { ExportData, ImportSummary } from "@/types"
 import { queryKeys } from "@/db/queryKeys"
 import styles from "./index.module.scss"
@@ -534,7 +535,9 @@ export default function Settings() {
 
             <section className={styles.Section}>
                 <h2 className={styles.Section__Title}>About</h2>
-                <p className={styles.Settings__Version}>Version 0.0.1</p>
+                <p className={styles.Settings__Version}>
+                    Version {APP_VERSION} ({COMMIT_SHA})
+                </p>
                 <div className="FlexRow">
                     <button
                         className={styles.Settings__BtnAction}

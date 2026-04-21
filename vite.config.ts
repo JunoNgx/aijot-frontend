@@ -4,6 +4,11 @@ import { VitePWA } from "vite-plugin-pwa"
 import { resolve } from "path"
 
 export default defineConfig({
+    define: {
+        "import.meta.env.VERCEL_GIT_COMMIT_SHA": JSON.stringify(
+            process.env.VERCEL_GIT_COMMIT_SHA || "dev",
+        ),
+    },
     resolve: {
         alias: {
             "@": resolve(__dirname, "src"),
