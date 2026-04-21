@@ -1,3 +1,10 @@
 {
-    "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+    "rewrites": [{ "source": "/(.*)", "destination": "/" }],
+    "redirects": [
+        {
+            "source": "/:path*",
+            "destination": "https://aijot.app/:path*",
+            "status": 301
+        }
+    ]
 }
