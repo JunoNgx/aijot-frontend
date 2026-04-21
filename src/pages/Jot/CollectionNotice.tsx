@@ -1,18 +1,23 @@
 import DemoDataBanner from "./DemoDataBanner"
 import { TRASH_PURGE_DURATION_DAY } from "@/utils/constants"
+import type { Collection } from "@/types"
 import styles from "./CollectionNotice.module.scss"
 
 interface CollectionNoticeProps {
     shouldShowDemoDataBanner: boolean
     isTrash: boolean
-    collectionTags: string[]
+    collection: Collection | undefined
 }
 
 export default function CollectionNotice({
     shouldShowDemoDataBanner,
     isTrash,
-    collectionTags,
+    collection,
 }: CollectionNoticeProps) {
+    const displayTags = collection
+        ? collection.coreType === "untagged" ? ["[untagged]"] : collection.tags
+        : [""];
+
     return (
         <div className={styles.CollectionNotice}>
             {shouldShowDemoDataBanner && <DemoDataBanner />}
@@ -22,14 +27,13 @@ export default function CollectionNotice({
                     {TRASH_PURGE_DURATION_DAY} days
                 </p>
             )}
-            {collectionTags.length > 0 && (
+            {displayTags.length > 0 && (
                 <div className={styles.CollectionNotice__TagsWrapper}>
                     <span className={styles.CollectionNotice__TagsLabel}>
                         Showing tags:
-                    </span>
-                    {" "}
+                    </span>{" "}
                     <span className={styles.CollectionNotice__TagsContent}>
-                        {collectionTags.join(" ")}
+                        {displayTags.join(" ")}
                     </span>
                 </div>
             )}

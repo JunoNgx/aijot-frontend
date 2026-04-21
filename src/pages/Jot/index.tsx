@@ -144,7 +144,7 @@ export default function Jot() {
             <CollectionNotice
                 shouldShowDemoDataBanner={shouldShowDemoDataBanner}
                 isTrash={isTrash}
-                collectionTags={currCollection?.tags ?? []}
+                collection={currCollection}
             />
             <MainInput
                 inputRef={mainInputRef}
