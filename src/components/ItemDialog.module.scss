@@ -105,6 +105,10 @@
         overflow: hidden;
     }
 
+    &__ContentInner {
+        padding: 0.75rem;
+    }
+
     &__Content[data-state="open"] {
         animation: slideDown var(--transTime) ease-in-out forwards;
     }

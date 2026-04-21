@@ -298,65 +298,67 @@ export default function ItemDialog({ item, onClose }: Props) {
                 </Accordion.Trigger>
             </Accordion.Header>
             <Accordion.Content className={styles.Accordion__Content}>
-                {isLinkItem && (
+                <div className={styles.Accordion__ContentInner}>
+                    {isLinkItem && (
+                        <div className={styles.ItemDialog__Field}>
+                            <label className={styles.ItemDialog__Label}>
+                                Favicon
+                            </label>
+                            <input
+                                className="Dialog__Input"
+                                value={faviconUrlVal}
+                                onChange={handleFaviconUrlChange}
+                                onKeyDown={saveHotkeyHandler}
+                                placeholder="https://..."
+                            />
+                        </div>
+                    )}
+                    <div className={styles.ItemDialog__Field}>
+                        <label className={styles.ItemDialog__Checkbox}>
+                            <input
+                                type="checkbox"
+                                checked={shouldCopyOnClickVal}
+                                onChange={(e) => {
+                                    setShouldCopyOnClickVal(e.target.checked)
+                                    markChanged()
+                                }}
+                            />
+                            Copy content on click as primary action
+                        </label>
+                    </div>
+                    <div className={styles.ItemDialog__Field}>
+                        <label className={styles.ItemDialog__Checkbox}>
+                            <input
+                                type="checkbox"
+                                checked={isPinnedVal}
+                                onChange={(e) => {
+                                    setIsPinnedVal(e.target.checked)
+                                    markChanged()
+                                }}
+                            />
+                            Pin this item
+                        </label>
+                    </div>
                     <div className={styles.ItemDialog__Field}>
                         <label className={styles.ItemDialog__Label}>
-                            Favicon
+                            Jotted at
                         </label>
                         <input
                             className="Dialog__Input"
-                            value={faviconUrlVal}
-                            onChange={handleFaviconUrlChange}
-                            onKeyDown={saveHotkeyHandler}
-                            placeholder="https://..."
+                            type="datetime-local"
+                            value={jottedAtInputVal}
+                            onChange={handleJottedAtChange}
                         />
                     </div>
-                )}
-                <div className={styles.ItemDialog__Field}>
-                    <label className={styles.ItemDialog__Checkbox}>
-                        <input
-                            type="checkbox"
-                            checked={shouldCopyOnClickVal}
-                            onChange={(e) => {
-                                setShouldCopyOnClickVal(e.target.checked)
-                                markChanged()
-                            }}
-                        />
-                        Copy content on click as primary action
-                    </label>
+                    {item.previousContent && (
+                        <button
+                            className={styles.ItemDialog__BtnAction}
+                            onClick={() => openPreviousVersionDialog(item)}
+                        >
+                            View previous version
+                        </button>
+                    )}
                 </div>
-                <div className={styles.ItemDialog__Field}>
-                    <label className={styles.ItemDialog__Checkbox}>
-                        <input
-                            type="checkbox"
-                            checked={isPinnedVal}
-                            onChange={(e) => {
-                                setIsPinnedVal(e.target.checked)
-                                markChanged()
-                            }}
-                        />
-                        Pin this item
-                    </label>
-                </div>
-                <div className={styles.ItemDialog__Field}>
-                    <label className={styles.ItemDialog__Label}>
-                        Jotted at
-                    </label>
-                    <input
-                        className="Dialog__Input"
-                        type="datetime-local"
-                        value={jottedAtInputVal}
-                        onChange={handleJottedAtChange}
-                    />
-                </div>
-                {item.previousContent && (
-                    <button
-                        className={styles.ItemDialog__BtnAction}
-                        onClick={() => openPreviousVersionDialog(item)}
-                    >
-                        View previous version
-                    </button>
-                )}
             </Accordion.Content>
         </Accordion.Item>
     )
