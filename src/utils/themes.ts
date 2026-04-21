@@ -162,7 +162,8 @@ const monkeyTypeThemes = [
         colText: "#091914",
         colDanger: "#990000",
     },
-    { // Modified
+    {
+        // Modified
         name: "Godspeed",
         colBg: "#eae4cf",
         colMain: "#9abbcd",
@@ -226,7 +227,8 @@ const monkeyTypeThemes = [
         colText: "#ffffff",
         colDanger: "#fff591",
     },
-    { // Modified
+    {
+        // Modified
         name: "Modern Dolch",
         colBg: "#2d2e30",
         colMain: "#7eddd3",
@@ -234,7 +236,8 @@ const monkeyTypeThemes = [
         colText: "#e3e6eb",
         colDanger: "#973b4a",
     },
-    { // Modified
+    {
+        // Modified
         name: "Modern Dolch Light",
         colBg: "#dbdbdb",
         colMain: "#8fd1c3",
@@ -298,7 +301,8 @@ const monkeyTypeThemes = [
         colText: "#e5f4f4",
         colDanger: "#da3333",
     },
-    { // Modified
+    {
+        // Modified
         name: "Retro",
         colBg: "#dad3c1",
         colMain: "#1d1b17",
@@ -473,6 +477,54 @@ const monkeyTypeThemes = [
         colSub: "#5c4a9c",
         colText: "#e8e8e8",
         colDanger: "#da3333",
+    },
+    {
+        name: "Arch",
+        colBg: "#0c0d11",
+        colMain: "#7ebab5",
+        colSub: "#454864",
+        colText: "#f6f5f5",
+        colDanger: "#ff4754",
+    },
+    {
+        name: "One Dark",
+        colBg: "#2f343f",
+        colMain: "#61afef",
+        colSub: "#eceff4",
+        colText: "#98c379",
+        colDanger: "#e06c75",
+    },
+    {
+        name: "Repose Dark",
+        colBg: "#2f3338",
+        colMain: "#d6d2bc",
+        colSub: "#8f8e84",
+        colText: "#d6d2bc",
+        colDanger: "#ff4a59",
+    },
+    {
+        name: "Soaring Skies",
+        colBg: "#fff9f2",
+        colMain: "#55c6f0",
+        colSub: "#1e107a",
+        colText: "#1d1e1e",
+        colDanger: "#fb5745",
+    },
+    {
+        name: "Superuser",
+        colBg: "#262a33",
+        colMain: "#43ffaf",
+        colSub: "#526777",
+        colText: "#e5f7ef",
+        colDanger: "#ff5f5f",
+    },
+    {
+        name: "Viridescent",
+        colBg: "#2c3333",
+        colMain: "#95d5b2",
+        colSub: "#84a98c",
+        colText: "#e9f5db",
+        colDanger: "#ff4646",
     },
 ] as const
 
