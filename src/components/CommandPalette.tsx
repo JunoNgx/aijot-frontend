@@ -375,6 +375,11 @@ export default function CommandPalette({
             className={styles.CommandPalette__Content}
             aria-describedby={undefined}
             onInteractOutside={revertThemePreview}
+            onOpenAutoFocus={(e) => {
+                if (window.matchMedia("(hover: none)").matches) {
+                    e.preventDefault()
+                }
+            }}
             onCloseAutoFocus={() => {
                 if (isThemeMode && !didCommitThemeSelection.current) {
                     revertThemePreview()
