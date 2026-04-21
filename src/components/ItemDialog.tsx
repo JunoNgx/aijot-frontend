@@ -287,22 +287,17 @@ export default function ItemDialog({ item, onClose }: Props) {
     )
 
     const moreOptionsAccordion = (
-        <Accordion.Item
-            value="advanced"
-            className={styles.ItemDialog__AccordionItem}
-        >
-            <Accordion.Header className={styles.ItemDialog__AccordionHeader}>
-                <Accordion.Trigger
-                    className={styles.ItemDialog__AccordionTrigger}
-                >
+        <Accordion.Item value="advanced" className={styles.Accordion__Item}>
+            <Accordion.Header className={styles.Accordion__Header}>
+                <Accordion.Trigger className={styles.Accordion__Trigger}>
                     <span>More options</span>
                     <IconChevronDown
                         {...ICON_PROPS_ACTION}
-                        className={styles.ItemDialog__AccordionChevron}
+                        className={styles.Accordion__Chevron}
                     />
                 </Accordion.Trigger>
             </Accordion.Header>
-            <Accordion.Content className={styles.ItemDialog__AccordionContent}>
+            <Accordion.Content className={styles.Accordion__Content}>
                 {isLinkItem && (
                     <div className={styles.ItemDialog__Field}>
                         <label className={styles.ItemDialog__Label}>
@@ -437,10 +432,7 @@ export default function ItemDialog({ item, onClose }: Props) {
                     placeholder=""
                 />
             </div>
-            <Accordion.Root
-                type="multiple"
-                className={styles.ItemDialog__Accordion}
-            >
+            <Accordion.Root type="multiple" className={styles.Accordion}>
                 {moreOptionsAccordion}
             </Accordion.Root>
             <div className={styles.ItemDialog__Footer}>

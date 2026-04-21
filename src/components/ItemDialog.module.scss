@@ -30,70 +30,6 @@
         font-size: var(--fontSizeSm);
     }
 
-    &__Accordion {
-        background-color: var(--colBgAlt);
-        padding: 0.5rem;
-    }
-
-    &__AccordionItem {
-        & + & {
-            border-top: var(--lineWidth) solid var(--colText);
-        }
-    }
-
-    &__AccordionHeader {
-        margin: 0;
-    }
-
-    &__AccordionTrigger {
-        all: unset;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        font-size: var(--fontSizeMd);
-        cursor: pointer;
-        box-sizing: border-box;
-    }
-
-    &__AccordionChevron {
-        transition: transform var(--transTime) ease;
-    }
-
-    &__AccordionTrigger[data-state="open"] &__AccordionChevron {
-        transform: rotate(180deg);
-    }
-
-    &__AccordionContent {
-        overflow: hidden;
-    }
-
-    &__AccordionContent[data-state="open"] {
-        animation: slideDown var(--transTime) ease-in-out forwards;
-    }
-
-    &__AccordionContent[data-state="closed"] {
-        animation: slideUp var(--transTime) ease-in-out forwards;
-    }
-
-    @keyframes slideDown {
-        from {
-            height: 0;
-        }
-        to {
-            height: var(--radix-accordion-content-height);
-        }
-    }
-
-    @keyframes slideUp {
-        from {
-            height: var(--radix-accordion-content-height);
-        }
-        to {
-            height: 0;
-        }
-    }
-
     &__Footer {
         composes: Dialog__Footer from global;
     }
@@ -129,6 +65,70 @@
     &__CloseBtn {
         composes: Btn Btn--Icon from global;
         composes: Dialog__CloseBtn from global;
+    }
+}
+
+.Accordion {
+    background-color: var(--colBgAlt);
+    padding: 0.5rem;
+
+    &__Item {
+        & + & {
+            border-top: var(--lineWidth) solid var(--colText);
+        }
+    }
+
+    &__Header {
+        margin: 0;
+    }
+
+    &__Trigger {
+        all: unset;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        font-size: var(--fontSizeMd);
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+
+    &__Chevron {
+        transition: transform var(--transTime) ease;
+    }
+
+    &__Trigger[data-state="open"] &__Chevron {
+        transform: rotate(180deg);
+    }
+
+    &__Content {
+        overflow: hidden;
+    }
+
+    &__Content[data-state="open"] {
+        animation: slideDown var(--transTime) ease-in-out forwards;
+    }
+
+    &__Content[data-state="closed"] {
+        animation: slideUp var(--transTime) ease-in-out forwards;
+    }
+
+    @keyframes slideDown {
+        from {
+            height: 0;
+        }
+        to {
+            height: var(--radix-accordion-content-height);
+        }
+    }
+
+    @keyframes slideUp {
+        from {
+            height: var(--radix-accordion-content-height);
+        }
+        to {
+            height: 0;
+        }
     }
 }
 
