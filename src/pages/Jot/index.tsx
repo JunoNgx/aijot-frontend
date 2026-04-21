@@ -9,12 +9,11 @@ import {
     SHORTCUT_FOCUS_MAIN_INPUT,
     SHORTCUT_TOGGLE_JOT_LIST_VIEW,
     ROUTE_JOT,
-    TRASH_PURGE_DURATION_DAY,
 } from "@/utils/constants"
 import { useProfileSettings } from "@/store/profileSettings"
 import MainInput from "@/pages/Jot/MainInput"
+import CollectionNotice from "@/pages/Jot/CollectionNotice"
 import JotItem from "@/components/itemComponent/JotItem"
-import DemoDataBanner from "@/pages/Jot/DemoDataBanner"
 import styles from "./index.module.scss"
 import type { Collection, MainInputSearchData, Item } from "@/types"
 
@@ -142,15 +141,10 @@ export default function Jot() {
 
     return (
         <div className={styles.Jot}>
-            <div className={styles.Jot__NoticeWrapper}>
-                {shouldShowDemoDataBanner && <DemoDataBanner />}
-                {isTrash && (
-                    <p className={styles.Jot__CollectionNotice}>
-                        Items in trash are automatically deleted after{" "}
-                        {TRASH_PURGE_DURATION_DAY} days
-                    </p>
-                )}
-            </div>
+            <CollectionNotice
+                shouldShowDemoDataBanner={shouldShowDemoDataBanner}
+                isTrash={isTrash}
+            />
             <MainInput
                 inputRef={mainInputRef}
                 onParse={setSearchData}

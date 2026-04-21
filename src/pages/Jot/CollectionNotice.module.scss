@@ -1,0 +1,10 @@
+.CollectionNotice {
+    padding: 40px 0;
+
+    &__Text {
+        text-align: center;
+        font-size: var(--fontSizeMd);
+        font-style: italic;
+        color: var(--colSub);
+    }
+}
