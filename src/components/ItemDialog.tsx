@@ -299,20 +299,6 @@ export default function ItemDialog({ item, onClose }: Props) {
             </Accordion.Header>
             <Accordion.Content className={styles.Accordion__Content}>
                 <div className={styles.Accordion__ContentInner}>
-                    {isLinkItem && (
-                        <div className={styles.ItemDialog__Field}>
-                            <label className={styles.ItemDialog__Label}>
-                                Favicon
-                            </label>
-                            <input
-                                className="Dialog__Input"
-                                value={faviconUrlVal}
-                                onChange={handleFaviconUrlChange}
-                                onKeyDown={saveHotkeyHandler}
-                                placeholder="https://..."
-                            />
-                        </div>
-                    )}
                     <div className={styles.ItemDialog__Field}>
                         <label className={styles.ItemDialog__Checkbox}>
                             <input
@@ -344,15 +330,32 @@ export default function ItemDialog({ item, onClose }: Props) {
                             Jotted at
                         </label>
                         <input
-                            className="Dialog__Input"
+                            className="Dialog__Input HalfInput"
                             type="datetime-local"
                             value={jottedAtInputVal}
                             onChange={handleJottedAtChange}
                         />
                     </div>
+                    {isLinkItem && (
+                        <div className={styles.ItemDialog__Field}>
+                            <label className={styles.ItemDialog__Label}>
+                                Favicon
+                            </label>
+                            <input
+                                className="Dialog__Input HalfInput"
+                                value={faviconUrlVal}
+                                onChange={handleFaviconUrlChange}
+                                onKeyDown={saveHotkeyHandler}
+                                placeholder="https://..."
+                            />
+                        </div>
+                    )}
                     {item.previousContent && (
                         <button
-                            className={styles.ItemDialog__BtnAction}
+                            className={`
+                                ${styles.ItemDialog__BtnAction}
+                                ${styles.ItemDialog__BtnPrevVersion}
+                            `}
                             onClick={() => openPreviousVersionDialog(item)}
                         >
                             View previous version

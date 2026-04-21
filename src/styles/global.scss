@@ -75,6 +75,11 @@ input[type="radio"] {
     }
 }
 
+.HalfInput {
+    border-width: 0 0 var(--lineWidth) 0;
+    padding: 0 0.5rem 0 0;
+}
+
 input[type="checkbox"] {
     appearance: none;
     @include StandardBorder;
