@@ -11,19 +11,27 @@ const originalThemes = [
     },
     {
         name: "JustJot Dark",
-        colBg: "#222222",
+        colBg: "#171717",
         colMain: "#5dffa2",
         colSub: "#c28c77",
         colText: "#e0e0e0",
         colDanger: "#fa5252",
     },
     {
-        name: "True Black",
+        name: "JustJot Black",
         colBg: "#000000",
         colMain: "#00E5FF",
         colSub: "#FF9100",
         colText: "#ebebeb",
         colDanger: "#bb474f",
+    },
+    {
+        name: "9009",
+        colBg: "#e5e1d8",
+        colMain: "#7fa580",
+        colSub: "#c87e74",
+        colText: "#171718",
+        colDanger: "#bc251e",
     },
 ] as const
 
@@ -41,14 +49,6 @@ const monkeyTypeThemes = [
         colSub: "#939eae",
         colText: "#e9ecf0",
         colDanger: "#da3333",
-    },
-    {
-        name: "9009",
-        colBg: "#eeebe2",
-        colMain: "#080909",
-        colSub: "#99947f",
-        colText: "#080909",
-        colDanger: "#c87e74",
     },
     {
         name: "Alduin",
@@ -162,12 +162,12 @@ const monkeyTypeThemes = [
         colText: "#091914",
         colDanger: "#990000",
     },
-    {
+    { // Modified
         name: "Godspeed",
         colBg: "#eae4cf",
         colMain: "#9abbcd",
-        colSub: "#ada998",
-        colText: "#646669",
+        colSub: "#7b786c",
+        colText: "#414345",
         colDanger: "#ca4754",
     },
     {
@@ -226,21 +226,21 @@ const monkeyTypeThemes = [
         colText: "#ffffff",
         colDanger: "#fff591",
     },
-    {
+    { // Modified
         name: "Modern Dolch",
         colBg: "#2d2e30",
         colMain: "#7eddd3",
-        colSub: "#54585c",
+        colSub: "#d36a7b",
         colText: "#e3e6eb",
-        colDanger: "#d36a7b",
+        colDanger: "#973b4a",
     },
-    {
+    { // Modified
         name: "Modern Dolch Light",
         colBg: "#dbdbdb",
         colMain: "#8fd1c3",
-        colSub: "#a3a2a2",
+        colSub: "#ea8a9a",
         colText: "#454545",
-        colDanger: "#ea8a9a",
+        colDanger: "#ec4e68",
     },
     {
         name: "Monokai",
@@ -298,11 +298,11 @@ const monkeyTypeThemes = [
         colText: "#e5f4f4",
         colDanger: "#da3333",
     },
-    {
+    { // Modified
         name: "Retro",
         colBg: "#dad3c1",
         colMain: "#1d1b17",
-        colSub: "#918b7d",
+        colSub: "#686358",
         colText: "#1d1b17",
         colDanger: "#bf616a",
     },
@@ -403,14 +403,6 @@ const monkeyTypeThemes = [
         colDanger: "#c4b5fc",
     },
     {
-        name: "Vesper Light",
-        colBg: "#f4f4f8",
-        colMain: "#6e6a9e",
-        colSub: "#a5a5bd",
-        colText: "#1d1d2b",
-        colDanger: "#6e6a9e",
-    },
-    {
         name: "VSCode",
         colBg: "#1e1e1e",
         colMain: "#007acc",
@@ -449,14 +441,6 @@ const monkeyTypeThemes = [
         colSub: "#d4d2d1",
         colText: "#14120f",
         colDanger: "#c82931",
-    },
-    {
-        name: "Honey",
-        colBg: "#f2aa00",
-        colMain: "#fff546",
-        colSub: "#a66b00",
-        colText: "#f3eecb",
-        colDanger: "#df3333",
     },
     {
         name: "Menthol",
