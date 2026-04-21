@@ -65,8 +65,10 @@
         top: auto;
         bottom: 0;
 
-        &__Wrapper {
-            padding-bottom: 2rem;
+        @media (pointer: coarse) {
+            &__Wrapper {
+                padding-bottom: 2rem;
+            }
         }
 
         &__Block {
