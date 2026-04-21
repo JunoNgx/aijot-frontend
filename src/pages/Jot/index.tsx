@@ -13,7 +13,7 @@ import {
 import { useProfileSettings } from "@/store/profileSettings"
 import MainInput from "@/pages/Jot/MainInput"
 import CollectionNotice from "@/pages/Jot/CollectionNotice"
-import JotItem from "@/components/itemComponent/JotItem"
+import JotItem from "@/pages/Jot/JotItem"
 import styles from "./index.module.scss"
 import type { Collection, MainInputSearchData, Item } from "@/types"
 
