@@ -93,6 +93,7 @@
     }
 
     &__Copied {
+        color: var(--colMain);
         animation: copiedFadeIn var(--transTime) ease-in-out forwards;
 
         @keyframes copiedFadeIn {
