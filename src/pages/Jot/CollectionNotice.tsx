@@ -15,8 +15,10 @@ export default function CollectionNotice({
     collection,
 }: CollectionNoticeProps) {
     const displayTags = collection
-        ? collection.coreType === "untagged" ? ["[untagged]"] : collection.tags
-        : [""];
+        ? collection.coreType === "untagged"
+            ? ["[untagged]"]
+            : collection.tags
+        : [""]
 
     return (
         <div className={styles.CollectionNotice}>
