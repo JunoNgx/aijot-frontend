@@ -1,13 +1,19 @@
 {
     "rewrites": [
         {
-            "source": "/((?!assets/).*)",
+            "source": "/((?!assets/|favicon.ico|robots.txt).*)",
             "destination": "/"
         }
     ],
     "redirects": [
         {
             "source": "/(.*)",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "www.aijot.app"
+                }
+            ],
             "destination": "https://aijot.app/$1",
             "statusCode": 301
         }
