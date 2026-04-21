@@ -10,7 +10,7 @@ import { DateTime } from "luxon"
 // import { EditorView, keymap, drawSelection } from "@codemirror/view"
 // import { EditorState } from "@codemirror/state"
 // import { defaultKeymap, history, historyKeymap } from "@codemirror/commands"
-import { IconX } from "@tabler/icons-react"
+import { IconX, IconChevronDown } from "@tabler/icons-react"
 import { ICON_PROPS_ACTION } from "@/utils/constants"
 import { useItemsMutations } from "@/hooks/useItemsMutations"
 import { useItemActions } from "@/hooks/useItemActions"
@@ -295,7 +295,11 @@ export default function ItemDialog({ item, onClose }: Props) {
                 <Accordion.Trigger
                     className={styles.ItemDialog__AccordionTrigger}
                 >
-                    More options
+                    <span>More options</span>
+                    <IconChevronDown
+                        {...ICON_PROPS_ACTION}
+                        className={styles.ItemDialog__AccordionChevron}
+                    />
                 </Accordion.Trigger>
             </Accordion.Header>
             <Accordion.Content className={styles.ItemDialog__AccordionContent}>
