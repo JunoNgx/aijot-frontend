@@ -1323,6 +1323,55 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource/be-vietnam-pro@npm:^5.2.8":
+  version: 5.2.8
+  resolution: "@fontsource/be-vietnam-pro@npm:5.2.8"
+  checksum: 10c0/46185f881123d542e9254b1237caffadd6b1280927abddc499c4545d67fd634d377a5ed765b121a777beba268bbc453ef919cf04b53cbf564417ac3e1861376d
+  languageName: node
+  linkType: hard
+
+"@fontsource/dm-mono@npm:^5.2.7":
+  version: 5.2.7
+  resolution: "@fontsource/dm-mono@npm:5.2.7"
+  checksum: 10c0/028843c26545e86ad01219786daabe18386ed5e19ebefd6bc00fd799f8dc33df0c3d679fe942bf9355696d21903459282d97cd671ee8b2e05cd876560f9bb441
+  languageName: node
+  linkType: hard
+
+"@fontsource/fira-code@npm:^5.2.7":
+  version: 5.2.7
+  resolution: "@fontsource/fira-code@npm:5.2.7"
+  checksum: 10c0/389d1356def9018da529bf6055af9d41d6f6ae9ee2ff804a9b0e3bd2f8cf2754967e2b4a25e267d21215278849fb13711b9fe9573c051a1e191ad737e55f125f
+  languageName: node
+  linkType: hard
+
+"@fontsource/hanken-grotesk@npm:^5.2.8":
+  version: 5.2.8
+  resolution: "@fontsource/hanken-grotesk@npm:5.2.8"
+  checksum: 10c0/166a99ae9ce290baf1f2526b96c1f71201960b1774d5a1c493b82f3046f4bb55281435199ddc4e6d8ec216fc344464d970a5beffc615e35d73612389dc05ebf0
+  languageName: node
+  linkType: hard
+
+"@fontsource/inclusive-sans@npm:^5.2.8":
+  version: 5.2.8
+  resolution: "@fontsource/inclusive-sans@npm:5.2.8"
+  checksum: 10c0/91f178c5b2d683ef9410c886ac1aed5676985b2a5efef4440c7f83bd05b1323630068133c6c909ed73f4fe7861338b316bd5b498b7a833d2c287643778e16543
+  languageName: node
+  linkType: hard
+
+"@fontsource/plus-jakarta-sans@npm:^5.2.8":
+  version: 5.2.8
+  resolution: "@fontsource/plus-jakarta-sans@npm:5.2.8"
+  checksum: 10c0/c16b0dcb5d5f7eeaa6cbc6a0824c0bb59bf70f58e3997c5bf95eb08cd46117b660bec61e7c3fdc7f517dd847e568449c468edfe936c51783e4b9438e52a39ff8
+  languageName: node
+  linkType: hard
+
+"@fontsource/roboto-mono@npm:^5.2.8":
+  version: 5.2.8
+  resolution: "@fontsource/roboto-mono@npm:5.2.8"
+  checksum: 10c0/042aeb468ebd89cecb2e78d1c3775ce5ab33d496003f56d31c84c0f04db38fc11714fa30846a330800e44ec0faf7620bca54833b641a9bcbae33e8489f0b5444
+  languageName: node
+  linkType: hard
+
 "@fontsource/space-grotesk@npm:^5.2.10":
   version: 5.2.10
   resolution: "@fontsource/space-grotesk@npm:5.2.10"
@@ -1334,6 +1383,13 @@ __metadata:
   version: 5.2.9
   resolution: "@fontsource/space-mono@npm:5.2.9"
   checksum: 10c0/ca025887e613f35a5daa3863ccc467cb7c3661771963a6e1d5584bf1e9710bff97e1d42a148f6872b0c9b794ca9d24a9d413a0b33f4db4ef9a6c36bcf0da9b56
+  languageName: node
+  linkType: hard
+
+"@fontsource/work-sans@npm:^5.2.8":
+  version: 5.2.8
+  resolution: "@fontsource/work-sans@npm:5.2.8"
+  checksum: 10c0/75b3bfaed9f5bd658fec251b3cfdc07cb8bc243ea9667aff8928a2d561dda2fa4e0a41b14d0543a9b0804e6bb366baa789cf8655e6127ae34761cc4c94f966eb
   languageName: node
   linkType: hard
 
@@ -2836,8 +2892,16 @@ __metadata:
     "@codemirror/state": "npm:^6.6.0"
     "@codemirror/view": "npm:^6.41.0"
     "@eslint/js": "npm:^9.39.4"
+    "@fontsource/be-vietnam-pro": "npm:^5.2.8"
+    "@fontsource/dm-mono": "npm:^5.2.7"
+    "@fontsource/fira-code": "npm:^5.2.7"
+    "@fontsource/hanken-grotesk": "npm:^5.2.8"
+    "@fontsource/inclusive-sans": "npm:^5.2.8"
+    "@fontsource/plus-jakarta-sans": "npm:^5.2.8"
+    "@fontsource/roboto-mono": "npm:^5.2.8"
     "@fontsource/space-grotesk": "npm:^5.2.10"
     "@fontsource/space-mono": "npm:^5.2.9"
+    "@fontsource/work-sans": "npm:^5.2.8"
     "@hello-pangea/dnd": "npm:^18.0.1"
     "@radix-ui/react-accordion": "npm:^1.2.12"
     "@radix-ui/react-context-menu": "npm:^2.2.16"
