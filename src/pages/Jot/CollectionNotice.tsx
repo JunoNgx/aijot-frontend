@@ -1,4 +1,5 @@
 import DemoDataBanner from "./DemoDataBanner"
+import SyncButton from "@/components/SyncButton"
 import { TRASH_PURGE_DURATION_DAY } from "@/config/constants"
 import type { Collection } from "@/types"
 import styles from "./CollectionNotice.module.scss"
@@ -22,6 +23,9 @@ export default function CollectionNotice({
 
     return (
         <div className={styles.CollectionNotice}>
+            <div className={styles.CollectionNotice__SyncWrapper}>
+                <SyncButton />
+            </div>
             {shouldShowDemoDataBanner && <DemoDataBanner />}
             {isTrash && (
                 <p className={styles.CollectionNotice__Text}>

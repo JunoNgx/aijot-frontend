@@ -1,0 +1,29 @@
+.SyncButton {
+    composes: Btn Btn--Icon from global;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+
+    &__Label {
+        font-size: var(--fontSizeXs);
+        color: var(--colTextAlt);
+    }
+
+    &__IconSpinning {
+        animation: spin 1s linear infinite;
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

@@ -22,6 +22,7 @@ import {
     SHORTCUT_ITEM_CONVERT_TO_TODO,
     SHORTCUT_SAVE_AND_CLOSE,
     SHORTCUT_SHORTCUTS_HELP,
+    SHORTCUT_SYNC,
 } from "@/config/constants"
 import styles from "./ShortcutDialog.module.scss"
 
@@ -183,6 +184,10 @@ export default function ShortcutDialog() {
                         <ShortcutItem
                             shortcut={SHORTCUT_SAVE_AND_CLOSE}
                             description="Save and close (editor)"
+                        />
+                        <ShortcutItem
+                            shortcut={SHORTCUT_SYNC}
+                            description="Sync to Google Drive"
                         />
                         <ShortcutItem
                             shortcut={SHORTCUT_SHORTCUTS_HELP}
