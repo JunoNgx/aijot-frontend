@@ -17,5 +17,6 @@
     &__BtnLoad {
         composes: Btn Btn--Pri from global;
         flex-shrink: 1;
+        padding: 0.25rem !important;
     }
 }
