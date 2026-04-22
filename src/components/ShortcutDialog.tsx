@@ -74,7 +74,9 @@ export default function ShortcutDialog() {
     return (
         <div className={styles.ShortcutDialog}>
             <div className={styles.ShortcutDialog__Header}>
-                <h2 className={styles.ShortcutDialog__Title}>Shortcuts</h2>
+                <h2 className={styles.ShortcutDialog__Title}>
+                    Hotkey shortcuts
+                </h2>
                 <button
                     className="Btn Btn--Icon"
                     onClick={closeAllDialogs}
