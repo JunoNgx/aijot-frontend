@@ -355,8 +355,8 @@ Remove all Mantine packages: `@mantine/core`, `@mantine/dates`, `@mantine/hooks`
 
 ## Task 32 — Post-release polish
 
-- [ ] Spotlight: setup + actions (theme, nav, export, sync)
-- [ ] Collection tag picker in ItemDialog: highlights collections whose tags match the item's tags
+- [x] Spotlight: setup + actions (theme, nav, export, sync)
+- [x] Collection tag picker in ItemDialog: highlights collections whose tags match the item's tags
 
 ## Task 33 - Offline handling
 
