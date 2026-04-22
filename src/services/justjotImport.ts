@@ -1,5 +1,5 @@
 import { storage } from "@/db"
-import type { Collection, Item, ItemType } from "@/types"
+import type { Collection, ImportSummary, Item, ItemType } from "@/types"
 
 // ============================================================
 // Random icon helper (mirrors CollectionDialog)
@@ -147,4 +147,48 @@ export async function transformJustJotToAijot(
         })
 
     return { collections, items }
+}
+
+// ============================================================
+// Import summary
+// ============================================================
+
+export async function getJustJotImportSummary(
+    data: JustJotExportData,
+): Promise<ImportSummary> {
+    const { collections, items } = await transformJustJotToAijot(data)
+
+    const [existingItems, existingCollections] = await Promise.all([
+        storage.getItems(),
+        storage.getCollections(),
+    ])
+
+    const existingItemIds = new Set(existingItems.map((i) => i.id))
+    const existingCollectionIds = new Set(existingCollections.map((c) => c.id))
+
+    return {
+        newItems: items.filter((i) => !existingItemIds.has(i.id)).length,
+        updatedItems: items.filter((i) => existingItemIds.has(i.id)).length,
+        newCollections: collections.filter(
+            (c) => !existingCollectionIds.has(c.id),
+        ).length,
+        updatedCollections: collections.filter((c) =>
+            existingCollectionIds.has(c.id),
+        ).length,
+    }
+}
+
+// ============================================================
+// Commit import
+// ============================================================
+
+export async function commitJustJotImport(
+    data: JustJotExportData,
+): Promise<void> {
+    const { collections, items } = await transformJustJotToAijot(data)
+
+    await Promise.all([
+        storage.bulkPutCollections(collections),
+        storage.bulkPutItems(items),
+    ])
 }
