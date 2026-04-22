@@ -110,6 +110,14 @@ input[type="checkbox"] {
     }
 }
 
+select {
+    @include StandardBorder;
+    color: var(--colText);
+    background-color: var(--colBg);
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+}
+
 kbd {
     color: var(--colSub);
     border-style: solid;

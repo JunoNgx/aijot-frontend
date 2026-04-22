@@ -11,6 +11,7 @@ import { useProfileSettings } from "@/store/profileSettings"
 import { useCoreCollectionSettings } from "@/store/coreCollectionSettings"
 import { useLocalSyncData } from "@/store/localSyncData"
 import { useDialogStore } from "@/store/dialogStore"
+import { SANS_SERIF_FONTS, MONO_FONTS } from "@/utils/fonts"
 import {
     exportData,
     parseImportFile,
@@ -36,6 +37,10 @@ export default function Settings() {
     const [isDebugMode, setIsDebugMode] = useState(false)
 
     const theme = useLocalUserSettings((s) => s.theme)
+    const fontFamily = useLocalUserSettings((s) => s.fontFamily)
+    const setFontFamily = useLocalUserSettings((s) => s.setFontFamily)
+    const fontFamilyMono = useLocalUserSettings((s) => s.fontFamilyMono)
+    const setFontFamilyMono = useLocalUserSettings((s) => s.setFontFamilyMono)
 
     const is24HourClock = useProfileSettings((s) => s.is24HourClock)
     const setIs24HourClock = useProfileSettings((s) => s.setIs24HourClock)
@@ -457,6 +462,48 @@ export default function Settings() {
                     >
                         Change Theme
                     </button>
+                </div>
+
+                <div className={`${styles.Field} ${styles["Field--FlexRow"]}`}>
+                    <label
+                        className={styles.Field__Label}
+                        htmlFor="uiFontSelect"
+                    >
+                        Primary UI font:
+                    </label>
+                    <select
+                        id="uiFontSelect"
+                        className={styles.Field__Input}
+                        value={fontFamily}
+                        onChange={(e) => setFontFamily(e.target.value)}
+                    >
+                        {SANS_SERIF_FONTS.map((font) => (
+                            <option key={font.cssName} value={font.cssName}>
+                                {font.name}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
+                <div className={`${styles.Field} ${styles["Field--FlexRow"]}`}>
+                    <label
+                        className={styles.Field__Label}
+                        htmlFor="codeFontSelect"
+                    >
+                        Input mono font:
+                    </label>
+                    <select
+                        id="codeFontSelect"
+                        className={styles.Field__Input}
+                        value={fontFamilyMono}
+                        onChange={(e) => setFontFamilyMono(e.target.value)}
+                    >
+                        {MONO_FONTS.map((font) => (
+                            <option key={font.cssName} value={font.cssName}>
+                                {font.name}
+                            </option>
+                        ))}
+                    </select>
                 </div>
             </section>
 
