@@ -7,6 +7,10 @@ export const useLocalUserSettings = create<LocalUserSettingsStore>()(
         (set) => ({
             theme: "JustJot Light",
             setTheme: (theme) => set({ theme }),
+            fontFamily: "Space Grotesk",
+            setFontFamily: (fontFamily) => set({ fontFamily }),
+            fontFamilyMono: "Space Mono",
+            setFontFamilyMono: (fontFamilyMono) => set({ fontFamilyMono }),
         }),
         { name: "localUserSettings" },
     ),

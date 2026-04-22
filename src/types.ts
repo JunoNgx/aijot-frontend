@@ -57,6 +57,10 @@ export type ThemeMode = ThemeName
 export interface LocalUserSettingsStore {
     theme: ThemeMode
     setTheme: (theme: ThemeMode) => void
+    fontFamily: string
+    setFontFamily: (font: string) => void
+    fontFamilyMono: string
+    setFontFamilyMono: (font: string) => void
 }
 
 export interface LocalAppDataStore {
