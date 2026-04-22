@@ -18,9 +18,15 @@ import {
     getImportSummary,
     commitImport,
 } from "@/services/exportImport"
+import {
+    parseJustJotFile,
+    getJustJotImportSummary,
+    commitJustJotImport,
+} from "@/services/justjotImport"
 import { clearAllData, resetApp } from "@/utils/clearData"
 import { APP_VERSION, COMMIT_SHA } from "@/config/constants"
 import type { ExportData, ImportSummary } from "@/types"
+import type { JustJotExportData } from "@/services/justjotImport"
 import { queryKeys } from "@/db/queryKeys"
 import styles from "./index.module.scss"
 import BackBtn from "@/components/BackBtn"
@@ -28,10 +34,15 @@ import BackBtn from "@/components/BackBtn"
 export default function Settings() {
     const queryClient = useQueryClient()
     const importInputRef = useRef<HTMLInputElement>(null)
+    const justjotImportInputRef = useRef<HTMLInputElement>(null)
     const [pendingImport, setPendingImport] = useState<ExportData | null>(null)
     const [importSummary, setImportSummary] = useState<ImportSummary | null>(
         null,
     )
+    const [pendingJustJotImport, setPendingJustJotImport] =
+        useState<JustJotExportData | null>(null)
+    const [justJotImportSummary, setJustJotImportSummary] =
+        useState<ImportSummary | null>(null)
     const [isClearingData, setIsClearingData] = useState(false)
     const [isResettingApp, setIsResettingApp] = useState(false)
     const [isDebugMode, setIsDebugMode] = useState(false)
@@ -162,6 +173,40 @@ export default function Settings() {
         } finally {
             setPendingImport(null)
             setImportSummary(null)
+        }
+    }
+
+    const handleJustJotImportFile = async (
+        e: React.ChangeEvent<HTMLInputElement>,
+    ) => {
+        const file = e.target.files?.[0]
+        if (!file) return
+        try {
+            const data = await parseJustJotFile(file)
+            const summary = await getJustJotImportSummary(data)
+            setPendingJustJotImport(data)
+            setJustJotImportSummary(summary)
+            setPendingImport(null)
+            setImportSummary(null)
+        } catch {
+            toast.error("Failed to read file: invalid JustJot format")
+        } finally {
+            e.target.value = ""
+        }
+    }
+
+    const handleConfirmJustJotImport = async () => {
+        if (!pendingJustJotImport) return
+        try {
+            await commitJustJotImport(pendingJustJotImport)
+            queryClient.invalidateQueries({ queryKey: queryKeys.items })
+            queryClient.invalidateQueries({ queryKey: queryKeys.collections })
+            toast("JustJot data imported successfully")
+        } catch {
+            toast.error("Failed to import JustJot data")
+        } finally {
+            setPendingJustJotImport(null)
+            setJustJotImportSummary(null)
         }
     }
 
@@ -530,12 +575,26 @@ export default function Settings() {
                     >
                         Import
                     </button>
+                    <button
+                        className={styles.Settings__BtnAction}
+                        type="button"
+                        onClick={() => justjotImportInputRef.current?.click()}
+                    >
+                        Import from JustJot
+                    </button>
                     <input
                         ref={importInputRef}
                         type="file"
                         accept=".json"
                         style={{ display: "none" }}
                         onChange={handleImportFile}
+                    />
+                    <input
+                        ref={justjotImportInputRef}
+                        type="file"
+                        accept=".json"
+                        style={{ display: "none" }}
+                        onChange={handleJustJotImportFile}
                     />
                 </div>
                 {pendingImport && importSummary && (
@@ -563,6 +622,38 @@ export default function Settings() {
                                 onClick={() => {
                                     setPendingImport(null)
                                     setImportSummary(null)
+                                }}
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                )}
+                {pendingJustJotImport && justJotImportSummary && (
+                    <div className={styles.Settings__ImportPreview}>
+                        <span>
+                            {justJotImportSummary.newItems} new,{" "}
+                            {justJotImportSummary.updatedItems} updated items
+                        </span>
+                        <span>
+                            {justJotImportSummary.newCollections} new,{" "}
+                            {justJotImportSummary.updatedCollections} updated
+                            collections
+                        </span>
+                        <div className={styles.Settings__ImportPreviewActions}>
+                            <button
+                                className={styles.Settings__BtnAction}
+                                type="button"
+                                onClick={handleConfirmJustJotImport}
+                            >
+                                Confirm
+                            </button>
+                            <button
+                                className={styles.Settings__BtnAction}
+                                type="button"
+                                onClick={() => {
+                                    setPendingJustJotImport(null)
+                                    setJustJotImportSummary(null)
                                 }}
                             >
                                 Cancel
