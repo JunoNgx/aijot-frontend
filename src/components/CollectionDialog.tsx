@@ -1,14 +1,13 @@
 import { useState, useRef, useEffect } from "react"
 import { DateTime } from "luxon"
 import { EmojiPicker } from "frimousse"
-import { HexColorPicker } from "react-colorful"
-import { IconArrowsShuffle, IconX } from "@tabler/icons-react"
+import { IconX } from "@tabler/icons-react"
 import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
 import { useCollectionsMutations } from "@/hooks/useCollectionsMutations"
 import { useCoreCollectionSettings } from "@/store/coreCollectionSettings"
 import { useDialogStore } from "@/store/dialogStore"
 import { useSyncedUserSettings } from "@/store/syncedUserSettings"
-import { generateSlug, isValidHexColourCode } from "@/utils/helpers"
+import { generateSlug } from "@/utils/helpers"
 import styles from "./CollectionDialog.module.scss"
 import type { Collection, ItemType } from "@/types"
 import { ICON_PROPS_ACTION } from "@/config/constants"
@@ -37,11 +36,6 @@ const RANDOM_ICONS = [
 ]
 const getRandomIcon = () =>
     RANDOM_ICONS[Math.floor(Math.random() * RANDOM_ICONS.length)]
-const getRandomColour = () =>
-    "#" +
-    Math.floor(Math.random() * 0xffffff)
-        .toString(16)
-        .padStart(6, "0")
 
 const ALL_TYPES: ItemType[] = ["text", "todo", "link"]
 const TYPE_LABELS: Record<ItemType, string> = {
@@ -75,20 +69,17 @@ export default function CollectionDialog({ collection }: Props) {
     const [nameVal, setNameVal] = useState(collection?.name ?? "")
     const [slugVal, setSlugVal] = useState(collection?.slug ?? "")
     const [iconVal, setIconVal] = useState(collection?.icon ?? getRandomIcon())
-    const [colourVal, setColourVal] = useState(collection?.colour ?? "#d0d0d0")
     const [typesVal, setTypesVal] = useState<ItemType[]>(
         collection?.types ?? ALL_TYPES,
     )
     const [tagStr, setTagStr] = useState(collection?.tags.join(" ") ?? "")
     const [saveError, setSaveError] = useState<string | null>(null)
     const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false)
-    const [isColourPickerOpen, setIsColourPickerOpen] = useState(false)
     const isDefault = isEditing && collection.slug === defaultCollectionSlug
 
     const isSlugManuallyEditedRef = useRef(isEditing)
     const emojiBtnRef = useRef<HTMLButtonElement>(null)
     const emojiFieldRef = useRef<HTMLDivElement>(null)
-    const colourPickerRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         if (!isEmojiPickerOpen) return
@@ -101,18 +92,6 @@ export default function CollectionDialog({ collection }: Props) {
         return () =>
             document.removeEventListener("mousedown", handleClickOutside)
     }, [isEmojiPickerOpen])
-
-    useEffect(() => {
-        if (!isColourPickerOpen) return
-        const handleClickOutside = (e: MouseEvent) => {
-            if (!colourPickerRef.current?.contains(e.target as Node)) {
-                setIsColourPickerOpen(false)
-            }
-        }
-        document.addEventListener("mousedown", handleClickOutside)
-        return () =>
-            document.removeEventListener("mousedown", handleClickOutside)
-    }, [isColourPickerOpen])
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setNameVal(e.target.value)
@@ -176,7 +155,6 @@ export default function CollectionDialog({ collection }: Props) {
                 name: nameVal.trim(),
                 slug: newSlug,
                 icon: iconVal,
-                colour: colourVal,
                 updatedAt: now,
             }
             if (collection.coreType === "all") setAll(coreConfig)
@@ -192,7 +170,6 @@ export default function CollectionDialog({ collection }: Props) {
                 name: nameVal.trim(),
                 slug: newSlug,
                 icon: iconVal,
-                colour: colourVal,
                 types: typesVal,
                 tags,
                 updatedAt: now,
@@ -216,7 +193,6 @@ export default function CollectionDialog({ collection }: Props) {
             name: nameVal.trim(),
             slug: newSlug,
             icon: iconVal,
-            colour: colourVal,
             types: typesVal,
             tags,
             sortOrder: maxSortOrder + 1000,
@@ -230,9 +206,6 @@ export default function CollectionDialog({ collection }: Props) {
         deleteCollectionMutation.mutate(collection)
         closeAllDialogs()
     }
-
-    const isColourValid = isValidHexColourCode(colourVal)
-    const swatchColour = isColourValid ? colourVal : "transparent"
 
     const typeCheckboxes = ALL_TYPES.map((type) => (
         <label key={type} className={styles.CollectionDialog__TypeLabel}>
@@ -255,15 +228,6 @@ export default function CollectionDialog({ collection }: Props) {
                     <EmojiPicker.List />
                 </EmojiPicker.Viewport>
             </EmojiPicker.Root>
-        </div>
-    )
-
-    const colourPickerPanel = isColourPickerOpen && (
-        <div className={styles.CollectionDialog__ColourPicker}>
-            <HexColorPicker
-                color={isColourValid ? colourVal : "#d0d0d0"}
-                onChange={setColourVal}
-            />
         </div>
     )
 
@@ -369,40 +333,6 @@ export default function CollectionDialog({ collection }: Props) {
                         </div>
                     </div>
                 )}
-            </div>
-            <div className={styles.CollectionDialog__Field}>
-                <label className={styles.CollectionDialog__Label}>Colour</label>
-                <div
-                    className={styles.CollectionDialog__ColourField}
-                    ref={colourPickerRef}
-                >
-                    <div className={styles.CollectionDialog__ColourRow}>
-                        <input
-                            className={`Dialog__Input ${styles.CollectionDialog__ColourInput}`}
-                            value={colourVal}
-                            onChange={(e) => setColourVal(e.target.value)}
-                            placeholder="#rrggbb"
-                        />
-                        <button
-                            type="button"
-                            className={
-                                styles.CollectionDialog__ColourPreviewBlock
-                            }
-                            style={{ backgroundColor: swatchColour }}
-                            onClick={() =>
-                                setIsColourPickerOpen((prev) => !prev)
-                            }
-                        />
-                        <button
-                            type="button"
-                            className={styles.CollectionDialog__BtnRandomise}
-                            onClick={() => setColourVal(getRandomColour())}
-                        >
-                            <IconArrowsShuffle {...ICON_PROPS_ACTION} />
-                        </button>
-                    </div>
-                    {colourPickerPanel}
-                </div>
             </div>
             <div className={styles.CollectionDialog__Field}>
                 <label className={styles.CollectionDialog__Label}>Tags</label>

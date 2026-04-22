@@ -9,7 +9,7 @@ import { openCollectionDialog } from "@/utils/openCollectionDialog"
 import styles from "./index.module.scss"
 import { ICON_PROPS_BUTTON, ICON_PROPS_NORMAL } from "@/config/constants"
 import BackBtn from "@/components/BackBtn"
-import CollectionColourBlock from "@/components/CollectionColourBlock"
+
 import type { Collection } from "@/types"
 import type { DropResult } from "@hello-pangea/dnd"
 
@@ -214,7 +214,6 @@ function CollectionRow({ collection, isDefault }: CollectionRowProps) {
             <span className={styles.CollectionItem__Icon}>
                 {collection.icon}
             </span>
-            <CollectionColourBlock colour={collection.colour} />
             <span className={styles.CollectionItem__Name}>
                 {collection.name}
             </span>

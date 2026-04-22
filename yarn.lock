@@ -2925,7 +2925,6 @@ __metadata:
     luxon: "npm:^3.7.2"
     prettier: "npm:^3.8.2"
     react: "npm:^19.2.4"
-    react-colorful: "npm:^5.6.1"
     react-dom: "npm:^19.2.4"
     react-hotkeys-hook: "npm:^5.2.4"
     react-router-dom: "npm:^7.14.0"
@@ -5319,16 +5318,6 @@ __metadata:
   dependencies:
     safe-buffer: "npm:^5.1.0"
   checksum: 10c0/50395efda7a8c94f5dffab564f9ff89736064d32addf0cc7e8bf5e4166f09f8ded7a0849ca6c2d2a59478f7d90f78f20d8048bca3cdf8be09d8e8a10790388f3
-  languageName: node
-  linkType: hard
-
-"react-colorful@npm:^5.6.1":
-  version: 5.6.1
-  resolution: "react-colorful@npm:5.6.1"
-  peerDependencies:
-    react: ">=16.8.0"
-    react-dom: ">=16.8.0"
-  checksum: 10c0/48eb73cf71e10841c2a61b6b06ab81da9fffa9876134c239bfdebcf348ce2a47e56b146338e35dfb03512c85966bfc9a53844fc56bc50154e71f8daee59ff6f0
   languageName: node
   linkType: hard
 

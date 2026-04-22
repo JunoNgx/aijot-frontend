@@ -39,7 +39,6 @@ export interface Collection {
     updatedAt: string
     name: string
     icon: string
-    colour: string
     slug: string
     sortOrder: number
     tags: string[]
@@ -109,7 +108,6 @@ export interface CoreCollectionConfig {
     name: string
     slug: string
     icon: string
-    colour: string
     sortOrder: number
     createdAt: string
     updatedAt: string

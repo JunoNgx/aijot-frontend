@@ -47,7 +47,6 @@ export function buildCoreCollection(
         updatedAt: config.updatedAt,
         name: config.name,
         icon: config.icon,
-        colour: config.colour,
         slug: config.slug,
         sortOrder,
         tags: [],

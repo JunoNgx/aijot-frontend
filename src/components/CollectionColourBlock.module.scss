@@ -1,9 +1,0 @@
-@use "styles/mixins" as *;
-
-.CollectionColourBlock {
-    width: var(--collectionColourBlockSize);
-    height: var(--collectionColourBlockSize);
-    border: var(--lineWidth) solid var(--colTextAlt);
-    border-radius: 50%;
-    flex-shrink: 0;
-}

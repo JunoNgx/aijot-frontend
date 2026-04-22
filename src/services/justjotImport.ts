@@ -143,7 +143,6 @@ export async function transformJustJotToAijot(
             tags: [resolvedSlug],
             types: [...ALL_TYPES],
             icon: getRandomIcon(),
-            colour: "#000000",
             createdAt: normaliseJustJotDate(jc.created),
             updatedAt: normaliseJustJotDate(jc.updated),
         }
