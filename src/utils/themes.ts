@@ -177,7 +177,7 @@ const monkeyTypeThemes = [
         colMain: "#4fcdb9",
         colSub: "#213c53",
         colText: "#e2f1f5",
-        colDaner: "#e32b2b",
+        colDanger: "#e32b2b",
     },
     {
         name: "Horizon",
