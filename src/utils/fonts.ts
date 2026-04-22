@@ -16,14 +16,14 @@ export const SANS_SERIF_FONTS: FontOption[] = [
         importPath: "@fontsource/inclusive-sans",
     },
     {
-        name: "Be Vietnam Pro",
-        cssName: "Be Vietnam Pro",
-        importPath: "@fontsource/be-vietnam-pro",
-    },
-    {
         name: "Plus Jakarta Sans",
         cssName: "Plus Jakarta Sans",
         importPath: "@fontsource/plus-jakarta-sans",
+    },
+    {
+        name: "Be Vietnam Pro",
+        cssName: "Be Vietnam Pro",
+        importPath: "@fontsource/be-vietnam-pro",
     },
     {
         name: "Hanken Grotesk",
