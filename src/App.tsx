@@ -59,10 +59,15 @@ export default function App() {
             <DialogManager />
             <Toaster
                 position="bottom-right"
+                mobileOffset={{
+                    bottom: "4rem",
+                }}
                 toastOptions={{
                     unstyled: true,
                     classNames: {
                         toast: "SonnerToast",
+                        title: "SonnerToast__Title",
+                        description: "SonnerToast__Description",
                         actionButton: "SonnerToast__ActionBtn",
                     },
                 }}

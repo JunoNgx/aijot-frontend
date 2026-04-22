@@ -48,6 +48,9 @@
 
     --transTime: 200ms;
 
+    // Configure sonner
+    --mobile-offset-bottom: 3rem;
+
     @media (prefers-reduced-motion: reduce) {
         --transTime: 0ms;
     }
