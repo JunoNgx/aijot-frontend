@@ -153,11 +153,12 @@ export async function transformJustJotToAijot(
         .filter((ji) => !ji.isTrashed)
         .map((ji) => {
             const collectionSlug = slugMap.get(ji.collection) ?? ji.collection
+            const isTodo = ji.type === "todo"
 
             return {
                 id: ji.id,
-                title: ji.title.trim() || undefined,
-                content: ji.content,
+                title: isTodo ? undefined : ji.title.trim() || undefined,
+                content: isTodo ? ji.title.trim() : ji.content,
                 type: ji.type,
                 shouldCopyOnClick: ji.shouldCopyOnClick,
                 isDone: ji.isTodoDone,
