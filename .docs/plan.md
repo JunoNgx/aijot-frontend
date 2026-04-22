@@ -557,3 +557,44 @@ Add the ability to toggle between compact and expanded view modes in the jot lis
 
 - Row 1: icon + primary text + status icons
 - Row 2: tags + full jottedAt (bottom right)
+
+---
+
+## Task 37 — Import from JustJot
+
+Import collections and items from a JustJot JSON export. JustJot uses folders (items reference a `collection` by ID); ai\*jot uses tags. Each imported collection uses its **slug as a tag**, and items that belonged to it are tagged with the same slug. Trashed items are skipped. Imported collections get `colour: "#000000"` and a random icon. Slug collisions are resolved by appending `-imported` (or `-imported-N`). The flow is kept inline on the Settings page (no separate dialog).
+
+### 37a — JustJot types and parser
+
+- [x] Create `src/services/justjotImport.ts`
+- [x] Define `JustJotExportData`, `JustJotCollection`, `JustJotItem` interfaces
+- [x] `parseJustJotFile(file)` — read file, `JSON.parse`, validate `itemCollections` and `items` arrays exist
+
+### 37b — Transformer and collision resolver
+
+- [x] `transformJustJotToAijot(data)` — map JustJot shape to ai\*jot shape:
+    - Skip items where `isTrashed === true`
+    - Collections: preserve `id`, map `name`/`slug`/`sortOrder`, set `tags: [slug]`, `types: ["text", "todo", "link"]`, `icon` from `getRandomIcon()`, `colour: "#000000"`, normalise dates to ISO
+    - Items: preserve `id`, map `title` (empty → `undefined`), `content`, `type`, `shouldCopyOnClick`, `isDone` from `isTodoDone`, `faviconUrl` (empty → `undefined`), `tags: [collectionSlug]`, normalise dates, set `jottedAt` from `created`
+- [x] `resolveSlugCollisions(slug, existingSlugs)` — append `-imported` (or `-imported-N`) if slug already exists in DB
+
+### 37c — Import summary and commit
+
+- [x] `getJustJotImportSummary(data)` — compare transformed data against existing storage to count new vs updated collections/items
+- [x] `commitJustJotImport(data)` — calls `storage.bulkPutCollections` and `storage.bulkPutItems` with the transformed data
+
+### 37d — Settings page: file input, parse handler, inline preview
+
+- [x] Modify `src/pages/Settings/index.tsx`
+- [x] Add `justjotImportInputRef` (hidden `<input type="file" accept=".json">`)
+- [x] Add "Import from JustJot" button next to existing "Import" button in Data section
+- [x] `handleJustJotImportFile` — parse file, resolve slug collisions, transform, compute summary
+- [x] Show inline preview below buttons (same pattern as existing import preview): new/updated counts for items and collections
+- [x] "Confirm" / "Cancel" buttons for the preview
+
+### 37e — Settings page: confirm flow
+
+- [x] `handleConfirmJustJotImport` — call `commitJustJotImport`, invalidate `queryKeys.items` and `queryKeys.collections`, toast `"JustJot data imported successfully"`
+- [x] On error at any step: toast `"Failed to import JustJot data"`
+- [x] Reset pending state after confirm or cancel
+- [x] Run `yarn format`
