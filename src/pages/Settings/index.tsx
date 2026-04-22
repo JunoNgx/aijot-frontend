@@ -216,7 +216,7 @@ export default function Settings() {
             disconnect()
             await clearAllData()
             setShouldShowDemoDataBanner(true)
-            toast("All data cleared. Reloading...")
+            toast.loading("All data cleared. Reloading...")
             setTimeout(() => window.location.reload(), 1500)
         } catch {
             toast.error("Failed to clear data")
