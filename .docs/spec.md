@@ -148,7 +148,10 @@ Stores that are prefixed with `local*` are for local use only and never synced.
 
 #### `localUserSettings`
 
-- themeMode: "system" | "light" | "dark"
+- theme: theme name (e.g., "JustJot Light")
+- fontFamily: selected UI font
+- fontFamilyMono: selected code/monospace font
+- is24HourClock: boolean, defaults to system locale detection
 
 #### `localAppData`
 
@@ -166,10 +169,13 @@ Stores that are prefixed with `local*` are for local use only and never synced.
 - syncStatus: "idle" | "syncing" | "error"
 - syncError: store error from sync upon issue encountered
 
-### `profileSettings`
+### `syncedUserSettings`
 
 - userDisplayName: to display user name on the navbar, top right corner
 - shouldApplyTagsOfCurrCollection: boolean, true by default. When checked, when viewing a collection, creating new items will automatically apply the tags associated with this collection.
+- defaultCollectionSlug: string, "all" by default. The collection to navigate to when landing on /jot.
+- shouldCustomSortCollections: boolean, true by default. When true, collections use a custom sort order; when false, sorted alphabetically.
+- shouldShowJotItemExtraInfo: boolean, false by default. Controls whether newly created jot items will automatically inherit the tags of the currently viewing collection.
 
 ### `coreCollectionSettings`
 
@@ -198,7 +204,7 @@ Stores that are prefixed with `local*` are for local use only and never synced.
 - High contrast black/white with sparing use of grey unless absolutely necessary (for default themes)
 - Thick and bold lines and borders
 - No rounded corners
-- Font family: Space Grostek and Space Mono
+- Font family: user-selectable UI font and code font, chosen from curated lists via Settings dropdowns. Defaults: Space Grotesk (UI) and Space Mono (code).
 
 ### Landing page
 
@@ -385,6 +391,13 @@ Configuration for:
 
 - User display name
 - Sync config/manual sync
+- Collection sort order (custom vs. alphabetical)
+- Auto-apply collection tags when creating items
+- Display jot items with extra info by default
+- 24-hour clock toggle
+- Theme selector
+- UI font selector
+- Code font selector
 - All items collection
 - Untagged collection
 - Trash bin
@@ -565,9 +578,12 @@ User can export all data to one single json file. The same data can be re-import
     "items": [...],
     "collections": [...],
     "settings": {
-        "profile": {
+        "syncedUserSettings": {
             "userDisplayName": "User",
-            "shouldApplyTagsOfCurrCollection": true
+            "shouldApplyTagsOfCurrCollection": true,
+            "defaultCollectionSlug": "all",
+            "shouldCustomSortCollections": true,
+            "shouldShowJotItemExtraInfo": false
         },
         "coreCollections": {
             "all": { "name": "All", "slug": "all", "colour": "#ffffff" },
@@ -601,7 +617,7 @@ First time user (see `shouldShowDemoDataBanner`) will receive a banner inviting 
         - localUserSettings
         - localAppData
         - localSyncData
-        - profileSettings
+        - syncedUserSettings
         - coreCollectionSettings
     - db: Dexie setup and schema
     - services: API calls and sync
@@ -614,10 +630,10 @@ First time user (see `shouldShowDemoDataBanner`) will receive a banner inviting 
     - utils: pure helpers
         - slug generator
         - date formatter
-    - constants: app-wide constants
-        - misc.ts
-        - coreCollections.ts
-        - keyboardShortcuts.ts
+    - config: app-wide config and constants
+        - constants.ts: routes, defaults, shortcuts, syntax prefixes
+        - themes.ts: theme color definitions
+        - fonts.ts: curated font lists
     - routes.tsx: React Router config
     - App.tsx
     - main.tsx
