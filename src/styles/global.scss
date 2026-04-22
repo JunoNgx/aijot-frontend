@@ -114,6 +114,7 @@ select {
     @include StandardBorder;
     color: var(--colText);
     background-color: var(--colBg);
+    font-family: var(--fontFamily);
     padding: 0.25rem 0.5rem;
     cursor: pointer;
 }
