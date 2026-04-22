@@ -53,7 +53,9 @@ export default function SyncButton() {
             <IconRefresh
                 {...ICON_PROPS_NORMAL}
                 className={
-                    isSyncing ? styles.SyncButton__IconSpinning : undefined
+                    isSyncing
+                        ? `${styles.SyncButton__Icon} ${styles["SyncButton__Icon--Spinning"]}`
+                        : styles.SyncButton__Icon
                 }
             />
             <span className={styles.SyncButton__Label}>{syncLabel}</span>

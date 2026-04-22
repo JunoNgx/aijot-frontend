@@ -5,9 +5,8 @@
     text-align: center;
 
     &__SyncWrapper {
-        position: absolute;
-        top: 0.5rem;
-        right: 0.5rem;
+        composes: FlexRow FlexRow--FlexEnd from global;
+        margin-top: 0 !important;
     }
 
     &__Text {

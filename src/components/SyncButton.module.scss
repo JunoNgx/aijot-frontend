@@ -10,12 +10,17 @@
     }
 
     &__Label {
-        font-size: var(--fontSizeXs);
-        color: var(--colTextAlt);
+        font-size: var(--fontSizeSm);
+        color: var(--colText);
     }
 
-    &__IconSpinning {
-        animation: spin 1s linear infinite;
+    &__Icon {
+        flex-shrink: 0;
+        color: var(--colMain);
+
+        &--Spinning {
+            animation: spin 1s linear infinite;
+        }
     }
 }
 
