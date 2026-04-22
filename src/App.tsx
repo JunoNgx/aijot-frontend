@@ -58,7 +58,8 @@ export default function App() {
             <SyncManager />
             <DialogManager />
             <Toaster
-                position="bottom-right"
+                position="bottom-center"
+                swipeDirections={["left", "right"]}
                 mobileOffset={{
                     bottom: "4rem",
                 }}
