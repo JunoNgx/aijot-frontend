@@ -2,13 +2,13 @@ import { useQuery } from "@tanstack/react-query"
 import { storage } from "@/db"
 import { queryKeys } from "@/db/queryKeys"
 import { useCoreCollectionSettings } from "@/store/coreCollectionSettings"
-import { useProfileSettings } from "@/store/profileSettings"
+import { useSyncedUserSettings } from "@/store/syncedUserSettings"
 import { buildCoreCollection } from "@/utils/helpers"
 import type { Collection } from "@/types"
 
 export function useCollectionsQuery() {
     const { all, untagged, trash } = useCoreCollectionSettings()
-    const shouldCustomSortCollections = useProfileSettings(
+    const shouldCustomSortCollections = useSyncedUserSettings(
         (s) => s.shouldCustomSortCollections,
     )
 

@@ -92,7 +92,7 @@ export interface LocalSyncDataStore {
     setSyncError: (error: string | undefined) => void
 }
 
-export interface ProfileSettingsStore {
+export interface SyncedUserSettingsStore {
     userDisplayName: string
     shouldApplyTagsOfCurrCollection: boolean
     defaultCollectionSlug: string
@@ -164,7 +164,7 @@ export interface MainInputCreationData {
 // ============================================================
 
 export interface ExportSettings {
-    profile: {
+    syncedUserSettings: {
         userDisplayName: string
         shouldApplyTagsOfCurrCollection: boolean
         defaultCollectionSlug: string

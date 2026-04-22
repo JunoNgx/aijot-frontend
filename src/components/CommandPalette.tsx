@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom"
 import { useLocalUserSettings } from "@/store/localUserSettings"
 import { useNavigateRoutes } from "@/hooks/useNavigateRoutes"
 import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
-import { useProfileSettings } from "@/store/profileSettings"
+import { useSyncedUserSettings } from "@/store/syncedUserSettings"
 import { openCollectionDialog } from "@/utils/openCollectionDialog"
 import { themes } from "@/config/themes"
 import type { ThemeName } from "@/config/themes"
@@ -51,10 +51,10 @@ export default function CommandPalette({
 
     const { slug } = useParams<{ slug: string }>()
     const currentSlug = slug ?? null
-    const defaultCollectionSlug = useProfileSettings(
+    const defaultCollectionSlug = useSyncedUserSettings(
         (s) => s.defaultCollectionSlug,
     )
-    const setDefaultCollectionSlug = useProfileSettings(
+    const setDefaultCollectionSlug = useSyncedUserSettings(
         (s) => s.setDefaultCollectionSlug,
     )
     const { collectionsQuery } = useCollectionsQuery()

@@ -14,7 +14,7 @@ import ThemeManager from "@/components/ThemeManager"
 import FontManager from "@/components/FontManager"
 import PurgeManager from "@/components/PurgeManager"
 import SyncManager from "@/components/SyncManager"
-import { useProfileSettings } from "@/store/profileSettings"
+import { useSyncedUserSettings } from "@/store/syncedUserSettings"
 import {
     ROUTE_JOT,
     ROUTE_COLLECTION,
@@ -27,7 +27,7 @@ import {
 import layoutStyles from "./App.module.scss"
 
 function JotRedirect() {
-    const defaultCollectionSlug = useProfileSettings(
+    const defaultCollectionSlug = useSyncedUserSettings(
         (s) => s.defaultCollectionSlug,
     )
     return <Navigate to={`${ROUTE_JOT}/${defaultCollectionSlug}`} replace />

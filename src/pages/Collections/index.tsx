@@ -4,7 +4,7 @@ import { DateTime } from "luxon"
 import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
 import { useCollectionsMutations } from "@/hooks/useCollectionsMutations"
 import { useCoreCollectionSettings } from "@/store/coreCollectionSettings"
-import { useProfileSettings } from "@/store/profileSettings"
+import { useSyncedUserSettings } from "@/store/syncedUserSettings"
 import { openCollectionDialog } from "@/utils/openCollectionDialog"
 import styles from "./index.module.scss"
 import { ICON_PROPS_BUTTON, ICON_PROPS_NORMAL } from "@/config/constants"
@@ -18,13 +18,13 @@ export default function Collections() {
     const { updateCollectionMutation } = useCollectionsMutations()
     const { setAll, setUntagged, setTrash, all, untagged, trash } =
         useCoreCollectionSettings()
-    const defaultCollectionSlug = useProfileSettings(
+    const defaultCollectionSlug = useSyncedUserSettings(
         (s) => s.defaultCollectionSlug,
     )
-    const shouldCustomSortCollections = useProfileSettings(
+    const shouldCustomSortCollections = useSyncedUserSettings(
         (s) => s.shouldCustomSortCollections,
     )
-    const setShouldCustomSortCollections = useProfileSettings(
+    const setShouldCustomSortCollections = useSyncedUserSettings(
         (s) => s.setShouldCustomSortCollections,
     )
 

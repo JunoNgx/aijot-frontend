@@ -5,7 +5,7 @@ import { openItemDialog } from "@/utils/openItemDialog"
 import { buildItem } from "@/utils/itemFactory"
 import { parseCreationData } from "@/hooks/useMainInputParser"
 import { SYNTAX_PREFIX_LONG_TEXT } from "@/config/constants"
-import { useProfileSettings } from "@/store/profileSettings"
+import { useSyncedUserSettings } from "@/store/syncedUserSettings"
 import { useTransientUiState } from "@/store/transientUiState"
 import { type MouseEvent } from "react"
 import type { Item } from "@/types"
@@ -20,7 +20,7 @@ export function useItemActions() {
         refetchLinkMetaMutation,
     } = useItemsMutations()
 
-    const shouldApplyTagsOfCurrCollection = useProfileSettings(
+    const shouldApplyTagsOfCurrCollection = useSyncedUserSettings(
         (s) => s.shouldApplyTagsOfCurrCollection,
     )
 

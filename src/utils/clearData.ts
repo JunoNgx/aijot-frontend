@@ -2,7 +2,7 @@ import { storage, forceDeleteDb as deleteDb } from "@/db"
 import { useLocalAppData } from "@/store/localAppData"
 import { useLocalSyncData } from "@/store/localSyncData"
 import { useLocalUserSettings } from "@/store/localUserSettings"
-import { useProfileSettings } from "@/store/profileSettings"
+import { useSyncedUserSettings } from "@/store/syncedUserSettings"
 import { useCoreCollectionSettings } from "@/store/coreCollectionSettings"
 
 export async function clearAllData(): Promise<void> {
@@ -23,7 +23,7 @@ export function resetZustandStores(): void {
     useLocalAppData.persist.clearStorage()
     useLocalSyncData.persist.clearStorage()
     useLocalUserSettings.persist.clearStorage()
-    useProfileSettings.persist.clearStorage()
+    useSyncedUserSettings.persist.clearStorage()
     useCoreCollectionSettings.persist.clearStorage()
 }
 

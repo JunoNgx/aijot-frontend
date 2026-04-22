@@ -10,7 +10,7 @@ import {
     SHORTCUT_TOGGLE_JOT_LIST_VIEW,
     ROUTE_JOT,
 } from "@/config/constants"
-import { useProfileSettings } from "@/store/profileSettings"
+import { useSyncedUserSettings } from "@/store/syncedUserSettings"
 import MainInput from "@/pages/Jot/MainInput"
 import CollectionNotice from "@/pages/Jot/CollectionNotice"
 import JotItem from "@/pages/Jot/JotItem"
@@ -76,7 +76,7 @@ export default function Jot() {
     const { shouldShowDemoDataBanner } = useLocalAppData()
     const mainInputRef = useRef<HTMLInputElement>(null)
 
-    const defaultShouldShowJotItemExtraInfo = useProfileSettings(
+    const defaultShouldShowJotItemExtraInfo = useSyncedUserSettings(
         (s) => s.shouldShowJotItemExtraInfo,
     )
     const [isShowingJotItemExtraInfo, setIsShowingJotItemExtraInfo] = useState(

@@ -7,7 +7,7 @@ import {
     IconWritingSign,
     IconKeyboard,
 } from "@tabler/icons-react"
-import { useProfileSettings } from "@/store/profileSettings"
+import { useSyncedUserSettings } from "@/store/syncedUserSettings"
 import { useNavigateRoutes } from "@/hooks/useNavigateRoutes"
 import { openShortcutDialog } from "@/utils/openShortcutDialog"
 import {
@@ -22,7 +22,7 @@ import { useMatch } from "react-router-dom"
 
 export default function UserDropdown() {
     const userDisplayName =
-        useProfileSettings((s) => s.userDisplayName) || DEFAULT_USERNAME
+        useSyncedUserSettings((s) => s.userDisplayName) || DEFAULT_USERNAME
     const {
         navigateToJot,
         navigateToSettings,

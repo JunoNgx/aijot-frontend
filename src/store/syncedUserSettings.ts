@@ -1,9 +1,9 @@
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
-import type { ProfileSettingsStore } from "@/types"
+import type { SyncedUserSettingsStore } from "@/types"
 import { DEFAULT_USERNAME } from "@/config/constants"
 
-export const useProfileSettings = create<ProfileSettingsStore>()(
+export const useSyncedUserSettings = create<SyncedUserSettingsStore>()(
     persist(
         (set) => ({
             userDisplayName: DEFAULT_USERNAME,
@@ -21,6 +21,6 @@ export const useProfileSettings = create<ProfileSettingsStore>()(
             setShouldShowJotItemExtraInfo: (value) =>
                 set({ shouldShowJotItemExtraInfo: value }),
         }),
-        { name: "profileSettings" },
+        { name: "syncedUserSettings" },
     ),
 )

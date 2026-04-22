@@ -7,7 +7,7 @@ import { useNavigateRoutes } from "@/hooks/useNavigateRoutes"
 import { useLocalAppData } from "@/store/localAppData"
 import { useLocalUserSettings } from "@/store/localUserSettings"
 import { useCommandPaletteStore } from "@/store/commandPaletteStore"
-import { useProfileSettings } from "@/store/profileSettings"
+import { useSyncedUserSettings } from "@/store/syncedUserSettings"
 import { useCoreCollectionSettings } from "@/store/coreCollectionSettings"
 import { useLocalSyncData } from "@/store/localSyncData"
 import { useDialogStore } from "@/store/dialogStore"
@@ -44,31 +44,33 @@ export default function Settings() {
     const is24HourClock = useLocalUserSettings((s) => s.is24HourClock)
     const setIs24HourClock = useLocalUserSettings((s) => s.setIs24HourClock)
 
-    const defaultCollectionSlug = useProfileSettings(
+    const defaultCollectionSlug = useSyncedUserSettings(
         (s) => s.defaultCollectionSlug,
     )
-    const setDefaultCollectionSlug = useProfileSettings(
+    const setDefaultCollectionSlug = useSyncedUserSettings(
         (s) => s.setDefaultCollectionSlug,
     )
 
-    const userDisplayName = useProfileSettings((s) => s.userDisplayName)
-    const setUserDisplayName = useProfileSettings((s) => s.setUserDisplayName)
-    const shouldApplyTagsOfCurrCollection = useProfileSettings(
+    const userDisplayName = useSyncedUserSettings((s) => s.userDisplayName)
+    const setUserDisplayName = useSyncedUserSettings(
+        (s) => s.setUserDisplayName,
+    )
+    const shouldApplyTagsOfCurrCollection = useSyncedUserSettings(
         (s) => s.shouldApplyTagsOfCurrCollection,
     )
-    const setShouldApplyTagsOfCurrCollection = useProfileSettings(
+    const setShouldApplyTagsOfCurrCollection = useSyncedUserSettings(
         (s) => s.setShouldApplyTagsOfCurrCollection,
     )
-    const shouldCustomSortCollections = useProfileSettings(
+    const shouldCustomSortCollections = useSyncedUserSettings(
         (s) => s.shouldCustomSortCollections,
     )
-    const setShouldCustomSortCollections = useProfileSettings(
+    const setShouldCustomSortCollections = useSyncedUserSettings(
         (s) => s.setShouldCustomSortCollections,
     )
-    const shouldShowJotItemExtraInfo = useProfileSettings(
+    const shouldShowJotItemExtraInfo = useSyncedUserSettings(
         (s) => s.shouldShowJotItemExtraInfo,
     )
-    const setShouldShowJotItemExtraInfo = useProfileSettings(
+    const setShouldShowJotItemExtraInfo = useSyncedUserSettings(
         (s) => s.setShouldShowJotItemExtraInfo,
     )
 
@@ -102,7 +104,7 @@ export default function Settings() {
 
     const handleExport = async () => {
         await exportData({
-            profile: {
+            syncedUserSettings: {
                 userDisplayName,
                 shouldApplyTagsOfCurrCollection,
                 defaultCollectionSlug,
@@ -136,16 +138,18 @@ export default function Settings() {
         if (!pendingImport) return
         try {
             const settings = await commitImport(pendingImport)
-            setUserDisplayName(settings.profile.userDisplayName)
+            setUserDisplayName(settings.syncedUserSettings.userDisplayName)
             setShouldApplyTagsOfCurrCollection(
-                settings.profile.shouldApplyTagsOfCurrCollection,
+                settings.syncedUserSettings.shouldApplyTagsOfCurrCollection,
             )
-            setDefaultCollectionSlug(settings.profile.defaultCollectionSlug)
+            setDefaultCollectionSlug(
+                settings.syncedUserSettings.defaultCollectionSlug,
+            )
             setShouldCustomSortCollections(
-                settings.profile.shouldCustomSortCollections,
+                settings.syncedUserSettings.shouldCustomSortCollections,
             )
             setShouldShowJotItemExtraInfo(
-                settings.profile.shouldShowJotItemExtraInfo,
+                settings.syncedUserSettings.shouldShowJotItemExtraInfo,
             )
             setAll(settings.coreCollections.all)
             setUntagged(settings.coreCollections.untagged)

@@ -7,7 +7,7 @@ import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
 import { useCollectionsMutations } from "@/hooks/useCollectionsMutations"
 import { useCoreCollectionSettings } from "@/store/coreCollectionSettings"
 import { useDialogStore } from "@/store/dialogStore"
-import { useProfileSettings } from "@/store/profileSettings"
+import { useSyncedUserSettings } from "@/store/syncedUserSettings"
 import { generateSlug, isValidHexColourCode } from "@/utils/helpers"
 import styles from "./CollectionDialog.module.scss"
 import type { Collection, ItemType } from "@/types"
@@ -63,10 +63,10 @@ export default function CollectionDialog({ collection }: Props) {
     } = useCollectionsMutations()
     const { setAll, setUntagged, setTrash } = useCoreCollectionSettings()
     const closeAllDialogs = useDialogStore((s) => s.closeAllDialogs)
-    const defaultCollectionSlug = useProfileSettings(
+    const defaultCollectionSlug = useSyncedUserSettings(
         (s) => s.defaultCollectionSlug,
     )
-    const setDefaultCollectionSlug = useProfileSettings(
+    const setDefaultCollectionSlug = useSyncedUserSettings(
         (s) => s.setDefaultCollectionSlug,
     )
 
