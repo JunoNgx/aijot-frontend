@@ -1,5 +1,5 @@
 .Jot {
-    composes: Router from global;
+    composes: RouteWrapper from global;
     display: flex;
     flex-direction: column;
     gap: 2rem;

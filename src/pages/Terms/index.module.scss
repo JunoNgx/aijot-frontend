@@ -1,9 +1,9 @@
 @use "styles/mixins" as *;
 
 .Terms {
-    composes: Router from global;
+    composes: RouteWrapper from global;
 
     &__Title {
-        composes: Router__Title from global;
+        composes: RouteWrapper__Title from global;
     }
 }
