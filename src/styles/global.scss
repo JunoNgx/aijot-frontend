@@ -394,7 +394,7 @@ kbd {
 .RouteWrapper {
     max-width: var(--routeWidth);
     margin: auto;
-    padding: 2rem 1rem;
+    padding: 0 1rem;
 
     &__Header {
         display: flex;
