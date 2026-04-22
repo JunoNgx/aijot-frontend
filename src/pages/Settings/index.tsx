@@ -575,13 +575,6 @@ export default function Settings() {
                     >
                         Import
                     </button>
-                    <button
-                        className={styles.Settings__BtnAction}
-                        type="button"
-                        onClick={() => justjotImportInputRef.current?.click()}
-                    >
-                        Import from JustJot
-                    </button>
                     <input
                         ref={importInputRef}
                         type="file"
@@ -589,6 +582,15 @@ export default function Settings() {
                         style={{ display: "none" }}
                         onChange={handleImportFile}
                     />
+                </div>
+                <div className="FlexRow">
+                    <button
+                        className={styles.Settings__BtnAction}
+                        type="button"
+                        onClick={() => justjotImportInputRef.current?.click()}
+                    >
+                        Import from JustJot
+                    </button>
                     <input
                         ref={justjotImportInputRef}
                         type="file"
