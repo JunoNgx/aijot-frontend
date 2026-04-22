@@ -11,7 +11,7 @@ import {
     SYNTAX_FILTER_TYPE_INCOMPLETE_TODO,
     SYNTAX_FILTER_TYPE_COMPLETED_TODO,
     SYNTAX_SEARCH_TAG_PREFIX,
-} from "@/utils/constants"
+} from "@/config/constants"
 import type {
     MainInputCreationData,
     MainInputSearchData,

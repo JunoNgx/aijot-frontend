@@ -22,7 +22,7 @@ import {
     SHORTCUT_ITEM_CONVERT_TO_TODO,
     SHORTCUT_SAVE_AND_CLOSE,
     SHORTCUT_SHORTCUTS_HELP,
-} from "@/utils/constants"
+} from "@/config/constants"
 import styles from "./ShortcutDialog.module.scss"
 
 interface ShortcutItemProps {

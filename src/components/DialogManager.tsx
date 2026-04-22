@@ -3,7 +3,7 @@ import { useDialogStore } from "@/store/dialogStore"
 import styles from "./DialogManager.module.scss"
 import { useHotkeys } from "react-hotkeys-hook"
 import { openShortcutDialog } from "@/utils/openShortcutDialog"
-import { SHORTCUT_SHORTCUTS_HELP } from "@/utils/constants"
+import { SHORTCUT_SHORTCUTS_HELP } from "@/config/constants"
 
 export default function DialogManager() {
     const isOpen = useDialogStore((s) => s.isOpen)

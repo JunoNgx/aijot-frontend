@@ -11,7 +11,7 @@ import { useProfileSettings } from "@/store/profileSettings"
 import { generateSlug, isValidHexColourCode } from "@/utils/helpers"
 import styles from "./CollectionDialog.module.scss"
 import type { Collection, ItemType } from "@/types"
-import { ICON_PROPS_ACTION } from "@/utils/constants"
+import { ICON_PROPS_ACTION } from "@/config/constants"
 
 const RANDOM_ICONS = [
     "💼", // work

@@ -14,7 +14,7 @@ import {
     COLLECTION_HOTKEY_COUNT,
     DROPDOWN_OFFSET,
     ICON_PROPS_NORMAL,
-} from "@/utils/constants"
+} from "@/config/constants"
 import styles from "./CollectionDropdown.module.scss"
 import CollectionColourBlock from "./CollectionColourBlock"
 

@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useLocalUserSettings } from "@/store/localUserSettings"
-import { themes } from "@/utils/themes"
+import { themes } from "@/config/themes"
 
 function applyThemeColors(colors: (typeof themes)[number]) {
     const root = document.documentElement

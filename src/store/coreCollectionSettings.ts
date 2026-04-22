@@ -5,7 +5,7 @@ import {
     DEFAULT_ALL_COLLECTION,
     DEFAULT_UNTAGGED_COLLECTION,
     DEFAULT_TRASH_COLLECTION,
-} from "@/utils/constants"
+} from "@/config/constants"
 
 export const useCoreCollectionSettings = create<CoreCollectionSettingsStore>()(
     persist(

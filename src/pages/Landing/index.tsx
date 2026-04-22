@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import styles from "./index.module.scss"
-import { ROUTE_JOT } from "@/utils/constants"
+import { ROUTE_JOT } from "@/config/constants"
 
 export default function Landing() {
     return (

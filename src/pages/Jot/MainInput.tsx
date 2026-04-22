@@ -18,7 +18,7 @@ import {
     SHORTCUT_ITEM_TOGGLE_COPY_ON_CLICK,
     SHORTCUT_ITEM_REFETCH,
     SHORTCUT_ITEM_CONVERT_TO_TODO,
-} from "@/utils/constants"
+} from "@/config/constants"
 import styles from "./MainInput.module.scss"
 import type { MainInputSearchData, Item } from "@/types"
 

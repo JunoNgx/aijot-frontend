@@ -1,6 +1,6 @@
 import { DateTime } from "luxon"
 import { IconX } from "@tabler/icons-react"
-import { ICON_PROPS_ACTION } from "@/utils/constants"
+import { ICON_PROPS_ACTION } from "@/config/constants"
 import { useItemsMutations } from "@/hooks/useItemsMutations"
 import { useDialogStore } from "@/store/dialogStore"
 import { openItemDialog } from "@/utils/openItemDialog"

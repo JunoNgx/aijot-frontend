@@ -9,7 +9,7 @@ import {
     SHORTCUT_FOCUS_MAIN_INPUT,
     SHORTCUT_TOGGLE_JOT_LIST_VIEW,
     ROUTE_JOT,
-} from "@/utils/constants"
+} from "@/config/constants"
 import { useProfileSettings } from "@/store/profileSettings"
 import MainInput from "@/pages/Jot/MainInput"
 import CollectionNotice from "@/pages/Jot/CollectionNotice"

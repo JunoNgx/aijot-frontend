@@ -16,7 +16,7 @@ import {
     ICON_PROPS_NORMAL,
     ROUTE_COLLECTION,
     ROUTE_JOT,
-} from "@/utils/constants"
+} from "@/config/constants"
 import styles from "./UserDropdown.module.scss"
 import { useMatch } from "react-router-dom"
 

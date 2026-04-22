@@ -1,7 +1,7 @@
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
 import type { ProfileSettingsStore } from "@/types"
-import { DEFAULT_USERNAME } from "@/utils/constants"
+import { DEFAULT_USERNAME } from "@/config/constants"
 
 const detectUse24HourClock = () => {
     const { hourCycle } = new Intl.DateTimeFormat(undefined, {

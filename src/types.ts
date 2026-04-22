@@ -1,5 +1,5 @@
 import type { ReactNode } from "react"
-import type { ThemeName } from "@/utils/themes"
+import type { ThemeName } from "@/config/themes"
 
 // ============================================================
 // Item

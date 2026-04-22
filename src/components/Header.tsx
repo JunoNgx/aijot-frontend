@@ -6,7 +6,7 @@ import {
     ROUTE_JOT,
     ROUTE_COLLECTION,
     ICON_PROPS_HEADER,
-} from "@/utils/constants"
+} from "@/config/constants"
 import { IconPalette } from "@tabler/icons-react"
 import { useCommandPaletteStore } from "@/store/commandPaletteStore"
 

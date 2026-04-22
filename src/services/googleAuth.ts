@@ -1,4 +1,4 @@
-import { BACKEND_URL } from "@/utils/constants"
+import { BACKEND_URL } from "@/config/constants"
 import type { AuthToken } from "@/types"
 
 export async function postAuthCallback(code: string): Promise<AuthToken> {

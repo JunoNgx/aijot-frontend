@@ -1,4 +1,4 @@
-import { getLightness } from "./helpers"
+import { getLightness } from "@/utils/helpers"
 
 const originalThemes = [
     {

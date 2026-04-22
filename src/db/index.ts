@@ -3,7 +3,7 @@ import type { StorageAdapter } from "@/db/storage.interface"
 import {
     TRASH_PURGE_DURATION_DAY,
     SOFT_DELETE_PURGE_DURATION_DAY,
-} from "@/utils/constants"
+} from "@/config/constants"
 import { DateTime } from "luxon"
 
 // Platform factory: swap adapter here for Electron (SQLite) in future

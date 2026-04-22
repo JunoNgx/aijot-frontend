@@ -11,7 +11,7 @@ import { useProfileSettings } from "@/store/profileSettings"
 import { useCoreCollectionSettings } from "@/store/coreCollectionSettings"
 import { useLocalSyncData } from "@/store/localSyncData"
 import { useDialogStore } from "@/store/dialogStore"
-import { SANS_SERIF_FONTS, MONO_FONTS } from "@/utils/fonts"
+import { SANS_SERIF_FONTS, MONO_FONTS } from "@/config/fonts"
 import {
     exportData,
     parseImportFile,
@@ -19,7 +19,7 @@ import {
     commitImport,
 } from "@/services/exportImport"
 import { clearAllData, resetApp } from "@/utils/clearData"
-import { APP_VERSION, COMMIT_SHA } from "@/utils/constants"
+import { APP_VERSION, COMMIT_SHA } from "@/config/constants"
 import type { ExportData, ImportSummary } from "@/types"
 import { queryKeys } from "@/db/queryKeys"
 import styles from "./index.module.scss"

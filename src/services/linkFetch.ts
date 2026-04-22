@@ -1,4 +1,4 @@
-import { BACKEND_URL } from "@/utils/constants"
+import { BACKEND_URL } from "@/config/constants"
 import type { LinkFetchResult } from "@/types"
 
 export async function fetchLinkMeta(url: string): Promise<LinkFetchResult> {

@@ -13,7 +13,7 @@ import {
     SYNTAX_PREFIX_TODO,
     SYNTAX_PREFIX_LONG_TEXT,
     ICON_PROPS_NORMAL,
-} from "@/utils/constants"
+} from "@/config/constants"
 import styles from "./MainInputExtendedMenu.module.scss"
 
 interface Props {

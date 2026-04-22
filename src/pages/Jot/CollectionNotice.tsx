@@ -1,5 +1,5 @@
 import DemoDataBanner from "./DemoDataBanner"
-import { TRASH_PURGE_DURATION_DAY } from "@/utils/constants"
+import { TRASH_PURGE_DURATION_DAY } from "@/config/constants"
 import type { Collection } from "@/types"
 import styles from "./CollectionNotice.module.scss"
 

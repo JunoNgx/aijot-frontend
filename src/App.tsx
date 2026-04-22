@@ -23,7 +23,7 @@ import {
     ROUTE_HELP,
     ROUTE_PRIVACY,
     ROUTE_TERMS,
-} from "@/utils/constants"
+} from "@/config/constants"
 import layoutStyles from "./App.module.scss"
 
 function JotRedirect() {

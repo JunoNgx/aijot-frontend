@@ -16,7 +16,7 @@ import {
     ICON_PROPS_ITEM_ICON,
     ICON_PROPS_ITEM_STATUS,
     ICON_PROPS_NORMAL,
-} from "@/utils/constants"
+} from "@/config/constants"
 import { useProfileSettings } from "@/store/profileSettings"
 import { useTransientUiState } from "@/store/transientUiState"
 import { useItemActions } from "@/hooks/useItemActions"

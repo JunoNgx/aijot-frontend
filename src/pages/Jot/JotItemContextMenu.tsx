@@ -13,7 +13,7 @@ import {
     IconSquare,
 } from "@tabler/icons-react"
 import { useItemActions } from "@/hooks/useItemActions"
-import { ICON_PROPS_NORMAL } from "@/utils/constants"
+import { ICON_PROPS_NORMAL } from "@/config/constants"
 import styles from "./JotItemContextMenu.module.scss"
 import type { Item } from "@/types"
 

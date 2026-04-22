@@ -6,7 +6,7 @@ import {
     ROUTE_HELP,
     ROUTE_PRIVACY,
     ROUTE_TERMS,
-} from "@/utils/constants"
+} from "@/config/constants"
 
 export function useNavigateRoutes() {
     const navigate = useNavigate()

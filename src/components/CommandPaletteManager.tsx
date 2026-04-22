@@ -5,7 +5,7 @@ import {
     SHORTCUT_CMD_PAL,
     SHORTCUT_CMD_PAL_ALT,
     SHORTCUT_CMD_PAL_THEME,
-} from "@/utils/constants"
+} from "@/config/constants"
 import CommandPalette from "./CommandPalette"
 import styles from "./CommandPalette.module.scss"
 

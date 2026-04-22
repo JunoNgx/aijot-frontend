@@ -7,10 +7,10 @@ import { useNavigateRoutes } from "@/hooks/useNavigateRoutes"
 import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
 import { useProfileSettings } from "@/store/profileSettings"
 import { openCollectionDialog } from "@/utils/openCollectionDialog"
-import { themes } from "@/utils/themes"
-import type { ThemeName } from "@/utils/themes"
+import { themes } from "@/config/themes"
+import type { ThemeName } from "@/config/themes"
 import styles from "./CommandPalette.module.scss"
-import { ICON_PROPS_NORMAL } from "@/utils/constants"
+import { ICON_PROPS_NORMAL } from "@/config/constants"
 import {
     IconWritingSign,
     IconStack2,
