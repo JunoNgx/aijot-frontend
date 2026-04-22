@@ -22,10 +22,12 @@ function isAuthError(err: unknown): boolean {
 }
 
 function isScopeError(err: unknown): boolean {
+    if (!(err instanceof Error)) return false
+    const message = err.message.toLowerCase()
     return (
-        err instanceof Error &&
-        err.message.includes("403") &&
-        err.message.includes("insufficientPermissions")
+        message.includes("403") &&
+        (message.includes("insufficient authentication scopes") ||
+            message.includes("access_token_scope_insufficient"))
     )
 }
 
@@ -94,6 +96,7 @@ export function useSyncFn() {
             } catch (err) {
                 if (isScopeError(err)) {
                     setSyncStatus("idle")
+                    setAuthToken(undefined)
                     toast.error(
                         "Google Drive access was revoked or has insufficient permissions. Please reconnect in Settings.",
                         { id: "auth-reconnect", duration: Infinity },
