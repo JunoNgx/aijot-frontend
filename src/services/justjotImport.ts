@@ -1,3 +1,4 @@
+import { DateTime } from "luxon"
 import { storage } from "@/db"
 import type { Collection, ImportSummary, Item, ItemType } from "@/types"
 
@@ -113,6 +114,10 @@ export function resolveSlugCollisions(
     return candidate
 }
 
+function normaliseJustJotDate(dateStr: string): string {
+    return DateTime.fromSQL(dateStr).toISO() ?? dateStr
+}
+
 // ============================================================
 // Transformer
 // ============================================================
@@ -139,8 +144,8 @@ export async function transformJustJotToAijot(
             types: [...ALL_TYPES],
             icon: getRandomIcon(),
             colour: "#000000",
-            createdAt: jc.created,
-            updatedAt: jc.updated,
+            createdAt: normaliseJustJotDate(jc.created),
+            updatedAt: normaliseJustJotDate(jc.updated),
         }
     })
 
@@ -158,9 +163,9 @@ export async function transformJustJotToAijot(
                 isDone: ji.isTodoDone,
                 faviconUrl: ji.faviconUrl.trim() || undefined,
                 tags: [collectionSlug],
-                createdAt: ji.created,
-                updatedAt: ji.updated,
-                jottedAt: ji.created,
+                createdAt: normaliseJustJotDate(ji.created),
+                updatedAt: normaliseJustJotDate(ji.updated),
+                jottedAt: normaliseJustJotDate(ji.created),
             }
         })
 
