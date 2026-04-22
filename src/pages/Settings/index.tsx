@@ -41,9 +41,8 @@ export default function Settings() {
     const setFontFamily = useLocalUserSettings((s) => s.setFontFamily)
     const fontFamilyMono = useLocalUserSettings((s) => s.fontFamilyMono)
     const setFontFamilyMono = useLocalUserSettings((s) => s.setFontFamilyMono)
-
-    const is24HourClock = useProfileSettings((s) => s.is24HourClock)
-    const setIs24HourClock = useProfileSettings((s) => s.setIs24HourClock)
+    const is24HourClock = useLocalUserSettings((s) => s.is24HourClock)
+    const setIs24HourClock = useLocalUserSettings((s) => s.setIs24HourClock)
 
     const defaultCollectionSlug = useProfileSettings(
         (s) => s.defaultCollectionSlug,

@@ -61,6 +61,8 @@ export interface LocalUserSettingsStore {
     setFontFamily: (font: string) => void
     fontFamilyMono: string
     setFontFamilyMono: (font: string) => void
+    is24HourClock: boolean
+    setIs24HourClock: (value: boolean) => void
 }
 
 export interface LocalAppDataStore {
@@ -94,13 +96,11 @@ export interface ProfileSettingsStore {
     userDisplayName: string
     shouldApplyTagsOfCurrCollection: boolean
     defaultCollectionSlug: string
-    is24HourClock: boolean
     shouldCustomSortCollections: boolean
     shouldShowJotItemExtraInfo: boolean
     setUserDisplayName: (name: string) => void
     setShouldApplyTagsOfCurrCollection: (value: boolean) => void
     setDefaultCollectionSlug: (slug: string) => void
-    setIs24HourClock: (value: boolean) => void
     setShouldCustomSortCollections: (value: boolean) => void
     setShouldShowJotItemExtraInfo: (value: boolean) => void
 }

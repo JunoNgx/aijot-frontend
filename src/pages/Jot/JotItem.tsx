@@ -17,7 +17,7 @@ import {
     ICON_PROPS_ITEM_STATUS,
     ICON_PROPS_NORMAL,
 } from "@/config/constants"
-import { useProfileSettings } from "@/store/profileSettings"
+import { useLocalUserSettings } from "@/store/localUserSettings"
 import { useTransientUiState } from "@/store/transientUiState"
 import { useItemActions } from "@/hooks/useItemActions"
 import JotItemContextMenu from "./JotItemContextMenu"
@@ -94,7 +94,7 @@ export default function JotItem({
     id,
 }: Props) {
     const { triggerPrimaryAction } = useItemActions()
-    const is24HourClock = useProfileSettings((s) => s.is24HourClock)
+    const is24HourClock = useLocalUserSettings((s) => s.is24HourClock)
     const copiedItemIds = useTransientUiState((s) => s.copiedItemIds)
     const fetchingLinkMetaItemIds = useTransientUiState(
         (s) => s.fetchingLinkMetaItemIds,
