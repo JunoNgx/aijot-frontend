@@ -11,6 +11,7 @@ import Header from "@/components/Header"
 import CommandPaletteManager from "@/components/CommandPaletteManager"
 import DialogManager from "@/components/DialogManager"
 import ThemeManager from "@/components/ThemeManager"
+import FontManager from "@/components/FontManager"
 import PurgeManager from "@/components/PurgeManager"
 import SyncManager from "@/components/SyncManager"
 import { useProfileSettings } from "@/store/profileSettings"
@@ -52,6 +53,7 @@ export default function App() {
     return (
         <>
             <ThemeManager />
+            <FontManager />
             <PurgeManager />
             <SyncManager />
             <DialogManager />
