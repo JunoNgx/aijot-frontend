@@ -562,7 +562,7 @@ Add the ability to toggle between compact and expanded view modes in the jot lis
 
 ## Task 37 — Import from JustJot
 
-Import collections and items from a JustJot JSON export. JustJot uses folders (items reference a `collection` by ID); ai*jot uses tags. Each imported collection uses its **slug as a tag**, and items that belonged to it are tagged with the same slug. Trashed items are skipped. Imported collections get `colour: "#000000"` and a random icon. Slug collisions are resolved by appending `-imported` (or `-imported-N`). The flow is kept inline on the Settings page (no separate dialog).
+Import collections and items from a JustJot JSON export. JustJot uses folders (items reference a `collection` by ID); ai\*jot uses tags. Each imported collection uses its **slug as a tag**, and items that belonged to it are tagged with the same slug. Trashed items are skipped. Imported collections get `colour: "#000000"` and a random icon. Slug collisions are resolved by appending `-imported` (or `-imported-N`). The flow is kept inline on the Settings page (no separate dialog).
 
 ### 37a — JustJot types and parser
 
@@ -572,7 +572,7 @@ Import collections and items from a JustJot JSON export. JustJot uses folders (i
 
 ### 37b — Transformer and collision resolver
 
-- [ ] `transformJustJotToAijot(data)` — map JustJot shape to ai*jot shape:
+- [ ] `transformJustJotToAijot(data)` — map JustJot shape to ai\*jot shape:
     - Skip items where `isTrashed === true`
     - Collections: preserve `id`, map `name`/`slug`/`sortOrder`, set `tags: [slug]`, `types: ["text", "todo", "link"]`, `icon` from `getRandomIcon()`, `colour: "#000000"`, normalise dates to ISO
     - Items: preserve `id`, map `title` (empty → `undefined`), `content`, `type`, `shouldCopyOnClick`, `isDone` from `isTodoDone`, `faviconUrl` (empty → `undefined`), `tags: [collectionSlug]`, normalise dates, set `jottedAt` from `created`
