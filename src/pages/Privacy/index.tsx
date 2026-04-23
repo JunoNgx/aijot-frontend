@@ -5,11 +5,11 @@ export default function Privacy() {
     return (
         <div className={styles.Privacy}>
             <BackBtn />
-            <h1 className={styles.Privacy__Title}>Privacy Policy</h1>
+            <h2 className={styles.Privacy__Title}>Privacy Policy</h2>
             <p className={styles.Privacy__Date}>Effective April 23, 2026</p>
 
             <section className={styles.Privacy__Section}>
-                <h2>The short version</h2>
+                <h3>The short version</h3>
                 <p>
                     Aijot is designed to keep your data in your hands. Your
                     notes, collections, and settings are stored locally in your
@@ -21,7 +21,7 @@ export default function Privacy() {
             </section>
 
             <section className={styles.Privacy__Section}>
-                <h2>What data is collected</h2>
+                <h3>What data is collected</h3>
                 <p>
                     Aijot stores the content you create: notes, todos, links,
                     collections, tags, and your app preferences. If you sign in
@@ -33,7 +33,7 @@ export default function Privacy() {
             </section>
 
             <section className={styles.Privacy__Section}>
-                <h2>Where your data lives</h2>
+                <h3>Where your data lives</h3>
                 <p>
                     By default, everything stays on your device in your
                     browser&apos;s IndexedDB database. Data is not transmitted
@@ -42,7 +42,7 @@ export default function Privacy() {
             </section>
 
             <section className={styles.Privacy__Section}>
-                <h2>Google Drive sync</h2>
+                <h3>Google Drive sync</h3>
                 <p>
                     Syncing to Google Drive is entirely optional. When enabled,
                     your data is sent over HTTPS to your own Google Drive
@@ -54,7 +54,7 @@ export default function Privacy() {
             </section>
 
             <section className={styles.Privacy__Section}>
-                <h2>Security</h2>
+                <h3>Security</h3>
                 <p>
                     Data synced to Google Drive is encrypted in transit using
                     HTTPS. Local data is protected by your browser&apos;s
@@ -64,7 +64,7 @@ export default function Privacy() {
             </section>
 
             <section className={styles.Privacy__Section}>
-                <h2>Your rights</h2>
+                <h3>Your rights</h3>
                 <p>
                     You own your data. Everything can be exported as a JSON file
                     at any time from Settings. All local data can also be
@@ -75,7 +75,7 @@ export default function Privacy() {
             </section>
 
             <section className={styles.Privacy__Section}>
-                <h2>Changes to this policy</h2>
+                <h3>Changes to this policy</h3>
                 <p>
                     If this policy is updated, the effective date at the top of
                     this page will be changed. Occasional review is encouraged.
@@ -83,7 +83,7 @@ export default function Privacy() {
             </section>
 
             <section className={styles.Privacy__Section}>
-                <h2>Contact</h2>
+                <h3>Contact</h3>
                 <p>
                     If you have questions about this privacy policy, please
                     reach out through the contact information provided in the

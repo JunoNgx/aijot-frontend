@@ -5,11 +5,11 @@ export default function Terms() {
     return (
         <div className={styles.Terms}>
             <BackBtn />
-            <h1 className={styles.Terms__Title}>Terms of Service</h1>
+            <h2 className={styles.Terms__Title}>Terms of Service</h2>
             <p className={styles.Terms__Date}>Effective April 23, 2026</p>
 
             <section className={styles.Terms__Section}>
-                <h2>Acceptance of terms</h2>
+                <h3>Acceptance of terms</h3>
                 <p>
                     By using aijot, you agree to these terms. If you do not
                     agree, please do not use the app.
@@ -17,7 +17,7 @@ export default function Terms() {
             </section>
 
             <section className={styles.Terms__Section}>
-                <h2>Data and sync</h2>
+                <h3>Data and sync</h3>
                 <p>
                     The availability of Google Drive sync is not guaranteed
                     indefinitely, as it depends on Google&apos;s APIs and
@@ -28,7 +28,7 @@ export default function Terms() {
             </section>
 
             <section className={styles.Terms__Section}>
-                <h2>Termination</h2>
+                <h3>Termination</h3>
                 <p>
                     You can stop using aijot and delete your data at any time.
                     Use the Clear all data or Reset app options in Settings. If
@@ -38,7 +38,7 @@ export default function Terms() {
             </section>
 
             <section className={styles.Terms__Section}>
-                <h2>Disclaimer</h2>
+                <h3>Disclaimer</h3>
                 <p>
                     Aijot is provided as is, without warranties of any kind. No
                     liability is assumed for data loss or damages arising from
@@ -48,7 +48,7 @@ export default function Terms() {
             </section>
 
             <section className={styles.Terms__Section}>
-                <h2>Changes to these terms</h2>
+                <h3>Changes to these terms</h3>
                 <p>
                     These terms may be updated from time to time. Changes will
                     be reflected by updating the effective date above. Continued

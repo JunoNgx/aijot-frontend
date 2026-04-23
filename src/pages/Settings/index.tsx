@@ -310,10 +310,10 @@ export default function Settings() {
     return (
         <div className={styles.Settings}>
             <BackBtn />
-            <h1 className={styles.Settings__Title}>Settings</h1>
+            <h2 className={styles.Settings__Title}>Settings</h2>
 
             <section className={styles.Section}>
-                <h2 className={styles.Section__Title}>Sync</h2>
+                <h3 className={styles.Section__Title}>Sync</h3>
                 <p className={styles.Section__Description}>
                     Back up your data to Google Drive
                 </p>
@@ -374,7 +374,7 @@ export default function Settings() {
             </section>
 
             <section className={styles.Section}>
-                <h2 className={styles.Section__Title}>Preferences</h2>
+                <h3 className={styles.Section__Title}>Preferences</h3>
 
                 <div className={`${styles.Field} ${styles["Field--FlexRow"]}`}>
                     <label
@@ -468,7 +468,7 @@ export default function Settings() {
             </section>
 
             <section className={styles.Section}>
-                <h2 className={styles.Section__Title}>Local device config</h2>
+                <h3 className={styles.Section__Title}>Local device config</h3>
                 <p className={styles.Section__Description}>
                     The following settings are not synchronised to your cloud
                     data
@@ -556,7 +556,7 @@ export default function Settings() {
             </section>
 
             <section className={styles.Section}>
-                <h2 className={styles.Section__Title}>Data</h2>
+                <h3 className={styles.Section__Title}>Data</h3>
                 <p className={styles.Section__Description}>
                     Export or import your items, collections, and settings
                 </p>
@@ -666,7 +666,7 @@ export default function Settings() {
             </section>
 
             <section className={styles.Section}>
-                <h2 className={styles.Section__Title}>Help</h2>
+                <h3 className={styles.Section__Title}>Help</h3>
                 <button
                     className={styles.Settings__BtnAction}
                     type="button"
@@ -677,12 +677,12 @@ export default function Settings() {
             </section>
 
             <section className={styles.Section}>
-                <h2
+                <h3
                     className={styles.Section__Title}
                     onClick={handleDebugEnableClick}
                 >
                     About
-                </h2>
+                </h3>
                 <p className={styles.Settings__Version}>
                     Version {APP_VERSION} ({COMMIT_SHA})
                 </p>
@@ -707,11 +707,11 @@ export default function Settings() {
             <section
                 className={`${styles.Section} ${styles["Section--Spaced"]}`}
             >
-                <h2
+                <h3
                     className={`${styles.Section__Title} ${styles["Section__Title--Danger"]}`}
                 >
                     Danger Zone
-                </h2>
+                </h3>
                 <p className={styles.Section__Description}>
                     Removes all items and collections. Your data on Google Drive
                     will remain intact.
@@ -727,7 +727,7 @@ export default function Settings() {
 
             {isDebugMode && (
                 <section className={styles.Section}>
-                    <h2 className={styles.Section__Title}>Debug</h2>
+                    <h3 className={styles.Section__Title}>Debug</h3>
                     <button
                         className={styles.Settings__Btn}
                         type="button"

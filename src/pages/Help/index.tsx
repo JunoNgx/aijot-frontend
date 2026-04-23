@@ -5,10 +5,10 @@ export default function Help() {
     return (
         <div className={styles.Help}>
             <BackBtn />
-            <h1 className={styles.Help__Title}>Help</h1>
+            <h2 className={styles.Help__Title}>Help</h2>
 
             <section className={styles.Help__Section}>
-                <h2>Creating items</h2>
+                <h3>Creating items</h3>
                 <p>
                     Type into the main input and press Enter to create an item.
                     The item type is detected automatically, or you can use a
@@ -32,7 +32,7 @@ export default function Help() {
             </section>
 
             <section className={styles.Help__Section}>
-                <h2>Tags and collections</h2>
+                <h3>Tags and collections</h3>
                 <p>
                     Append flags when creating an item to assign tags or
                     collections.
@@ -48,7 +48,7 @@ export default function Help() {
             </section>
 
             <section className={styles.Help__Section}>
-                <h2>Searching</h2>
+                <h3>Searching</h3>
                 <p>
                     Type in the main input without pressing Enter to filter
                     items.
@@ -71,7 +71,7 @@ export default function Help() {
             </section>
 
             <section className={styles.Help__Section}>
-                <h2>Keyboard shortcuts</h2>
+                <h3>Keyboard shortcuts</h3>
                 <p>
                     Press <kbd>mod + /</kbd> to see the full list of shortcuts.
                     Common ones include navigation with arrow keys, editing
@@ -80,7 +80,7 @@ export default function Help() {
             </section>
 
             <section className={styles.Help__Section}>
-                <h2>Collections</h2>
+                <h3>Collections</h3>
                 <p>
                     Collections group items by tag. The sidebar shows the core
                     collections:
@@ -100,7 +100,7 @@ export default function Help() {
             </section>
 
             <section className={styles.Help__Section}>
-                <h2>Sync and backup</h2>
+                <h3>Sync and backup</h3>
                 <p>
                     Connect Google Drive in Settings to back up your data. You
                     can also export everything as a JSON file, import from an
