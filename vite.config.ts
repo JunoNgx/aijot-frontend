@@ -28,6 +28,7 @@ export default defineConfig({
             manifest: {
                 name: "ai*jot",
                 short_name: "aijot",
+                description: "A minimalist keyboard-first note app",
                 start_url: "/jot",
                 display: "standalone",
                 background_color: "#1a1a1a",
