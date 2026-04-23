@@ -26,6 +26,7 @@ import {
 import { clearAllData, resetApp } from "@/utils/clearData"
 import { APP_VERSION, COMMIT_SHA } from "@/config/constants"
 import { formatFullDatetime } from "@/utils/helpers"
+import { useThemeActions } from "@/hooks/useThemeActions"
 import type { ExportData, ImportSummary } from "@/types"
 import type { JustJotExportData } from "@/services/justjotImport"
 import { queryKeys } from "@/db/queryKeys"
@@ -112,6 +113,7 @@ export default function Settings() {
         authToken,
     } = useGoogleAuth()
     const { sync } = useSyncFn()
+    const { randomiseTheme } = useThemeActions()
     const { navigateToHelp, navigateToPrivacy, navigateToTerms } =
         useNavigateRoutes()
 
@@ -501,15 +503,24 @@ export default function Settings() {
                     <span className={styles.Settings__CurrentTheme}>
                         {theme}
                     </span>
-                    <button
-                        type="button"
-                        className={styles.Settings__BtnAction}
-                        onClick={() => {
-                            useCommandPaletteStore.getState().open("theme")
-                        }}
-                    >
-                        Change Theme
-                    </button>
+                    <div className={styles.Settings__ThemeBtnWrapper}>
+                        <button
+                            type="button"
+                            className={styles.Settings__BtnAction}
+                            onClick={() => {
+                                useCommandPaletteStore.getState().open("theme")
+                            }}
+                        >
+                            Change Theme
+                        </button>
+                        <button
+                            type="button"
+                            className={styles.Settings__BtnAction}
+                            onClick={randomiseTheme}
+                        >
+                            Randomise
+                        </button>
+                    </div>
                 </div>
 
                 <div className={`${styles.Field} ${styles["Field--FlexRow"]}`}>

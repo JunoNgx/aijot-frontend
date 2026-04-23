@@ -57,6 +57,13 @@
         gap: 0.5rem;
     }
 
+    &__ThemeBtnWrapper {
+        display: flex;
+        gap: 0.5rem;
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+
     &__Version {
         font-size: var(--fontSizeSm);
         color: var(--colTextAlt);
