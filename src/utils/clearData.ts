@@ -1,3 +1,4 @@
+import { toast } from "sonner"
 import { storage, forceDeleteDb as deleteDb } from "@/db"
 import { useLocalAppData } from "@/store/localAppData"
 import { useLocalSyncData } from "@/store/localSyncData"
@@ -6,7 +7,11 @@ import { useSyncedUserSettings } from "@/store/syncedUserSettings"
 import { useCoreCollectionSettings } from "@/store/coreCollectionSettings"
 
 export async function clearAllData(): Promise<void> {
-    await storage.clearAllData()
+    try {
+        await storage.clearAllData()
+    } catch (err) {
+        throw new Error(`Failed to clear database: ${(err as Error).message}`)
+    }
 }
 
 export async function forceDeleteDb(): Promise<void> {
@@ -33,8 +38,34 @@ export function clearAllStorage(): void {
 }
 
 export async function resetApp(): Promise<void> {
-    clearAllStorage()
-    await forceDeleteDb()
-    await clearAllCaches()
-    window.location.href = "/"
+    try {
+        resetZustandStores()
+    } catch (err) {
+        throw new Error(`Failed to reset app state: ${(err as Error).message}`)
+    }
+
+    try {
+        clearAllStorage()
+    } catch (err) {
+        throw new Error(
+            `Failed to clear browser storage: ${(err as Error).message}`,
+        )
+    }
+
+    try {
+        await forceDeleteDb()
+    } catch (err) {
+        throw new Error(`Failed to delete database: ${(err as Error).message}`)
+    }
+
+    try {
+        await clearAllCaches()
+    } catch (err) {
+        throw new Error(`Failed to clear caches: ${(err as Error).message}`)
+    }
+
+    toast.loading("App reset. Reloading...")
+    setTimeout(() => {
+        window.location.href = "/"
+    }, 1500)
 }

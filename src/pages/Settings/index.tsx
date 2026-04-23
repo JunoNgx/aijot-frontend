@@ -222,8 +222,8 @@ export default function Settings() {
             setShouldShowDemoDataBanner(true)
             toast.loading("All data cleared. Reloading...")
             setTimeout(() => window.location.reload(), 1500)
-        } catch {
-            toast.error("Failed to clear data")
+        } catch (err) {
+            toast.error((err as Error).message)
             setIsClearingData(false)
         }
     }
@@ -232,8 +232,8 @@ export default function Settings() {
         setIsResettingApp(true)
         try {
             await resetApp()
-        } catch {
-            toast.error("Failed to reset app")
+        } catch (err) {
+            toast.error((err as Error).message)
             setIsResettingApp(false)
         }
     }

@@ -29,8 +29,11 @@ export async function forceDeleteDb(): Promise<void> {
         request.onsuccess = () => resolve()
         request.onerror = () => reject(request.error)
         request.onblocked = () => {
-            console.warn("IndexedDB delete blocked - tab may still be open")
-            resolve()
+            reject(
+                new Error(
+                    "Database delete blocked. Close other tabs using this app and try again.",
+                ),
+            )
         }
     })
 }
