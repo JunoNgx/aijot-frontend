@@ -135,6 +135,14 @@ code {
     font-family: var(--fontFamilyMono);
 }
 
+a {
+    color: var(--colMain);
+
+    &:visited {
+        color: var(--colMain);
+    }
+}
+
 // ============================================================
 // Button system
 // ============================================================

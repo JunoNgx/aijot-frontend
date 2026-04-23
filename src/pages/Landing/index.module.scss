@@ -41,6 +41,10 @@
     &__Btn {
         composes: Btn Btn--Pri from global;
         margin-top: 1.5rem;
+
+        &:visited {
+            color: var(--colBg);
+        }
     }
 
     &__BtnHint {

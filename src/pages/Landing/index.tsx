@@ -64,10 +64,17 @@ export default function Landing() {
                 </h2>
                 <p className={styles.Landing__Text}>
                     You probably know the drill. No ad, no sub, no tracking.
-                    Open source and free forever. Fork and host all you want.
-                    Backend only does what it needs, no remote database. Data
-                    only leave your device to go to your Google Drive, only when
-                    you choose.
+                    Open source and free forever. Fork and host all you want.{" "}
+                    <a
+                        href="https://github.com/JunoNgx/aijot-backend"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Backend
+                    </a>{" "}
+                    only does what it needs, no remote database. Data only leave
+                    your device to go to your Google Drive, only when you
+                    choose.
                 </p>
             </section>
 
