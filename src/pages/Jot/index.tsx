@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useMemo } from "react"
 import { useParams, Navigate } from "react-router-dom"
 import { useHotkeys } from "react-hotkeys-hook"
 import { useItemsQuery } from "@/hooks/useItemsQuery"
@@ -91,10 +91,17 @@ export default function Jot() {
     const baseItems = isTrash
         ? (trashedItemsQuery.data ?? [])
         : (itemsQuery.data ?? [])
-    const collectionItems = currCollection
-        ? filterByCollection(baseItems, currCollection)
-        : baseItems
-    const visibleItems = filterItems(collectionItems, searchData)
+    const collectionItems = useMemo(
+        () =>
+            currCollection
+                ? filterByCollection(baseItems, currCollection)
+                : baseItems,
+        [baseItems, currCollection],
+    )
+    const visibleItems = useMemo(
+        () => filterItems(collectionItems, searchData),
+        [collectionItems, searchData],
+    )
     const selectedItem =
         selectedIndex >= 0 ? visibleItems[selectedIndex] : undefined
 

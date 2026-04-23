@@ -1,4 +1,4 @@
-import { useState, type MouseEvent } from "react"
+import { useState, type MouseEvent, memo } from "react"
 import * as ContextMenu from "@radix-ui/react-context-menu"
 import {
     IconNote,
@@ -82,7 +82,7 @@ function ItemIcon({
     return <IconNote {...ICON_PROPS_ITEM_ICON} />
 }
 
-export default function JotItem({
+export default memo(function JotItem({
     item,
     isSelected,
     itemIndex,
@@ -285,4 +285,4 @@ export default function JotItem({
             <JotItemContextMenu item={item} />
         </ContextMenu.Root>
     )
-}
+})
