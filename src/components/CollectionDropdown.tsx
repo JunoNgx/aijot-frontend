@@ -59,16 +59,18 @@ export default function CollectionDropdown() {
             isActive ? styles["CollectionItem--Active"] : "",
         ].join(" ")
 
-        const rightContent = isActive ? (
+        const currCollectionCheckmark = (
+            <IconCheck {...ICON_PROPS_CURR_COLLECTION} />
+        )
+        const hotkeyNumberUi = hotkeyNum !== null && (
+            <kbd className={styles.CollectionItem__RightContent}>
+                {hotkeyNum}
+            </kbd>
+        )
+        const rightContent = (
             <span className={styles.CollectionItem__RightContent}>
-                <IconCheck {...ICON_PROPS_CURR_COLLECTION} />
+                {isActive ? currCollectionCheckmark : hotkeyNumberUi}
             </span>
-        ) : (
-            hotkeyNum !== null && (
-                <kbd className={styles.CollectionItem__RightContent}>
-                    {hotkeyNum}
-                </kbd>
-            )
         )
 
         return (
