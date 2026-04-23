@@ -95,6 +95,9 @@ export default function Settings() {
     const syncStatus = useLocalSyncData((s) => s.syncStatus)
     const syncError = useLocalSyncData((s) => s.syncError)
     const lastSyncTime = useLocalSyncData((s) => s.lastSyncTime)
+    const lastSyncTimeUiText = lastSyncTime
+        ? `Last sync: ${new Date(lastSyncTime).toLocaleString()}`
+        : "Last sync: Never"
     const setShouldShowDemoDataBanner = useLocalAppData(
         (s) => s.setShouldShowDemoDataBanner,
     )
@@ -314,18 +317,19 @@ export default function Settings() {
                     Back up your data to Google Drive
                 </p>
                 {isConnected && authToken && (
-                    <div className={styles.Field__SyncStatus}>
-                        <span>Connected as {authToken.email}</span>
-                        {lastSyncTime && (
-                            <span>
-                                Last sync:{" "}
-                                {new Date(lastSyncTime).toLocaleString()}
-                            </span>
-                        )}
-                        {syncStatus === "syncing" && <span>Syncing...</span>}
+                    <div className={styles.Field__SyncInfoWrapper}>
+                        <span className={styles.Field__SyncEmail}>
+                            Connected as {authToken.email}
+                        </span>
+                        <span className={styles.Field__SyncStatus}>
+                            {syncStatus === "syncing"
+                                ? "Syncing..."
+                                : lastSyncTimeUiText
+                            }
+                        </span>
                         {syncStatus === "error" && syncError && (
                             <span
-                                className={styles["Field__SyncStatus--Error"]}
+                                className={styles.Field__SyncError}
                             >
                                 Error: {syncError}
                             </span>

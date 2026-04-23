@@ -140,16 +140,27 @@
         composes: Checkbox from global;
     }
 
-    &__SyncStatus {
+    &__SyncInfoWrapper {
         display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-size: var(--fontSizeMd);
-        color: var(--colSub);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+
         margin-bottom: 0.75rem;
 
-        &--Error {
-            color: var(--colDanger);
-        }
+    }
+
+    &__SyncEmail {
+        font-size: var(--fontSizeMd);
+        color: var(--colSub);
+    }
+
+    &__SyncStatus {
+        font-size: var(--fontSizeSm);
+        color: var(--colTextAlt);
+    }
+
+    &__SyncError {
+        color: var(--colDanger);
     }
 }
