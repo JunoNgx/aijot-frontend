@@ -1,7 +1,7 @@
 import { useRef, useLayoutEffect, useEffect } from "react"
 import { Command } from "cmdk"
 import * as Dialog from "@radix-ui/react-dialog"
-import { useParams } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 import { useLocalUserSettings } from "@/store/localUserSettings"
 import { useNavigateRoutes } from "@/hooks/useNavigateRoutes"
 import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
@@ -10,7 +10,7 @@ import { openCollectionDialog } from "@/utils/openCollectionDialog"
 import { themes } from "@/config/themes"
 import type { ThemeName } from "@/config/themes"
 import styles from "./CommandPalette.module.scss"
-import { ICON_PROPS_NORMAL } from "@/config/constants"
+import { ICON_PROPS_NORMAL, ROUTE_JOT } from "@/config/constants"
 import {
     IconWritingSign,
     IconStack2,
@@ -48,8 +48,10 @@ export default function CommandPalette({
         navigateToHelp,
     } = useNavigateRoutes()
 
-    const { slug } = useParams<{ slug: string }>()
-    const currentSlug = slug ?? null
+    const location = useLocation()
+    const currentSlug = location.pathname.startsWith(`${ROUTE_JOT}/`)
+        ? (location.pathname.split("/").pop() ?? null)
+        : null
     const defaultCollectionSlug = useSyncedUserSettings(
         (s) => s.defaultCollectionSlug,
     )

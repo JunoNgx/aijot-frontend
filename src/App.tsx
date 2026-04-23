@@ -42,9 +42,6 @@ function LayoutShell() {
                     <Outlet />
                 </div>
             </div>
-
-            {/* Kept inside Routes to allow use of `useParams` */}
-            <CommandPaletteManager />
         </>
     )
 }
@@ -57,6 +54,7 @@ export default function App() {
             <PurgeManager />
             <SyncManager />
             <DialogManager />
+            <CommandPaletteManager />
             <Toaster
                 position="bottom-center"
                 swipeDirections={["left", "right"]}
