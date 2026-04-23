@@ -20,6 +20,7 @@ import { getHotkeyHandler } from "@/utils/hotkeyHandler"
 import { SHORTCUT_SAVE_AND_CLOSE } from "@/config/constants"
 import { formatDatetime } from "@/utils/helpers"
 import { openPreviousVersionDialog } from "@/utils/openPreviousVersionDialog"
+import { useLocalUserSettings } from "@/store/localUserSettings"
 import styles from "./ItemDialog.module.scss"
 import type { Item } from "@/types"
 
@@ -106,6 +107,7 @@ export default function ItemDialog({ item, onClose }: Props) {
     const { updateItemMutation, refetchLinkMetaMutation } = useItemsMutations()
     const { trashItem } = useItemActions()
     const closeAllDialogs = useDialogStore((s) => s.closeAllDialogs)
+    const is24HourClock = useLocalUserSettings((s) => s.is24HourClock)
 
     const [titleVal, setTitleVal] = useState(item.title ?? "")
     const [contentVal, setContentVal] = useState(item.content)
@@ -117,7 +119,7 @@ export default function ItemDialog({ item, onClose }: Props) {
     )
     const [isPinnedVal, setIsPinnedVal] = useState(item.isPinned ?? false)
     const [saveStatusText, setSaveStatusText] = useState(
-        `Saved ${formatDatetime(item.updatedAt)}`,
+        `Saved ${formatDatetime(item.updatedAt, is24HourClock)}`,
     )
 
     const titleRef = useRef(titleVal)
@@ -193,9 +195,11 @@ export default function ItemDialog({ item, onClose }: Props) {
 
     const handleSave = useCallback(() => {
         mutateRef.current(buildUpdatedItem())
-        setSaveStatusText(`Saved ${formatDatetime(DateTime.now().toISO())}`)
+        setSaveStatusText(
+            `Saved ${formatDatetime(DateTime.now().toISO(), is24HourClock)}`,
+        )
         hasUnsavedChangesRef.current = false
-    }, [buildUpdatedItem])
+    }, [buildUpdatedItem, is24HourClock])
 
     const handleSaveAndClose = useCallback(() => {
         handleSave()

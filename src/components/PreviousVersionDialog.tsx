@@ -3,6 +3,7 @@ import { IconX } from "@tabler/icons-react"
 import { ICON_PROPS_ACTION } from "@/config/constants"
 import { useItemsMutations } from "@/hooks/useItemsMutations"
 import { useDialogStore } from "@/store/dialogStore"
+import { useLocalUserSettings } from "@/store/localUserSettings"
 import { openItemDialog } from "@/utils/openItemDialog"
 import styles from "./PreviousVersionDialog.module.scss"
 import type { Item } from "@/types"
@@ -14,6 +15,7 @@ interface Props {
 export default function PreviousVersionDialog({ item }: Props) {
     const { updateItemMutation } = useItemsMutations()
     const closeAllDialogs = useDialogStore((s) => s.closeAllDialogs)
+    const is24HourClock = useLocalUserSettings((s) => s.is24HourClock)
 
     const isTextItem = item.type === "text"
 
@@ -39,7 +41,9 @@ export default function PreviousVersionDialog({ item }: Props) {
             Recorded{" "}
             {DateTime.fromISO(item.previousContentRecordedAt)
                 .toLocal()
-                .toLocaleString(DateTime.DATETIME_MED)}
+                .toFormat(
+                    is24HourClock ? "MMM d, yyyy HH:mm" : "MMM d, yyyy h:mm a",
+                )}
         </span>
     )
 
