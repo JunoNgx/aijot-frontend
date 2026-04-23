@@ -1,4 +1,5 @@
 @use "styles/mixins" as *;
+@use "styles/vars" as *;
 
 .JotItem {
     appearance: none;
@@ -15,6 +16,13 @@
     border-width: var(--itemBorderWidth);
     border-color: transparent;
     user-select: none;
+    scroll-margin-top: var(--verticalPaddingLg);
+    scroll-margin-bottom: var(--verticalPaddingSm);
+
+    @media (width <= $breakpointMobile) {
+        scroll-margin-top: var(--verticalPaddingSm);
+        scroll-margin-bottom: var(--verticalPaddingLg);
+    }
 
     &:hover {
         background-color: var(--colBgAlt);
