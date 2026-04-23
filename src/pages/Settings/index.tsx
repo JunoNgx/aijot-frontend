@@ -25,6 +25,7 @@ import {
 } from "@/services/justjotImport"
 import { clearAllData, resetApp } from "@/utils/clearData"
 import { APP_VERSION, COMMIT_SHA } from "@/config/constants"
+import { formatFullDatetime } from "@/utils/helpers"
 import type { ExportData, ImportSummary } from "@/types"
 import type { JustJotExportData } from "@/services/justjotImport"
 import { queryKeys } from "@/db/queryKeys"
@@ -96,9 +97,7 @@ export default function Settings() {
     const syncError = useLocalSyncData((s) => s.syncError)
     const lastSyncTime = useLocalSyncData((s) => s.lastSyncTime)
     const lastSyncTimeUiText = lastSyncTime
-        ? `Last sync: ${new Date(lastSyncTime).toLocaleString(undefined, {
-              hour12: !is24HourClock,
-          })}`
+        ? `Last sync: ${formatFullDatetime(lastSyncTime, is24HourClock)}`
         : "Last sync: Never"
     const setShouldShowDemoDataBanner = useLocalAppData(
         (s) => s.setShouldShowDemoDataBanner,

@@ -10,8 +10,11 @@ import {
     IconHourglassLow,
     IconPinFilled,
 } from "@tabler/icons-react"
-import { isValidHexColourCode, formatDatetime } from "@/utils/helpers"
-import { DateTime } from "luxon"
+import {
+    isValidHexColourCode,
+    formatDatetime,
+    formatDetailedDatetime,
+} from "@/utils/helpers"
 import {
     ICON_PROPS_ITEM_ICON,
     ICON_PROPS_ITEM_STATUS,
@@ -77,13 +80,6 @@ function ItemIcon({
         )
     }
     return <IconNote {...ICON_PROPS_ITEM_ICON} />
-}
-
-function formatDetailedDatetime(isoString: string, is24HourClock = true) {
-    const date = DateTime.fromISO(isoString).toLocal()
-    return date.toFormat(
-        is24HourClock ? "MMM d, yyyy HH:mm" : "MMM d, yyyy h:mm a",
-    )
 }
 
 export default function JotItem({

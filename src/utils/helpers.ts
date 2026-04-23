@@ -23,6 +23,26 @@ export function formatDatetime(
     return date.toFormat("MMM d, yyyy")
 }
 
+export function formatDetailedDatetime(
+    isoString: string,
+    is24HourClock = true,
+): string {
+    const date = DateTime.fromISO(isoString).toLocal()
+    return date.toFormat(
+        is24HourClock ? "MMM d, yyyy HH:mm" : "MMM d, yyyy h:mm a",
+    )
+}
+
+export function formatFullDatetime(
+    isoString: string,
+    is24HourClock = true,
+): string {
+    const date = DateTime.fromISO(isoString).toLocal()
+    return date.toFormat(
+        is24HourClock ? "MMM d, yyyy HH:mm:ss" : "MMM d, yyyy h:mm:ss a",
+    )
+}
+
 const HEX_COLOUR_REGEX = /#[A-Fa-f0-9]{6}$/
 
 export function isValidHexColourCode(str: string): boolean {

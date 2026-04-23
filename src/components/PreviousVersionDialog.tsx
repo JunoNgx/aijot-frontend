@@ -4,6 +4,7 @@ import { ICON_PROPS_ACTION } from "@/config/constants"
 import { useItemsMutations } from "@/hooks/useItemsMutations"
 import { useDialogStore } from "@/store/dialogStore"
 import { useLocalUserSettings } from "@/store/localUserSettings"
+import { formatDetailedDatetime } from "@/utils/helpers"
 import { openItemDialog } from "@/utils/openItemDialog"
 import styles from "./PreviousVersionDialog.module.scss"
 import type { Item } from "@/types"
@@ -39,11 +40,10 @@ export default function PreviousVersionDialog({ item }: Props) {
     const timestampDisplay = item.previousContentRecordedAt && (
         <span className={styles.PreviousVersionDialog__Timestamp}>
             Recorded{" "}
-            {DateTime.fromISO(item.previousContentRecordedAt)
-                .toLocal()
-                .toFormat(
-                    is24HourClock ? "MMM d, yyyy HH:mm" : "MMM d, yyyy h:mm a",
-                )}
+            {formatDetailedDatetime(
+                item.previousContentRecordedAt,
+                is24HourClock,
+            )}
         </span>
     )
 
