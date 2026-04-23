@@ -96,7 +96,9 @@ export default function Settings() {
     const syncError = useLocalSyncData((s) => s.syncError)
     const lastSyncTime = useLocalSyncData((s) => s.lastSyncTime)
     const lastSyncTimeUiText = lastSyncTime
-        ? `Last sync: ${new Date(lastSyncTime).toLocaleString()}`
+        ? `Last sync: ${new Date(lastSyncTime).toLocaleString(undefined, {
+              hour12: !is24HourClock,
+          })}`
         : "Last sync: Never"
     const setShouldShowDemoDataBanner = useLocalAppData(
         (s) => s.setShouldShowDemoDataBanner,
@@ -324,13 +326,10 @@ export default function Settings() {
                         <span className={styles.Field__SyncStatus}>
                             {syncStatus === "syncing"
                                 ? "Syncing..."
-                                : lastSyncTimeUiText
-                            }
+                                : lastSyncTimeUiText}
                         </span>
                         {syncStatus === "error" && syncError && (
-                            <span
-                                className={styles.Field__SyncError}
-                            >
+                            <span className={styles.Field__SyncError}>
                                 Error: {syncError}
                             </span>
                         )}
