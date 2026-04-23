@@ -292,7 +292,7 @@ export default function Settings() {
         })
     }
 
-    const handleTitleClick = () => {
+    const handleDebugEnableClick = () => {
         if (!isDebugMode) {
             setIsDebugMode(true)
             toast("Debug mode enabled")
@@ -306,9 +306,7 @@ export default function Settings() {
     return (
         <div className={styles.Settings}>
             <BackBtn />
-            <h1 className={styles.Settings__Title} onClick={handleTitleClick}>
-                Settings
-            </h1>
+            <h1 className={styles.Settings__Title}>Settings</h1>
 
             <section className={styles.Section}>
                 <h2 className={styles.Section__Title}>Sync</h2>
@@ -677,7 +675,12 @@ export default function Settings() {
             </section>
 
             <section className={styles.Section}>
-                <h2 className={styles.Section__Title}>About</h2>
+                <h2
+                    className={styles.Section__Title}
+                    onClick={handleDebugEnableClick}
+                >
+                    About
+                </h2>
                 <p className={styles.Settings__Version}>
                     Version {APP_VERSION} ({COMMIT_SHA})
                 </p>
