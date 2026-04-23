@@ -130,6 +130,11 @@ kbd {
     font-size: var(--fontSizeXs);
 }
 
+code {
+    color: var(--colSub);
+    font-family: var(--fontFamilyMono);
+}
+
 // ============================================================
 // Button system
 // ============================================================
@@ -436,6 +441,30 @@ kbd {
             line-height: 1.5;
             color: var(--colText);
             margin: 0;
+        }
+
+        ul {
+            font-size: var(--fontSizeMd);
+            line-height: 1.5;
+            color: var(--colText);
+            margin: 0.5rem 0 0;
+            padding-left: 1.25rem;
+        }
+
+        li {
+            margin-bottom: 0.25rem;
+        }
+
+        code {
+            font-family: var(--fontFamilyMono);
+            font-size: var(--fontSizeSm);
+            background-color: var(--colBgAlt);
+            padding: 0.125rem 0.25rem;
+        }
+
+        strong {
+            font-weight: 600;
+            color: var(--colSub);
         }
     }
 }

@@ -2,6 +2,7 @@
 
 .Help {
     composes: RouteWrapper from global;
+    composes: LegalPage from global;
 
     &__Title {
         composes: RouteWrapper__Title from global;
