@@ -5,7 +5,57 @@ export default function Terms() {
     return (
         <div className={styles.Terms}>
             <BackBtn />
-            <h1 className={styles.Terms__Title}>Terms</h1>
+            <h1 className={styles.Terms__Title}>Terms of Service</h1>
+            <p className={styles.Terms__Date}>Effective April 23, 2026</p>
+
+            <section className={styles.Terms__Section}>
+                <h2>Acceptance of terms</h2>
+                <p>
+                    By using aijot, you agree to these terms. If you do not
+                    agree, please do not use the app.
+                </p>
+            </section>
+
+            <section className={styles.Terms__Section}>
+                <h2>Data and sync</h2>
+                <p>
+                    The availability of Google Drive sync is not guaranteed
+                    indefinitely, as it depends on Google&apos;s APIs and
+                    policies. You are responsible for maintaining backups of
+                    your data. Periodic use of the export feature is
+                    recommended.
+                </p>
+            </section>
+
+            <section className={styles.Terms__Section}>
+                <h2>Termination</h2>
+                <p>
+                    You can stop using aijot and delete your data at any time.
+                    Use the Clear all data or Reset app options in Settings. If
+                    you have Google Drive backups, you can delete those directly
+                    from your Google Drive.
+                </p>
+            </section>
+
+            <section className={styles.Terms__Section}>
+                <h2>Disclaimer</h2>
+                <p>
+                    Aijot is provided as is, without warranties of any kind. No
+                    liability is assumed for data loss or damages arising from
+                    your use of the app. Because your data lives primarily on
+                    your device, you are responsible for keeping it safe.
+                </p>
+            </section>
+
+            <section className={styles.Terms__Section}>
+                <h2>Changes to these terms</h2>
+                <p>
+                    These terms may be updated from time to time. Changes will
+                    be reflected by updating the effective date above. Continued
+                    use of the app after changes means you accept the updated
+                    terms.
+                </p>
+            </section>
         </div>
     )
 }

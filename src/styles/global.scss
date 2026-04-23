@@ -411,6 +411,36 @@ kbd {
 }
 
 // ============================================================
+// Legal page (Privacy, Terms)
+// ============================================================
+
+.LegalPage {
+    &__Date {
+        font-size: var(--fontSizeSm);
+        color: var(--colTextAlt);
+        margin-bottom: 2rem;
+    }
+
+    &__Section {
+        margin-bottom: 1.5rem;
+
+        h2 {
+            font-size: var(--fontSizeLg);
+            color: var(--colSub);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            font-size: var(--fontSizeMd);
+            line-height: 1.5;
+            color: var(--colText);
+            margin: 0;
+        }
+    }
+}
+
+// ============================================================
 // Misc
 // ============================================================
 
