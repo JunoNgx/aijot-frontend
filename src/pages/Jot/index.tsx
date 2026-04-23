@@ -1,13 +1,16 @@
-import { useState, useEffect, useRef, useMemo } from "react"
+import { useState, useEffect, useRef, useMemo, useCallback } from "react"
 import { useParams, Navigate } from "react-router-dom"
 import { useHotkeys } from "react-hotkeys-hook"
 import { useItemsQuery } from "@/hooks/useItemsQuery"
 import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
 import { useCoreCollectionSettings } from "@/store/coreCollectionSettings"
 import { useLocalAppData } from "@/store/localAppData"
+import { useNavigateRoutes } from "@/hooks/useNavigateRoutes"
 import {
     SHORTCUT_FOCUS_MAIN_INPUT,
     SHORTCUT_TOGGLE_JOT_LIST_VIEW,
+    SHORTCUT_NAV_PREV_COLLECTION,
+    SHORTCUT_NAV_NEXT_COLLECTION,
     ROUTE_JOT,
 } from "@/config/constants"
 import { useSyncedUserSettings } from "@/store/syncedUserSettings"
@@ -127,6 +130,36 @@ export default function Jot() {
         },
         { enableOnFormTags: true },
     )
+
+    const { navigateToCollection } = useNavigateRoutes()
+    const collectionIndex = collections.findIndex((c) => c.slug === slug)
+    const prevCollectionSlug =
+        collections[
+            collectionIndex <= 0 ? collections.length - 1 : collectionIndex - 1
+        ]?.slug
+    const nextCollectionSlug =
+        collections[
+            collectionIndex >= collections.length - 1 ? 0 : collectionIndex + 1
+        ]?.slug
+
+    const navigateToPrevCollection = useCallback(() => {
+        if (prevCollectionSlug) {
+            navigateToCollection(prevCollectionSlug)
+        }
+    }, [prevCollectionSlug, navigateToCollection])
+
+    const navigateToNextCollection = useCallback(() => {
+        if (nextCollectionSlug) {
+            navigateToCollection(nextCollectionSlug)
+        }
+    }, [nextCollectionSlug, navigateToCollection])
+
+    useHotkeys(SHORTCUT_NAV_PREV_COLLECTION, navigateToPrevCollection, {}, [
+        navigateToPrevCollection,
+    ])
+    useHotkeys(SHORTCUT_NAV_NEXT_COLLECTION, navigateToNextCollection, {}, [
+        navigateToNextCollection,
+    ])
 
     if (!collectionsQuery.isPending && !currCollection) {
         return <Navigate to={`${ROUTE_JOT}/${allSlug}`} replace />

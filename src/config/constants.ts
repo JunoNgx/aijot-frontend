@@ -140,6 +140,8 @@ export const SHORTCUT_NAV_TOP = "mod+shift+ArrowUp"
 export const SHORTCUT_NAV_BOTTOM = "mod+shift+ArrowDown"
 export const SHORTCUT_NAV_SUBMIT = "Enter"
 export const SHORTCUT_NAV_ACTION = "mod+Enter"
+export const SHORTCUT_NAV_PREV_COLLECTION = "ArrowLeft"
+export const SHORTCUT_NAV_NEXT_COLLECTION = "ArrowRight"
 
 export const COLLECTION_HOTKEY_COUNT = 9
 
