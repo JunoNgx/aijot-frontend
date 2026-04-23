@@ -13,6 +13,7 @@ import { openCollectionDialog } from "@/utils/openCollectionDialog"
 import {
     COLLECTION_HOTKEY_COUNT,
     DROPDOWN_OFFSET,
+    ICON_PROPS_CURR_COLLECTION,
     ICON_PROPS_NORMAL,
 } from "@/config/constants"
 import styles from "./CollectionDropdown.module.scss"
@@ -60,7 +61,7 @@ export default function CollectionDropdown() {
 
         const rightContent = isActive ? (
             <span className={styles.CollectionItem__RightContent}>
-                <IconCheck {...ICON_PROPS_NORMAL} />
+                <IconCheck {...ICON_PROPS_CURR_COLLECTION} />
             </span>
         ) : (
             hotkeyNum !== null && (

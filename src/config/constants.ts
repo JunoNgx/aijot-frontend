@@ -48,6 +48,11 @@ export const ICON_PROPS_ITEM_ICON = {
     strokeWidth: 2,
 }
 
+export const ICON_PROPS_CURR_COLLECTION = {
+    size: 20,
+    strokeWidth: 2,
+}
+
 export const ICON_PROPS_ITEM_STATUS = {
     size: 16,
     strokeWidth: 2,
