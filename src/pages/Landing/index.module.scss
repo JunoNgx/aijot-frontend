@@ -33,7 +33,7 @@
 
     &__Description {
         font-size: var(--fontSizeMd);
-        max-width: 480px;
+        max-width: var(--landingMaxWidth);
         margin: 1.5rem 0 0;
         line-height: 1.5;
     }
@@ -54,7 +54,7 @@
     }
 
     &__Section {
-        max-width: 480px;
+        max-width: var(--landingMaxWidth);
         margin-bottom: 3rem;
     }
 
