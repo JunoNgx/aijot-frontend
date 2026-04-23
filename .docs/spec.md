@@ -683,3 +683,31 @@ ARC 9
 - Elden Ring: tag: er
 - Chore: tag: chore
 - Work: tag: programming web
+
+## Technical decisions
+
+### Item list optimisation
+
+The item list in the Jot view re-renders the entire list on every keyboard navigation event (arrow keys changing `selectedIndex`). This caused O(n) work per keypress: array filtering, mapping, and component function calls for every visible item.
+
+Two complementary optimisations were applied:
+
+1. **`useMemo` for derived arrays** (`src/pages/Jot/index.tsx`):
+   - `collectionItems` and `visibleItems` are memoised with `useMemo`
+   - Dependencies: `[baseItems, currCollection]` and `[collectionItems, searchData]`
+   - Prevents `filterByCollection` and `filterItems` from re-running when only `selectedIndex` changes
+   - Returns stable array references, reducing unnecessary `.map()` re-execution
+
+2. **`memo` for `JotItem` components** (`src/pages/Jot/JotItem.tsx`):
+   - `JotItem` is wrapped in `React.memo`
+   - React performs shallow prop comparison before calling the component function
+   - During keyboard navigation, only the previously-selected and newly-selected items re-render
+   - Unchanged items are skipped entirely (no function call, no DOM diff)
+
+**Why both are needed:**
+
+- `useMemo` alone prevents re-filtering but `.map()` still creates new element references, so every `JotItem` still re-renders
+- `memo` alone skips child re-renders but the parent still re-filters the arrays on every keypress
+- Together: filtering is skipped *and* only the two items whose `isSelected` changed actually re-render, reducing per-keypress work from O(n) to O(1)
+
+`memo` provides the biggest perceived performance gain, while `useMemo` removes the unnecessary filtering overhead and keeps the optimisation chain clean.
