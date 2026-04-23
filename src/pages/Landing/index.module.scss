@@ -2,24 +2,102 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     min-height: 100vh;
-    gap: 1rem;
-    text-align: center;
-    padding: 2rem;
+    padding: 3rem 1.5rem;
+
+    &__Hero {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 4rem;
+    }
 
     &__Title {
         font-size: var(--fontSizeLogo);
-        font-weight: 700;
+        font-weight: bold;
         margin: 0;
     }
 
     &__Tagline {
         font-size: var(--fontSizeMd);
-        margin: 0;
+        color: var(--colTextAlt);
+        margin: 0.5rem 0 0;
+    }
+
+    // &__Definition {
+    //     font-size: var(--fontSizeSm);
+    //     color: var(--colTextAlt);
+    //     margin: 0.25rem 0 0;
+    // }
+
+    &__Description {
+        font-size: var(--fontSizeMd);
+        max-width: 480px;
+        margin: 1.5rem 0 0;
+        line-height: 1.5;
     }
 
     &__Btn {
         composes: Btn Btn--Pri from global;
+        margin-top: 1.5rem;
+    }
+
+    &__BtnHint {
+        font-size: var(--fontSizeSm);
+        color: var(--colTextAlt);
+        margin: 0.5rem 0 0;
+    }
+
+    &__Section {
+        max-width: 480px;
+        margin-bottom: 3rem;
+    }
+
+    &__SectionTitle {
+        font-size: var(--fontSizeLg);
+        color: var(--colSub);
+        font-weight: 600;
+        margin: 0 0 0.75rem;
+    }
+
+    &__Text {
+        font-size: var(--fontSizeMd);
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    &__Footer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: auto;
+        padding-top: 2rem;
+        font-size: var(--fontSizeSm);
+        color: var(--colTextAlt);
+
+        a {
+            color: var(--colTextAlt);
+            text-decoration: none;
+
+            &:hover {
+                color: var(--colMain);
+            }
+        }
+    }
+
+    &__FooterCredit {
+        margin: 0 0 0.5rem;
+    }
+
+    &__FooterLinks {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    &__FooterDivider {
+        color: var(--colTextAlt);
     }
 }
