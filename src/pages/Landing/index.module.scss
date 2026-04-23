@@ -78,12 +78,8 @@
         color: var(--colTextAlt);
 
         a {
-            color: var(--colTextAlt);
+            color: var(--colMain);
             text-decoration: none;
-
-            &:hover {
-                color: var(--colMain);
-            }
         }
     }
 
