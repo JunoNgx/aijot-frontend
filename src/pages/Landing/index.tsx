@@ -6,8 +6,12 @@ import {
     ROUTE_PRIVACY,
     ROUTE_TERMS,
 } from "@/config/constants"
+import { useThemeActions } from "@/hooks/useThemeActions"
+import { useCommandPaletteStore } from "@/store/commandPaletteStore"
 
 export default function Landing() {
+    const { randomiseTheme } = useThemeActions()
+
     return (
         <div className={styles.Landing}>
             <section className={styles.Landing__Hero}>
@@ -53,8 +57,25 @@ export default function Landing() {
                 <p className={styles.Landing__Text}>
                     Spotify can't even do light theme as of 2026, but I don't
                     work for them. Choose from original tasteful themes, or 60
-                    other well-known and proven colour palettes. Randomise or
-                    pick one. Go wild.
+                    other well-known and proven colour palettes.{" "}
+                    <button
+                        type="button"
+                        className={`Btn Btn--Tert ${styles.Landing__InlineAction}`}
+                        onClick={randomiseTheme}
+                    >
+                        Randomise
+                    </button>{" "}
+                    or{" "}
+                    <button
+                        type="button"
+                        className={`Btn Btn--Tert ${styles.Landing__InlineAction}`}
+                        onClick={() => {
+                            useCommandPaletteStore.getState().open("theme")
+                        }}
+                    >
+                        pick one
+                    </button>
+                    . Go wild.
                 </p>
             </section>
 
