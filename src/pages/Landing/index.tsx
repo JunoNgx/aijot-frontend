@@ -2,7 +2,6 @@ import { Link } from "react-router-dom"
 import styles from "./index.module.scss"
 import {
     ROUTE_JOT,
-    ROUTE_HELP,
     ROUTE_PRIVACY,
     ROUTE_TERMS,
 } from "@/config/constants"
@@ -103,7 +102,7 @@ export default function Landing() {
                 Get started
             </Link>
             <p className={styles.Landing__BtnHint}>
-                (local-first, no account needed)
+                (no account needed)
             </p>
 
             <footer className={styles.Landing__Footer}>
@@ -118,19 +117,17 @@ export default function Landing() {
                     </a>
                 </p>
                 <div className={styles.Landing__FooterLinks}>
-                    <Link to={ROUTE_HELP}>Help guide</Link>
-                    <span className={styles.Landing__FooterDivider}>·</span>
-                    <Link to={ROUTE_PRIVACY}>Privacy</Link>
-                    <span className={styles.Landing__FooterDivider}>·</span>
-                    <Link to={ROUTE_TERMS}>Terms</Link>
-                    <span className={styles.Landing__FooterDivider}>·</span>
                     <a
                         href="https://github.com/JunoNgx/aijot-frontend"
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        Source
+                        Source code
                     </a>
+                    <span className={styles.Landing__FooterDivider}>·</span>
+                    <Link to={ROUTE_PRIVACY}>Privacy Policy</Link>
+                    <span className={styles.Landing__FooterDivider}>·</span>
+                    <Link to={ROUTE_TERMS}>Terms of Service</Link>
                 </div>
             </footer>
         </div>
