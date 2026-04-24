@@ -207,6 +207,9 @@ export default function ShortcutDialog() {
                     <h3 className={styles.ShortcutDialog__SectionTitle}>
                         Collections
                     </h3>
+                    <p className={styles.ShortcutDialog__SectionNote}>
+                        Requires the main input to be unfocused.
+                    </p>
                     <div className={styles.ShortcutDialog__Grid}>
                         <ShortcutItem
                             shortcut={SHORTCUT_NAV_PREV_COLLECTION}
