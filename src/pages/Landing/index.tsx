@@ -1,10 +1,6 @@
 import { Link } from "react-router-dom"
 import styles from "./index.module.scss"
-import {
-    ROUTE_JOT,
-    ROUTE_PRIVACY,
-    ROUTE_TERMS,
-} from "@/config/constants"
+import { ROUTE_JOT, ROUTE_PRIVACY, ROUTE_TERMS } from "@/config/constants"
 import { useThemeActions } from "@/hooks/useThemeActions"
 import { useCommandPaletteStore } from "@/store/commandPaletteStore"
 
@@ -101,9 +97,7 @@ export default function Landing() {
             <Link to={ROUTE_JOT} className={styles.Landing__Btn}>
                 Get started
             </Link>
-            <p className={styles.Landing__BtnHint}>
-                (no account needed)
-            </p>
+            <p className={styles.Landing__BtnHint}>(no account needed)</p>
 
             <footer className={styles.Landing__Footer}>
                 <p className={styles.Landing__FooterCredit}>

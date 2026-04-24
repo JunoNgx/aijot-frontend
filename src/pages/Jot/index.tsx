@@ -6,6 +6,7 @@ import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
 import { useCoreCollectionSettings } from "@/store/coreCollectionSettings"
 import { useLocalAppData } from "@/store/localAppData"
 import { useNavigateRoutes } from "@/hooks/useNavigateRoutes"
+import { useDocumentTitle } from "@/hooks/useDocumentTitle"
 import {
     SHORTCUT_FOCUS_MAIN_INPUT,
     SHORTCUT_TOGGLE_JOT_LIST_VIEW,
@@ -89,6 +90,8 @@ export default function Jot() {
     const collections = collectionsQuery.data ?? []
     const currCollection = collections.find((c) => c.slug === slug)
     const allSlug = useCoreCollectionSettings((s) => s.all.slug)
+
+    useDocumentTitle(currCollection?.name)
 
     const isTrash = currCollection?.coreType === "trash"
     const baseItems = isTrash

@@ -11,6 +11,7 @@ import { useSyncedUserSettings } from "@/store/syncedUserSettings"
 import { useCoreCollectionSettings } from "@/store/coreCollectionSettings"
 import { useLocalSyncData } from "@/store/localSyncData"
 import { useDialogStore } from "@/store/dialogStore"
+import { useDocumentTitle } from "@/hooks/useDocumentTitle"
 import { SANS_SERIF_FONTS, MONO_FONTS } from "@/config/fonts"
 import {
     exportData,
@@ -34,6 +35,7 @@ import styles from "./index.module.scss"
 import BackBtn from "@/components/BackBtn"
 
 export default function Settings() {
+    useDocumentTitle("Settings")
     const queryClient = useQueryClient()
     const importInputRef = useRef<HTMLInputElement>(null)
     const justjotImportInputRef = useRef<HTMLInputElement>(null)

@@ -1,7 +1,9 @@
+import { useDocumentTitle } from "@/hooks/useDocumentTitle"
 import styles from "./index.module.scss"
 import BackBtn from "@/components/BackBtn"
 
 export default function Privacy() {
+    useDocumentTitle("Privacy Policy")
     return (
         <div className={styles.Privacy}>
             <BackBtn />

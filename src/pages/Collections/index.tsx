@@ -6,6 +6,7 @@ import { useCollectionsMutations } from "@/hooks/useCollectionsMutations"
 import { useCoreCollectionSettings } from "@/store/coreCollectionSettings"
 import { useSyncedUserSettings } from "@/store/syncedUserSettings"
 import { openCollectionDialog } from "@/utils/openCollectionDialog"
+import { useDocumentTitle } from "@/hooks/useDocumentTitle"
 import styles from "./index.module.scss"
 import { ICON_PROPS_BUTTON, ICON_PROPS_NORMAL } from "@/config/constants"
 import BackBtn from "@/components/BackBtn"
@@ -14,6 +15,7 @@ import type { Collection } from "@/types"
 import type { DropResult } from "@hello-pangea/dnd"
 
 export default function Collections() {
+    useDocumentTitle("Collections")
     const { collectionsQuery } = useCollectionsQuery()
     const { updateCollectionMutation } = useCollectionsMutations()
     const { setAll, setUntagged, setTrash, all, untagged, trash } =
