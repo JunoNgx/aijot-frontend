@@ -105,6 +105,20 @@ export default function Help() {
             </section>
 
             <section className={styles.Help__Section}>
+                <h3>Deletion and trash</h3>
+                <p>
+                    Trashing an item moves it to the Trash collection, where it
+                    can be restored at any time. Items in Trash are permanently
+                    deleted after 7 days. Soft-deleted records are cleaned up
+                    after 60 days.
+                </p>
+                <p>
+                    To prevent out of sync across devices, sync to Google Drive
+                    frequently, especially after making important changes.
+                </p>
+            </section>
+
+            <section className={styles.Help__Section}>
                 <h3>Sync and backup</h3>
                 <p>
                     Connect Google Drive in Settings to back up your data. You
