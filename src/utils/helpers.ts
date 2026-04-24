@@ -98,6 +98,7 @@ export function parseShortcut(shortcut: string): string[] {
         if (lower === "end") return "End"
         // Handle slash key
         if (lower === "slash") return "/"
+        if (lower === "backslash") return "\\"
         return part
     })
 }
