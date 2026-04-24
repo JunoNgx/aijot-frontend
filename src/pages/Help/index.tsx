@@ -16,17 +16,18 @@ export default function Help() {
                 </p>
                 <ul>
                     <li>
-                        <strong>Text</strong>: type anything
+                        <strong>Text</strong>: enter anything
                     </li>
                     <li>
-                        <strong>Todo</strong>: <code>:td:</code> Buy milk
+                        <strong>Todo</strong>: <code>:td: Buy eggs</code>
                     </li>
                     <li>
-                        <strong>Link</strong>: paste or type a URL
+                        <strong>Link</strong>: enter a URL-like text; e.g.{" "}
+                        <code>mozilla.org</code>
                     </li>
                     <li>
-                        <strong>Long text</strong>: <code>:t:</code> My note
-                        title
+                        <strong>Long text</strong>:{" "}
+                        <code>:t: My novel draft</code>
                     </li>
                 </ul>
             </section>
@@ -39,10 +40,11 @@ export default function Help() {
                 </p>
                 <ul>
                     <li>
-                        <code>::tg work urgent</code> - adds tags
+                        <code>::tg design colour</code> - adds tags
                     </li>
                     <li>
-                        <code>::col projects</code> - adds to collection
+                        <code>::col project</code> - adds to collection (which
+                        is actually tags associated with the collection)
                     </li>
                 </ul>
             </section>
@@ -54,6 +56,7 @@ export default function Help() {
                     items.
                 </p>
                 <ul>
+                    <li>Regular text - search from title and content</li>
                     <li>
                         <code>##work</code> - filter by tag
                     </li>
@@ -73,9 +76,9 @@ export default function Help() {
             <section className={styles.Help__Section}>
                 <h3>Keyboard shortcuts</h3>
                 <p>
-                    Press <kbd>mod + /</kbd> to see the full list of shortcuts.
-                    Common ones include navigation with arrow keys, editing
-                    selected items, and opening the command palette.
+                    Press <kbd>Ctrl/Cmd + /</kbd> to see the full list of
+                    shortcuts. Common ones include navigation with arrow keys,
+                    editing selected items, and opening the command palette.
                 </p>
             </section>
 
