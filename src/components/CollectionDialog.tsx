@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react"
 import { DateTime } from "luxon"
+import { nanoid } from "nanoid"
 import { EmojiPicker } from "frimousse"
 import { IconX } from "@tabler/icons-react"
 import { useCollectionsQuery } from "@/hooks/useCollectionsQuery"
@@ -187,7 +188,7 @@ export default function CollectionDialog({ collection }: Props) {
                 : 0
 
         createCollectionMutation.mutate({
-            id: crypto.randomUUID(),
+            id: nanoid(),
             createdAt: now,
             updatedAt: now,
             name: nameVal.trim(),

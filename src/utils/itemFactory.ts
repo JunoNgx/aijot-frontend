@@ -1,5 +1,5 @@
 import { DateTime } from "luxon"
-import { v4 as uuidv4 } from "uuid"
+import { nanoid } from "nanoid"
 import type { Collection, Item, ItemType, MainInputCreationData } from "@/types"
 
 export function buildDemoItems(): Item[] {
@@ -8,7 +8,7 @@ export function buildDemoItems(): Item[] {
         base.minus({ minutes: minutesAgo }).toUTC().toISO()
     return [
         {
-            id: uuidv4(),
+            id: nanoid(),
             type: "link",
             content: "https://www.mozilla.org/en-US/",
             title: "Mozilla",
@@ -20,7 +20,7 @@ export function buildDemoItems(): Item[] {
             updatedAt: at(12),
         },
         {
-            id: uuidv4(),
+            id: nanoid(),
             type: "link",
             content: "https://xkcd.com/",
             title: "xkcd",
@@ -31,7 +31,7 @@ export function buildDemoItems(): Item[] {
             updatedAt: at(11),
         },
         {
-            id: uuidv4(),
+            id: nanoid(),
             type: "link",
             content:
                 "https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_code_values",
@@ -43,7 +43,7 @@ export function buildDemoItems(): Item[] {
             updatedAt: at(10),
         },
         {
-            id: uuidv4(),
+            id: nanoid(),
             type: "link",
             content: "https://fredrocha.net/2025/05/21/small-web-is-beautiful/",
             title: "Small (web) is beautiful",
@@ -55,7 +55,7 @@ export function buildDemoItems(): Item[] {
             updatedAt: at(9),
         },
         {
-            id: uuidv4(),
+            id: nanoid(),
             type: "text",
             title: "Hexcode validator func",
             content: `export const isValidHexColourCode = (str: string): boolean => {
@@ -68,7 +68,7 @@ export function buildDemoItems(): Item[] {
             updatedAt: at(8),
         },
         {
-            id: uuidv4(),
+            id: nanoid(),
             type: "todo",
             content: "Submit PR to fix keyboard shortcut",
             tags: ["work", "programming"],
@@ -78,7 +78,7 @@ export function buildDemoItems(): Item[] {
             updatedAt: at(7),
         },
         {
-            id: uuidv4(),
+            id: nanoid(),
             type: "text",
             title: "Carian Knight build",
             content: `Lvl: 150
@@ -98,7 +98,7 @@ ARC 9`,
             updatedAt: at(6),
         },
         {
-            id: uuidv4(),
+            id: nanoid(),
             type: "todo",
             content: "Try Quadrilateral Cowboy",
             tags: [],
@@ -108,7 +108,7 @@ ARC 9`,
             updatedAt: at(5),
         },
         {
-            id: uuidv4(),
+            id: nanoid(),
             type: "todo",
             content: "Buy bacon",
             tags: ["chore"],
@@ -118,7 +118,7 @@ ARC 9`,
             updatedAt: at(4),
         },
         {
-            id: uuidv4(),
+            id: nanoid(),
             type: "todo",
             content: "Refill toilet supplies",
             tags: ["chore"],
@@ -128,7 +128,7 @@ ARC 9`,
             updatedAt: at(3),
         },
         {
-            id: uuidv4(),
+            id: nanoid(),
             type: "todo",
             content: "Get Carian Slicer",
             tags: ["er"],
@@ -138,7 +138,7 @@ ARC 9`,
             updatedAt: at(2),
         },
         {
-            id: uuidv4(),
+            id: nanoid(),
             type: "todo",
             content: "Get Sword Dance",
             tags: ["er"],
@@ -156,7 +156,7 @@ export function buildDemoCollections(): Collection[] {
 
     return [
         {
-            id: uuidv4(),
+            id: nanoid(),
             createdAt: now,
             updatedAt: now,
             name: "Elden Ring",
@@ -167,7 +167,7 @@ export function buildDemoCollections(): Collection[] {
             types: allTypes,
         },
         {
-            id: uuidv4(),
+            id: nanoid(),
             createdAt: now,
             updatedAt: now,
             name: "Chore",
@@ -178,7 +178,7 @@ export function buildDemoCollections(): Collection[] {
             types: allTypes,
         },
         {
-            id: uuidv4(),
+            id: nanoid(),
             createdAt: now,
             updatedAt: now,
             name: "Work",
@@ -194,7 +194,7 @@ export function buildDemoCollections(): Collection[] {
 export function buildItem(creationData: MainInputCreationData): Item {
     const now = DateTime.now().toUTC().toISO()
     return {
-        id: uuidv4(),
+        id: nanoid(),
         createdAt: now,
         jottedAt: now,
         updatedAt: now,
