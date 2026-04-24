@@ -9,7 +9,7 @@ import { useNavigateRoutes } from "@/hooks/useNavigateRoutes"
 import { useDocumentTitle } from "@/hooks/useDocumentTitle"
 import {
     SHORTCUT_FOCUS_MAIN_INPUT,
-    SHORTCUT_TOGGLE_JOT_LIST_VIEW,
+    SHORTCUT_TOGGLE_ITEM_EXPANDED_MODE,
     SHORTCUT_NAV_PREV_COLLECTION,
     SHORTCUT_NAV_NEXT_COLLECTION,
     ROUTE_JOT,
@@ -127,7 +127,7 @@ export default function Jot() {
     })
 
     useHotkeys(
-        SHORTCUT_TOGGLE_JOT_LIST_VIEW,
+        SHORTCUT_TOGGLE_ITEM_EXPANDED_MODE,
         () => {
             setIsShowingJotItemExtraInfo((prev) => !prev)
         },

@@ -23,7 +23,7 @@ import {
     SHORTCUT_SAVE_AND_CLOSE,
     SHORTCUT_SHORTCUTS_HELP,
     SHORTCUT_SYNC,
-    SHORTCUT_TOGGLE_JOT_LIST_VIEW,
+    SHORTCUT_TOGGLE_ITEM_EXPANDED_MODE,
     SHORTCUT_NAV_PREV_COLLECTION,
     SHORTCUT_NAV_NEXT_COLLECTION,
 } from "@/config/constants"
@@ -197,7 +197,7 @@ export default function ShortcutDialog() {
                             description="Show shortcuts"
                         />
                         <ShortcutItem
-                            shortcut={SHORTCUT_TOGGLE_JOT_LIST_VIEW}
+                            shortcut={SHORTCUT_TOGGLE_ITEM_EXPANDED_MODE}
                             description="Toggle expanded item info"
                         />
                     </div>
