@@ -23,6 +23,9 @@ import {
     SHORTCUT_SAVE_AND_CLOSE,
     SHORTCUT_SHORTCUTS_HELP,
     SHORTCUT_SYNC,
+    SHORTCUT_TOGGLE_JOT_LIST_VIEW,
+    SHORTCUT_NAV_PREV_COLLECTION,
+    SHORTCUT_NAV_NEXT_COLLECTION,
 } from "@/config/constants"
 import styles from "./ShortcutDialog.module.scss"
 
@@ -193,6 +196,10 @@ export default function ShortcutDialog() {
                             shortcut={SHORTCUT_SHORTCUTS_HELP}
                             description="Show shortcuts"
                         />
+                        <ShortcutItem
+                            shortcut={SHORTCUT_TOGGLE_JOT_LIST_VIEW}
+                            description="Toggle expanded item info"
+                        />
                     </div>
                 </section>
 
@@ -200,10 +207,20 @@ export default function ShortcutDialog() {
                     <h3 className={styles.ShortcutDialog__SectionTitle}>
                         Collections
                     </h3>
-                    <ShortcutItem
-                        shortcut="mod+n"
-                        description="Jump to collection n (1-9)"
-                    />
+                    <div className={styles.ShortcutDialog__Grid}>
+                        <ShortcutItem
+                            shortcut={SHORTCUT_NAV_PREV_COLLECTION}
+                            description="Previous collection"
+                        />
+                        <ShortcutItem
+                            shortcut={SHORTCUT_NAV_NEXT_COLLECTION}
+                            description="Next collection"
+                        />
+                        <ShortcutItem
+                            shortcut="mod+n"
+                            description="Jump to collection n (1-9)"
+                        />
+                    </div>
                 </section>
             </div>
         </div>
