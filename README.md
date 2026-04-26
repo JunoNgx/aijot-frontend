@@ -44,7 +44,7 @@ yarn dev
 
 ### Environment variable
 
-TODO
+`VITE_GOOGLE_CLIENT_ID`: the Google Clould client ID, only used when user attempts to connect to Google for Drive data sync.
 
 ## Contribution
 
